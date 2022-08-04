@@ -56,15 +56,111 @@
 		79BBF692289AB50B0003FAD8 /* ChungSungChungSung */ = {
 			isa = PBXGroup;
 			children = (
+				79F67636289C2DAF00850FF0 /* Main */,
+				79F67633289C2D4700850FF0 /* Workout */,
+				79F67635289C2D6000850FF0 /* FitnessTest */,
+				79F67634289C2D5200850FF0 /* Profile */,
+				79BBF697289AB50B0003FAD8 /* ViewController.swift */,
 				79BBF693289AB50B0003FAD8 /* AppDelegate.swift */,
 				79BBF695289AB50B0003FAD8 /* SceneDelegate.swift */,
-				79BBF697289AB50B0003FAD8 /* ViewController.swift */,
 				79BBF699289AB50B0003FAD8 /* Main.storyboard */,
 				79BBF69C289AB50D0003FAD8 /* Assets.xcassets */,
 				79BBF69E289AB50D0003FAD8 /* LaunchScreen.storyboard */,
 				79BBF6A1289AB50D0003FAD8 /* Info.plist */,
 			);
 			path = ChungSungChungSung;
+			sourceTree = "<group>";
+		};
+		79F67633289C2D4700850FF0 /* Workout */ = {
+			isa = PBXGroup;
+			children = (
+				79F67638289C2F2700850FF0 /* ViewController */,
+				79F6763C289C2F5000850FF0 /* View */,
+			);
+			path = Workout;
+			sourceTree = "<group>";
+		};
+		79F67634289C2D5200850FF0 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				79F6763A289C2F2C00850FF0 /* ViewController */,
+				79F6763E289C2F6000850FF0 /* View */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		79F67635289C2D6000850FF0 /* FitnessTest */ = {
+			isa = PBXGroup;
+			children = (
+				79F67639289C2F2900850FF0 /* ViewController */,
+				79F6763D289C2F5200850FF0 /* View */,
+			);
+			path = FitnessTest;
+			sourceTree = "<group>";
+		};
+		79F67636289C2DAF00850FF0 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				79F67637289C2F1D00850FF0 /* ViewController */,
+				79F6763B289C2F3E00850FF0 /* View */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		79F67637289C2F1D00850FF0 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		79F67638289C2F2700850FF0 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		79F67639289C2F2900850FF0 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		79F6763A289C2F2C00850FF0 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		79F6763B289C2F3E00850FF0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		79F6763C289C2F5000850FF0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		79F6763D289C2F5200850FF0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		79F6763E289C2F6000850FF0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
