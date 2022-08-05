@@ -13,6 +13,8 @@
 		79BBF69B289AB50B0003FAD8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79BBF699289AB50B0003FAD8 /* Main.storyboard */; };
 		79BBF69D289AB50D0003FAD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79BBF69C289AB50D0003FAD8 /* Assets.xcassets */; };
 		79BBF6A0289AB50D0003FAD8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79BBF69E289AB50D0003FAD8 /* LaunchScreen.storyboard */; };
+		7E9A47BE289CF0EC005B98B4 /* FitnessTestAdd.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E9A47BD289CF0EC005B98B4 /* FitnessTestAdd.storyboard */; };
+		7E9A47C0289CF10E005B98B4 /* FitnessTestAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9A47BF289CF10E005B98B4 /* FitnessTestAddViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		79BBF69C289AB50D0003FAD8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		79BBF69F289AB50D0003FAD8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		79BBF6A1289AB50D0003FAD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7E9A47BD289CF0EC005B98B4 /* FitnessTestAdd.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FitnessTestAdd.storyboard; sourceTree = "<group>"; };
+		7E9A47BF289CF10E005B98B4 /* FitnessTestAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessTestAddViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +128,7 @@
 		79F67639289C2F2900850FF0 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				7E9A47BF289CF10E005B98B4 /* FitnessTestAddViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -152,6 +157,7 @@
 		79F6763D289C2F5200850FF0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7E9A47BD289CF0EC005B98B4 /* FitnessTestAdd.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -222,6 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				79BBF6A0289AB50D0003FAD8 /* LaunchScreen.storyboard in Resources */,
+				7E9A47BE289CF0EC005B98B4 /* FitnessTestAdd.storyboard in Resources */,
 				79BBF69D289AB50D0003FAD8 /* Assets.xcassets in Resources */,
 				79BBF69B289AB50B0003FAD8 /* Main.storyboard in Resources */,
 			);
@@ -235,6 +242,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				79BBF698289AB50B0003FAD8 /* ViewController.swift in Sources */,
+				7E9A47C0289CF10E005B98B4 /* FitnessTestAddViewController.swift in Sources */,
 				79BBF694289AB50B0003FAD8 /* AppDelegate.swift in Sources */,
 				79BBF696289AB50B0003FAD8 /* SceneDelegate.swift in Sources */,
 			);
