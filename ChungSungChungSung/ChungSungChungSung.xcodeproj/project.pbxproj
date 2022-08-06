@@ -15,6 +15,8 @@
 		79BBF6A0289AB50D0003FAD8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79BBF69E289AB50D0003FAD8 /* LaunchScreen.storyboard */; };
 		7E9A47C2289D4774005B98B4 /* Workout.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E9A47C1289D4774005B98B4 /* Workout.storyboard */; };
 		7E9A47C4289D478A005B98B4 /* WorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9A47C3289D478A005B98B4 /* WorkoutViewController.swift */; };
+		7ED2F7B7289ED9A700DAEEC9 /* DailyCalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED2F7B6289ED9A700DAEEC9 /* DailyCalendarCell.swift */; };
+		7ED2F7BA289EDE0E00DAEEC9 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED2F7B9289EDE0E00DAEEC9 /* UIColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		79BBF6A1289AB50D0003FAD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7E9A47C1289D4774005B98B4 /* Workout.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Workout.storyboard; sourceTree = "<group>"; };
 		7E9A47C3289D478A005B98B4 /* WorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutViewController.swift; sourceTree = "<group>"; };
+		7ED2F7B6289ED9A700DAEEC9 /* DailyCalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCalendarCell.swift; sourceTree = "<group>"; };
+		7ED2F7B9289EDE0E00DAEEC9 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,7 @@
 				79F67633289C2D4700850FF0 /* Workout */,
 				79F67635289C2D6000850FF0 /* FitnessTest */,
 				79F67634289C2D5200850FF0 /* Profile */,
+				7ED2F7B8289EDDF800DAEEC9 /* Extensions */,
 				79BBF697289AB50B0003FAD8 /* ViewController.swift */,
 				79BBF693289AB50B0003FAD8 /* AppDelegate.swift */,
 				79BBF695289AB50B0003FAD8 /* SceneDelegate.swift */,
@@ -151,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				7E9A47C1289D4774005B98B4 /* Workout.storyboard */,
+				7ED2F7B6289ED9A700DAEEC9 /* DailyCalendarCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -167,6 +173,14 @@
 			children = (
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		7ED2F7B8289EDDF800DAEEC9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7ED2F7B9289EDE0E00DAEEC9 /* UIColor.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,9 +256,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E9A47C4289D478A005B98B4 /* WorkoutViewController.swift in Sources */,
+				7ED2F7BA289EDE0E00DAEEC9 /* UIColor.swift in Sources */,
 				79BBF698289AB50B0003FAD8 /* ViewController.swift in Sources */,
 				79BBF694289AB50B0003FAD8 /* AppDelegate.swift in Sources */,
 				79BBF696289AB50B0003FAD8 /* SceneDelegate.swift in Sources */,
+				7ED2F7B7289ED9A700DAEEC9 /* DailyCalendarCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
