@@ -9,7 +9,7 @@ import UIKit
 
 class WorkoutAddOneTableViewCell: UITableViewCell {
     var inputTypeText = "회"
-
+    
     @IBOutlet weak var cellRectangle: UIView!
     @IBOutlet weak var setNumberView: UILabel!
     @IBOutlet weak var inputType: UILabel!
@@ -20,7 +20,6 @@ class WorkoutAddOneTableViewCell: UITableViewCell {
         cellRectangle.layer.cornerRadius = 8
         setNumberView.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         inputType.text = inputTypeText
-
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
