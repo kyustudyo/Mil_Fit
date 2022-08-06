@@ -1,5 +1,5 @@
 //
-//  WorkoutAddTableViewCell.swift
+//  WorkoutAddOneTableViewCell.swift
 //  ChungSungChungSung
 //
 //  Created by Eunbee Kang on 2022/08/06.
@@ -7,22 +7,19 @@
 
 import UIKit
 
-class WorkoutAddTwoTableViewCell: UITableViewCell {
-    var firstInputTypeText = "kg"
-    var secondInputTypeText = "회"
-    
+class WorkoutAddOneTableViewCell: UITableViewCell {
+    var inputTypeText = "회"
+
     @IBOutlet weak var cellRectangle: UIView!
     @IBOutlet weak var setNumberView: UILabel!
-    @IBOutlet weak var firstInputType: UILabel!
-    @IBOutlet weak var secondInputType: UILabel!
+    @IBOutlet weak var inputType: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         
         cellRectangle.layer.cornerRadius = 8
         setNumberView.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        firstInputType.text = firstInputTypeText
-        secondInputType.text = secondInputTypeText
+        inputType.text = inputTypeText
 
     }
 

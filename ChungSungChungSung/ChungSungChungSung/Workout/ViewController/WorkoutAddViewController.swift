@@ -8,6 +8,7 @@
 import UIKit
 
 class WorkoutAddViewController: UIViewController {
+    let numberOfRows: Int = 5
     
     @IBOutlet weak var workoutAddTable: UITableView!
     
@@ -15,16 +16,22 @@ class WorkoutAddViewController: UIViewController {
         super.viewDidLoad()
 
         let workoutAddTwoTableViewCellNib = UINib(nibName: "WorkoutAddTwoTableViewCell", bundle: nil)
+        let workoutAddOneTableViewCellNib = UINib(nibName: "WorkoutAddOneTableViewCell", bundle: nil)
+        let workoutAddPlusTableViewCellNib = UINib(nibName: "WorkoutAddPlusTableViewCell", bundle: nil)
+        
         workoutAddTable.register(workoutAddTwoTableViewCellNib, forCellReuseIdentifier: "workoutAddTwoTableViewCell")
+        workoutAddTable.register(workoutAddOneTableViewCellNib, forCellReuseIdentifier: "WorkoutAddOneTableViewCell")
+        workoutAddTable.register(workoutAddPlusTableViewCellNib, forCellReuseIdentifier: "WorkoutAddPlusTableViewCell")
     }
 }
 
 extension WorkoutAddViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return numberOfRows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "workoutAddTwoTableViewCell", for: indexPath) as? WorkoutAddTwoTableViewCell else {
             return UITableViewCell()
