@@ -10,7 +10,7 @@ import UIKit
 class WorkoutViewController: UIViewController {
     private let calInset: CGFloat = 17.0
     private let numberOfCellsShown = 6
-    private var selectedCell: Int?
+    private var selectedCell: Int = 6
     private var weekdays: [String] = ["월", "화", "수", "목", "금", "토", "일"]
     private var dates: [String] = ["8", "9", "10", "11", "12", "13", "14"]
     
@@ -22,6 +22,12 @@ class WorkoutViewController: UIViewController {
 
         configNavigationTitle()
         setSelectedDateView()
+        
+//        let flowLayout = UICollectionViewFlowLayout()
+//        flowLayout.sectionInset = UIEdgeInsets(top: 0, left: calInset, bottom: 0, right: calInset)
+//        dailyCalendarView.collectionViewLayout = flowLayout
+        
+        
     }
     
     private func configNavigationTitle() {
@@ -54,24 +60,25 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
             return UICollectionViewCell()
         }
         
-        cell.dateNumberView.text = dates[indexPath.item]
-        cell.dayNameView.text = weekdays[indexPath.item]
+        cell.dateNumberView.text = dates[indexPath.row]
+        cell.dayNameView.text = weekdays[indexPath.row]
         cell.dayHighlightView.layer.cornerRadius = 26
         cell.dayHighlightView.backgroundColor = CustomColor.mainPurple
         
-        if indexPath.item == selectedCell {
-            cell.dayHighlightView.alpha = 1.0
-            cell.dayNameView.textColor = .white
-        } else {
-            cell.dayHighlightView.alpha = 0.0
-            cell.dayNameView.textColor = .black
-        }
+//        if indexPath.row == selectedCell {
+//            cell.dayHighlightView.alpha = 1.0
+//            cell.dayNameView.textColor = .white
+//        } else {
+//            cell.dayHighlightView.alpha = 0.0
+//            cell.dayNameView.textColor = .black
+//        }
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedCell = indexPath.item
+        selectedCell = indexPath.row
+        print(indexPath.row)
     }
 }
 

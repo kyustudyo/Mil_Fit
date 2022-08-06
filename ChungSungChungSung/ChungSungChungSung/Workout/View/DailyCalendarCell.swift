@@ -12,5 +12,14 @@ class DailyCalendarCell: UICollectionViewCell {
     @IBOutlet weak var dateNumberView: UILabel!
     @IBOutlet weak var dayNameView: UILabel!
     @IBOutlet weak var dayHighlightView: UIView!
-    
+ 
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                dayHighlightView.isHidden = false
+            } else {
+                dayHighlightView.isHidden = true
+            }
+        }
+    }
 }
