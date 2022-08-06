@@ -15,15 +15,16 @@ class WorkoutAddViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        workoutAddTable.delegate = self
-        workoutAddTable.dataSource = self
+//        workoutAddTable.delegate = self
+//        workoutAddTable.dataSource = self
+        
         let workoutAddTwoTableViewCellNib = UINib(nibName: "WorkoutAddTwoTableViewCell", bundle: nil)
         let workoutAddOneTableViewCellNib = UINib(nibName: "WorkoutAddOneTableViewCell", bundle: nil)
         let workoutAddPlusTableViewCellNib = UINib(nibName: "WorkoutAddPlusTableViewCell", bundle: nil)
         
         workoutAddTable.register(workoutAddTwoTableViewCellNib, forCellReuseIdentifier: "workoutAddTwoTableViewCell")
-        workoutAddTable.register(workoutAddOneTableViewCellNib, forCellReuseIdentifier: "WorkoutAddOneTableViewCell")
-        workoutAddTable.register(workoutAddPlusTableViewCellNib, forCellReuseIdentifier: "WorkoutAddPlusTableViewCell")
+        workoutAddTable.register(workoutAddOneTableViewCellNib, forCellReuseIdentifier: "workoutAddOneTableViewCell")
+        workoutAddTable.register(workoutAddPlusTableViewCellNib, forCellReuseIdentifier: "workoutAddPlusTableViewCell")
     }
 }
 
@@ -33,21 +34,21 @@ extension WorkoutAddViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        if indexPath.row == numberOfRows {
-//            guard let cell = tableView.dequeueReusableCell(withIdentifier: "workoutAddPlusTableViewCell", for: indexPath) as? WorkoutAddPlusTableViewCell else {
-//                return UITableViewCell()
-//            }
-//
-//            return cell
-//        } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "workoutAddTwoTableViewCell", for: indexPath) as? WorkoutAddTwoTableViewCell else {
+        if indexPath.row == numberOfRows {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "workoutAddPlusTableViewCell", for: indexPath) as? WorkoutAddPlusTableViewCell else {
+                return UITableViewCell()
+            }
+
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "workoutAddOneTableViewCell", for: indexPath) as? WorkoutAddOneTableViewCell else {
                 return UITableViewCell()
             }
         
-            let setNumber = indexPath.row + 1    
+            let setNumber = indexPath.row + 1
             cell.setNumberView.text = "\(setNumber)세트"
             
             return cell
-//        }
+        }
     }
 }

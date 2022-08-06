@@ -19,6 +19,8 @@
 		7ED2F799289E524500DAEEC9 /* WorkoutAddTwoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7ED2F797289E524500DAEEC9 /* WorkoutAddTwoTableViewCell.xib */; };
 		7ED2F7AC289EA12100DAEEC9 /* WorkoutAddOneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED2F7AA289EA12100DAEEC9 /* WorkoutAddOneTableViewCell.swift */; };
 		7ED2F7AD289EA12100DAEEC9 /* WorkoutAddOneTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7ED2F7AB289EA12100DAEEC9 /* WorkoutAddOneTableViewCell.xib */; };
+		7ED2F7B0289EAC2000DAEEC9 /* WorkoutAddPlusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED2F7AE289EAC2000DAEEC9 /* WorkoutAddPlusTableViewCell.swift */; };
+		7ED2F7B1289EAC2000DAEEC9 /* WorkoutAddPlusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7ED2F7AF289EAC2000DAEEC9 /* WorkoutAddPlusTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		7ED2F797289E524500DAEEC9 /* WorkoutAddTwoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WorkoutAddTwoTableViewCell.xib; sourceTree = "<group>"; };
 		7ED2F7AA289EA12100DAEEC9 /* WorkoutAddOneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutAddOneTableViewCell.swift; sourceTree = "<group>"; };
 		7ED2F7AB289EA12100DAEEC9 /* WorkoutAddOneTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WorkoutAddOneTableViewCell.xib; sourceTree = "<group>"; };
+		7ED2F7AE289EAC2000DAEEC9 /* WorkoutAddPlusTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutAddPlusTableViewCell.swift; sourceTree = "<group>"; };
+		7ED2F7AF289EAC2000DAEEC9 /* WorkoutAddPlusTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WorkoutAddPlusTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +167,8 @@
 				7ED2F797289E524500DAEEC9 /* WorkoutAddTwoTableViewCell.xib */,
 				7ED2F7AA289EA12100DAEEC9 /* WorkoutAddOneTableViewCell.swift */,
 				7ED2F7AB289EA12100DAEEC9 /* WorkoutAddOneTableViewCell.xib */,
+				7ED2F7AE289EAC2000DAEEC9 /* WorkoutAddPlusTableViewCell.swift */,
+				7ED2F7AF289EAC2000DAEEC9 /* WorkoutAddPlusTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -240,6 +246,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7ED2F78D289E481300DAEEC9 /* WorkoutAdd.storyboard in Resources */,
+				7ED2F7B1289EAC2000DAEEC9 /* WorkoutAddPlusTableViewCell.xib in Resources */,
 				79BBF6A0289AB50D0003FAD8 /* LaunchScreen.storyboard in Resources */,
 				7ED2F7AD289EA12100DAEEC9 /* WorkoutAddOneTableViewCell.xib in Resources */,
 				79BBF69D289AB50D0003FAD8 /* Assets.xcassets in Resources */,
@@ -255,6 +262,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7ED2F7B0289EAC2000DAEEC9 /* WorkoutAddPlusTableViewCell.swift in Sources */,
 				7ED2F78F289E482600DAEEC9 /* WorkoutAddViewController.swift in Sources */,
 				7ED2F798289E524500DAEEC9 /* WorkoutAddTwoTableViewCell.swift in Sources */,
 				79BBF698289AB50B0003FAD8 /* ViewController.swift in Sources */,
