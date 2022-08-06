@@ -24,6 +24,7 @@ class TestMainTableViewCell: UITableViewCell {
     func drawCellUI() {
         fitnessTitleLabel.textColor = UIColor.red
         fitnessRecordDateLabel.textColor = UIColor.systemGray
+        fitnessImageView.layer.cornerRadius = 20
     }
 
 }
