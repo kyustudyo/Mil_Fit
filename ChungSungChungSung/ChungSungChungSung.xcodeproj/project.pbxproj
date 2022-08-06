@@ -21,6 +21,8 @@
 		7ED2F7AD289EA12100DAEEC9 /* WorkoutAddOneTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7ED2F7AB289EA12100DAEEC9 /* WorkoutAddOneTableViewCell.xib */; };
 		7ED2F7B0289EAC2000DAEEC9 /* WorkoutAddPlusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED2F7AE289EAC2000DAEEC9 /* WorkoutAddPlusTableViewCell.swift */; };
 		7ED2F7B1289EAC2000DAEEC9 /* WorkoutAddPlusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7ED2F7AF289EAC2000DAEEC9 /* WorkoutAddPlusTableViewCell.xib */; };
+		7ED2F7B4289EB4F600DAEEC9 /* WorkoutAddCalorieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED2F7B2289EB4F600DAEEC9 /* WorkoutAddCalorieTableViewCell.swift */; };
+		7ED2F7B5289EB4F600DAEEC9 /* WorkoutAddCalorieTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7ED2F7B3289EB4F600DAEEC9 /* WorkoutAddCalorieTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		7ED2F7AB289EA12100DAEEC9 /* WorkoutAddOneTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WorkoutAddOneTableViewCell.xib; sourceTree = "<group>"; };
 		7ED2F7AE289EAC2000DAEEC9 /* WorkoutAddPlusTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutAddPlusTableViewCell.swift; sourceTree = "<group>"; };
 		7ED2F7AF289EAC2000DAEEC9 /* WorkoutAddPlusTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WorkoutAddPlusTableViewCell.xib; sourceTree = "<group>"; };
+		7ED2F7B2289EB4F600DAEEC9 /* WorkoutAddCalorieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutAddCalorieTableViewCell.swift; sourceTree = "<group>"; };
+		7ED2F7B3289EB4F600DAEEC9 /* WorkoutAddCalorieTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WorkoutAddCalorieTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +173,8 @@
 				7ED2F7AB289EA12100DAEEC9 /* WorkoutAddOneTableViewCell.xib */,
 				7ED2F7AE289EAC2000DAEEC9 /* WorkoutAddPlusTableViewCell.swift */,
 				7ED2F7AF289EAC2000DAEEC9 /* WorkoutAddPlusTableViewCell.xib */,
+				7ED2F7B2289EB4F600DAEEC9 /* WorkoutAddCalorieTableViewCell.swift */,
+				7ED2F7B3289EB4F600DAEEC9 /* WorkoutAddCalorieTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -250,6 +256,7 @@
 				79BBF6A0289AB50D0003FAD8 /* LaunchScreen.storyboard in Resources */,
 				7ED2F7AD289EA12100DAEEC9 /* WorkoutAddOneTableViewCell.xib in Resources */,
 				79BBF69D289AB50D0003FAD8 /* Assets.xcassets in Resources */,
+				7ED2F7B5289EB4F600DAEEC9 /* WorkoutAddCalorieTableViewCell.xib in Resources */,
 				79BBF69B289AB50B0003FAD8 /* Main.storyboard in Resources */,
 				7ED2F799289E524500DAEEC9 /* WorkoutAddTwoTableViewCell.xib in Resources */,
 			);
@@ -267,6 +274,7 @@
 				7ED2F798289E524500DAEEC9 /* WorkoutAddTwoTableViewCell.swift in Sources */,
 				79BBF698289AB50B0003FAD8 /* ViewController.swift in Sources */,
 				79BBF694289AB50B0003FAD8 /* AppDelegate.swift in Sources */,
+				7ED2F7B4289EB4F600DAEEC9 /* WorkoutAddCalorieTableViewCell.swift in Sources */,
 				7ED2F7AC289EA12100DAEEC9 /* WorkoutAddOneTableViewCell.swift in Sources */,
 				79BBF696289AB50B0003FAD8 /* SceneDelegate.swift in Sources */,
 			);

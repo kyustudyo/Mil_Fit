@@ -9,6 +9,7 @@ import UIKit
 
 class WorkoutAddViewController: UIViewController {
     let numberOfRows: Int = 5
+    var estimatedCalorie: Double = 0
     
     @IBOutlet weak var workoutAddTable: UITableView!
     
@@ -21,10 +22,12 @@ class WorkoutAddViewController: UIViewController {
         let workoutAddTwoTableViewCellNib = UINib(nibName: "WorkoutAddTwoTableViewCell", bundle: nil)
         let workoutAddOneTableViewCellNib = UINib(nibName: "WorkoutAddOneTableViewCell", bundle: nil)
         let workoutAddPlusTableViewCellNib = UINib(nibName: "WorkoutAddPlusTableViewCell", bundle: nil)
+        let workoutAddCalorieTableViewCellNib = UINib(nibName: "WorkoutAddCalorieTableViewCell", bundle: nil)
         
         workoutAddTable.register(workoutAddTwoTableViewCellNib, forCellReuseIdentifier: "workoutAddTwoTableViewCell")
         workoutAddTable.register(workoutAddOneTableViewCellNib, forCellReuseIdentifier: "workoutAddOneTableViewCell")
         workoutAddTable.register(workoutAddPlusTableViewCellNib, forCellReuseIdentifier: "workoutAddPlusTableViewCell")
+        workoutAddTable.register(workoutAddCalorieTableViewCellNib, forCellReuseIdentifier: "workoutAddCalorieTableViewCell")
     }
 }
 
@@ -35,6 +38,14 @@ extension WorkoutAddViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == numberOfRows {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "workoutAddCalorieTableViewCell", for: indexPath) as? WorkoutAddCalorieTableViewCell else {
+                return UITableViewCell()
+            }
+            
+            cell.estimatedCalorieView.text = "추정 칼로리: \(estimatedCalorie) kcal"
+
+            return cell
+        } else if (indexPath.row == numberOfRows - 1) {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "workoutAddPlusTableViewCell", for: indexPath) as? WorkoutAddPlusTableViewCell else {
                 return UITableViewCell()
             }
