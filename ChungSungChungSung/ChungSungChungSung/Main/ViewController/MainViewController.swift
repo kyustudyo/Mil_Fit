@@ -79,27 +79,24 @@ class MainViewController: UIViewController {
         return roundedView
     }()
     
-//    fileprivate lazy var shortBasicRoundedView: UIView = {
-//        let roundedView = Bar()
-//        roundedView.progressValue = 25.0
-//        roundedView.progressColor = .green
-//        roundedView.trackColor = .clear
-//        return roundedView
-//    }()
-    
-    
-    fileprivate let shortBasicRoundedView: UIProgressView = {
-        let bar = UIProgressView()
-        bar.progressTintColor = UIColor.systemGray
-        bar.setHeight(height: 30)
-        bar.progressTintColor = .green
-        bar.progress = 1
-        bar.clipsToBounds = true
-        bar.layer.cornerRadius = 16
-        bar.layer.sublayers![1].cornerRadius = 16// 뒤에 있는 회색 track
-        bar.subviews[1].clipsToBounds = true
-        return bar
-    }()
+    fileprivate func shortRoundedView(color: UIColor) -> UIView {
+        let view = UIView()
+        view.setWidth(width: 26)
+        view.layer.cornerRadius = 8
+        view.backgroundColor = color
+        return view
+    }
+
+    fileprivate func shortMent(ment: String, value: Int) -> UIView {
+        let mentLabel = UILabel()
+        mentLabel.text = ment
+        let valueLabel = UILabel()
+        valueLabel.text = "\(value) cal"
+        let vstack = UIStackView(arrangedSubviews: [mentLabel, valueLabel])
+        vstack.axis = .vertical
+        vstack.alignment = .leading
+        return vstack
+    }
     
     fileprivate lazy var workoutRoundedView: UIView = {
         let roundedView = Bar()
@@ -109,28 +106,6 @@ class MainViewController: UIViewController {
         return roundedView
     }()
     
-//    fileprivate lazy var shortWorkoutRoundedView: UIView = {
-//        let roundedView = Bar()
-//        roundedView.progressValue = 25.0
-//        roundedView.progressColor = .blue
-//        roundedView.trackColor = .clear
-//        return roundedView
-//    }()
-    
-    fileprivate let shortWorkoutRoundedView: UIProgressView = {
-        let bar = UIProgressView()
-        bar.progressTintColor = UIColor.systemGray
-        bar.setHeight(height: 30)
-        bar.progressTintColor = .green
-        bar.progress = 1.0
-        bar.clipsToBounds = true
-        bar.layer.cornerRadius = 16
-        bar.layer.sublayers![1].cornerRadius = 16// 뒤에 있는 회색 track
-        bar.subviews[1].clipsToBounds = true
-        return bar
-    }()
-    
-    
     fileprivate lazy var eatRoundedView: UIView = {
         let roundedView = Bar()
         roundedView.progressValue = eatPercent
@@ -139,33 +114,10 @@ class MainViewController: UIViewController {
         return roundedView
     }()
     
-//    fileprivate lazy var shortEatRoundedView: UIView = {
-//        let roundedView = Bar()
-//        roundedView.progressValue = 25.0
-//        roundedView.progressColor = .brown
-//        roundedView.trackColor = .clear
-//        return roundedView
-//    }()
-    
-    fileprivate let shortEatRoundedView: UIProgressView = {
-        let bar = UIProgressView()
-        bar.progressTintColor = UIColor.systemGray
-        bar.setHeight(height: 30)
-        bar.progressTintColor = .green
-        bar.progress = 1.0
-        bar.clipsToBounds = true
-        bar.layer.cornerRadius = 16
-        bar.layer.sublayers![1].cornerRadius = 16// 뒤에 있는 회색 track
-        bar.subviews[1].clipsToBounds = true
-        return bar
-    }()
-    
     private enum Constants {
-//        static let itemSize = CGSize(width: 100, height: 72)
         static let lineSpacing = 8.0
         static let purposeCellHeight = 105.0
         static let mealCellHeight = 185.0
-//        static let minimumInteritemSpacing = 0.0
         static let collectionViewContentInset = UIEdgeInsets(top: 10, left: 6, bottom: 10, right: 6)
       }
     
@@ -207,6 +159,21 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .red
+        
+        let scrollView = UIScrollView()
+        view.addSubview(scrollView)
+        scrollView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
+        
+        let emptyView = UIView()
+        emptyView.backgroundColor = .brown
+        scrollView.addSubview(emptyView)
+        
+        emptyView.anchor(top: scrollView.topAnchor, left: scrollView.leftAnchor,bottom: scrollView.bottomAnchor ,right: scrollView.rightAnchor, paddingTop: 0, paddingLeft: 0,paddingBottom: 0 ,paddingRight: 0)
+
+        emptyView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+        
+        
+        
         //MARK: (날짜 + 멘트)
         let stack = UIStackView(arrangedSubviews: [dateLabel, todayMent])
         stack.axis = .vertical
@@ -251,26 +218,30 @@ class MainViewController: UIViewController {
         view.addSubview(eatRoundedView)
         eatRoundedView.anchor(top: mealStack.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 16, paddingLeft: 0, paddingRight: 0, height: 16)
         
-        
         view.addSubview(workoutRoundedView)
         workoutRoundedView.anchor(top: eatRoundedView.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 4, paddingLeft: 0, paddingRight: 0, height: 16)
         
         view.addSubview(basicRoundedView)
         basicRoundedView.anchor(top: workoutRoundedView.topAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0, height: 16)
         
-        let threeRoundedViewStack = UIStackView(arrangedSubviews: [shortBasicRoundedView, shortWorkoutRoundedView, shortEatRoundedView])
-//        threeRoundedViewStack.distribution = .equalCentering
-//        threeRoundedViewStack.backgroundColor = .cyan
+        let basicCal = shortRoundedView(color: .green)
+        let workOutCal = shortRoundedView(color: .blue)
+        let eatCal = shortRoundedView(color: .brown)
+        let threeRoundedViewStack = UIStackView(arrangedSubviews: [eatCal, basicCal, workOutCal])
 
         view.addSubview(threeRoundedViewStack)
-        threeRoundedViewStack.distribution = .fillEqually
-        
-        shortBasicRoundedView.setWidth(width: 30)
-        shortWorkoutRoundedView.setWidth(width: 30)
-        shortEatRoundedView.setWidth(width: 30)
-        
+        threeRoundedViewStack.distribution = .equalCentering
         threeRoundedViewStack.anchor(top: basicRoundedView.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 16, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, height: 16)
 
+        let basicMentVstack = shortMent(ment: "기초 대사량", value: 1700)
+        let workoutMentVstack = shortMent(ment: "운동 칼로리", value: 1700)
+        let eatMentVstack = shortMent(ment: "먹은 대사량", value: 1700)
+        
+        let threeShortMentStack = UIStackView(arrangedSubviews: [basicMentVstack, workoutMentVstack, eatMentVstack])
+        view.addSubview(threeShortMentStack)
+        threeShortMentStack.distribution = .equalCentering
+        threeShortMentStack.anchor(top: threeRoundedViewStack.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 4, paddingLeft: 0, paddingRight: 0)
+        
         view.backgroundColor = .white
     }
 }
