@@ -71,6 +71,12 @@ class MainViewController: UIViewController {
     let workoutPercent = 45.0
     let basicPercent = 40.0
     
+    fileprivate let calLabel: UILabel = {
+        let label = UILabel()
+        label.text = "칼로리"
+        return label
+    }()
+    
     fileprivate lazy var basicRoundedView: UIView = {
         let roundedView = Bar()
         roundedView.progressValue = basicPercent
@@ -165,7 +171,7 @@ class MainViewController: UIViewController {
         scrollView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
         
         let emptyView = UIView()
-        emptyView.backgroundColor = .brown
+        emptyView.backgroundColor = .white
         scrollView.addSubview(emptyView)
         
         emptyView.anchor(top: scrollView.topAnchor, left: scrollView.leftAnchor,bottom: scrollView.bottomAnchor ,right: scrollView.rightAnchor, paddingTop: 0, paddingLeft: 0,paddingBottom: 0 ,paddingRight: 0)
@@ -177,26 +183,33 @@ class MainViewController: UIViewController {
         //MARK: (날짜 + 멘트)
         let stack = UIStackView(arrangedSubviews: [dateLabel, todayMent])
         stack.axis = .vertical
-        view.addSubview(stack)
-        stack.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 0, paddingLeft: 16, paddingRight: 16)
+//        view.addSubview(stack)
+        emptyView.addSubview(stack)
+//        stack.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 0, paddingLeft: 16, paddingRight: 16)
+        stack.anchor(top: emptyView.safeAreaLayoutGuide.topAnchor, left: emptyView.safeAreaLayoutGuide.leftAnchor, right: emptyView.safeAreaLayoutGuide.rightAnchor, paddingTop: 0, paddingLeft: 16, paddingRight: 16)
         
         //MARK: 전역일 프로그레스
-        view.addSubview(endDayBar)
+//        view.addSubview(endDayBar)
+        emptyView.addSubview(endDayBar)
         endDayBar.anchor(top:stack.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor,paddingTop: 32, paddingLeft: 0, paddingRight: 0)
         endDayBar.progress = 전역가까움
         
-        view.addSubview(전역일)
+//        view.addSubview(전역일)
+        emptyView.addSubview(전역일)
         전역일.centerY(inView: endDayBar)
         전역일.anchor(left: endDayBar.leftAnchor, paddingLeft: 8)
         
-        view.addSubview(dDay)
-        dDay.anchor(bottom: endDayBar.topAnchor, right: view.safeAreaLayoutGuide.leftAnchor,paddingBottom: 8, paddingRight: 전역가까움 > 0.1 ? -CGFloat(전역가까움) * (UIScreen.main.bounds.width - 16) : -60)
+//        view.addSubview(dDay)
+        emptyView.addSubview(dDay)
+//        dDay.anchor(bottom: endDayBar.topAnchor, right: view.safeAreaLayoutGuide.leftAnchor,paddingBottom: 8, paddingRight: 전역가까움 > 0.1 ? -CGFloat(전역가까움) * (UIScreen.main.bounds.width - 16) : -60)
+        dDay.anchor(bottom: endDayBar.topAnchor, right: emptyView.safeAreaLayoutGuide.leftAnchor,paddingBottom: 8, paddingRight: 전역가까움 > 0.1 ? -CGFloat(전역가까움) * (UIScreen.main.bounds.width - 16) : -60)
         
         //MARK: (목표들)
         let purposeStack = UIStackView(arrangedSubviews: [purposeLabel, purposeCollectionView])
         purposeStack.axis = .vertical
         purposeStack.spacing = 8
-        view.addSubview(purposeStack)
+//        view.addSubview(purposeStack)
+        emptyView.addSubview(purposeStack)
         purposeStack.anchor(top: endDayBar.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 16, paddingLeft: 0, paddingRight: 0)
         purposeCollectionView.anchor(left: stack.leftAnchor, right: stack.rightAnchor, paddingLeft: 0, paddingRight: 0)
         purposeCollectionView.setHeight(height: Constants.purposeCellHeight)
@@ -209,38 +222,60 @@ class MainViewController: UIViewController {
         let mealStack = UIStackView(arrangedSubviews: [mealHStack, mealCollectionView])
         mealStack.axis = .vertical
         mealStack.spacing = 8
-        view.addSubview(mealStack)
+//        view.addSubview(mealStack)
+        emptyView.addSubview(mealStack)
         mealStack.anchor(top: purposeStack.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 16, paddingLeft: 0, paddingRight: 0)
         mealCollectionView.anchor(left: stack.leftAnchor, right: stack.rightAnchor, paddingLeft: 0, paddingRight: 0)
         mealCollectionView.setHeight(height: Constants.mealCellHeight)
         
         //MARK: 칼로리
-        view.addSubview(eatRoundedView)
-        eatRoundedView.anchor(top: mealStack.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 16, paddingLeft: 0, paddingRight: 0, height: 16)
+//        view.addSubview(eatRoundedView)
         
-        view.addSubview(workoutRoundedView)
-        workoutRoundedView.anchor(top: eatRoundedView.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 4, paddingLeft: 0, paddingRight: 0, height: 16)
+        emptyView.addSubview(calLabel)
+        calLabel.anchor(top: mealStack.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 16, paddingLeft: 0, paddingRight: 0)
         
-        view.addSubview(basicRoundedView)
-        basicRoundedView.anchor(top: workoutRoundedView.topAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0, height: 16)
+        let calContainerView = UIView()
+        calContainerView.layer.cornerRadius = 16
+        emptyView.addSubview(calContainerView)
+        calContainerView.backgroundColor = .systemGray6
+        calContainerView.anchor(top: calLabel.bottomAnchor, left: stack.leftAnchor, bottom: emptyView.bottomAnchor,right: stack.rightAnchor, paddingTop: 8, paddingLeft: 0, paddingBottom: 16,paddingRight: 0, height: 160)
+        
+        
+        
+//        emptyView.addSubview(eatRoundedView)
+        calContainerView.addSubview(eatRoundedView)
+        eatRoundedView.anchor(top: calContainerView.topAnchor, left: calContainerView.leftAnchor, right: calContainerView.rightAnchor, paddingTop: 16, paddingLeft: 8, paddingRight: 8, height: 16)
+        
+//        view.addSubview(workoutRoundedView)
+//        emptyView.addSubview(workoutRoundedView)
+        calContainerView.addSubview(workoutRoundedView)
+        workoutRoundedView.anchor(top: eatRoundedView.bottomAnchor, left: eatRoundedView.leftAnchor, right: eatRoundedView.rightAnchor, paddingTop: 4, paddingLeft: 0, paddingRight: 0, height: 16)
+        
+//        view.addSubview(basicRoundedView)
+        emptyView.addSubview(basicRoundedView)
+        basicRoundedView.anchor(top: workoutRoundedView.topAnchor, left: eatRoundedView.leftAnchor, right: eatRoundedView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0, height: 16)
         
         let basicCal = shortRoundedView(color: .green)
         let workOutCal = shortRoundedView(color: .blue)
         let eatCal = shortRoundedView(color: .brown)
         let threeRoundedViewStack = UIStackView(arrangedSubviews: [eatCal, basicCal, workOutCal])
 
-        view.addSubview(threeRoundedViewStack)
+//        view.addSubview(threeRoundedViewStack)
+//        emptyView.addSubview(threeRoundedViewStack)
+        calContainerView.addSubview(threeRoundedViewStack)
         threeRoundedViewStack.distribution = .equalCentering
-        threeRoundedViewStack.anchor(top: basicRoundedView.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 16, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, height: 16)
+        threeRoundedViewStack.anchor(top: basicRoundedView.bottomAnchor, left: calContainerView.leftAnchor, right: calContainerView.rightAnchor, paddingTop: 16, paddingLeft: 8, paddingBottom: 0, paddingRight: 8, height: 16)
 
         let basicMentVstack = shortMent(ment: "기초 대사량", value: 1700)
         let workoutMentVstack = shortMent(ment: "운동 칼로리", value: 1700)
         let eatMentVstack = shortMent(ment: "먹은 대사량", value: 1700)
         
         let threeShortMentStack = UIStackView(arrangedSubviews: [basicMentVstack, workoutMentVstack, eatMentVstack])
-        view.addSubview(threeShortMentStack)
+//        view.addSubview(threeShortMentStack)
+//        emptyView.addSubview(threeShortMentStack)
+        calContainerView.addSubview(threeShortMentStack)
         threeShortMentStack.distribution = .equalCentering
-        threeShortMentStack.anchor(top: threeRoundedViewStack.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 4, paddingLeft: 0, paddingRight: 0)
+        threeShortMentStack.anchor(top: threeRoundedViewStack.bottomAnchor, left: calContainerView.leftAnchor, right: stack.rightAnchor, paddingTop: 4, paddingLeft: 8,paddingRight: 8)
         
         view.backgroundColor = .white
     }
