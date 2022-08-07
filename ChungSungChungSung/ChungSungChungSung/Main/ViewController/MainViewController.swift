@@ -269,7 +269,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         let calContainerView = UIView()
         calContainerView.layer.cornerRadius = 16
         emptyView.addSubview(calContainerView)
-        calContainerView.backgroundColor = .systemGray6
+        calContainerView.backgroundColor = .white
         calContainerView.anchor(top: calLabel.bottomAnchor, left: stack.leftAnchor, bottom: emptyView.bottomAnchor,right: stack.rightAnchor, paddingTop: 8, paddingLeft: 0, paddingBottom: 16,paddingRight: 0, height: 160)
         
         calContainerView.addSubview(eatRoundedView)
