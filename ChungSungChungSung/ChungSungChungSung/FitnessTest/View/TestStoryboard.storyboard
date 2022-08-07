@@ -3,7 +3,6 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -32,12 +31,13 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QAT-ke-QNe">
-                                        <rect key="frame" x="319.5" y="18" width="41.5" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eqd-p4-l0b">
+                                        <rect key="frame" x="346" y="18" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="2BR-FP-OmQ"/>
+                                            <constraint firstAttribute="height" constant="20" id="chu-ik-OAU"/>
+                                        </constraints>
+                                    </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="0xK-Wp-akf">
                                         <rect key="frame" x="8" y="80.5" width="366" height="186"/>
                                         <subviews>
@@ -140,6 +140,9 @@
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="286.5"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                        <connections>
+                                            <action selector="tapHistoryTestButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="l3p-lE-5yC"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemOrangeColor"/>
@@ -148,18 +151,18 @@
                                     <constraint firstItem="0xK-Wp-akf" firstAttribute="centerX" secondItem="Chn-bf-jKi" secondAttribute="centerX" id="Aqh-NC-tHi"/>
                                     <constraint firstAttribute="bottom" secondItem="0xK-Wp-akf" secondAttribute="bottom" constant="20" id="D0G-Db-x5v"/>
                                     <constraint firstItem="iZC-ja-Pv3" firstAttribute="leading" secondItem="Chn-bf-jKi" secondAttribute="leading" id="E11-m7-6iH"/>
+                                    <constraint firstItem="eqd-p4-l0b" firstAttribute="top" secondItem="dNC-wy-bmb" secondAttribute="top" id="FuX-90-k6a"/>
                                     <constraint firstItem="iZC-ja-Pv3" firstAttribute="height" secondItem="Chn-bf-jKi" secondAttribute="height" id="Iau-G0-BOz"/>
                                     <constraint firstItem="iZC-ja-Pv3" firstAttribute="top" secondItem="Chn-bf-jKi" secondAttribute="top" id="MaU-Pm-sg6"/>
                                     <constraint firstItem="dNC-wy-bmb" firstAttribute="leading" secondItem="Chn-bf-jKi" secondAttribute="leading" constant="21" id="Nc9-G4-eij"/>
                                     <constraint firstItem="0xK-Wp-akf" firstAttribute="leading" secondItem="Chn-bf-jKi" secondAttribute="leading" constant="8" id="PBp-4O-KdZ"/>
                                     <constraint firstItem="iZC-ja-Pv3" firstAttribute="width" secondItem="Chn-bf-jKi" secondAttribute="width" id="QBS-mY-LbB"/>
-                                    <constraint firstItem="QAT-ke-QNe" firstAttribute="top" secondItem="dNC-wy-bmb" secondAttribute="top" id="R6E-yG-kin"/>
                                     <constraint firstItem="0xK-Wp-akf" firstAttribute="height" secondItem="Chn-bf-jKi" secondAttribute="height" multiplier="0.65" id="SmE-KQ-1fD"/>
                                     <constraint firstItem="1TH-0N-IOr" firstAttribute="leading" secondItem="dNC-wy-bmb" secondAttribute="trailing" constant="18" id="YOd-ls-RD3"/>
                                     <constraint firstItem="dNC-wy-bmb" firstAttribute="top" secondItem="Chn-bf-jKi" secondAttribute="top" constant="18" id="bzs-bw-VeK"/>
-                                    <constraint firstAttribute="trailing" secondItem="QAT-ke-QNe" secondAttribute="trailing" constant="21" id="kw6-a1-k87"/>
                                     <constraint firstAttribute="trailing" secondItem="0xK-Wp-akf" secondAttribute="trailing" constant="8" id="osB-IE-tww"/>
                                     <constraint firstItem="1TH-0N-IOr" firstAttribute="top" secondItem="dNC-wy-bmb" secondAttribute="top" id="phy-pG-EZ9"/>
+                                    <constraint firstAttribute="trailing" secondItem="eqd-p4-l0b" secondAttribute="trailing" constant="16" id="q1n-Mw-vue"/>
                                     <constraint firstAttribute="bottom" secondItem="iZC-ja-Pv3" secondAttribute="bottom" id="z5J-sZ-Qr3"/>
                                 </constraints>
                             </view>
@@ -224,7 +227,6 @@
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s3p-ua-kks">
                                 <rect key="frame" x="16" y="372.5" width="41.5" height="20.5"/>
-                                <color key="backgroundColor" name="AccentColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -250,7 +252,7 @@
                     <connections>
                         <outlet property="fitnessGraphButton" destination="iZC-ja-Pv3" id="VM1-fX-wUO"/>
                         <outlet property="fitnessMainTableView" destination="Ki0-dK-Iap" id="bPK-oV-Dqe"/>
-                        <outlet property="goToHistoryLabel" destination="QAT-ke-QNe" id="6Wz-Pj-vou"/>
+                        <outlet property="goToHistoryImageView" destination="eqd-p4-l0b" id="YtM-NA-vCw"/>
                         <outlet property="graphRoundedRectangleView" destination="Chn-bf-jKi" id="qrO-Gj-4r7"/>
                         <outlet property="historyFitnessTestLabel" destination="dNC-wy-bmb" id="e9K-un-6bh"/>
                         <outlet property="lastFitnessTestDateLabel" destination="1TH-0N-IOr" id="Puq-1X-3H8"/>
@@ -309,9 +311,6 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="AccentColor">
-            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
