@@ -11,6 +11,7 @@ class WorkoutViewController: UIViewController {
     private let calInset: CGFloat = 17.0
     private let numberOfCellsShown = 6
     private var selectedCell: Int = 6
+    private var initialSelectedCell: Int = 6
     private var weekdays: [String] = ["월", "화", "수", "목", "금", "토", "일"]
     private var dates: [String] = ["8", "9", "10", "11", "12", "13", "14"]
     
@@ -23,11 +24,13 @@ class WorkoutViewController: UIViewController {
         configNavigationTitle()
         setSelectedDateView()
         
-//        let flowLayout = UICollectionViewFlowLayout()
-//        flowLayout.sectionInset = UIEdgeInsets(top: 0, left: calInset, bottom: 0, right: calInset)
-//        dailyCalendarView.collectionViewLayout = flowLayout
+        self.dailyCalendarView.backgroundColor = .clear
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        
+        setSelectedDateView()
     }
     
     private func configNavigationTitle() {
@@ -41,12 +44,18 @@ class WorkoutViewController: UIViewController {
     }
 
     private func setSelectedDateView() {
-        var month: Int = 8
-        var date: Int = 10
-//        var selectedDateText: String = "\(month)월 \(date)일"
+        var month: String = "8"
+        var date: String = "10"
+        var selectedDateText: String = "\(month)월 \(date)일"
         var selectedTodayText: String = "\(month)월 \(date)일, 오늘"
         
-        selectedDateView.text = selectedTodayText
+        print(selectedCell)
+        if selectedCell == dates.count - 1 {
+            selectedDateView.text = selectedTodayText
+        } else {
+            date = dates[selectedCell]
+            selectedDateView.text = selectedDateText
+        }
     }
 }
 
@@ -62,23 +71,26 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
         
         cell.dateNumberView.text = dates[indexPath.row]
         cell.dayNameView.text = weekdays[indexPath.row]
-        cell.dayHighlightView.layer.cornerRadius = 26
+        
+        cell.dayHighlightView.layer.cornerRadius = ( cell.dayHighlightView.frame.width + 4 ) / 2
         cell.dayHighlightView.backgroundColor = CustomColor.mainPurple
         
-//        if indexPath.row == selectedCell {
-//            cell.dayHighlightView.alpha = 1.0
-//            cell.dayNameView.textColor = .white
-//        } else {
-//            cell.dayHighlightView.alpha = 0.0
-//            cell.dayNameView.textColor = .black
-//        }
+        cell.dateHighlightCircleView.layer.cornerRadius = 19
+        cell.dateHighlightCircleView.layer.shadowColor = UIColor.systemGray5.cgColor
+        cell.dateHighlightCircleView.layer.shadowRadius = 20
+        cell.dateHighlightCircleView.layer.shadowOpacity = 1
+        cell.dateHighlightCircleView.backgroundColor = CustomColor.dateGreen
+        
+        if(indexPath.row == initialSelectedCell) {
+            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .right)
+        }
+        cell.isSelected = indexPath.row == initialSelectedCell
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedCell = indexPath.row
-        print(indexPath.row)
     }
 }
 
@@ -90,13 +102,13 @@ extension WorkoutViewController: UICollectionViewDelegateFlowLayout {
         
         let viewWidth = self.view.bounds.width
         let inset = (17 / 390) * viewWidth
-        let spacing = (8 / 390) * viewWidth
+//        let spacing = (8 / 390) * viewWidth
         
-        let width = (viewWidth - (inset * 2) - (spacing * 5)) / 6
-        let height = (86 / 53) * width
+        let width = (viewWidth - (inset * 2) /*- (spacing * 5)*/) / 6
+        let height = (105 / 61) * width
         
-        flow.minimumInteritemSpacing = spacing
-        flow.minimumLineSpacing = spacing
+//        flow.minimumInteritemSpacing = spacing
+//        flow.minimumLineSpacing = spacing
         flow.sectionInset.left = inset
         flow.sectionInset.right = inset
         
