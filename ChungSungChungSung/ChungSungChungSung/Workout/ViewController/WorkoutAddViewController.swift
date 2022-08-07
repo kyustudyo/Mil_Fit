@@ -52,7 +52,7 @@ extension WorkoutAddViewController: UITableViewDelegate, UITableViewDataSource {
 
             return cell
         } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "workoutAddOneTableViewCell", for: indexPath) as? WorkoutAddOneTableViewCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "workoutAddTwoTableViewCell", for: indexPath) as? WorkoutAddTwoTableViewCell else {
                 return UITableViewCell()
             }
         
