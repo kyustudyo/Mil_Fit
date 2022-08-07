@@ -7,8 +7,11 @@
 
 import UIKit
 import FSCalendar
+
 //TODO: scrollview
 // 맨아래 작은것들 uiview로 만들기
+// gradient 잇음
+
 class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSource  {
 
     var 전역가까움: Float = 0.9
@@ -22,7 +25,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     fileprivate let dateLabel: UILabel = {
         let label = UILabel()
         label.text = "2022년 8월 21일"
-        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: Constants.bigText, weight: .bold)
         return label
     }()
     
@@ -35,11 +38,11 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     fileprivate let endDayBar: UIProgressView = {
         let bar = UIProgressView()
 //        bar.progressTintColor = .red
-        bar.setHeight(height: 30)
+        bar.setHeight(height: 38)
         bar.progressTintColor = .진보라
         bar.clipsToBounds = true
-        bar.layer.cornerRadius = 16
-        bar.layer.sublayers![1].cornerRadius = 16// 뒤에 있는 회색 track
+        bar.layer.cornerRadius = 20
+        bar.layer.sublayers![1].cornerRadius = 20// 뒤에 있는 회색 track
         bar.subviews[1].clipsToBounds = true
         return bar
     }()
@@ -47,36 +50,50 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     fileprivate let 전역일: UILabel = {
         let label = UILabel()
         label.text = "전역일"
+        label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
     
     fileprivate let dDay: UILabel = {
         let label = UILabel()
         label.text = "D-212"
+        label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
     
     fileprivate let purposeLabel: UILabel = {
         let label = UILabel()
         label.text = "목표"
+        label.font = UIFont.systemFont(ofSize: Constants.bigText, weight: .bold)
         return label
     }()
     
     fileprivate let mealLabel: UILabel = {
         let label = UILabel()
         label.text = "식단"
+        label.font = UIFont.systemFont(ofSize: Constants.bigText, weight: .bold)
         return label
     }()
     
     fileprivate let moreLabel: UILabel = {
         let label = UILabel()
         label.text = "더보기"
+        label.font = UIFont.systemFont(ofSize: Constants.smallText)
+        label.textColor = .systemGray2
         return label
     }()
     
     fileprivate let calLabel: UILabel = {
         let label = UILabel()
         label.text = "칼로리"
+        label.font = UIFont.systemFont(ofSize: Constants.bigText, weight: .bold)
+        return label
+    }()
+    
+    fileprivate let workoutLabel: UILabel = {
+        let label = UILabel()
+        label.text = "운동"
+        label.font = UIFont.systemFont(ofSize: Constants.bigText, weight: .bold)
         return label
     }()
     
@@ -90,7 +107,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     
     fileprivate func shortRoundedView(color: UIColor) -> UIView {
         let view = UIView()
-        view.setWidth(width: 26)
+        view.setWidth(width: 30)
         view.setHeight(height: 14)
         view.layer.cornerRadius = 8
         view.backgroundColor = color
@@ -127,13 +144,6 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         roundedView.trackColor = .clear
         return roundedView
     }()
-    
-    private enum Constants {
-        static let lineSpacing = 8.0
-        static let purposeCellHeight = 115.0
-        static let mealCellHeight = 185.0
-        static let collectionViewContentInset = UIEdgeInsets(top: 10, left: 6, bottom: 10, right: 6)
-      }
     
     private let purposeCollectionViewFlowLayout: UICollectionViewFlowLayout = {
         let view = UICollectionViewFlowLayout()
@@ -194,33 +204,37 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         emptyView.addSubview(stack)
         stack.anchor(top: emptyView.topAnchor, left: emptyView.leftAnchor, right: emptyView.rightAnchor, paddingTop: 0, paddingLeft: 16, paddingRight: 16)
         //TODO
-        navigationController?.isNavigationBarHidden = true
+//        navigationController?.isNavigationBarHidden = true
         //MARK: 전역일 프로그레스
 
-        emptyView.addSubview(endDayBar)
-        endDayBar.anchor(top:stack.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor,paddingTop: 32, paddingLeft: 0, paddingRight: 0)
-        endDayBar.progress = 전역가까움
+
+        
         emptyView.addSubview(전역일)
-        
-        전역일.anchor(left: stack.leftAnchor, bottom: endDayBar.topAnchor, paddingLeft: 0, paddingBottom: 8)
-        
+        전역일.anchor(top: stack.bottomAnchor, left: stack.leftAnchor, paddingTop: 24.0, paddingLeft: 0)
         emptyView.addSubview(dDay)
-        dDay.anchor(bottom: endDayBar.topAnchor, right: emptyView.safeAreaLayoutGuide.leftAnchor,paddingBottom: 8, paddingRight: 전역가까움 > 0.1 ? -CGFloat(전역가까움) * (UIScreen.main.bounds.width - 16) : -60)
+        dDay.anchor(top: dateLabel.bottomAnchor, right: emptyView.safeAreaLayoutGuide.leftAnchor,paddingTop: 24.0, paddingRight: 전역가까움 > 0.1 ? -CGFloat(전역가까움) * (UIScreen.main.bounds.width - 16) : -60)
+        
+        emptyView.addSubview(endDayBar)
+        endDayBar.anchor(top:전역일.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor,paddingTop: 12, paddingLeft: 0, paddingRight: 0)
+        endDayBar.progress = 전역가까움
+        
         
         //MARK: (목표들)
         let purposeStack = UIStackView(arrangedSubviews: [purposeLabel, purposeCollectionView])
         purposeStack.axis = .vertical
         purposeStack.spacing = 8
         emptyView.addSubview(purposeStack)
-        purposeStack.anchor(top: endDayBar.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 16, paddingLeft: 0, paddingRight: 0)
+        purposeStack.anchor(top: endDayBar.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 40, paddingLeft: 0, paddingRight: 0)
         purposeCollectionView.anchor(left: stack.leftAnchor, right: stack.rightAnchor, paddingLeft: 0, paddingRight: 0)
         purposeCollectionView.setHeight(height: Constants.purposeCellHeight)
         purposeCollectionView.backgroundColor = .systemGray6
         //MARK: 운동 달력
 
+        emptyView.addSubview(workoutLabel)
+        workoutLabel.anchor(top: purposeStack.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 40, paddingLeft: 0, paddingRight: 0)
         
         emptyView.addSubview(calendar)
-        calendar.anchor(top: purposeStack.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 16, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, height: 300)
+        calendar.anchor(top: workoutLabel.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 8, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, height: 300)
         calendar.backgroundColor = .white
         calendar.layer.cornerRadius = 16
         
@@ -250,6 +264,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         calendar.placeholderType = .none//현재달만
         calendar.appearance.titleFont = UIFont.systemFont(ofSize: 13)
         setUpEvents()
+        
         //MARK: 식단
         let mealHStack = UIStackView(arrangedSubviews: [mealLabel, moreLabel])
         moreLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
@@ -258,26 +273,28 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         mealStack.axis = .vertical
         mealStack.spacing = 8
         emptyView.addSubview(mealStack)
-        mealStack.anchor(top: calendar.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 16, paddingLeft: 0, paddingRight: 0)
+        mealStack.anchor(top: calendar.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 40, paddingLeft: 0, paddingRight: 0)
         mealCollectionView.anchor(left: stack.leftAnchor, right: stack.rightAnchor, paddingLeft: 0, paddingRight: 0)
         mealCollectionView.setHeight(height: Constants.mealCellHeight)
         
         //MARK: 칼로리
         
         emptyView.addSubview(calLabel)
-        calLabel.anchor(top: mealStack.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 16, paddingLeft: 0, paddingRight: 0)
+        calLabel.anchor(top: mealStack.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 40, paddingLeft: 0, paddingRight: 0)
         let calContainerView = UIView()
         calContainerView.layer.cornerRadius = 16
         emptyView.addSubview(calContainerView)
         calContainerView.backgroundColor = .white
-        calContainerView.anchor(top: calLabel.bottomAnchor, left: stack.leftAnchor, bottom: emptyView.bottomAnchor,right: stack.rightAnchor, paddingTop: 8, paddingLeft: 0, paddingBottom: 16,paddingRight: 0, height: 160)
+        calContainerView.anchor(top: calLabel.bottomAnchor, left: stack.leftAnchor, bottom: emptyView.bottomAnchor,right: stack.rightAnchor, paddingTop: 8, paddingLeft: 0, paddingBottom: 60,paddingRight: 0, height: 160)
         
         calContainerView.addSubview(eatRoundedView)
-        eatRoundedView.anchor(top: calContainerView.topAnchor, left: calContainerView.leftAnchor, right: calContainerView.rightAnchor, paddingTop: 16, paddingLeft: 8, paddingRight: 8, height: 16)
+        eatRoundedView.anchor(top: calContainerView.topAnchor, left: calContainerView.leftAnchor, right: calContainerView.rightAnchor, paddingTop: 26, paddingLeft: 22, paddingRight: 0, height: 14)
+        
         calContainerView.addSubview(workoutRoundedView)
-        workoutRoundedView.anchor(top: eatRoundedView.bottomAnchor, left: eatRoundedView.leftAnchor, right: eatRoundedView.rightAnchor, paddingTop: 4, paddingLeft: 0, paddingRight: 0, height: 16)
-        emptyView.addSubview(basicRoundedView)
-        basicRoundedView.anchor(top: workoutRoundedView.topAnchor, left: eatRoundedView.leftAnchor, right: eatRoundedView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0, height: 16)
+        workoutRoundedView.anchor(top: eatRoundedView.bottomAnchor, left: eatRoundedView.leftAnchor, right: eatRoundedView.rightAnchor, paddingTop: 13, paddingLeft: 0, paddingRight: 0, height: 14)
+        
+        calContainerView.addSubview(basicRoundedView)
+        basicRoundedView.anchor(top: eatRoundedView.bottomAnchor, left: eatRoundedView.leftAnchor, right: eatRoundedView.rightAnchor, paddingTop: 13, paddingLeft: 0, paddingRight: 0, height: 14)
         
         //TODO: 중복
         let eatCal = shortRoundedView(color: .연보라)
@@ -304,27 +321,8 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         let 세개칼로리스택 = UIStackView(arrangedSubviews: [먹은칼로리, 기초칼로리, 운동칼로리])
         calContainerView.addSubview(세개칼로리스택)
         세개칼로리스택.distribution = .equalCentering
-        세개칼로리스택.anchor(top: basicRoundedView.bottomAnchor, left: calContainerView.leftAnchor, right: calContainerView.rightAnchor, paddingTop: 24, paddingLeft: 8, paddingRight: 8)
-        
-//        let basicCal = shortRoundedView(color: .연빨강)
-//        let workOutCal = shortRoundedView(color: .연노랑)
-//        let eatCal = shortRoundedView(color: .연보라)
-//        let threeRoundedViewStack = UIStackView(arrangedSubviews: [eatCal, basicCal, workOutCal])
-//        calContainerView.addSubview(threeRoundedViewStack)
-//        threeRoundedViewStack.distribution = .equalCentering
-//        threeRoundedViewStack.anchor(top: basicRoundedView.bottomAnchor, left: calContainerView.leftAnchor, right: calContainerView.rightAnchor, paddingTop: 16, paddingLeft: 8, paddingBottom: 0, paddingRight: 8, height: 16)
+        세개칼로리스택.anchor(top: basicRoundedView.bottomAnchor, left: calContainerView.leftAnchor, right: calContainerView.rightAnchor, paddingTop: 24, paddingLeft: 22, paddingRight: 16)
 
-//        let basicMentVstack = shortMent(ment: "기초 대사량", value: 1700)
-//        let workoutMentVstack = shortMent(ment: "운동 칼로리", value: 1700)
-//        let eatMentVstack = shortMent(ment: "먹은 대사량", value: 1700)
-        
-//        let threeShortMentStack = UIStackView(arrangedSubviews: [basicMentVstack, workoutMentVstack, eatMentVstack])
-//        calContainerView.addSubview(threeShortMentStack)
-//        threeShortMentStack.distribution = .equalCentering
-//        threeShortMentStack.anchor(top: threeRoundedViewStack.bottomAnchor, left: calContainerView.leftAnchor, right: stack.rightAnchor, paddingTop: 4, paddingLeft: 8,paddingRight: 8)
-        
-        
-//        view.backgroundColor = .systemGray5
     }
     func setUpEvents() {
         let formatter = DateFormatter()
@@ -384,13 +382,14 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
 //        print(collectionView)
         switch collectionView {
         case purposeCollectionView:
-            let width: CGFloat = (view.bounds.width - (20 * 5))
+//            let width: CGFloat = (view.bounds.width - (20 * 5))
+            let width: CGFloat = Constants.purposeCellWidth
     //        let height: CGFloat = width + 35
             let height: CGFloat = Constants.purposeCellHeight
             return CGSize(width: width, height: height)
             
         case mealCollectionView:
-            let width: CGFloat = (view.bounds.width / 2.5)
+            let width: CGFloat = Constants.mealCellWidth
     //        let height: CGFloat = width + 35
             let height: CGFloat = Constants.mealCellHeight
             return CGSize(width: width, height: height)
@@ -510,3 +509,15 @@ extension MainViewController {
 extension MainViewController: FSCalendarDelegateAppearance {
     
 }
+
+enum Constants {
+    static let lineSpacing = 16.0
+    static let purposeCellHeight = 107.0
+    static let mealCellHeight = 210.0//191
+    static let purposeCellWidth = 289.0
+    static let mealCellWidth = 160.0 //145.0
+    static let bigText = 22.0
+    static let smallText = 15.0
+    static let middleText = 17.0
+    static let collectionViewContentInset = UIEdgeInsets(top: 10, left: 6, bottom: 10, right: 6)
+  }
