@@ -48,6 +48,7 @@ class PurposeCollectionViewCell: UICollectionViewCell {
     }
     
     fileprivate func setupUI() {
+//        self.backgroundColor = .red
         self.layer.cornerRadius = 16
         let hstack = UIStackView(arrangedSubviews: [dateLabel, didOrNot])
         let vstack = UIStackView(arrangedSubviews: [purposeLabel, hstack])
