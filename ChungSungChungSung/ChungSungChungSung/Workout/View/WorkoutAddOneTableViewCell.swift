@@ -18,7 +18,7 @@ class WorkoutAddOneTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         cellRectangle.layer.cornerRadius = 8
-        setNumberView.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        setNumberView.font = UIFont.systemFont(ofSize: 17, weight: .regular)
         inputType.text = inputTypeText
     }
 
