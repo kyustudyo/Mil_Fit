@@ -18,6 +18,9 @@ class WorkoutViewController: UIViewController {
     @IBOutlet weak var selectedDateView: UILabel!
     @IBOutlet weak var dailyCalendarView: UICollectionView!
 
+    @IBOutlet weak var todaysWorkoutView: UITableView!
+    @IBOutlet weak var workoutListView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
