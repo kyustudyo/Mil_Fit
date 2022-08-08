@@ -26,5 +26,4 @@ class TestMainTableViewCell: UITableViewCell {
         fitnessRecordDateLabel.textColor = UIColor.systemGray
         fitnessImageView.layer.cornerRadius = 20
     }
-
 }
