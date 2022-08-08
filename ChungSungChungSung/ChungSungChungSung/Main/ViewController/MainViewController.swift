@@ -40,15 +40,34 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
 //    }()
     
     fileprivate let endDayBar: UIProgressView = {
-        let bar = UIProgressView()
-//        bar.progressTintColor = .red
-        bar.setHeight(height: 38)
-        bar.progressTintColor = .진보라
-        bar.clipsToBounds = true
-        bar.layer.cornerRadius = 20
-        bar.layer.sublayers![1].cornerRadius = 20// 뒤에 있는 회색 track
-        bar.subviews[1].clipsToBounds = true
-        return bar
+        
+        let newbar = GradientProgressView(progressViewStyle: UIProgressView.Style.bar)
+        let col1 = UIColor(red: 170/255.0, green: 144/255.0, blue: 239/255.0, alpha: 1)
+        let col2 = UIColor(red: 113/255.0, green: 87/255.0, blue: 219/255.0, alpha: 1)
+        newbar.firstColor = col2
+        newbar.secondColor = col1
+        newbar.setHeight(height: 38)
+        newbar.clipsToBounds = true
+        newbar.layer.cornerRadius = 20
+        newbar.layer.sublayers![1].cornerRadius = 20
+        newbar.subviews[1].clipsToBounds = true
+        newbar.trackTintColor = .연보라
+        
+//        let bar = UIProgressView()
+//        bar.setHeight(height: 38)
+//        bar.progressTintColor = .진보라
+//        bar.trackTintColor = .연보라
+//        bar.clipsToBounds = true
+//        bar.layer.cornerRadius = 20
+        
+        
+        
+//        let gradient = CAGradientLayer()
+//        gradient.frame = bar.bounds
+//        gradient.colors = [col1, col2]
+//        bar.layer.sublayers![1].insertSublayer(gradient, at: 0)
+        
+        return newbar
     }()
     
     fileprivate let 전역일: UILabel = {
@@ -79,6 +98,14 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         return label
     }()
     
+    fileprivate let moreButton: UIButton = {
+       let button = UIButton()
+        button.setTitle("더보기", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: Constants.smallText, weight: .light)
+        button.setTitleColor(UIColor.systemGray2, for: .normal)
+        button.addTarget(self, action: #selector(goMoreMeal), for: .touchUpInside)
+        return button
+    }()
     fileprivate let moreLabel: UILabel = {
         let label = UILabel()
         label.text = "더보기"
@@ -133,6 +160,9 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         return vstack
     }
     
+    @objc fileprivate func goMoreMeal() {
+        print("more meal")
+    }
     fileprivate lazy var workoutRoundedView: UIView = {
         let roundedView = Bar()
         roundedView.progressValue = basicPercent + workoutPercent
@@ -270,8 +300,9 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         setUpEvents()
         
         //MARK: 식단
-        let mealHStack = UIStackView(arrangedSubviews: [mealLabel, moreLabel])
-        moreLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        let mealHStack = UIStackView(arrangedSubviews: [mealLabel, moreButton])
+        mealHStack.alignment = .firstBaseline
+        moreButton.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         let mealStack = UIStackView(arrangedSubviews: [mealHStack, mealCollectionView])
         mealCollectionView.backgroundColor = .systemGray6
         mealStack.axis = .vertical
@@ -366,6 +397,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         case purposeCollectionView:
             print("cell purposeCollectionView")
             guard let cell = purposeCollectionView.dequeueReusableCell(withReuseIdentifier: PurposeCollectionViewCell.cellID, for: indexPath) as? PurposeCollectionViewCell else { return UICollectionViewCell() }
+            cell.delegate = self
             cell.backgroundColor = .white
             return cell
         case mealCollectionView:
@@ -523,5 +555,33 @@ enum Constants {
     static let bigText = 22.0
     static let smallText = 15.0
     static let middleText = 17.0
-    static let collectionViewContentInset = UIEdgeInsets(top: 10, left: 6, bottom: 10, right: 6)
+//    static let collectionViewContentInset = UIEdgeInsets(top: 10, left: 6, bottom: 10, right: 6)
   }
+
+extension MainViewController: didPurpose {
+    func getThumbUp() {
+        print("get thumb up in vc")
+    }
+}
+
+//https://medium.com/academy-poa/how-to-create-a-uiprogressview-with-gradient-progress-in-swift-2d1fa7d26f24
+class GradientProgressView: UIProgressView {
+    
+    @IBInspectable var firstColor: UIColor = UIColor.white {
+        didSet {
+            updateView()
+        }
+    }
+    
+    @IBInspectable var secondColor: UIColor = UIColor.white {
+        didSet {
+            updateView()
+        }
+    }
+    
+    func updateView() {
+        if let gradientImage = UIImage(bounds: self.bounds, colors: [firstColor, secondColor]) {
+            self.progressImage = gradientImage
+        }
+    }
+}

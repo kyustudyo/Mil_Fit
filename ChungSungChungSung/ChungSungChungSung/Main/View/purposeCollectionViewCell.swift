@@ -11,9 +11,7 @@ class PurposeCollectionViewCell: UICollectionViewCell {
     
     static let cellID = "purposeCollectionViewCellID"
     
-//    override func layoutSubviews() {
-//        setupUI()
-//    }
+    weak var delegate: didPurpose?
     
     let purposeLabel: UILabel = {
         let label = UILabel()
@@ -29,17 +27,14 @@ class PurposeCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    let didOrNot: UIImageView = {
-        let imageView = UIImageView()
-        let largeBoldDoc = UIImage(systemName: "hand.thumbsup.circle.fill")
-        imageView.image = largeBoldDoc
-        imageView.setHeight(height: 44)
-        imageView.setWidth(width: 44)
-        imageView.contentMode = .scaleAspectFit
-        
-        return imageView
+    private lazy var thumbButton: UIButton = {
+        let button = UIButton()
+        let boldConfig = UIImage.SymbolConfiguration(pointSize: 38)
+        let largeBoldDoc = UIImage(systemName: "hand.thumbsup.circle.fill", withConfiguration: boldConfig)
+        button.setImage(largeBoldDoc, for: .normal)
+        button.addTarget(self, action: #selector(getThumbUp), for: .touchUpInside)
+        return button
     }()
-    
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -52,23 +47,24 @@ class PurposeCollectionViewCell: UICollectionViewCell {
     }
     
     fileprivate func setupUI() {
-//        self.backgroundColor = .red
         self.layer.cornerRadius = 16
-//        let hstack = UIStackView(arrangedSubviews: [dateLabel, didOrNot])
-//        let vstack = UIStackView(arrangedSubviews: [purposeLabel, hstack])
-//        vstack.axis = .vertical
-        
+
         let vstack = UIStackView(arrangedSubviews: [purposeLabel, dateLabel])
         vstack.axis = .vertical
         vstack.spacing = 24.0
         
-        let hstack = UIStackView(arrangedSubviews: [vstack, didOrNot])
-        hstack.distribution = .fill
-        
+        let hstack = UIStackView(arrangedSubviews: [vstack, thumbButton])
+        thumbButton.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         contentView.addSubview(hstack)
-        hstack.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, bottom: contentView.bottomAnchor, right: contentView.rightAnchor, paddingTop: 26.0, paddingLeft: 13.0, paddingBottom: 18.0, paddingRight: 12.0)
-//        contentView.addSubview(vstack)
-//        vstack.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, bottom: contentView.bottomAnchor, right: contentView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
+        hstack.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, bottom: contentView.bottomAnchor, right: contentView.rightAnchor, paddingTop: 26.0, paddingLeft: 13.0, paddingBottom: 24.0, paddingRight: 16)
     }
     
+    @objc fileprivate func getThumbUp() {
+        thumbButton.tintColor = thumbButton.tintColor == .gray ? .none : .gray
+        delegate?.getThumbUp()
+    }
+}
+
+protocol didPurpose: AnyObject {
+    func getThumbUp()
 }
