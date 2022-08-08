@@ -11,7 +11,10 @@ import FSCalendar
 //TODO: scrollview
 // 맨아래 작은것들 uiview로 만들기
 // gradient 잇음
-
+// 버튼만들기 더보기
+//전역일 글자
+// 따봉 회색
+// 화살표 크기
 class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSource  {
 
     var 전역가까움: Float = 0.9
