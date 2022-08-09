@@ -15,6 +15,27 @@ class WorkoutViewController: UIViewController {
     private var weekdays: [String] = ["월", "화", "수", "목", "금", "토", "일"]
     private var dates: [String] = ["8", "9", "10", "11", "12", "13", "14"]
     
+    private var workoutList = WorkoutData().list
+    private var workout: WorkoutModel?
+    
+//    private var workoutData = [
+//        ("푸시업", "", "회"),
+//        ("달리기", "", "분"),
+//        ("풀업", "", "회")
+//    ]
+//    lazy var list: [WorkoutModel] = {
+//        var datalist = [WorkoutModel]()
+//        for (title, first, second) in self.workoutData {
+//            let workoutdata = WorkoutModel()
+//            workoutdata.title = title
+//            workoutdata.firstInputType = first
+//            workoutdata.secondInputType = second
+//
+//            datalist.append(workoutdata)
+//        }
+//        return datalist
+//    }()
+    
     @IBOutlet weak var selectedDateView: UILabel!
     @IBOutlet weak var dailyCalendarView: UICollectionView!
 
@@ -28,6 +49,14 @@ class WorkoutViewController: UIViewController {
         setSelectedDateView()
         
         self.dailyCalendarView.backgroundColor = .clear
+        
+        todaysWorkoutView.register(UITableViewCell.self, forCellReuseIdentifier: "todaysWorkoutCell")
+        workoutListView.register(UITableViewCell.self, forCellReuseIdentifier: "todaysWorkoutCell")
+        
+        todaysWorkoutView.delegate = self
+        todaysWorkoutView.dataSource = self
+        workoutListView.delegate = self
+        workoutListView.dataSource = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -116,5 +145,28 @@ extension WorkoutViewController: UICollectionViewDelegateFlowLayout {
         flow.sectionInset.right = inset
         
         return CGSize(width: width, height: height)
+    }
+}
+
+extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return workoutList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "todaysWorkoutCell", for: indexPath) as? TodaysWorkoutCell else {
+            return UITableViewCell()
+        }
+        
+        let workout = workoutList[indexPath.row]
+        cell.workoutTitle.text = workout.title
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let workout = workoutList[indexPath.row]
+        print("\(indexPath.row) selected.")
+        print("\(workout.title)")
     }
 }
