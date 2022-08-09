@@ -9,12 +9,8 @@ import UIKit
 import FSCalendar
 
 //TODO: scrollview
-// 맨아래 작은것들 uiview로 만들기
-// gradient 잇음
-// 버튼만들기 더보기
+
 //전역일 글자
-// 따봉 회색
-// 화살표 크기
 
 class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSource  {
 
@@ -38,6 +34,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
 //        label.text = "오늘도 열심히 운동해요!"
 //        return label
 //    }()
+    
     
     fileprivate let endDayBar: UIProgressView = {
         
@@ -509,6 +506,7 @@ extension MainViewController {
 //    func minimumDate(for calendar: FSCalendar) -> Date {
 //        return Date()
 //    }
+    
     @objc func nextTapped(_ sender:UIButton) {
         calendar.setCurrentPage(getNextMonth(date: calendar.currentPage), animated: true)
     }
