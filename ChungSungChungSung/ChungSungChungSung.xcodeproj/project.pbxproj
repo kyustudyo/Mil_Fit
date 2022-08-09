@@ -13,6 +13,8 @@
 		79BBF69B289AB50B0003FAD8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79BBF699289AB50B0003FAD8 /* Main.storyboard */; };
 		79BBF69D289AB50D0003FAD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79BBF69C289AB50D0003FAD8 /* Assets.xcassets */; };
 		79BBF6A0289AB50D0003FAD8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79BBF69E289AB50D0003FAD8 /* LaunchScreen.storyboard */; };
+		DDB9F1E928A014A700EF1491 /* FitnessTestStandard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DDB9F1E828A014A700EF1491 /* FitnessTestStandard.storyboard */; };
+		DDB9F1EB28A014D400EF1491 /* FitnessTestStandardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB9F1EA28A014D400EF1491 /* FitnessTestStandardViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		79BBF69C289AB50D0003FAD8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		79BBF69F289AB50D0003FAD8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		79BBF6A1289AB50D0003FAD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DDB9F1E828A014A700EF1491 /* FitnessTestStandard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FitnessTestStandard.storyboard; sourceTree = "<group>"; };
+		DDB9F1EA28A014D400EF1491 /* FitnessTestStandardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessTestStandardViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +128,7 @@
 		79F67639289C2F2900850FF0 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				DDB9F1EA28A014D400EF1491 /* FitnessTestStandardViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -152,6 +157,7 @@
 		79F6763D289C2F5200850FF0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				DDB9F1E828A014A700EF1491 /* FitnessTestStandard.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -223,6 +229,7 @@
 			files = (
 				79BBF6A0289AB50D0003FAD8 /* LaunchScreen.storyboard in Resources */,
 				79BBF69D289AB50D0003FAD8 /* Assets.xcassets in Resources */,
+				DDB9F1E928A014A700EF1491 /* FitnessTestStandard.storyboard in Resources */,
 				79BBF69B289AB50B0003FAD8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -236,6 +243,7 @@
 			files = (
 				79BBF698289AB50B0003FAD8 /* ViewController.swift in Sources */,
 				79BBF694289AB50B0003FAD8 /* AppDelegate.swift in Sources */,
+				DDB9F1EB28A014D400EF1491 /* FitnessTestStandardViewController.swift in Sources */,
 				79BBF696289AB50B0003FAD8 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

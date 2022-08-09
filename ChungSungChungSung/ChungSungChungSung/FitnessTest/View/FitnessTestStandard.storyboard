@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Fitness Test Standard View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="StandardVC" id="Y6W-OH-hqX" customClass="FitnessTestStandardViewController" customModule="ChungSungChungSung" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G9U-hI-dFi">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <items>
+                                    <navigationItem title="Title" id="AH2-EC-RdH"/>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3km 달리기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DqS-A4-7Wa">
+                                <rect key="frame" x="24" y="112" width="366" height="23"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="MGY-Yp-Fgk">
+                                <rect key="frame" x="16" y="159" width="382" height="703"/>
+                                <color key="backgroundColor" name="mainGray"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FitnessTestStandardRunningCell" textLabel="feZ-5e-rof" detailTextLabel="b9b-gq-HFe" style="IBUITableViewCellStyleValue1" id="6up-D9-F7M">
+                                        <rect key="frame" x="20" y="49.5" width="342" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6up-D9-F7M" id="sQd-q6-hVu">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="feZ-5e-rof">
+                                                    <rect key="frame" x="20" y="15" width="25" height="14.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="b9b-gq-HFe">
+                                                    <rect key="frame" x="289" y="15" width="33" height="14.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Y6W-OH-hqX" id="FT0-ne-Gj3"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" name="mainGray"/>
+                        <constraints>
+                            <constraint firstItem="DqS-A4-7Wa" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="24" id="38d-AF-1FX"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="MGY-Yp-Fgk" secondAttribute="bottom" id="Dyn-7z-qze"/>
+                            <constraint firstItem="MGY-Yp-Fgk" firstAttribute="top" secondItem="DqS-A4-7Wa" secondAttribute="bottom" constant="24" id="OpO-ND-cNw"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="MGY-Yp-Fgk" secondAttribute="trailing" constant="16" id="YaJ-6y-1zl"/>
+                            <constraint firstItem="G9U-hI-dFi" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="cfj-Mv-xC1"/>
+                            <constraint firstItem="G9U-hI-dFi" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="pse-I9-Gh1"/>
+                            <constraint firstItem="DqS-A4-7Wa" firstAttribute="top" secondItem="G9U-hI-dFi" secondAttribute="bottom" constant="24" id="s17-gm-lUg"/>
+                            <constraint firstItem="MGY-Yp-Fgk" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="u8a-CD-nhq"/>
+                            <constraint firstItem="G9U-hI-dFi" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="xcC-aE-Kwd"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="DqS-A4-7Wa" secondAttribute="trailing" constant="24" id="yLJ-Fe-iQi"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="zit-8r-Yzy"/>
+                    <connections>
+                        <outlet property="fitnessTestRunningTableView" destination="MGY-Yp-Fgk" id="Pdj-FU-V14"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1042.0289855072465" y="115.84821428571428"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="mainGray">
+            <color red="0.97647058823529409" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+    </resources>
+</document>
