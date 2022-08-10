@@ -134,7 +134,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="workoutTitle" destination="r4f-lL-S3c" id="cjR-4p-Nyz"/>
+                                            <outlet property="workoutTitle" destination="r4f-lL-S3c" id="WJr-A3-zVZ"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

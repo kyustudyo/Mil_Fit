@@ -50,7 +50,7 @@ class WorkoutViewController: UIViewController {
         
         self.dailyCalendarView.backgroundColor = .clear
         
-        todaysWorkoutView.register(UITableViewCell.self, forCellReuseIdentifier: "todaysWorkoutCell")
+//        todaysWorkoutView.register(UITableViewCell.self, forCellReuseIdentifier: "todaysWorkoutCell")
         workoutListView.register(UITableViewCell.self, forCellReuseIdentifier: "todaysWorkoutCell")
         
         todaysWorkoutView.delegate = self
