@@ -27,7 +27,9 @@ class WorkoutViewController: UIViewController {
     @IBOutlet weak var dailyCalendarView: UICollectionView!
 
     @IBOutlet weak var todaysWorkoutView: UITableView!
+    @IBOutlet weak var todaysWorkoutEditButton: UIButton!
     @IBOutlet weak var workoutListView: UITableView!
+    @IBOutlet weak var workoutListEditButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +38,13 @@ class WorkoutViewController: UIViewController {
         selectedDateView.text = "\(selectedMonth)월 \(dates[dates.count - 1])일, 오늘"
         
         self.dailyCalendarView.backgroundColor = .clear
+        todaysWorkoutView.backgroundColor = .clear
+        todaysWorkoutView.contentInset.top = -30
+        workoutListView.backgroundColor = .clear
+        workoutListView.contentInset.top = -30
+        
+        todaysWorkoutEditButton.tintColor = CustomColor.mainPurple
+        workoutListEditButton.tintColor = CustomColor.mainPurple
         
         todaysWorkoutView.delegate = self
         todaysWorkoutView.dataSource = self
@@ -67,8 +76,10 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
         cell.dateNumberView.text = dates[indexPath.row]
         cell.dayNameView.text = weekdays[indexPath.row]
         
-        cell.dayHighlightView.layer.cornerRadius = ( cell.dayHighlightView.frame.width + 4 ) / 2
+        let cornerRadius = ( cell.dayHighlightView.frame.width + 4 ) / 2
+        cell.dayHighlightView.layer.cornerRadius = cornerRadius
         cell.dayHighlightView.backgroundColor = CustomColor.mainPurple
+        cell.dayHighlightView.setGradient(color1: (CustomColor.gradientPurple)!, color2: (CustomColor.mainPurple)!, cornerRadius: cornerRadius)
         
         cell.dateHighlightCircleView.layer.cornerRadius = 19
         cell.dateHighlightCircleView.layer.shadowColor = UIColor.systemGray5.cgColor
@@ -118,6 +129,10 @@ extension WorkoutViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+//protocol WorkoutAddViewDelegate {
+//    func didTapWorkout(workoutTitle: String, workout: WorkoutModel)
+//}
+
 extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return workoutList.count
@@ -147,7 +162,12 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let workout = workoutList[indexPath.row]
-        print("\(indexPath.row) selected.")
-        print("\(workout.title)")
+        print("\(indexPath.row) \(workout.title) selected.")
+  
+        if tableView == todaysWorkoutView {
+            guard let workoutAddView = UIStoryboard(name: "WorkoutAdd", bundle: .main).instantiateViewController(withIdentifier: "WorkoutAddViewController") as? WorkoutAddViewController else { return }
+            workoutAddView.workout = workout
+            self.navigationController?.pushViewController(workoutAddView, animated: true)
+        }
     }
 }

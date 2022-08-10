@@ -35,14 +35,14 @@
                                     <color key="baseForegroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="회" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9S1-Br-NQf">
-                                <rect key="frame" x="218" y="13.5" width="12.5" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9S1-Br-NQf">
+                                <rect key="frame" x="230.5" y="22" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="43R-OD-gVo">
-                                <rect key="frame" x="166" y="5" width="46" height="34"/>
+                                <rect key="frame" x="178.5" y="5" width="46" height="34"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="46" id="byc-nx-CrR"/>
@@ -50,14 +50,14 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="kg" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fuy-h4-6Vu">
-                                <rect key="frame" x="119.5" y="13.5" width="15.5" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fuy-h4-6Vu">
+                                <rect key="frame" x="147.5" y="22" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oII-22-cFe">
-                                <rect key="frame" x="67.5" y="5" width="46" height="34"/>
+                                <rect key="frame" x="95.5" y="5" width="46" height="34"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="46" id="9aH-uz-whw"/>
@@ -94,7 +94,9 @@
             <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
             <connections>
                 <outlet property="cellRectangle" destination="AXz-if-mEA" id="paF-Ea-QD3"/>
+                <outlet property="firstInputField" destination="oII-22-cFe" id="AYE-2l-g8j"/>
                 <outlet property="firstInputType" destination="Fuy-h4-6Vu" id="6wJ-7f-1m4"/>
+                <outlet property="secondInputField" destination="43R-OD-gVo" id="gFt-Oc-uz6"/>
                 <outlet property="secondInputType" destination="9S1-Br-NQf" id="0Rz-jO-iqf"/>
                 <outlet property="setNumberView" destination="bjS-fe-BKq" id="BAW-lo-jag"/>
             </connections>

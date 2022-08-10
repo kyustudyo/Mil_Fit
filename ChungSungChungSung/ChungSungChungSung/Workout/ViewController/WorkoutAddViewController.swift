@@ -8,8 +8,10 @@
 import UIKit
 
 class WorkoutAddViewController: UIViewController {
-    let numberOfRows: Int = 5
-    var estimatedCalorie: Double = 0
+    private let numberOfRows: Int = 5
+    private var estimatedCalorie: Double = 0
+    
+    var workout: WorkoutModel?
     
     @IBOutlet weak var workoutAddTable: UITableView!
     
@@ -58,6 +60,15 @@ extension WorkoutAddViewController: UITableViewDelegate, UITableViewDataSource {
         
             let setNumber = indexPath.row + 1
             cell.setNumberView.text = "\(setNumber)세트"
+            
+            if let workout = workout {
+                if let firstInput = workout.firstInputType {
+                    cell.firstInputType.text = firstInput
+                } else {
+                    cell.firstInputField.isHidden = true
+                }
+                cell.secondInputType.text = workout.secondInputType
+            }
             
             return cell
         }

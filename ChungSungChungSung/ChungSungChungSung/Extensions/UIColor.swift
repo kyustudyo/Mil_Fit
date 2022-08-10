@@ -36,7 +36,8 @@ extension UIColor {
 }
 
 class CustomColor {
-    static let mainPurple = UIColor(hex: "AA90EF")
+    static let mainPurple = UIColor(hex: "7157DB")
+    static let gradientPurple = UIColor(hex: "AA90EF")
     static let bgGray = UIColor(hex: "F9FAFA")
     static let dateGreen = UIColor(hex: "50E6A8")
 }

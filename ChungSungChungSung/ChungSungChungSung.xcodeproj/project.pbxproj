@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		325F8E0F28A3C962004ACF9E /* WorkoutListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325F8E0E28A3C962004ACF9E /* WorkoutListCell.swift */; };
+		325F8E1128A3F1BC004ACF9E /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325F8E1028A3F1BC004ACF9E /* UIView.swift */; };
 		79BBF694289AB50B0003FAD8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BBF693289AB50B0003FAD8 /* AppDelegate.swift */; };
 		79BBF696289AB50B0003FAD8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BBF695289AB50B0003FAD8 /* SceneDelegate.swift */; };
 		79BBF698289AB50B0003FAD8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BBF697289AB50B0003FAD8 /* ViewController.swift */; };
@@ -34,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		325F8E0E28A3C962004ACF9E /* WorkoutListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutListCell.swift; sourceTree = "<group>"; };
+		325F8E1028A3F1BC004ACF9E /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		79BBF690289AB50B0003FAD8 /* ChungSungChungSung.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChungSungChungSung.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79BBF693289AB50B0003FAD8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79BBF695289AB50B0003FAD8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				7ED2F7B9289EDE0E00DAEEC9 /* UIColor.swift */,
+				325F8E1028A3F1BC004ACF9E /* UIView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				79BBF698289AB50B0003FAD8 /* ViewController.swift in Sources */,
 				79BBF694289AB50B0003FAD8 /* AppDelegate.swift in Sources */,
 				7ED2F7B4289EB4F600DAEEC9 /* WorkoutAddCalorieTableViewCell.swift in Sources */,
+				325F8E1128A3F1BC004ACF9E /* UIView.swift in Sources */,
 				7ED2F7AC289EA12100DAEEC9 /* WorkoutAddOneTableViewCell.swift in Sources */,
 				7E5BF64428A2450900B6DD26 /* TodaysWorkoutCell.swift in Sources */,
 				79BBF696289AB50B0003FAD8 /* SceneDelegate.swift in Sources */,
