@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftUI
+import Charts
 
 class TestMainViewController: UIViewController {
     

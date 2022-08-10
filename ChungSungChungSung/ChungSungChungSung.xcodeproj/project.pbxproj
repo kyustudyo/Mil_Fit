@@ -13,10 +13,12 @@
 		79BBF69B289AB50B0003FAD8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79BBF699289AB50B0003FAD8 /* Main.storyboard */; };
 		79BBF69D289AB50D0003FAD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79BBF69C289AB50D0003FAD8 /* Assets.xcassets */; };
 		79BBF6A0289AB50D0003FAD8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79BBF69E289AB50D0003FAD8 /* LaunchScreen.storyboard */; };
+		AB21160F28A1308B0050E9F8 /* FitnessHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB21160E28A1308B0050E9F8 /* FitnessHistoryViewController.swift */; };
 		AB8623BE289E5B4200F71283 /* TestMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8623BD289E5B4200F71283 /* TestMainViewController.swift */; };
 		AB8623C0289E5B4A00F71283 /* TestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB8623BF289E5B4A00F71283 /* TestStoryboard.storyboard */; };
 		AB8623C2289ECD8900F71283 /* TestMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8623C1289ECD8900F71283 /* TestMainTableViewCell.swift */; };
 		ABE51DD1289F90B2005BFB0E /* FitnessCircularGraphSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE51DD0289F90B2005BFB0E /* FitnessCircularGraphSwiftUIView.swift */; };
+		FA719CEAE7AE40249D62879A /* Pods_ChungSungChungSung.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35C3F82C3C241FE8DEB5627B /* Pods_ChungSungChungSung.framework */; };
 		7E9A47C2289D4774005B98B4 /* Workout.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E9A47C1289D4774005B98B4 /* Workout.storyboard */; };
 		7E9A47C4289D478A005B98B4 /* WorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9A47C3289D478A005B98B4 /* WorkoutViewController.swift */; };
 		7ED2F7B7289ED9A700DAEEC9 /* DailyCalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED2F7B6289ED9A700DAEEC9 /* DailyCalendarCell.swift */; };
@@ -34,6 +36,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		35C3F82C3C241FE8DEB5627B /* Pods_ChungSungChungSung.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChungSungChungSung.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		46045EA159CE3025680BAFC8 /* Pods-ChungSungChungSung.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChungSungChungSung.release.xcconfig"; path = "Target Support Files/Pods-ChungSungChungSung/Pods-ChungSungChungSung.release.xcconfig"; sourceTree = "<group>"; };
 		79BBF690289AB50B0003FAD8 /* ChungSungChungSung.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChungSungChungSung.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79BBF693289AB50B0003FAD8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79BBF695289AB50B0003FAD8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -42,10 +46,12 @@
 		79BBF69C289AB50D0003FAD8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		79BBF69F289AB50D0003FAD8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		79BBF6A1289AB50D0003FAD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AB21160E28A1308B0050E9F8 /* FitnessHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessHistoryViewController.swift; sourceTree = "<group>"; };
 		AB8623BD289E5B4200F71283 /* TestMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMainViewController.swift; sourceTree = "<group>"; };
 		AB8623BF289E5B4A00F71283 /* TestStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TestStoryboard.storyboard; sourceTree = "<group>"; };
 		AB8623C1289ECD8900F71283 /* TestMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMainTableViewCell.swift; sourceTree = "<group>"; };
 		ABE51DD0289F90B2005BFB0E /* FitnessCircularGraphSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessCircularGraphSwiftUIView.swift; sourceTree = "<group>"; };
+		F479F63A6243CE5C2F3F653E /* Pods-ChungSungChungSung.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChungSungChungSung.debug.xcconfig"; path = "Target Support Files/Pods-ChungSungChungSung/Pods-ChungSungChungSung.debug.xcconfig"; sourceTree = "<group>"; };
 		7E9A47C1289D4774005B98B4 /* Workout.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Workout.storyboard; sourceTree = "<group>"; };
 		7E9A47C3289D478A005B98B4 /* WorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutViewController.swift; sourceTree = "<group>"; };
 		7ED2F7B6289ED9A700DAEEC9 /* DailyCalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCalendarCell.swift; sourceTree = "<group>"; };
@@ -67,17 +73,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA719CEAE7AE40249D62879A /* Pods_ChungSungChungSung.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01C83859EF576F214D7853FF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F479F63A6243CE5C2F3F653E /* Pods-ChungSungChungSung.debug.xcconfig */,
+				46045EA159CE3025680BAFC8 /* Pods-ChungSungChungSung.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		3BADCA467AD34ABEE242271A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				35C3F82C3C241FE8DEB5627B /* Pods_ChungSungChungSung.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		79BBF687289AB50B0003FAD8 = {
 			isa = PBXGroup;
 			children = (
 				79BBF692289AB50B0003FAD8 /* ChungSungChungSung */,
 				79BBF691289AB50B0003FAD8 /* Products */,
+				01C83859EF576F214D7853FF /* Pods */,
+				3BADCA467AD34ABEE242271A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -165,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				AB8623BD289E5B4200F71283 /* TestMainViewController.swift */,
+				AB21160E28A1308B0050E9F8 /* FitnessHistoryViewController.swift */,
 				AB8623C1289ECD8900F71283 /* TestMainTableViewCell.swift */,
 			);
 			path = ViewController;
@@ -232,9 +259,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 79BBF6A4289AB50D0003FAD8 /* Build configuration list for PBXNativeTarget "ChungSungChungSung" */;
 			buildPhases = (
+				09FA4CA7AA2A49DCAB2BCC15 /* [CP] Check Pods Manifest.lock */,
 				79BBF68C289AB50B0003FAD8 /* Sources */,
 				79BBF68D289AB50B0003FAD8 /* Frameworks */,
 				79BBF68E289AB50B0003FAD8 /* Resources */,
+				19357ABD1BEC88D81980AABA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -298,11 +327,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		09FA4CA7AA2A49DCAB2BCC15 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ChungSungChungSung-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		19357ABD1BEC88D81980AABA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChungSungChungSung/Pods-ChungSungChungSung-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChungSungChungSung/Pods-ChungSungChungSung-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChungSungChungSung/Pods-ChungSungChungSung-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		79BBF68C289AB50B0003FAD8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB21160F28A1308B0050E9F8 /* FitnessHistoryViewController.swift in Sources */,
 				7E9A47C4289D478A005B98B4 /* WorkoutViewController.swift in Sources */,
 				7ED2F7BA289EDE0E00DAEEC9 /* UIColor.swift in Sources */,
 				7ED2F7B0289EAC2000DAEEC9 /* WorkoutAddPlusTableViewCell.swift in Sources */,
@@ -458,6 +530,7 @@
 		};
 		79BBF6A5289AB50D0003FAD8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F479F63A6243CE5C2F3F653E /* Pods-ChungSungChungSung.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -468,7 +541,7 @@
 				INFOPLIST_FILE = ChungSungChungSung/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = TestStoryboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -486,6 +559,7 @@
 		};
 		79BBF6A6289AB50D0003FAD8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 46045EA159CE3025680BAFC8 /* Pods-ChungSungChungSung.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -496,7 +570,7 @@
 				INFOPLIST_FILE = ChungSungChungSung/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = TestStoryboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
