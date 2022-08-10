@@ -15,26 +15,13 @@ class WorkoutViewController: UIViewController {
     private var weekdays: [String] = ["월", "화", "수", "목", "금", "토", "일"]
     private var dates: [String] = ["8", "9", "10", "11", "12", "13", "14"]
     
+    private var selectedMonth: String = "8"
+    private var selectedDate: String = "10"
+    private var selectedDateText: String?
+    private var selectedTodayText: String?
+    
     private var workoutList = WorkoutData().list
     private var workout: WorkoutModel?
-    
-//    private var workoutData = [
-//        ("푸시업", "", "회"),
-//        ("달리기", "", "분"),
-//        ("풀업", "", "회")
-//    ]
-//    lazy var list: [WorkoutModel] = {
-//        var datalist = [WorkoutModel]()
-//        for (title, first, second) in self.workoutData {
-//            let workoutdata = WorkoutModel()
-//            workoutdata.title = title
-//            workoutdata.firstInputType = first
-//            workoutdata.secondInputType = second
-//
-//            datalist.append(workoutdata)
-//        }
-//        return datalist
-//    }()
     
     @IBOutlet weak var selectedDateView: UILabel!
     @IBOutlet weak var dailyCalendarView: UICollectionView!
@@ -46,23 +33,14 @@ class WorkoutViewController: UIViewController {
         super.viewDidLoad()
 
         configNavigationTitle()
-        setSelectedDateView()
+        selectedDateView.text = "\(selectedMonth)월 \(dates[dates.count - 1])일, 오늘"
         
         self.dailyCalendarView.backgroundColor = .clear
-        
-//        todaysWorkoutView.register(UITableViewCell.self, forCellReuseIdentifier: "todaysWorkoutCell")
-        workoutListView.register(UITableViewCell.self, forCellReuseIdentifier: "todaysWorkoutCell")
         
         todaysWorkoutView.delegate = self
         todaysWorkoutView.dataSource = self
         workoutListView.delegate = self
         workoutListView.dataSource = self
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        setSelectedDateView()
     }
     
     private func configNavigationTitle() {
@@ -73,21 +51,6 @@ class WorkoutViewController: UIViewController {
         workoutViewTitle.text = "운동"
         
         self.navigationItem.titleView = workoutViewTitle
-    }
-
-    private func setSelectedDateView() {
-        var month: String = "8"
-        var date: String = "10"
-        var selectedDateText: String = "\(month)월 \(date)일"
-        var selectedTodayText: String = "\(month)월 \(date)일, 오늘"
-        
-        print(selectedCell)
-        if selectedCell == dates.count - 1 {
-            selectedDateView.text = selectedTodayText
-        } else {
-            date = dates[selectedCell]
-            selectedDateView.text = selectedDateText
-        }
     }
 }
 
@@ -123,6 +86,17 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedCell = indexPath.row
+        
+        selectedDateText = "\(selectedMonth)월 \(selectedDate)일"
+        selectedTodayText = "\(selectedMonth)월 \(selectedDate)일, 오늘"
+        
+        print(selectedCell)
+        if selectedCell == dates.count - 1 {
+            selectedDateView.text = selectedTodayText
+        } else {
+            selectedDate = dates[selectedCell]
+            selectedDateView.text = selectedDateText
+        }
     }
 }
 
@@ -134,13 +108,9 @@ extension WorkoutViewController: UICollectionViewDelegateFlowLayout {
         
         let viewWidth = self.view.bounds.width
         let inset = (17 / 390) * viewWidth
-//        let spacing = (8 / 390) * viewWidth
-        
-        let width = (viewWidth - (inset * 2) /*- (spacing * 5)*/) / 6
+        let width = (viewWidth - (inset * 2)) / 6
         let height = (105 / 61) * width
         
-//        flow.minimumInteritemSpacing = spacing
-//        flow.minimumLineSpacing = spacing
         flow.sectionInset.left = inset
         flow.sectionInset.right = inset
         
@@ -154,14 +124,25 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "todaysWorkoutCell", for: indexPath) as? TodaysWorkoutCell else {
-            return UITableViewCell()
+        var returnCell = UITableViewCell()
+        
+        if tableView == todaysWorkoutView {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "todaysWorkoutCell", for: indexPath) as? TodaysWorkoutCell else { return UITableViewCell() }
+            
+            let workout = workoutList[indexPath.row]
+            cell.todayWorkoutTitle.text = workout.title
+            
+            returnCell = cell
+            
+        } else if tableView == workoutListView {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "workoutListCell", for: indexPath) as? WorkoutListCell else { return UITableViewCell() }
+            let workout = workoutList[indexPath.row]
+            cell.workoutTitle.text = workout.title
+            
+            returnCell = cell
         }
         
-        let workout = workoutList[indexPath.row]
-        cell.workoutTitle.text = workout.title
-        
-        return cell
+        return returnCell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -8,6 +8,6 @@
 import UIKit
 
 class TodaysWorkoutCell: UITableViewCell {
-    @IBOutlet weak var workoutTitle: UILabel!
+    @IBOutlet weak var todayWorkoutTitle: UILabel!
     
 }
