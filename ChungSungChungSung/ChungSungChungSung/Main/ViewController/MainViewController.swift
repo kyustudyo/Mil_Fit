@@ -159,6 +159,8 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     
     @objc fileprivate func goMoreMeal() {
         print("more meal")
+        let vc = MainMealViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     fileprivate lazy var workoutRoundedView: UIView = {
         let roundedView = Bar()
@@ -211,6 +213,11 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
       return view
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+        //다른 뷰컨에서 navi를 보이므로 
+        navigationController?.isNavigationBarHidden = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGray6
@@ -221,7 +228,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         let scrollView = UIScrollView()
         view.addSubview(scrollView)
         
-        scrollView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
+        scrollView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
         let emptyView = UIView()
         emptyView.backgroundColor = .white
         scrollView.addSubview(emptyView)
@@ -233,9 +240,10 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         let stack = UIStackView(arrangedSubviews: [dateLabel])
 //        stack.axis = .vertical
         emptyView.addSubview(stack)
-        stack.anchor(top: emptyView.topAnchor, left: emptyView.leftAnchor, right: emptyView.rightAnchor, paddingTop: 0, paddingLeft: 16, paddingRight: 16)
+        stack.anchor(top: emptyView.topAnchor, left: emptyView.leftAnchor, right: emptyView.rightAnchor, paddingTop: 40, paddingLeft: 16, paddingRight: 16)
         //TODO
-//        navigationController?.isNavigationBarHidden = true
+        
+
         //MARK: 전역일 프로그레스
 
 
@@ -243,7 +251,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         emptyView.addSubview(전역일)
         전역일.anchor(top: stack.bottomAnchor, left: stack.leftAnchor, paddingTop: 24.0, paddingLeft: 0)
         emptyView.addSubview(dDay)
-        dDay.anchor(top: dateLabel.bottomAnchor, right: emptyView.safeAreaLayoutGuide.leftAnchor,paddingTop: 24.0, paddingRight: 전역가까움 > 0.1 ? -CGFloat(전역가까움) * (UIScreen.main.bounds.width - 16) : -60)
+        dDay.anchor(top: dateLabel.bottomAnchor, right: emptyView.leftAnchor,paddingTop: 24.0, paddingRight: 전역가까움 > 0.1 ? -CGFloat(전역가까움) * (UIScreen.main.bounds.width - 16) : -60)
         
         emptyView.addSubview(endDayBar)
         endDayBar.anchor(top:전역일.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor,paddingTop: 12, paddingLeft: 0, paddingRight: 0)
@@ -407,7 +415,24 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
     }
     
+    
 }
+
+//extension MainViewController {
+//    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+//        UIView.animate(withDuration: 0.5) { [weak self] in
+//            guard velocity.y != 0 else { return }
+//            if velocity.y < 0 {
+//                let height = self?.tabBarController?.tabBar.frame.height ?? 0.0
+//                self?.tabBarController?.tabBar.alpha = 1.0
+//                self?.tabBarController?.tabBar.frame.origin = CGPoint(x: 0, y: UIScreen.main.bounds.maxY - height)
+//            } else {
+//                self?.tabBarController?.tabBar.alpha = 0.0
+//                self?.tabBarController?.tabBar.frame.origin = CGPoint(x: 0, y: UIScreen.main.bounds.maxY)
+//            }
+//        }
+//    }
+//}
 extension MainViewController: UICollectionViewDelegateFlowLayout {
     // 셀 사이즈 어떻게 할까?
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -546,6 +571,7 @@ extension MainViewController: FSCalendarDelegateAppearance {
 
 enum Constants {
     static let lineSpacing = 16.0
+    static let weekLineSpacing = 6.0
     static let purposeCellHeight = 107.0
     static let mealCellHeight = 210.0//191
     static let purposeCellWidth = 289.0

@@ -22,6 +22,8 @@
 		79F676A0289EC65C00850FF0 /* Bar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F6769F289EC65C00850FF0 /* Bar.swift */; };
 		79F676C828A00A4B00850FF0 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F676C728A00A4B00850FF0 /* ColorExtension.swift */; };
 		79F676CA28A163F300850FF0 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F676C928A163F300850FF0 /* UIImageExtension.swift */; };
+		79F676CC28A372F800850FF0 /* MainMealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F676CB28A372F800850FF0 /* MainMealViewController.swift */; };
+		79F676CE28A39D0C00850FF0 /* MainMealTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F676CD28A39D0C00850FF0 /* MainMealTableViewCell.swift */; };
 		7E9A47C2289D4774005B98B4 /* Workout.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E9A47C1289D4774005B98B4 /* Workout.storyboard */; };
 		7E9A47C4289D478A005B98B4 /* WorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9A47C3289D478A005B98B4 /* WorkoutViewController.swift */; };
 		7ED2F78D289E481300DAEEC9 /* WorkoutAdd.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7ED2F78C289E481300DAEEC9 /* WorkoutAdd.storyboard */; };
@@ -57,6 +59,8 @@
 		79F6769F289EC65C00850FF0 /* Bar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bar.swift; sourceTree = "<group>"; };
 		79F676C728A00A4B00850FF0 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		79F676C928A163F300850FF0 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		79F676CB28A372F800850FF0 /* MainMealViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMealViewController.swift; sourceTree = "<group>"; };
+		79F676CD28A39D0C00850FF0 /* MainMealTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMealTableViewCell.swift; sourceTree = "<group>"; };
 		7E9A47C1289D4774005B98B4 /* Workout.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Workout.storyboard; sourceTree = "<group>"; };
 		7E9A47C3289D478A005B98B4 /* WorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutViewController.swift; sourceTree = "<group>"; };
 		7ED2F78C289E481300DAEEC9 /* WorkoutAdd.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WorkoutAdd.storyboard; sourceTree = "<group>"; };
@@ -174,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				79F67695289E53AF00850FF0 /* MainViewController.swift */,
+				79F676CB28A372F800850FF0 /* MainMealViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -206,6 +211,7 @@
 			children = (
 				79F6769A289E680000850FF0 /* purposeCollectionViewCell.swift */,
 				79F6769C289EACF900850FF0 /* mealCollectionViewCell.swift */,
+				79F676CD28A39D0C00850FF0 /* MainMealTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -397,6 +403,7 @@
 				7ED2F78F289E482600DAEEC9 /* WorkoutAddViewController.swift in Sources */,
 				7ED2F798289E524500DAEEC9 /* WorkoutAddTwoTableViewCell.swift in Sources */,
 				79BBF698289AB50B0003FAD8 /* ViewController.swift in Sources */,
+				79F676CE28A39D0C00850FF0 /* MainMealTableViewCell.swift in Sources */,
 				79F676CA28A163F300850FF0 /* UIImageExtension.swift in Sources */,
 				79BBF694289AB50B0003FAD8 /* AppDelegate.swift in Sources */,
 				7ED2F7B4289EB4F600DAEEC9 /* WorkoutAddCalorieTableViewCell.swift in Sources */,
@@ -404,6 +411,7 @@
 				79BBF696289AB50B0003FAD8 /* SceneDelegate.swift in Sources */,
 				79F67699289E557200850FF0 /* ViewExtensioin.swift in Sources */,
 				79F6769D289EACF900850FF0 /* mealCollectionViewCell.swift in Sources */,
+				79F676CC28A372F800850FF0 /* MainMealViewController.swift in Sources */,
 				79F6769B289E680000850FF0 /* purposeCollectionViewCell.swift in Sources */,
 				79F676A0289EC65C00850FF0 /* Bar.swift in Sources */,
 				79F67696289E53AF00850FF0 /* MainViewController.swift in Sources */,
