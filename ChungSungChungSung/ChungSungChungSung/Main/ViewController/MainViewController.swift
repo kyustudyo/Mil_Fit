@@ -579,7 +579,6 @@ enum Constants {
     static let bigText = 22.0
     static let smallText = 15.0
     static let middleText = 17.0
-//    static let collectionViewContentInset = UIEdgeInsets(top: 10, left: 6, bottom: 10, right: 6)
   }
 
 extension MainViewController: didPurpose {
@@ -588,7 +587,7 @@ extension MainViewController: didPurpose {
     }
 }
 
-//https://medium.com/academy-poa/how-to-create-a-uiprogressview-with-gradient-progress-in-swift-2d1fa7d26f24
+//ref: https://medium.com/academy-poa/how-to-create-a-uiprogressview-with-gradient-progress-in-swift-2d1fa7d26f24
 class GradientProgressView: UIProgressView {
     
     @IBInspectable var firstColor: UIColor = UIColor.white {
