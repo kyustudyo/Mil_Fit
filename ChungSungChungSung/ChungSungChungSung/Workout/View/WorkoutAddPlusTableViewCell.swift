@@ -14,7 +14,10 @@ class WorkoutAddPlusTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        cellRectangle.layer.cornerRadius = 8
+        cellRectangle.layer.cornerRadius = 12
+        cellRectangle.layer.shadowColor = UIColor.systemGray5.cgColor
+        cellRectangle.layer.shadowRadius = 20
+        cellRectangle.layer.shadowOpacity = 1
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

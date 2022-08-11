@@ -18,7 +18,11 @@ class WorkoutAddTwoTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        cellRectangle.layer.cornerRadius = 8
+        cellRectangle.layer.cornerRadius = 12
+        cellRectangle.layer.shadowColor = UIColor.systemGray5.cgColor
+        cellRectangle.layer.shadowRadius = 20
+        cellRectangle.layer.shadowOpacity = 1
+        
         setNumberView.font = UIFont.systemFont(ofSize: 17, weight: .regular)
     }
 

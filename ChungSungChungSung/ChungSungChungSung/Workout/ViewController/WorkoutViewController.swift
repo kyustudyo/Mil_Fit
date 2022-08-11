@@ -81,11 +81,13 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
         cell.dayHighlightView.backgroundColor = CustomColor.mainPurple
         cell.dayHighlightView.setGradient(color1: (CustomColor.gradientPurple)!, color2: (CustomColor.mainPurple)!, cornerRadius: cornerRadius)
         
+//        cell.dateHighlightCircleView.backgroundColor = CustomColor.dateGreen
         cell.dateHighlightCircleView.layer.cornerRadius = 19
+        cell.dateHighlightCircleView.layer.backgroundColor = CustomColor.dateGreen?.cgColor
         cell.dateHighlightCircleView.layer.shadowColor = UIColor.systemGray5.cgColor
         cell.dateHighlightCircleView.layer.shadowRadius = 20
         cell.dateHighlightCircleView.layer.shadowOpacity = 1
-        cell.dateHighlightCircleView.backgroundColor = CustomColor.dateGreen
+
         
         if(indexPath.row == initialSelectedCell) {
             collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .right)
@@ -156,6 +158,14 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
             
             returnCell = cell
         }
+        
+//        cell.dateHighlightCircleView.layer.shadowColor = UIColor.systemGray5.cgColor
+//        cell.dateHighlightCircleView.layer.shadowRadius = 20
+//        cell.dateHighlightCircleView.layer.shadowOpacity = 1
+        
+        returnCell.layer.shadowColor = UIColor.systemGray5.cgColor
+        returnCell.layer.shadowRadius = 20
+        returnCell.layer.shadowOpacity = 1
         
         return returnCell
     }
