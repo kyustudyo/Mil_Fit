@@ -2,35 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b2bd9eb9-eb14-4504-9c20-c22162d81533" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ChungSungChungSung/Extensions/UIView.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ChungSungChungSung/FitnessTest/FitnessCircularGraphSwiftUIView.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ChungSungChungSung/FitnessTest/View/TestStoryboard.storyboard" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ChungSungChungSung/FitnessTest/ViewController/FitnessHistoryTableViewCell.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ChungSungChungSung/FitnessTest/ViewController/FitnessHistoryViewController.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ChungSungChungSung/FitnessTest/ViewController/TestMainTableViewCell.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ChungSungChungSung/FitnessTest/ViewController/TestMainViewController.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ChungSungChungSung/Model/WorkoutModel.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ChungSungChungSung/Workout/View/TodaysWorkoutCell.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ChungSungChungSung/Workout/View/TodaysWorkoutEdit.storyboard" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ChungSungChungSung/Workout/View/TodaysWorkoutEditViewController.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ChungSungChungSung/Workout/View/WorkoutAdd/TodaysWorkoutEditCell.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ChungSungChungSung/Workout/View/WorkoutListCell.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ChungSungChungSung.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ChungSungChungSung.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChungSungChungSung/Extensions/UIColor.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ChungSungChungSung/Extensions/UIColor.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChungSungChungSung/Workout/View/Workout.storyboard" beforeDir="false" afterPath="$PROJECT_DIR$/ChungSungChungSung/Workout/View/Workout.storyboard" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChungSungChungSung/Workout/View/WorkoutAdd.storyboard" beforeDir="false" afterPath="$PROJECT_DIR$/ChungSungChungSung/Workout/View/WorkoutAdd/WorkoutAdd.storyboard" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChungSungChungSung/Workout/View/WorkoutAddCalorieTableViewCell.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ChungSungChungSung/Workout/View/WorkoutAdd/WorkoutAddCalorieTableViewCell.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChungSungChungSung/Workout/View/WorkoutAddCalorieTableViewCell.xib" beforeDir="false" afterPath="$PROJECT_DIR$/ChungSungChungSung/Workout/View/WorkoutAdd/WorkoutAddCalorieTableViewCell.xib" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChungSungChungSung/Workout/View/WorkoutAddOneTableViewCell.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ChungSungChungSung/Workout/View/WorkoutAdd/WorkoutAddOneTableViewCell.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChungSungChungSung/Workout/View/WorkoutAddOneTableViewCell.xib" beforeDir="false" afterPath="$PROJECT_DIR$/ChungSungChungSung/Workout/View/WorkoutAdd/WorkoutAddOneTableViewCell.xib" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChungSungChungSung/Workout/View/WorkoutAddPlusTableViewCell.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ChungSungChungSung/Workout/View/WorkoutAdd/WorkoutAddPlusTableViewCell.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChungSungChungSung/Workout/View/WorkoutAddPlusTableViewCell.xib" beforeDir="false" afterPath="$PROJECT_DIR$/ChungSungChungSung/Workout/View/WorkoutAdd/WorkoutAddPlusTableViewCell.xib" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChungSungChungSung/Workout/View/WorkoutAddTwoTableViewCell.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ChungSungChungSung/Workout/View/WorkoutAdd/WorkoutAddTwoTableViewCell.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChungSungChungSung/Workout/View/WorkoutAddTwoTableViewCell.xib" beforeDir="false" afterPath="$PROJECT_DIR$/ChungSungChungSung/Workout/View/WorkoutAdd/WorkoutAddTwoTableViewCell.xib" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChungSungChungSung/Workout/ViewController/WorkoutAddViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ChungSungChungSung/Workout/ViewController/WorkoutAddViewController.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ChungSungChungSung/Workout/ViewController/WorkoutViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ChungSungChungSung/Workout/ViewController/WorkoutViewController.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Podfile" beforeDir="false" afterPath="$PROJECT_DIR$/Podfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Podfile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChungSungChungSung.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChungSungChungSung.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +14,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectApplicationVersion">
     <option name="ide" value="AppCode" />
@@ -51,15 +29,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "cidr.known.project.marker": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -69,6 +47,7 @@
       <option name="presentableId" value="Default" />
       <updated>1660208643214</updated>
       <workItem from="1660208644525" duration="35000" />
+      <workItem from="1660215028622" duration="1607000" />
     </task>
     <servers />
   </component>
