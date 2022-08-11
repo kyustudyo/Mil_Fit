@@ -180,6 +180,7 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
   
         if tableView == todaysWorkoutView {
             guard let workoutAddView = UIStoryboard(name: "WorkoutAdd", bundle: .main).instantiateViewController(withIdentifier: "WorkoutAddViewController") as? WorkoutAddViewController else { return }
+            workoutAddView.workoutAddTitleText = workout.title
             workoutAddView.workout = workout
             self.navigationController?.pushViewController(workoutAddView, animated: true)
         }

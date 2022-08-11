@@ -11,6 +11,7 @@ class WorkoutAddViewController: UIViewController {
     private let numberOfRows: Int = 5
     private var estimatedCalorie: Double = 0
     
+    var workoutAddTitleText: String = "text"
     var workout: WorkoutModel?
     
     @IBOutlet weak var workoutAddTable: UITableView!
@@ -19,6 +20,7 @@ class WorkoutAddViewController: UIViewController {
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.tintColor = CustomColor.mainPurple
+        self.navigationItem.title = workoutAddTitleText
         
         let workoutAddTwoTableViewCellNib = UINib(nibName: "WorkoutAddTwoTableViewCell", bundle: nil)
         let workoutAddOneTableViewCellNib = UINib(nibName: "WorkoutAddOneTableViewCell", bundle: nil)
