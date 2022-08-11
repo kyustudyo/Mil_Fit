@@ -15,8 +15,6 @@
 		79BBF6A0289AB50D0003FAD8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79BBF69E289AB50D0003FAD8 /* LaunchScreen.storyboard */; };
 		7E9A47C2289D4774005B98B4 /* Workout.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E9A47C1289D4774005B98B4 /* Workout.storyboard */; };
 		7E9A47C4289D478A005B98B4 /* WorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9A47C3289D478A005B98B4 /* WorkoutViewController.swift */; };
-		7ED2F7B7289ED9A700DAEEC9 /* DailyCalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED2F7B6289ED9A700DAEEC9 /* DailyCalendarCell.swift */; };
-		7ED2F7BA289EDE0E00DAEEC9 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED2F7B9289EDE0E00DAEEC9 /* UIColor.swift */; };
 		7ED2F78D289E481300DAEEC9 /* WorkoutAdd.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7ED2F78C289E481300DAEEC9 /* WorkoutAdd.storyboard */; };
 		7ED2F78F289E482600DAEEC9 /* WorkoutAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED2F78E289E482600DAEEC9 /* WorkoutAddViewController.swift */; };
 		7ED2F798289E524500DAEEC9 /* WorkoutAddTwoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED2F796289E524500DAEEC9 /* WorkoutAddTwoTableViewCell.swift */; };
@@ -27,9 +25,20 @@
 		7ED2F7B1289EAC2000DAEEC9 /* WorkoutAddPlusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7ED2F7AF289EAC2000DAEEC9 /* WorkoutAddPlusTableViewCell.xib */; };
 		7ED2F7B4289EB4F600DAEEC9 /* WorkoutAddCalorieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED2F7B2289EB4F600DAEEC9 /* WorkoutAddCalorieTableViewCell.swift */; };
 		7ED2F7B5289EB4F600DAEEC9 /* WorkoutAddCalorieTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7ED2F7B3289EB4F600DAEEC9 /* WorkoutAddCalorieTableViewCell.xib */; };
+		7ED2F7B7289ED9A700DAEEC9 /* DailyCalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED2F7B6289ED9A700DAEEC9 /* DailyCalendarCell.swift */; };
+		7ED2F7BA289EDE0E00DAEEC9 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED2F7B9289EDE0E00DAEEC9 /* UIColor.swift */; };
+		AB21160F28A1308B0050E9F8 /* FitnessHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB21160E28A1308B0050E9F8 /* FitnessHistoryViewController.swift */; };
+		AB21161228A4C5F20050E9F8 /* FitnessHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB21161128A4C5F20050E9F8 /* FitnessHistoryTableViewCell.swift */; };
+		AB8623BE289E5B4200F71283 /* TestMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8623BD289E5B4200F71283 /* TestMainViewController.swift */; };
+		AB8623C0289E5B4A00F71283 /* TestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB8623BF289E5B4A00F71283 /* TestStoryboard.storyboard */; };
+		AB8623C2289ECD8900F71283 /* TestMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8623C1289ECD8900F71283 /* TestMainTableViewCell.swift */; };
+		ABE51DD1289F90B2005BFB0E /* FitnessCircularGraphSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE51DD0289F90B2005BFB0E /* FitnessCircularGraphSwiftUIView.swift */; };
+		FA719CEAE7AE40249D62879A /* Pods_ChungSungChungSung.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35C3F82C3C241FE8DEB5627B /* Pods_ChungSungChungSung.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		35C3F82C3C241FE8DEB5627B /* Pods_ChungSungChungSung.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChungSungChungSung.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		46045EA159CE3025680BAFC8 /* Pods-ChungSungChungSung.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChungSungChungSung.release.xcconfig"; path = "Target Support Files/Pods-ChungSungChungSung/Pods-ChungSungChungSung.release.xcconfig"; sourceTree = "<group>"; };
 		79BBF690289AB50B0003FAD8 /* ChungSungChungSung.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChungSungChungSung.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79BBF693289AB50B0003FAD8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79BBF695289AB50B0003FAD8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -40,8 +49,6 @@
 		79BBF6A1289AB50D0003FAD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7E9A47C1289D4774005B98B4 /* Workout.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Workout.storyboard; sourceTree = "<group>"; };
 		7E9A47C3289D478A005B98B4 /* WorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutViewController.swift; sourceTree = "<group>"; };
-		7ED2F7B6289ED9A700DAEEC9 /* DailyCalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCalendarCell.swift; sourceTree = "<group>"; };
-		7ED2F7B9289EDE0E00DAEEC9 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		7ED2F78C289E481300DAEEC9 /* WorkoutAdd.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WorkoutAdd.storyboard; sourceTree = "<group>"; };
 		7ED2F78E289E482600DAEEC9 /* WorkoutAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutAddViewController.swift; sourceTree = "<group>"; };
 		7ED2F796289E524500DAEEC9 /* WorkoutAddTwoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutAddTwoTableViewCell.swift; sourceTree = "<group>"; };
@@ -52,6 +59,15 @@
 		7ED2F7AF289EAC2000DAEEC9 /* WorkoutAddPlusTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WorkoutAddPlusTableViewCell.xib; sourceTree = "<group>"; };
 		7ED2F7B2289EB4F600DAEEC9 /* WorkoutAddCalorieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutAddCalorieTableViewCell.swift; sourceTree = "<group>"; };
 		7ED2F7B3289EB4F600DAEEC9 /* WorkoutAddCalorieTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WorkoutAddCalorieTableViewCell.xib; sourceTree = "<group>"; };
+		7ED2F7B6289ED9A700DAEEC9 /* DailyCalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCalendarCell.swift; sourceTree = "<group>"; };
+		7ED2F7B9289EDE0E00DAEEC9 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		AB21160E28A1308B0050E9F8 /* FitnessHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessHistoryViewController.swift; sourceTree = "<group>"; };
+		AB21161128A4C5F20050E9F8 /* FitnessHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessHistoryTableViewCell.swift; sourceTree = "<group>"; };
+		AB8623BD289E5B4200F71283 /* TestMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMainViewController.swift; sourceTree = "<group>"; };
+		AB8623BF289E5B4A00F71283 /* TestStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TestStoryboard.storyboard; sourceTree = "<group>"; };
+		AB8623C1289ECD8900F71283 /* TestMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMainTableViewCell.swift; sourceTree = "<group>"; };
+		ABE51DD0289F90B2005BFB0E /* FitnessCircularGraphSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessCircularGraphSwiftUIView.swift; sourceTree = "<group>"; };
+		F479F63A6243CE5C2F3F653E /* Pods-ChungSungChungSung.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChungSungChungSung.debug.xcconfig"; path = "Target Support Files/Pods-ChungSungChungSung/Pods-ChungSungChungSung.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,17 +75,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA719CEAE7AE40249D62879A /* Pods_ChungSungChungSung.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01C83859EF576F214D7853FF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F479F63A6243CE5C2F3F653E /* Pods-ChungSungChungSung.debug.xcconfig */,
+				46045EA159CE3025680BAFC8 /* Pods-ChungSungChungSung.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		3BADCA467AD34ABEE242271A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				35C3F82C3C241FE8DEB5627B /* Pods_ChungSungChungSung.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		79BBF687289AB50B0003FAD8 = {
 			isa = PBXGroup;
 			children = (
 				79BBF692289AB50B0003FAD8 /* ChungSungChungSung */,
 				79BBF691289AB50B0003FAD8 /* Products */,
+				01C83859EF576F214D7853FF /* Pods */,
+				3BADCA467AD34ABEE242271A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -121,6 +157,7 @@
 		79F67635289C2D6000850FF0 /* FitnessTest */ = {
 			isa = PBXGroup;
 			children = (
+				ABE51DD0289F90B2005BFB0E /* FitnessCircularGraphSwiftUIView.swift */,
 				79F67639289C2F2900850FF0 /* ViewController */,
 				79F6763D289C2F5200850FF0 /* View */,
 			);
@@ -155,6 +192,10 @@
 		79F67639289C2F2900850FF0 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				AB8623BD289E5B4200F71283 /* TestMainViewController.swift */,
+				AB21160E28A1308B0050E9F8 /* FitnessHistoryViewController.swift */,
+				AB8623C1289ECD8900F71283 /* TestMainTableViewCell.swift */,
+				AB21161128A4C5F20050E9F8 /* FitnessHistoryTableViewCell.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -194,6 +235,7 @@
 		79F6763D289C2F5200850FF0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AB8623BF289E5B4A00F71283 /* TestStoryboard.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -220,9 +262,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 79BBF6A4289AB50D0003FAD8 /* Build configuration list for PBXNativeTarget "ChungSungChungSung" */;
 			buildPhases = (
+				09FA4CA7AA2A49DCAB2BCC15 /* [CP] Check Pods Manifest.lock */,
 				79BBF68C289AB50B0003FAD8 /* Sources */,
 				79BBF68D289AB50B0003FAD8 /* Frameworks */,
 				79BBF68E289AB50B0003FAD8 /* Resources */,
+				19357ABD1BEC88D81980AABA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -275,6 +319,7 @@
 				7ED2F78D289E481300DAEEC9 /* WorkoutAdd.storyboard in Resources */,
 				7ED2F7B1289EAC2000DAEEC9 /* WorkoutAddPlusTableViewCell.xib in Resources */,
 				79BBF6A0289AB50D0003FAD8 /* LaunchScreen.storyboard in Resources */,
+				AB8623C0289E5B4A00F71283 /* TestStoryboard.storyboard in Resources */,
 				7ED2F7AD289EA12100DAEEC9 /* WorkoutAddOneTableViewCell.xib in Resources */,
 				79BBF69D289AB50D0003FAD8 /* Assets.xcassets in Resources */,
 				7ED2F7B5289EB4F600DAEEC9 /* WorkoutAddCalorieTableViewCell.xib in Resources */,
@@ -285,21 +330,68 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		09FA4CA7AA2A49DCAB2BCC15 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ChungSungChungSung-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		19357ABD1BEC88D81980AABA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChungSungChungSung/Pods-ChungSungChungSung-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChungSungChungSung/Pods-ChungSungChungSung-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChungSungChungSung/Pods-ChungSungChungSung-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		79BBF68C289AB50B0003FAD8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB21160F28A1308B0050E9F8 /* FitnessHistoryViewController.swift in Sources */,
 				7E9A47C4289D478A005B98B4 /* WorkoutViewController.swift in Sources */,
 				7ED2F7BA289EDE0E00DAEEC9 /* UIColor.swift in Sources */,
 				7ED2F7B0289EAC2000DAEEC9 /* WorkoutAddPlusTableViewCell.swift in Sources */,
 				7ED2F78F289E482600DAEEC9 /* WorkoutAddViewController.swift in Sources */,
 				7ED2F798289E524500DAEEC9 /* WorkoutAddTwoTableViewCell.swift in Sources */,
 				79BBF698289AB50B0003FAD8 /* ViewController.swift in Sources */,
+				AB21161228A4C5F20050E9F8 /* FitnessHistoryTableViewCell.swift in Sources */,
 				79BBF694289AB50B0003FAD8 /* AppDelegate.swift in Sources */,
 				7ED2F7B4289EB4F600DAEEC9 /* WorkoutAddCalorieTableViewCell.swift in Sources */,
 				7ED2F7AC289EA12100DAEEC9 /* WorkoutAddOneTableViewCell.swift in Sources */,
 				79BBF696289AB50B0003FAD8 /* SceneDelegate.swift in Sources */,
+				AB8623C2289ECD8900F71283 /* TestMainTableViewCell.swift in Sources */,
+				AB8623BE289E5B4200F71283 /* TestMainViewController.swift in Sources */,
+				ABE51DD1289F90B2005BFB0E /* FitnessCircularGraphSwiftUIView.swift in Sources */,
 				7ED2F7B7289ED9A700DAEEC9 /* DailyCalendarCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -442,6 +534,7 @@
 		};
 		79BBF6A5289AB50D0003FAD8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F479F63A6243CE5C2F3F653E /* Pods-ChungSungChungSung.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -470,6 +563,7 @@
 		};
 		79BBF6A6289AB50D0003FAD8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 46045EA159CE3025680BAFC8 /* Pods-ChungSungChungSung.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
