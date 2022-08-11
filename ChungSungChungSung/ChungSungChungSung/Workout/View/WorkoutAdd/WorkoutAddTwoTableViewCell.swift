@@ -8,22 +8,22 @@
 import UIKit
 
 class WorkoutAddTwoTableViewCell: UITableViewCell {
-    var firstInputTypeText = "kg"
-    var secondInputTypeText = "회"
-    
     @IBOutlet weak var cellRectangle: UIView!
     @IBOutlet weak var setNumberView: UILabel!
     @IBOutlet weak var firstInputType: UILabel!
+    @IBOutlet weak var firstInputField: UITextField!
     @IBOutlet weak var secondInputType: UILabel!
-
+    @IBOutlet weak var secondInputField: UITextField!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        cellRectangle.layer.cornerRadius = 8
+        cellRectangle.layer.cornerRadius = 12
+        cellRectangle.layer.shadowColor = UIColor.systemGray5.cgColor
+        cellRectangle.layer.shadowRadius = 20
+        cellRectangle.layer.shadowOpacity = 1
+        
         setNumberView.font = UIFont.systemFont(ofSize: 17, weight: .regular)
-        firstInputType.text = firstInputTypeText
-        secondInputType.text = secondInputTypeText
-
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
