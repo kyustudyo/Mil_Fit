@@ -15,6 +15,8 @@
 		79BBF69B289AB50B0003FAD8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79BBF699289AB50B0003FAD8 /* Main.storyboard */; };
 		79BBF69D289AB50D0003FAD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79BBF69C289AB50D0003FAD8 /* Assets.xcassets */; };
 		79BBF6A0289AB50D0003FAD8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79BBF69E289AB50D0003FAD8 /* LaunchScreen.storyboard */; };
+		7E37333928A4CBD1008F7EFA /* TodaysWorkoutEdit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E37333828A4CBD1008F7EFA /* TodaysWorkoutEdit.storyboard */; };
+		7E37333D28A4CC5A008F7EFA /* TodaysWorkoutEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E37333C28A4CC5A008F7EFA /* TodaysWorkoutEditViewController.swift */; };
 		7E5BF64228A23A5400B6DD26 /* WorkoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5BF64128A23A5400B6DD26 /* WorkoutModel.swift */; };
 		7E5BF64428A2450900B6DD26 /* TodaysWorkoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5BF64328A2450900B6DD26 /* TodaysWorkoutCell.swift */; };
 		7E9A47C2289D4774005B98B4 /* Workout.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E9A47C1289D4774005B98B4 /* Workout.storyboard */; };
@@ -44,6 +46,8 @@
 		79BBF69C289AB50D0003FAD8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		79BBF69F289AB50D0003FAD8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		79BBF6A1289AB50D0003FAD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7E37333828A4CBD1008F7EFA /* TodaysWorkoutEdit.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TodaysWorkoutEdit.storyboard; sourceTree = "<group>"; };
+		7E37333C28A4CC5A008F7EFA /* TodaysWorkoutEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaysWorkoutEditViewController.swift; sourceTree = "<group>"; };
 		7E5BF64128A23A5400B6DD26 /* WorkoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutModel.swift; sourceTree = "<group>"; };
 		7E5BF64328A2450900B6DD26 /* TodaysWorkoutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaysWorkoutCell.swift; sourceTree = "<group>"; };
 		7E9A47C1289D4774005B98B4 /* Workout.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Workout.storyboard; sourceTree = "<group>"; };
@@ -185,19 +189,13 @@
 		79F6763C289C2F5000850FF0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7E37333728A4CBA1008F7EFA /* WorkoutAdd */,
 				7E9A47C1289D4774005B98B4 /* Workout.storyboard */,
 				7ED2F7B6289ED9A700DAEEC9 /* DailyCalendarCell.swift */,
-				7ED2F78C289E481300DAEEC9 /* WorkoutAdd.storyboard */,
-				7ED2F796289E524500DAEEC9 /* WorkoutAddTwoTableViewCell.swift */,
-				7ED2F797289E524500DAEEC9 /* WorkoutAddTwoTableViewCell.xib */,
-				7ED2F7AA289EA12100DAEEC9 /* WorkoutAddOneTableViewCell.swift */,
-				7ED2F7AB289EA12100DAEEC9 /* WorkoutAddOneTableViewCell.xib */,
-				7ED2F7AE289EAC2000DAEEC9 /* WorkoutAddPlusTableViewCell.swift */,
-				7ED2F7AF289EAC2000DAEEC9 /* WorkoutAddPlusTableViewCell.xib */,
-				7ED2F7B2289EB4F600DAEEC9 /* WorkoutAddCalorieTableViewCell.swift */,
-				7ED2F7B3289EB4F600DAEEC9 /* WorkoutAddCalorieTableViewCell.xib */,
 				7E5BF64328A2450900B6DD26 /* TodaysWorkoutCell.swift */,
 				325F8E0E28A3C962004ACF9E /* WorkoutListCell.swift */,
+				7E37333828A4CBD1008F7EFA /* TodaysWorkoutEdit.storyboard */,
+				7E37333C28A4CC5A008F7EFA /* TodaysWorkoutEditViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -214,6 +212,22 @@
 			children = (
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		7E37333728A4CBA1008F7EFA /* WorkoutAdd */ = {
+			isa = PBXGroup;
+			children = (
+				7ED2F78C289E481300DAEEC9 /* WorkoutAdd.storyboard */,
+				7ED2F796289E524500DAEEC9 /* WorkoutAddTwoTableViewCell.swift */,
+				7ED2F797289E524500DAEEC9 /* WorkoutAddTwoTableViewCell.xib */,
+				7ED2F7AA289EA12100DAEEC9 /* WorkoutAddOneTableViewCell.swift */,
+				7ED2F7AB289EA12100DAEEC9 /* WorkoutAddOneTableViewCell.xib */,
+				7ED2F7AE289EAC2000DAEEC9 /* WorkoutAddPlusTableViewCell.swift */,
+				7ED2F7AF289EAC2000DAEEC9 /* WorkoutAddPlusTableViewCell.xib */,
+				7ED2F7B2289EB4F600DAEEC9 /* WorkoutAddCalorieTableViewCell.swift */,
+				7ED2F7B3289EB4F600DAEEC9 /* WorkoutAddCalorieTableViewCell.xib */,
+			);
+			path = WorkoutAdd;
 			sourceTree = "<group>";
 		};
 		7E5BF64028A23A3800B6DD26 /* Model */ = {
@@ -295,6 +309,7 @@
 				7ED2F78D289E481300DAEEC9 /* WorkoutAdd.storyboard in Resources */,
 				7ED2F7B1289EAC2000DAEEC9 /* WorkoutAddPlusTableViewCell.xib in Resources */,
 				79BBF6A0289AB50D0003FAD8 /* LaunchScreen.storyboard in Resources */,
+				7E37333928A4CBD1008F7EFA /* TodaysWorkoutEdit.storyboard in Resources */,
 				7ED2F7AD289EA12100DAEEC9 /* WorkoutAddOneTableViewCell.xib in Resources */,
 				79BBF69D289AB50D0003FAD8 /* Assets.xcassets in Resources */,
 				7ED2F7B5289EB4F600DAEEC9 /* WorkoutAddCalorieTableViewCell.xib in Resources */,
@@ -314,6 +329,7 @@
 				7E5BF64228A23A5400B6DD26 /* WorkoutModel.swift in Sources */,
 				7ED2F7BA289EDE0E00DAEEC9 /* UIColor.swift in Sources */,
 				325F8E0F28A3C962004ACF9E /* WorkoutListCell.swift in Sources */,
+				7E37333D28A4CC5A008F7EFA /* TodaysWorkoutEditViewController.swift in Sources */,
 				7ED2F7B0289EAC2000DAEEC9 /* WorkoutAddPlusTableViewCell.swift in Sources */,
 				7ED2F78F289E482600DAEEC9 /* WorkoutAddViewController.swift in Sources */,
 				7ED2F798289E524500DAEEC9 /* WorkoutAddTwoTableViewCell.swift in Sources */,

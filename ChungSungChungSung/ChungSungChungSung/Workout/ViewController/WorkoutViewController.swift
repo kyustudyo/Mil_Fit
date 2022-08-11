@@ -96,6 +96,8 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
         
         if(indexPath.row == initialSelectedCell) {
             collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .right)
+            collectionView.scrollToItem(at: indexPath, at: .right, animated: false)
+            // TODO: initial scroll posotion not working
         }
         cell.isSelected = indexPath.row == initialSelectedCell
         
