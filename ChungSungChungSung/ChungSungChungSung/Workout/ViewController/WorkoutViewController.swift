@@ -8,6 +8,7 @@
 import UIKit
 
 class WorkoutViewController: UIViewController {
+    private let workoutViewTitle = "운동"
     private let calInset: CGFloat = 17.0
     private let numberOfCellsShown = 6
     private var selectedCell: Int = 6
@@ -35,6 +36,10 @@ class WorkoutViewController: UIViewController {
         super.viewDidLoad()
 
         configNavigationTitle()
+        
+        let backBarButtonItem = UIBarButtonItem(title: workoutViewTitle, style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backBarButtonItem
+        
         selectedDateView.text = "\(selectedMonth)월 \(dates[dates.count - 1])일, 오늘"
         
         self.dailyCalendarView.backgroundColor = .clear
@@ -54,12 +59,12 @@ class WorkoutViewController: UIViewController {
     
     private func configNavigationTitle() {
         let viewWidth = self.view.bounds.width - 140
-        let workoutViewTitle = UILabel(frame: CGRect(x: 25, y: 0, width: viewWidth, height: 20))
-        workoutViewTitle.textAlignment = .left
-        workoutViewTitle.font = UIFont.boldSystemFont(ofSize: 28)
-        workoutViewTitle.text = "운동"
+        let workoutViewTitleLabel = UILabel(frame: CGRect(x: 25, y: 0, width: viewWidth, height: 20))
+        workoutViewTitleLabel.textAlignment = .left
+        workoutViewTitleLabel.font = UIFont.boldSystemFont(ofSize: 28)
+        workoutViewTitleLabel.text = workoutViewTitle
         
-        self.navigationItem.titleView = workoutViewTitle
+        self.navigationItem.titleView = workoutViewTitleLabel
     }
 }
 
@@ -118,7 +123,6 @@ extension WorkoutViewController: UICollectionViewDelegateFlowLayout {
         guard let flow = collectionViewLayout as? UICollectionViewFlowLayout else {
             return CGSize()
         }
-        
         let viewWidth = self.view.bounds.width
         let inset = (17 / 390) * viewWidth
         let width = (viewWidth - (inset * 2)) / 6

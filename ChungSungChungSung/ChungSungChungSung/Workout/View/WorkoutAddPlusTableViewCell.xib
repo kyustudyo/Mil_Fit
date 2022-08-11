@@ -46,6 +46,7 @@
             <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
             <connections>
                 <outlet property="cellRectangle" destination="qFH-Fg-mOJ" id="rKf-nb-odb"/>
+                <outlet property="plusView" destination="ODf-K8-Sca" id="X6D-yN-54U"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="91.741071428571431"/>
         </tableViewCell>
