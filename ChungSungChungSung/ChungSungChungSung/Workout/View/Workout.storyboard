@@ -101,6 +101,9 @@
                                     <fontDescription key="titleFontDescription" type="system" pointSize="15"/>
                                     <directionalEdgeInsets key="contentInsets" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="didTapTodaysWorkoutEditButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="9Gg-Hu-wa0"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="오늘 한 운동" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qtp-oO-3Ij">
                                 <rect key="frame" x="28" y="289" width="82" height="21"/>
@@ -122,14 +125,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r4f-lL-S3c">
-                                                    <rect key="frame" x="32" y="11.5" width="42" height="21"/>
+                                                    <rect key="frame" x="20" y="11.5" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="r4f-lL-S3c" firstAttribute="leading" secondItem="dz9-lJ-i7P" secondAttribute="leadingMargin" constant="12" id="Taq-Qo-71z"/>
+                                                <constraint firstItem="r4f-lL-S3c" firstAttribute="leading" secondItem="dz9-lJ-i7P" secondAttribute="leadingMargin" id="Taq-Qo-71z"/>
                                                 <constraint firstItem="r4f-lL-S3c" firstAttribute="centerY" secondItem="dz9-lJ-i7P" secondAttribute="centerY" id="byQ-tW-txq"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -161,7 +164,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y47-hH-ntO">
-                                                    <rect key="frame" x="32" y="11.5" width="42" height="21"/>
+                                                    <rect key="frame" x="20" y="11.5" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -179,7 +182,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="azn-gi-ed6" secondAttribute="trailing" constant="20" id="Igw-ui-R4O"/>
                                                 <constraint firstItem="azn-gi-ed6" firstAttribute="centerY" secondItem="dXc-2D-ZVP" secondAttribute="centerY" id="f6r-wC-3WN"/>
-                                                <constraint firstItem="y47-hH-ntO" firstAttribute="leading" secondItem="dXc-2D-ZVP" secondAttribute="leadingMargin" constant="12" id="pkN-Q9-h2U"/>
+                                                <constraint firstItem="y47-hH-ntO" firstAttribute="leading" secondItem="dXc-2D-ZVP" secondAttribute="leadingMargin" id="pkN-Q9-h2U"/>
                                                 <constraint firstItem="y47-hH-ntO" firstAttribute="centerY" secondItem="dXc-2D-ZVP" secondAttribute="centerY" id="y2i-tX-Wv9"/>
                                             </constraints>
                                         </tableViewCellContentView>

@@ -11,15 +11,48 @@
         <!--Todays Workout Edit View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="todaysWorkoutEditViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="TodaysWorkoutEditViewController" customModule="ChungSungChungSung" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TodaysWorkoutEditViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="TodaysWorkoutEditViewController" customModule="ChungSungChungSung" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="qi9-uD-uVx">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="edw-3f-arV">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <items>
+                                    <navigationItem title="오늘 한 운동 편집" id="XfS-Sq-Wv2">
+                                        <barButtonItem key="leftBarButtonItem" title="취소" id="fC4-gP-dSN"/>
+                                        <barButtonItem key="rightBarButtonItem" title="완료" id="bt4-Uu-6I5"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="qi9-uD-uVx">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="todaysWorkoutEditCell" id="NAE-m5-YlH" customClass="TodaysWorkoutEditCell" customModule="ChungSungChungSung" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="49.5" width="374" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NAE-m5-YlH" id="OMn-mR-gUY">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jms-cD-I4h">
+                                                    <rect key="frame" x="20" y="11.5" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="jms-cD-I4h" firstAttribute="centerY" secondItem="OMn-mR-gUY" secondAttribute="centerY" id="Hp8-OH-Q0M"/>
+                                                <constraint firstItem="jms-cD-I4h" firstAttribute="leading" secondItem="OMn-mR-gUY" secondAttribute="leadingMargin" id="aTk-an-X1X"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="todaysWorkoutTitle" destination="jms-cD-I4h" id="33z-ey-3c7"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="Y6W-OH-hqX" id="2xS-DL-Zxg"/>
                                     <outlet property="delegate" destination="Y6W-OH-hqX" id="1u6-cm-4kE"/>
@@ -28,6 +61,15 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="qi9-uD-uVx" secondAttribute="bottom" id="0nG-uT-a5d"/>
+                            <constraint firstItem="qi9-uD-uVx" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Ha0-jX-GzE"/>
+                            <constraint firstItem="qi9-uD-uVx" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="JAo-SJ-ksC"/>
+                            <constraint firstItem="edw-3f-arV" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="JRp-nq-ZBn"/>
+                            <constraint firstItem="qi9-uD-uVx" firstAttribute="top" secondItem="edw-3f-arV" secondAttribute="bottom" id="PUy-Xd-qiX"/>
+                            <constraint firstItem="edw-3f-arV" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="tlP-sa-c64"/>
+                            <constraint firstItem="edw-3f-arV" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="w8p-JY-bfc"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="todaysWorkoutEditTable" destination="qi9-uD-uVx" id="y4x-U1-Nxs"/>

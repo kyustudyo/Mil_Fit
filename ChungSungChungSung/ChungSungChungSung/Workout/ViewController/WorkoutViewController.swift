@@ -32,6 +32,12 @@ class WorkoutViewController: UIViewController {
     @IBOutlet weak var workoutListView: UITableView!
     @IBOutlet weak var workoutListEditButton: UIButton!
     
+    @IBAction private func didTapTodaysWorkoutEditButton(_ sender: UIButton) {
+        guard let todaysWorkoutEditView = UIStoryboard(name: "TodaysWorkoutEdit", bundle: .main).instantiateViewController(withIdentifier: "TodaysWorkoutEditViewController") as? TodaysWorkoutEditViewController else { return }
+        todaysWorkoutEditView.workoutList = workoutList
+        present(todaysWorkoutEditView, animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

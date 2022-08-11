@@ -10,12 +10,14 @@ import UIKit
 class TodaysWorkoutEditViewController: UIViewController {
     var workoutList: [WorkoutModel] = []
     
+    @IBOutlet
     @IBOutlet weak var todaysWorkoutEditTable: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        self.view.backgroundColor = CustomColor.bgGray
+        todaysWorkoutEditTable.backgroundColor = .clear
         // Do any additional setup after loading the view.
     }
 }
@@ -26,10 +28,10 @@ extension TodaysWorkoutEditViewController: UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "todaysWorkoutCell", for: indexPath) as? TodaysWorkoutCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "todaysWorkoutEditCell", for: indexPath) as? TodaysWorkoutEditCell else { return UITableViewCell() }
         
         let workout = workoutList[indexPath.row]
-        cell.todayWorkoutTitle.text = workout.title
+        cell.todaysWorkoutTitle.text = workout.title
         
         return cell
     }
