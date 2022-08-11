@@ -22,9 +22,11 @@ class TodaysWorkoutEditViewController: UIViewController {
         super.viewDidLoad()
 
         self.view.backgroundColor = CustomColor.bgGray
+        cancelButton.tintColor = CustomColor.mainPurple
+        doneButton.tintColor = CustomColor.mainPurple
+        
         todaysWorkoutEditTable.backgroundColor = .clear
-        
-        
+        todaysWorkoutEditTable.setEditing(true, animated: true)
     }
 }
 
@@ -40,5 +42,20 @@ extension TodaysWorkoutEditViewController: UITableViewDelegate, UITableViewDataS
         cell.todaysWorkoutTitle.text = workout.title
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        workoutList.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let targetCell = workoutList[sourceIndexPath.row]
+        workoutList.remove(at: sourceIndexPath.row)
+        workoutList.insert(targetCell, at: destinationIndexPath.row)
     }
 }
