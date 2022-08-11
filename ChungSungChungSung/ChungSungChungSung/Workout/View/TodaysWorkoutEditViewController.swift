@@ -10,15 +10,21 @@ import UIKit
 class TodaysWorkoutEditViewController: UIViewController {
     var workoutList: [WorkoutModel] = []
     
-    @IBOutlet
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
+    @IBOutlet weak var doneButton: UIBarButtonItem!
     @IBOutlet weak var todaysWorkoutEditTable: UITableView!
+    
+    @IBAction func cancel(_ sender: Any) {
+        self.presentingViewController?.dismiss(animated: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.view.backgroundColor = CustomColor.bgGray
         todaysWorkoutEditTable.backgroundColor = .clear
-        // Do any additional setup after loading the view.
+        
+        
     }
 }
 
