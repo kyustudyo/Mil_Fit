@@ -40,15 +40,12 @@
 		AB8623C0289E5B4A00F71283 /* TestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB8623BF289E5B4A00F71283 /* TestStoryboard.storyboard */; };
 		AB8623C2289ECD8900F71283 /* TestMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8623C1289ECD8900F71283 /* TestMainTableViewCell.swift */; };
 		ABE51DD1289F90B2005BFB0E /* FitnessCircularGraphSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE51DD0289F90B2005BFB0E /* FitnessCircularGraphSwiftUIView.swift */; };
-		FA719CEAE7AE40249D62879A /* Pods_ChungSungChungSung.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35C3F82C3C241FE8DEB5627B /* Pods_ChungSungChungSung.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		325F8E0E28A3C962004ACF9E /* WorkoutListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutListCell.swift; sourceTree = "<group>"; };
 		325F8E1028A3F1BC004ACF9E /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		325F8E1228A4E244004ACF9E /* TodaysWorkoutEditCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaysWorkoutEditCell.swift; sourceTree = "<group>"; };
-		35C3F82C3C241FE8DEB5627B /* Pods_ChungSungChungSung.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChungSungChungSung.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		46045EA159CE3025680BAFC8 /* Pods-ChungSungChungSung.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChungSungChungSung.release.xcconfig"; path = "Target Support Files/Pods-ChungSungChungSung/Pods-ChungSungChungSung.release.xcconfig"; sourceTree = "<group>"; };
 		79BBF690289AB50B0003FAD8 /* ChungSungChungSung.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChungSungChungSung.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79BBF693289AB50B0003FAD8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79BBF695289AB50B0003FAD8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,7 +78,6 @@
 		AB8623BF289E5B4A00F71283 /* TestStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TestStoryboard.storyboard; sourceTree = "<group>"; };
 		AB8623C1289ECD8900F71283 /* TestMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMainTableViewCell.swift; sourceTree = "<group>"; };
 		ABE51DD0289F90B2005BFB0E /* FitnessCircularGraphSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessCircularGraphSwiftUIView.swift; sourceTree = "<group>"; };
-		F479F63A6243CE5C2F3F653E /* Pods-ChungSungChungSung.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChungSungChungSung.debug.xcconfig"; path = "Target Support Files/Pods-ChungSungChungSung/Pods-ChungSungChungSung.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,7 +85,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA719CEAE7AE40249D62879A /* Pods_ChungSungChungSung.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,18 +94,8 @@
 		01C83859EF576F214D7853FF /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F479F63A6243CE5C2F3F653E /* Pods-ChungSungChungSung.debug.xcconfig */,
-				46045EA159CE3025680BAFC8 /* Pods-ChungSungChungSung.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		3BADCA467AD34ABEE242271A /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				35C3F82C3C241FE8DEB5627B /* Pods_ChungSungChungSung.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		79BBF687289AB50B0003FAD8 = {
@@ -119,7 +104,6 @@
 				79BBF692289AB50B0003FAD8 /* ChungSungChungSung */,
 				79BBF691289AB50B0003FAD8 /* Products */,
 				01C83859EF576F214D7853FF /* Pods */,
-				3BADCA467AD34ABEE242271A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -299,11 +283,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 79BBF6A4289AB50D0003FAD8 /* Build configuration list for PBXNativeTarget "ChungSungChungSung" */;
 			buildPhases = (
-				09FA4CA7AA2A49DCAB2BCC15 /* [CP] Check Pods Manifest.lock */,
 				79BBF68C289AB50B0003FAD8 /* Sources */,
 				79BBF68D289AB50B0003FAD8 /* Frameworks */,
 				79BBF68E289AB50B0003FAD8 /* Resources */,
-				19357ABD1BEC88D81980AABA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -367,48 +349,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		09FA4CA7AA2A49DCAB2BCC15 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ChungSungChungSung-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		19357ABD1BEC88D81980AABA /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ChungSungChungSung/Pods-ChungSungChungSung-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ChungSungChungSung/Pods-ChungSungChungSung-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChungSungChungSung/Pods-ChungSungChungSung-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		79BBF68C289AB50B0003FAD8 /* Sources */ = {
@@ -578,7 +518,6 @@
 		};
 		79BBF6A5289AB50D0003FAD8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F479F63A6243CE5C2F3F653E /* Pods-ChungSungChungSung.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -607,7 +546,6 @@
 		};
 		79BBF6A6289AB50D0003FAD8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 46045EA159CE3025680BAFC8 /* Pods-ChungSungChungSung.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
