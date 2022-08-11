@@ -8,6 +8,7 @@
 import UIKit
 
 class WorkoutViewController: UIViewController {
+    private let workoutViewTitle = "운동"
     private let calInset: CGFloat = 17.0
     private let numberOfCellsShown = 6
     private var selectedCell: Int = 6
@@ -15,50 +16,61 @@ class WorkoutViewController: UIViewController {
     private var weekdays: [String] = ["월", "화", "수", "목", "금", "토", "일"]
     private var dates: [String] = ["8", "9", "10", "11", "12", "13", "14"]
     
+    private var selectedMonth: String = "8"
+    private var selectedDate: String = "10"
+    private var selectedDateText: String?
+    private var selectedTodayText: String?
+    
+    private var workoutList = WorkoutData().list
+    private var workout: WorkoutModel?
+    
     @IBOutlet weak var selectedDateView: UILabel!
     @IBOutlet weak var dailyCalendarView: UICollectionView!
 
     @IBOutlet weak var todaysWorkoutView: UITableView!
+    @IBOutlet weak var todaysWorkoutEditButton: UIButton!
     @IBOutlet weak var workoutListView: UITableView!
+    @IBOutlet weak var workoutListEditButton: UIButton!
+    
+    @IBAction private func didTapTodaysWorkoutEditButton(_ sender: UIButton) {
+        guard let todaysWorkoutEditView = UIStoryboard(name: "TodaysWorkoutEdit", bundle: .main).instantiateViewController(withIdentifier: "TodaysWorkoutEditViewController") as? TodaysWorkoutEditViewController else { return }
+        todaysWorkoutEditView.workoutList = workoutList
+        present(todaysWorkoutEditView, animated: true, completion: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configNavigationTitle()
-        setSelectedDateView()
+        
+        let backBarButtonItem = UIBarButtonItem(title: workoutViewTitle, style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backBarButtonItem
+        
+        selectedDateView.text = "\(selectedMonth)월 \(dates[dates.count - 1])일, 오늘"
         
         self.dailyCalendarView.backgroundColor = .clear
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        todaysWorkoutView.backgroundColor = .clear
+        todaysWorkoutView.contentInset.top = -30
+        workoutListView.backgroundColor = .clear
+        workoutListView.contentInset.top = -30
         
-        setSelectedDateView()
+        todaysWorkoutEditButton.tintColor = CustomColor.mainPurple
+        workoutListEditButton.tintColor = CustomColor.mainPurple
+        
+        todaysWorkoutView.delegate = self
+        todaysWorkoutView.dataSource = self
+        workoutListView.delegate = self
+        workoutListView.dataSource = self
     }
     
     private func configNavigationTitle() {
         let viewWidth = self.view.bounds.width - 140
-        let workoutViewTitle = UILabel(frame: CGRect(x: 25, y: 0, width: viewWidth, height: 20))
-        workoutViewTitle.textAlignment = .left
-        workoutViewTitle.font = UIFont.boldSystemFont(ofSize: 28)
-        workoutViewTitle.text = "운동"
+        let workoutViewTitleLabel = UILabel(frame: CGRect(x: 25, y: 0, width: viewWidth, height: 20))
+        workoutViewTitleLabel.textAlignment = .left
+        workoutViewTitleLabel.font = UIFont.boldSystemFont(ofSize: 28)
+        workoutViewTitleLabel.text = workoutViewTitle
         
-        self.navigationItem.titleView = workoutViewTitle
-    }
-
-    private func setSelectedDateView() {
-        var month: String = "8"
-        var date: String = "10"
-        var selectedDateText: String = "\(month)월 \(date)일"
-        var selectedTodayText: String = "\(month)월 \(date)일, 오늘"
-        
-        print(selectedCell)
-        if selectedCell == dates.count - 1 {
-            selectedDateView.text = selectedTodayText
-        } else {
-            date = dates[selectedCell]
-            selectedDateView.text = selectedDateText
-        }
+        self.navigationItem.titleView = workoutViewTitleLabel
     }
 }
 
@@ -75,17 +87,23 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
         cell.dateNumberView.text = dates[indexPath.row]
         cell.dayNameView.text = weekdays[indexPath.row]
         
-        cell.dayHighlightView.layer.cornerRadius = ( cell.dayHighlightView.frame.width + 4 ) / 2
+        let cornerRadius = ( cell.dayHighlightView.frame.width + 4 ) / 2
+        cell.dayHighlightView.layer.cornerRadius = cornerRadius
         cell.dayHighlightView.backgroundColor = CustomColor.mainPurple
+        cell.dayHighlightView.setGradient(color1: (CustomColor.gradientPurple)!, color2: (CustomColor.mainPurple)!, cornerRadius: cornerRadius)
         
+//        cell.dateHighlightCircleView.backgroundColor = CustomColor.dateGreen
         cell.dateHighlightCircleView.layer.cornerRadius = 19
+        cell.dateHighlightCircleView.layer.backgroundColor = CustomColor.dateGreen?.cgColor
         cell.dateHighlightCircleView.layer.shadowColor = UIColor.systemGray5.cgColor
         cell.dateHighlightCircleView.layer.shadowRadius = 20
         cell.dateHighlightCircleView.layer.shadowOpacity = 1
-        cell.dateHighlightCircleView.backgroundColor = CustomColor.dateGreen
+
         
         if(indexPath.row == initialSelectedCell) {
             collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .right)
+            collectionView.scrollToItem(at: indexPath, at: .right, animated: false)
+            // TODO: initial scroll posotion not working
         }
         cell.isSelected = indexPath.row == initialSelectedCell
         
@@ -94,6 +112,17 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedCell = indexPath.row
+        
+        selectedDateText = "\(selectedMonth)월 \(selectedDate)일"
+        selectedTodayText = "\(selectedMonth)월 \(selectedDate)일, 오늘"
+        
+        print(selectedCell)
+        if selectedCell == dates.count - 1 {
+            selectedDateView.text = selectedTodayText
+        } else {
+            selectedDate = dates[selectedCell]
+            selectedDateView.text = selectedDateText
+        }
     }
 }
 
@@ -102,19 +131,66 @@ extension WorkoutViewController: UICollectionViewDelegateFlowLayout {
         guard let flow = collectionViewLayout as? UICollectionViewFlowLayout else {
             return CGSize()
         }
-        
         let viewWidth = self.view.bounds.width
         let inset = (17 / 390) * viewWidth
-//        let spacing = (8 / 390) * viewWidth
-        
-        let width = (viewWidth - (inset * 2) /*- (spacing * 5)*/) / 6
+        let width = (viewWidth - (inset * 2)) / 6
         let height = (105 / 61) * width
         
-//        flow.minimumInteritemSpacing = spacing
-//        flow.minimumLineSpacing = spacing
         flow.sectionInset.left = inset
         flow.sectionInset.right = inset
         
         return CGSize(width: width, height: height)
+    }
+}
+
+//protocol WorkoutAddViewDelegate {
+//    func didTapWorkout(workoutTitle: String, workout: WorkoutModel)
+//}
+
+extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return workoutList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var returnCell = UITableViewCell()
+        
+        if tableView == todaysWorkoutView {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "todaysWorkoutCell", for: indexPath) as? TodaysWorkoutCell else { return UITableViewCell() }
+            
+            let workout = workoutList[indexPath.row]
+            cell.todayWorkoutTitle.text = workout.title
+            
+            returnCell = cell
+            
+        } else if tableView == workoutListView {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "workoutListCell", for: indexPath) as? WorkoutListCell else { return UITableViewCell() }
+            let workout = workoutList[indexPath.row]
+            cell.workoutTitle.text = workout.title
+            
+            returnCell = cell
+        }
+        
+//        cell.dateHighlightCircleView.layer.shadowColor = UIColor.systemGray5.cgColor
+//        cell.dateHighlightCircleView.layer.shadowRadius = 20
+//        cell.dateHighlightCircleView.layer.shadowOpacity = 1
+        
+        returnCell.layer.shadowColor = UIColor.systemGray5.cgColor
+        returnCell.layer.shadowRadius = 20
+        returnCell.layer.shadowOpacity = 1
+        
+        return returnCell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let workout = workoutList[indexPath.row]
+        print("\(indexPath.row) \(workout.title) selected.")
+  
+        if tableView == todaysWorkoutView {
+            guard let workoutAddView = UIStoryboard(name: "WorkoutAdd", bundle: .main).instantiateViewController(withIdentifier: "WorkoutAddViewController") as? WorkoutAddViewController else { return }
+            workoutAddView.workoutAddTitleText = workout.title
+            workoutAddView.workout = workout
+            self.navigationController?.pushViewController(workoutAddView, animated: true)
+        }
     }
 }
