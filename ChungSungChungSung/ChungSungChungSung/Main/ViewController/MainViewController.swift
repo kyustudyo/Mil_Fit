@@ -336,6 +336,10 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         calContainerView.addSubview(basicRoundedView)
         basicRoundedView.anchor(top: eatRoundedView.bottomAnchor, left: eatRoundedView.leftAnchor, right: eatRoundedView.rightAnchor, paddingTop: 13, paddingLeft: 0, paddingRight: 0, height: 14)
         
+        let tapButton = UIButton()
+        calContainerView.addSubview(tapButton)
+        tapButton.anchor(top: calContainerView.topAnchor, left: calContainerView.leftAnchor, bottom: calContainerView.bottomAnchor, right: calContainerView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
+        tapButton.addTarget(self, action: #selector(goCalorie), for: .touchUpInside)
         //TODO: 중복
         let eatCal = shortRoundedView(color: .연보라)
         let eatMentVstack = shortMent(ment: "먹은 대사량", value: 1700)
@@ -363,6 +367,10 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         세개칼로리스택.distribution = .equalCentering
         세개칼로리스택.anchor(top: basicRoundedView.bottomAnchor, left: calContainerView.leftAnchor, right: calContainerView.rightAnchor, paddingTop: 24, paddingLeft: 22, paddingRight: 16)
 
+    }
+    @objc fileprivate func goCalorie() {
+        print("qwe")
+        navigationController?.pushViewController(MainCalorieViewController(), animated: true)
     }
     func setUpEvents() {
         let formatter = DateFormatter()

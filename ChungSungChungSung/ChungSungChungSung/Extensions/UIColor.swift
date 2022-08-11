@@ -40,4 +40,6 @@ class CustomColor {
     static let gradientPurple = UIColor(hex: "AA90EF")
     static let bgGray = UIColor(hex: "F9FAFA")
     static let dateGreen = UIColor(hex: "50E6A8")
+    static let red = UIColor(hex: "F0827D")
+    static let subtlePurple = UIColor(hex: "7D93F8")
 }
