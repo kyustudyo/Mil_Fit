@@ -10,7 +10,6 @@ import UIKit
 class TodaysWorkoutEditViewController: UIViewController {
     var workoutList: [WorkoutModel] = []
     
-    @IBOutlet
     @IBOutlet weak var todaysWorkoutEditTable: UITableView!
     
     override func viewDidLoad() {

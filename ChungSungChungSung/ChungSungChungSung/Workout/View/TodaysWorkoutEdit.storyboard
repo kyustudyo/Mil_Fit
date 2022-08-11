@@ -72,7 +72,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="todaysWorkoutEditTable" destination="qi9-uD-uVx" id="y4x-U1-Nxs"/>
+                        <outlet property="todaysWorkoutEditTable" destination="qi9-uD-uVx" id="4Os-Dv-VUA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -4,7 +4,8 @@
 target 'ChungSungChungSung' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-  pod 'Charts'
-  # Pods for ChungSungChungSung
 
+  # Pods for ChungSungChungSung
+pod 'FSCalendar'
+pod 'Charts'
 end
