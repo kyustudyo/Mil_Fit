@@ -12,6 +12,8 @@ struct FitnessTestStandardRunning {
     let time: String
 }
 
+var fitnessTestStandardSports = ["3km 달리기", "팔굽혀펴기", "윗몸일으키기"]
+
 var fitnessTestStandardRunningList = [
     FitnessTestStandardRunning(grade: "특급", time: "12분 30초 이내"),
     FitnessTestStandardRunning(grade: "1급", time: "12분 31초~13분 32초"),
@@ -24,6 +26,7 @@ var fitnessTestStandardRunningList = [
 
 class FitnessTestStandardViewController: UIViewController {
     @IBOutlet weak var fitnessTestRunningTableView: UITableView!
+    @IBOutlet weak var fitnessTestStandardAge: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,5 +48,12 @@ extension FitnessTestStandardViewController: UITableViewDelegate, UITableViewDat
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label = UILabel()
+        label.text = fitnessTestStandardSports[section]
+        label.font = .systemFont(ofSize: 22, weight: .bold)
+        return label
     }
 }
