@@ -27,6 +27,7 @@ class WorkoutPreviousViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(WorkoutPreviousTableViewCell.self, forCellReuseIdentifier: WorkoutPreviousTableViewCell.cellID)
+        
         tableView.layer.cornerRadius = 16
         tableView.rowHeight = 44
         view.addSubview(calendar)
@@ -34,13 +35,13 @@ class WorkoutPreviousViewController: UIViewController {
         calendar.backgroundColor = .white
         calendar.layer.cornerRadius = 16
         calendar.appearance.todayColor = .진보라
-//        calendar.allowsSelection = false
         calendar.headerHeight = 80
         calendar.appearance.headerMinimumDissolvedAlpha = 0
         calendar.appearance.headerDateFormat = "YYYY년 M월"
         calendar.appearance.headerTitleColor = .black
         calendar.appearance.headerTitleFont = UIFont.systemFont(ofSize: 18)
         calendar.appearance.weekdayTextColor = .systemGray2
+        
         let previousButton = UIButton()
         previousButton.addTarget(self, action: #selector(previousTapped(_:)), for: .touchUpInside)
         view.addSubview(previousButton)
@@ -48,6 +49,7 @@ class WorkoutPreviousViewController: UIViewController {
         previousButton.centerY(inView: calendar.calendarHeaderView)
         previousButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
         previousButton.tintColor = .black
+        
         let nextButton = UIButton()
         nextButton.addTarget(self, action: #selector(nextTapped(_:)), for: .touchUpInside)
         nextButton.tintColor = .black
@@ -61,18 +63,15 @@ class WorkoutPreviousViewController: UIViewController {
         let workoutRecord = UILabel()
         workoutRecord.text = "운동 기록"
         workoutRecord.font = UIFont.systemFont(ofSize: Constants.bigText, weight: .bold)
-//        view.addSubview(workoutRecord)
-//        workoutRecord.anchor(top: calendar.bottomAnchor, left: calendar.leftAnchor, paddingTop: 40, paddingLeft: 16)
         setUpEvents()
-//        view.addSubview(tableView)
-//        workoutRecord.anchor(top: calendar.bottomAnchor, left: calendar.leftAnchor, right: calendar.rightAnchor, paddingTop: 40, paddingLeft: 0, paddingRight: 0)
-//        workoutRecord.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+        
         let tempView = UIView()
         tempView.addSubview(workoutRecord)
         workoutRecord.centerY(inView: tempView)
         workoutRecord.anchor(left: tempView.leftAnchor, paddingLeft: 8)
         view.addSubview(tempView)
         tempView.anchor(top: calendar.bottomAnchor, left: calendar.leftAnchor, right: calendar.rightAnchor, paddingTop: 30, paddingLeft: 0, paddingRight: 0, height: 30)
+        
         let emptyView = UIView()
         let vstack = UIStackView(arrangedSubviews: [tableView, emptyView])
         vstack.axis = .vertical
@@ -80,21 +79,8 @@ class WorkoutPreviousViewController: UIViewController {
         vstack.spacing = 16
         
         vstack.anchor(top: tempView.bottomAnchor, left: calendar.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: calendar.rightAnchor, paddingTop: 8, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
-//        emptyView.setContentHuggingPriority(.defaultHigh, for: .vertical)
-//        emptyView.backgroundColor = .yellow
-//        workoutRecord.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
-//        tableView.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
-        
-//        emptyView.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
-        
-//        tableView.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -44).isActive = true
         tableView.anchor(top: vstack.topAnchor, left: calendar.leftAnchor, right: calendar.rightAnchor, paddingTop: 8, paddingLeft: 0, paddingRight: 0, height: 44 * CGFloat(운동들.count))
-//        vstack.backgroundColor = .red
-        
-//        tableView.rowHeight = 40
-        
-//        tableView.anchor(top: workoutRecord.bottomAnchor, left: calendar.leftAnchor, right: calendar.rightAnchor, paddingTop: 8, paddingLeft: 0, paddingRight: 0, height: 100)
-//        tableView.heightAnchor.constraint(equalToConstant: tableView.rowHeight * CGFloat(events2.count)).isActive = true
+
     }
 
     func setUpEvents() {
@@ -106,11 +92,13 @@ class WorkoutPreviousViewController: UIViewController {
         events2 = [sampledate5!, sampledate6!, sampledate7!]
         
     }
+    
     fileprivate lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter
     }()
+    
 }
 
 extension WorkoutPreviousViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
