@@ -70,7 +70,7 @@ class WorkoutPreviousViewController: UIViewController {
         workoutRecord.centerY(inView: tempView)
         workoutRecord.anchor(left: tempView.leftAnchor, paddingLeft: 8)
         view.addSubview(tempView)
-        tempView.anchor(top: calendar.bottomAnchor, left: calendar.leftAnchor, right: calendar.rightAnchor, paddingTop: 30, paddingLeft: 0, paddingRight: 0, height: 30)
+        tempView.anchor(top: calendar.bottomAnchor, left: calendar.leftAnchor, right: calendar.rightAnchor, paddingTop: 24, paddingLeft: 0, paddingRight: 0, height: 30)
         
         let emptyView = UIView()
         let vstack = UIStackView(arrangedSubviews: [tableView, emptyView])
