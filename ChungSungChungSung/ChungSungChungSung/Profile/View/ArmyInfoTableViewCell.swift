@@ -19,7 +19,10 @@ class ArmyInfoTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        cellRectangle.layer.cornerRadius = 8
+        cellRectangle.layer.cornerRadius = 12
+        cellRectangle.layer.shadowColor = UIColor.systemGray6.cgColor
+        cellRectangle.layer.shadowRadius = 20
+        cellRectangle.layer.shadowOpacity = 1
         editArmyInfoButton.tintColor = CustomColor.editGray
         
         armyCorpsNameLabel.text = armyCorpsName

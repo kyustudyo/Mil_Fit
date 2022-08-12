@@ -15,6 +15,8 @@
 		328AB9B028A63B6500000A85 /* ArmyInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 328AB9AE28A63B6500000A85 /* ArmyInfoTableViewCell.xib */; };
 		328AB9B328A64A9700000A85 /* BodyInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328AB9B128A64A9700000A85 /* BodyInfoTableViewCell.swift */; };
 		328AB9B428A64A9700000A85 /* BodyInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 328AB9B228A64A9700000A85 /* BodyInfoTableViewCell.xib */; };
+		328AB9B728A64D5A00000A85 /* GoalsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328AB9B528A64D5A00000A85 /* GoalsTableViewCell.swift */; };
+		328AB9B828A64D5A00000A85 /* GoalsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 328AB9B628A64D5A00000A85 /* GoalsTableViewCell.xib */; };
 		4ACE80F58EE9B4CABE58C574 /* Pods_ChungSungChungSung.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FF3882342AE3CFD66EC86C9 /* Pods_ChungSungChungSung.framework */; };
 		794B600A28A527BB00621A27 /* WorkoutAddOneTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 794B600028A527BB00621A27 /* WorkoutAddOneTableViewCell.xib */; };
 		794B600B28A527BB00621A27 /* TodaysWorkoutEditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794B600128A527BB00621A27 /* TodaysWorkoutEditCell.swift */; };
@@ -69,6 +71,8 @@
 		328AB9AE28A63B6500000A85 /* ArmyInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArmyInfoTableViewCell.xib; sourceTree = "<group>"; };
 		328AB9B128A64A9700000A85 /* BodyInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyInfoTableViewCell.swift; sourceTree = "<group>"; };
 		328AB9B228A64A9700000A85 /* BodyInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BodyInfoTableViewCell.xib; sourceTree = "<group>"; };
+		328AB9B528A64D5A00000A85 /* GoalsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsTableViewCell.swift; sourceTree = "<group>"; };
+		328AB9B628A64D5A00000A85 /* GoalsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GoalsTableViewCell.xib; sourceTree = "<group>"; };
 		3FF3882342AE3CFD66EC86C9 /* Pods_ChungSungChungSung.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChungSungChungSung.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		794B600028A527BB00621A27 /* WorkoutAddOneTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorkoutAddOneTableViewCell.xib; sourceTree = "<group>"; };
 		794B600128A527BB00621A27 /* TodaysWorkoutEditCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodaysWorkoutEditCell.swift; sourceTree = "<group>"; };
@@ -294,6 +298,8 @@
 				328AB9AE28A63B6500000A85 /* ArmyInfoTableViewCell.xib */,
 				328AB9B128A64A9700000A85 /* BodyInfoTableViewCell.swift */,
 				328AB9B228A64A9700000A85 /* BodyInfoTableViewCell.xib */,
+				328AB9B528A64D5A00000A85 /* GoalsTableViewCell.swift */,
+				328AB9B628A64D5A00000A85 /* GoalsTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -414,6 +420,7 @@
 				7E9A47C2289D4774005B98B4 /* Workout.storyboard in Resources */,
 				328AB9B428A64A9700000A85 /* BodyInfoTableViewCell.xib in Resources */,
 				794B601228A527BB00621A27 /* WorkoutAddTwoTableViewCell.xib in Resources */,
+				328AB9B828A64D5A00000A85 /* GoalsTableViewCell.xib in Resources */,
 				79BBF6A0289AB50D0003FAD8 /* LaunchScreen.storyboard in Resources */,
 				7E37333928A4CBD1008F7EFA /* TodaysWorkoutEdit.storyboard in Resources */,
 				794B601128A527BB00621A27 /* WorkoutAddPlusTableViewCell.xib in Resources */,
@@ -481,6 +488,7 @@
 				AB21160F28A1308B0050E9F8 /* FitnessHistoryViewController.swift in Sources */,
 				7E9A47C4289D478A005B98B4 /* WorkoutViewController.swift in Sources */,
 				794B600C28A527BB00621A27 /* WorkoutAddPlusTableViewCell.swift in Sources */,
+				328AB9B728A64D5A00000A85 /* GoalsTableViewCell.swift in Sources */,
 				7E5BF64228A23A5400B6DD26 /* WorkoutModel.swift in Sources */,
 				7ED2F7BA289EDE0E00DAEEC9 /* UIColor.swift in Sources */,
 				325F8E0F28A3C962004ACF9E /* WorkoutListCell.swift in Sources */,

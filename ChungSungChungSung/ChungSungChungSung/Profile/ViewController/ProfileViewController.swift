@@ -26,9 +26,11 @@ class ProfileViewController: UIViewController {
         
         let armyInfoTableViewCellNib = UINib(nibName: "ArmyInfoTableViewCell", bundle: nil)
         let bodyInfoTableViewCellNib = UINib(nibName: "BodyInfoTableViewCell", bundle: nil)
+        let goalsTableViewCellNib = UINib(nibName: "GoalsTableViewCell", bundle: nil)
         
         profileTableView.register(armyInfoTableViewCellNib, forCellReuseIdentifier: "armyInfoTableViewCell")
         profileTableView.register(bodyInfoTableViewCellNib, forCellReuseIdentifier: "bodyInfoTableViewCell")
+        profileTableView.register(goalsTableViewCellNib, forCellReuseIdentifier: "goalsTableViewCell")
     }
     
     private func configNavigationTitle() {
@@ -55,6 +57,10 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "bodyInfoTableViewCell", for: indexPath) as? BodyInfoTableViewCell else { return UITableViewCell() }
             
             return cell
+        } else if indexPath.row == 2 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "goalsTableViewCell", for: indexPath) as? GoalsTableViewCell else { return UITableViewCell() }
+            
+            return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "armyInfoTableViewCell", for: indexPath) as? ArmyInfoTableViewCell else { return UITableViewCell() }
             
@@ -67,6 +73,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             return 152
         } else if indexPath.row == 1 {
             return 152
+        } else if indexPath.row == 2 {
+            return 142
         } else {
             return 152
         }

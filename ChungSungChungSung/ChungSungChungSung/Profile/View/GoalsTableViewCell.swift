@@ -1,5 +1,5 @@
 //
-//  BodyInfoTableViewCell.swift
+//  GoalsTableViewCell.swift
 //  ChungSungChungSung
 //
 //  Created by Eunbee Kang on 2022/08/12.
@@ -7,14 +7,14 @@
 
 import UIKit
 
-class BodyInfoTableViewCell: UITableViewCell {
-    var age = "제 0000부대"
-    var heightAndWeight = "180cm / 80kg"
+class GoalsTableViewCell: UITableViewCell {
+    var goal = "턱걸이 30개 하기"
+    var goalSavedDate = "2022.5.11"
     
     @IBOutlet weak var cellRectangle: UIView!
-    @IBOutlet weak var editBodyInfoButton: UIButton!
-    @IBOutlet weak var ageLabel: UILabel!
-    @IBOutlet weak var heightAndWeightLabel: UILabel!
+    @IBOutlet weak var moreButton: UIButton!
+    @IBOutlet weak var goalLabel: UILabel!
+    @IBOutlet weak var goalSavedDateLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,10 +23,10 @@ class BodyInfoTableViewCell: UITableViewCell {
         cellRectangle.layer.shadowColor = UIColor.systemGray6.cgColor
         cellRectangle.layer.shadowRadius = 20
         cellRectangle.layer.shadowOpacity = 1
-        editBodyInfoButton.tintColor = CustomColor.editGray
+        moreButton.tintColor = CustomColor.editGray
         
-        ageLabel.text = age
-        heightAndWeightLabel.text = heightAndWeight
+        goalLabel.text = goal
+        goalSavedDateLabel.text = goalSavedDate
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
