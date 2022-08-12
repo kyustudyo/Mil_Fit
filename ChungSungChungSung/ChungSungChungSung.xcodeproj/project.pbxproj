@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		325F8E0F28A3C962004ACF9E /* WorkoutListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325F8E0E28A3C962004ACF9E /* WorkoutListCell.swift */; };
 		325F8E1128A3F1BC004ACF9E /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325F8E1028A3F1BC004ACF9E /* UIView.swift */; };
+		328AB9AA28A638A000000A85 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 328AB9A928A638A000000A85 /* Profile.storyboard */; };
+		328AB9AC28A638C200000A85 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328AB9AB28A638C200000A85 /* ProfileViewController.swift */; };
+		328AB9AF28A63B6500000A85 /* ArmyInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328AB9AD28A63B6500000A85 /* ArmyInfoTableViewCell.swift */; };
+		328AB9B028A63B6500000A85 /* ArmyInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 328AB9AE28A63B6500000A85 /* ArmyInfoTableViewCell.xib */; };
 		4ACE80F58EE9B4CABE58C574 /* Pods_ChungSungChungSung.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FF3882342AE3CFD66EC86C9 /* Pods_ChungSungChungSung.framework */; };
 		794B600A28A527BB00621A27 /* WorkoutAddOneTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 794B600028A527BB00621A27 /* WorkoutAddOneTableViewCell.xib */; };
 		794B600B28A527BB00621A27 /* TodaysWorkoutEditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794B600128A527BB00621A27 /* TodaysWorkoutEditCell.swift */; };
@@ -57,6 +61,10 @@
 /* Begin PBXFileReference section */
 		325F8E0E28A3C962004ACF9E /* WorkoutListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutListCell.swift; sourceTree = "<group>"; };
 		325F8E1028A3F1BC004ACF9E /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		328AB9A928A638A000000A85 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		328AB9AB28A638C200000A85 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		328AB9AD28A63B6500000A85 /* ArmyInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmyInfoTableViewCell.swift; sourceTree = "<group>"; };
+		328AB9AE28A63B6500000A85 /* ArmyInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArmyInfoTableViewCell.xib; sourceTree = "<group>"; };
 		3FF3882342AE3CFD66EC86C9 /* Pods_ChungSungChungSung.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChungSungChungSung.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		794B600028A527BB00621A27 /* WorkoutAddOneTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorkoutAddOneTableViewCell.xib; sourceTree = "<group>"; };
 		794B600128A527BB00621A27 /* TodaysWorkoutEditCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodaysWorkoutEditCell.swift; sourceTree = "<group>"; };
@@ -237,6 +245,7 @@
 		79F6763A289C2F2C00850FF0 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				328AB9AB28A638C200000A85 /* ProfileViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -276,6 +285,9 @@
 		79F6763E289C2F6000850FF0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				328AB9A928A638A000000A85 /* Profile.storyboard */,
+				328AB9AD28A63B6500000A85 /* ArmyInfoTableViewCell.swift */,
+				328AB9AE28A63B6500000A85 /* ArmyInfoTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -398,9 +410,11 @@
 				79BBF6A0289AB50D0003FAD8 /* LaunchScreen.storyboard in Resources */,
 				7E37333928A4CBD1008F7EFA /* TodaysWorkoutEdit.storyboard in Resources */,
 				794B601128A527BB00621A27 /* WorkoutAddPlusTableViewCell.xib in Resources */,
+				328AB9AA28A638A000000A85 /* Profile.storyboard in Resources */,
 				794B600A28A527BB00621A27 /* WorkoutAddOneTableViewCell.xib in Resources */,
 				AB8623C0289E5B4A00F71283 /* TestStoryboard.storyboard in Resources */,
 				794B600F28A527BB00621A27 /* WorkoutAddCalorieTableViewCell.xib in Resources */,
+				328AB9B028A63B6500000A85 /* ArmyInfoTableViewCell.xib in Resources */,
 				79BBF69D289AB50D0003FAD8 /* Assets.xcassets in Resources */,
 				79BBF69B289AB50B0003FAD8 /* Main.storyboard in Resources */,
 				794B601028A527BB00621A27 /* WorkoutAdd.storyboard in Resources */,
@@ -480,11 +494,13 @@
 				794B600E28A527BB00621A27 /* WorkoutAddCalorieTableViewCell.swift in Sources */,
 				79F676CC28A372F800850FF0 /* MainMealViewController.swift in Sources */,
 				79F6769B289E680000850FF0 /* purposeCollectionViewCell.swift in Sources */,
+				328AB9AC28A638C200000A85 /* ProfileViewController.swift in Sources */,
 				79F676A0289EC65C00850FF0 /* Bar.swift in Sources */,
 				794B600B28A527BB00621A27 /* TodaysWorkoutEditCell.swift in Sources */,
 				79F67696289E53AF00850FF0 /* MainViewController.swift in Sources */,
 				79F676C828A00A4B00850FF0 /* ColorExtension.swift in Sources */,
 				AB8623C2289ECD8900F71283 /* TestMainTableViewCell.swift in Sources */,
+				328AB9AF28A63B6500000A85 /* ArmyInfoTableViewCell.swift in Sources */,
 				794B601328A527BB00621A27 /* WorkoutAddTwoTableViewCell.swift in Sources */,
 				AB8623BE289E5B4200F71283 /* TestMainViewController.swift in Sources */,
 				ABE51DD1289F90B2005BFB0E /* FitnessCircularGraphSwiftUIView.swift in Sources */,
