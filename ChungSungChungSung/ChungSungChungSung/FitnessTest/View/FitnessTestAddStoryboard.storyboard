@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Fitness Test Add View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="FitnessTestAddViewController" id="Y6W-OH-hqX" customClass="FitnessTestAddViewController" customModule="ChungSungChungSung" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zA0-og-Hwy">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <items>
+                                    <navigationItem title="Title" id="nvy-ux-IA7"/>
+                                </items>
+                            </navigationBar>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="9pj-6H-R68">
+                                <rect key="frame" x="16" y="112" width="382" height="32"/>
+                                <segments>
+                                    <segment title="연습"/>
+                                    <segment title="체력검정"/>
+                                </segments>
+                            </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3km 달리기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Zo-H7-RjK">
+                                <rect key="frame" x="16" y="167" width="107.5" height="26.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZaE-xP-1TY">
+                                <rect key="frame" x="349" y="167" width="51" height="31"/>
+                            </switch>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ZaE-xP-1TY" firstAttribute="top" secondItem="9pj-6H-R68" secondAttribute="bottom" constant="24" id="4Ly-OT-G5v"/>
+                            <constraint firstItem="zA0-og-Hwy" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="B5t-zc-DnS"/>
+                            <constraint firstItem="zA0-og-Hwy" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Fy7-OG-jth"/>
+                            <constraint firstItem="zA0-og-Hwy" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="PRn-tL-Dzv"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="9pj-6H-R68" secondAttribute="trailing" constant="16" id="QDS-DS-0vt"/>
+                            <constraint firstItem="9pj-6H-R68" firstAttribute="top" secondItem="zA0-og-Hwy" secondAttribute="bottom" constant="24" id="QSR-gz-ubS"/>
+                            <constraint firstItem="9pj-6H-R68" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="XQU-qd-EuU"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="ZaE-xP-1TY" secondAttribute="trailing" constant="16" id="gks-jU-FSR"/>
+                            <constraint firstItem="6Zo-H7-RjK" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="qER-61-y7g"/>
+                            <constraint firstItem="6Zo-H7-RjK" firstAttribute="top" secondItem="9pj-6H-R68" secondAttribute="bottom" constant="24" id="xJg-cf-4qf"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="139" y="117"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
