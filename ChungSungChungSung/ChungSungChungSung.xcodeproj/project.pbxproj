@@ -13,6 +13,8 @@
 		328AB9AC28A638C200000A85 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328AB9AB28A638C200000A85 /* ProfileViewController.swift */; };
 		328AB9AF28A63B6500000A85 /* ArmyInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328AB9AD28A63B6500000A85 /* ArmyInfoTableViewCell.swift */; };
 		328AB9B028A63B6500000A85 /* ArmyInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 328AB9AE28A63B6500000A85 /* ArmyInfoTableViewCell.xib */; };
+		328AB9B328A64A9700000A85 /* BodyInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328AB9B128A64A9700000A85 /* BodyInfoTableViewCell.swift */; };
+		328AB9B428A64A9700000A85 /* BodyInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 328AB9B228A64A9700000A85 /* BodyInfoTableViewCell.xib */; };
 		4ACE80F58EE9B4CABE58C574 /* Pods_ChungSungChungSung.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FF3882342AE3CFD66EC86C9 /* Pods_ChungSungChungSung.framework */; };
 		794B600A28A527BB00621A27 /* WorkoutAddOneTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 794B600028A527BB00621A27 /* WorkoutAddOneTableViewCell.xib */; };
 		794B600B28A527BB00621A27 /* TodaysWorkoutEditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794B600128A527BB00621A27 /* TodaysWorkoutEditCell.swift */; };
@@ -65,6 +67,8 @@
 		328AB9AB28A638C200000A85 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		328AB9AD28A63B6500000A85 /* ArmyInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmyInfoTableViewCell.swift; sourceTree = "<group>"; };
 		328AB9AE28A63B6500000A85 /* ArmyInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArmyInfoTableViewCell.xib; sourceTree = "<group>"; };
+		328AB9B128A64A9700000A85 /* BodyInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyInfoTableViewCell.swift; sourceTree = "<group>"; };
+		328AB9B228A64A9700000A85 /* BodyInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BodyInfoTableViewCell.xib; sourceTree = "<group>"; };
 		3FF3882342AE3CFD66EC86C9 /* Pods_ChungSungChungSung.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChungSungChungSung.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		794B600028A527BB00621A27 /* WorkoutAddOneTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorkoutAddOneTableViewCell.xib; sourceTree = "<group>"; };
 		794B600128A527BB00621A27 /* TodaysWorkoutEditCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodaysWorkoutEditCell.swift; sourceTree = "<group>"; };
@@ -288,6 +292,8 @@
 				328AB9A928A638A000000A85 /* Profile.storyboard */,
 				328AB9AD28A63B6500000A85 /* ArmyInfoTableViewCell.swift */,
 				328AB9AE28A63B6500000A85 /* ArmyInfoTableViewCell.xib */,
+				328AB9B128A64A9700000A85 /* BodyInfoTableViewCell.swift */,
+				328AB9B228A64A9700000A85 /* BodyInfoTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -406,6 +412,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E9A47C2289D4774005B98B4 /* Workout.storyboard in Resources */,
+				328AB9B428A64A9700000A85 /* BodyInfoTableViewCell.xib in Resources */,
 				794B601228A527BB00621A27 /* WorkoutAddTwoTableViewCell.xib in Resources */,
 				79BBF6A0289AB50D0003FAD8 /* LaunchScreen.storyboard in Resources */,
 				7E37333928A4CBD1008F7EFA /* TodaysWorkoutEdit.storyboard in Resources */,
@@ -485,6 +492,7 @@
 				AB21161228A4C5F20050E9F8 /* FitnessHistoryTableViewCell.swift in Sources */,
 				79BBF694289AB50B0003FAD8 /* AppDelegate.swift in Sources */,
 				325F8E1128A3F1BC004ACF9E /* UIView.swift in Sources */,
+				328AB9B328A64A9700000A85 /* BodyInfoTableViewCell.swift in Sources */,
 				7E5BF64428A2450900B6DD26 /* TodaysWorkoutCell.swift in Sources */,
 				79BBF696289AB50B0003FAD8 /* SceneDelegate.swift in Sources */,
 				794B600D28A527BB00621A27 /* WorkoutAddOneTableViewCell.swift in Sources */,
