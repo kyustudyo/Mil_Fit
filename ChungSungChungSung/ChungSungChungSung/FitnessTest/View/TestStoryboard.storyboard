@@ -340,7 +340,7 @@
                                 <rect key="frame" x="0.0" y="382" width="414" height="480"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="108" id="PRW-Rg-1zx" customClass="FitnessHistoryTableViewCell" customModule="ChungSungChungSung" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FitnessHistoryTableViewCell" rowHeight="108" id="PRW-Rg-1zx" customClass="FitnessHistoryTableViewCell" customModule="ChungSungChungSung" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="108"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PRW-Rg-1zx" id="I7G-xe-vDd">
@@ -375,6 +375,11 @@
                                                 <constraint firstItem="JWW-OU-EAz" firstAttribute="leading" secondItem="I7G-xe-vDd" secondAttribute="leadingMargin" constant="5" id="uAK-6X-WfO"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="dateLabel" destination="JWW-OU-EAz" id="JCt-zg-9su"/>
+                                            <outlet property="recordLabel" destination="tQf-u8-ppJ" id="zmA-O3-xDc"/>
+                                            <outlet property="tagLabel" destination="ZWH-ue-hDg" id="Ho6-KB-jvu"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -396,6 +401,7 @@
                     </view>
                     <connections>
                         <outlet property="lineChartView" destination="euy-jN-prP" id="1me-Ev-Whj"/>
+                        <outlet property="sortedButton" destination="dDo-h3-zKQ" id="rsP-50-wUL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OXg-m0-ygk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

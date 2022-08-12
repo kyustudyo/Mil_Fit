@@ -9,6 +9,11 @@ import UIKit
 
 class FitnessHistoryTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var tagLabel: UILabel!
+    @IBOutlet weak var recordLabel: UILabel!
+    
+    static let identifier = "FitnessHistoryTableViewCell"
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
