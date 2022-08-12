@@ -116,16 +116,7 @@ class MainCalorieViewController: UIViewController {
         stackView.alignment = .firstBaseline
         return stackView
     }
-    
-//    fileprivate var forkKnife: UIView = {
-//        let forkKnife = UIImage(systemName: "fork.knife")
-//        let imageView = UIImageView(image: forkKnife)
-//        imageView.anchor(width: 14, height: 15)
-//
-//        imageView.tintColor = .진보라
-//        return imageView
-//    }()
-    
+
     enum 섭취운동사진: String {
         case 섭취 = "fork.knife"
         case 운동 = "figure.walk"
