@@ -38,6 +38,11 @@ class WorkoutViewController: UIViewController {
         present(todaysWorkoutEditView, animated: true, completion: nil)
     }
     
+    @IBAction private func didTapWorkoutListEditButton(_ sender: UIButton) {
+        guard let workoutListEditView = UIStoryboard(name: "WorkoutListEdit", bundle: .main).instantiateViewController(withIdentifier: "WorkoutListEditViewController") as? WorkoutListEditViewController else { return }
+        present(workoutListEditView, animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
