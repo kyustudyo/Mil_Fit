@@ -29,9 +29,9 @@ class FitnessTestStandardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fitnessTestRunningTableView.layer.shadowColor = UIColor.blue.cgColor
-        fitnessTestRunningTableView.layer.shadowRadius = 20
-        fitnessTestRunningTableView.layer.shadowOffset = CGSize(width: 4, height: 4)
+//        fitnessTestRunningTableView.layer.shadowColor = UIColor.blue.cgColor
+//        fitnessTestRunningTableView.layer.shadowRadius = 20
+//        fitnessTestRunningTableView.layer.shadowOffset = CGSize(width: 4, height: 4)
     }
 }
 
@@ -44,9 +44,6 @@ extension FitnessTestStandardViewController: UITableViewDelegate, UITableViewDat
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FitnessTestStandardTableViewCell", for: indexPath) as? FitnessTestStandardTableViewCell else { return UITableViewCell() }
         cell.textLabel?.text = fitnessTestStandardRunningList[indexPath.row].grade
         cell.detailTextLabel?.text = fitnessTestStandardRunningList[indexPath.row].time
-//        cell.layer.shadowColor = UIColor.blue.cgColor
-//        cell.layer.shadowRadius = 20
-//        cell.layer.shadowOffset = CGSize(width: 4, height: 4)
         return cell
     }
     
@@ -58,6 +55,14 @@ extension FitnessTestStandardViewController: UITableViewDelegate, UITableViewDat
         let label = UILabel()
         label.text = fitnessTestStandardSports[section]
         label.font = .systemFont(ofSize: 22, weight: .bold)
-        return label
+        
+        let label2 = UILabel()
+        label2.text = "25세 기준"
+        label2.font = .preferredFont(forTextStyle: .callout)
+        
+        let stack = UIStackView(arrangedSubviews: [label, label2])
+        label2.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        
+        return stack
     }
 }

@@ -17,6 +17,18 @@ class FitnessTestStandardTableViewCell: UITableViewCell {
         
     }
 
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.layer.shadowColor = UIColor.blue.cgColor
+        self.layer.shadowRadius = 20
+        self.layer.shadowOffset = CGSize(width: 4, height: 4)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+//        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
