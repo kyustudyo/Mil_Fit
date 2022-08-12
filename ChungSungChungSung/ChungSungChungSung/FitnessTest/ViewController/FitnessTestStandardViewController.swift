@@ -32,7 +32,6 @@ class FitnessTestStandardViewController: UIViewController {
         fitnessTestRunningTableView.layer.shadowColor = UIColor.blue.cgColor
         fitnessTestRunningTableView.layer.shadowRadius = 20
         fitnessTestRunningTableView.layer.shadowOffset = CGSize(width: 4, height: 4)
-        fitnessTestRunningTableView.layer.masksToBounds = false
     }
 }
 
