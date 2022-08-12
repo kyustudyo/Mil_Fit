@@ -8,7 +8,7 @@
 import UIKit
 
 class BodyInfoTableViewCell: UITableViewCell {
-    var age = "제 0000부대"
+    var age = "23"
     var heightAndWeight = "180cm / 80kg"
     
     @IBOutlet weak var cellRectangle: UIView!

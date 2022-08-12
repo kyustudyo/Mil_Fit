@@ -15,6 +15,7 @@ class GoalsTableViewCell: UITableViewCell {
     @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var goalLabel: UILabel!
     @IBOutlet weak var goalSavedDateLabel: UILabel!
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()

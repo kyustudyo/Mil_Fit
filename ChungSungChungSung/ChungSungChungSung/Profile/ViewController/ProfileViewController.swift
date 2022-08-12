@@ -27,10 +27,12 @@ class ProfileViewController: UIViewController {
         let armyInfoTableViewCellNib = UINib(nibName: "ArmyInfoTableViewCell", bundle: nil)
         let bodyInfoTableViewCellNib = UINib(nibName: "BodyInfoTableViewCell", bundle: nil)
         let goalsTableViewCellNib = UINib(nibName: "GoalsTableViewCell", bundle: nil)
+        let badgeTableViewCellNib = UINib(nibName: "BadgeTableViewCell", bundle: nil)
         
         profileTableView.register(armyInfoTableViewCellNib, forCellReuseIdentifier: "armyInfoTableViewCell")
         profileTableView.register(bodyInfoTableViewCellNib, forCellReuseIdentifier: "bodyInfoTableViewCell")
         profileTableView.register(goalsTableViewCellNib, forCellReuseIdentifier: "goalsTableViewCell")
+        profileTableView.register(badgeTableViewCellNib, forCellReuseIdentifier: "badgeTableViewCell")
     }
     
     private func configNavigationTitle() {
@@ -62,7 +64,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             
             return cell
         } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "armyInfoTableViewCell", for: indexPath) as? ArmyInfoTableViewCell else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "badgeTableViewCell", for: indexPath) as? BadgeTableViewCell else { return UITableViewCell() }
             
             return cell
         }
@@ -74,9 +76,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         } else if indexPath.row == 1 {
             return 152
         } else if indexPath.row == 2 {
-            return 142
+            return 174
         } else {
-            return 152
+            return 300
+//            return UITableView.automaticDimension
+            // TODO: 뱃지 많아지면 자동으로 CollectionView 높이만큼 이 TableViewCell 높이도 길어졌으면 좋겠음.
         }
     }
 }
