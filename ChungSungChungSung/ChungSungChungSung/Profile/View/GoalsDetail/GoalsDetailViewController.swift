@@ -28,6 +28,7 @@ class GoalsDetailViewController: UIViewController {
         let editButton = UIButton()
         let editImage = UIImage(systemName: "text.badge.minus")
         editButton.setImage(editImage, for: .normal)
+        editButton.addTarget(self, action: #selector(didTapEditButton), for: .touchUpInside)
     
         let plusButton = UIButton()
         let plusImage = UIImage(systemName: "plus")
@@ -38,8 +39,8 @@ class GoalsDetailViewController: UIViewController {
         self.navigationItem.rightBarButtonItems = [plusBarButton, editBarButton]
     }
     
-    private func didTapEditButton() {
-        
+    @objc private func didTapEditButton() {
+        goalsDetailTableView.setEditing(true, animated: true)
     }
 }
 
@@ -72,5 +73,14 @@ extension GoalsDetailViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 121
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        goalList.remove(at: indexPath.row)
+        goalsDetailTableView.deleteRows(at: [indexPath], with: .automatic)
     }
 }
