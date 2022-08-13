@@ -10,6 +10,8 @@ import UIKit
 class ProfileViewController: UIViewController {
     private let profileViewTitle = "프로필"
     
+    private var goalList = GoalData().list
+    
     @IBOutlet weak var settingsButton: UIBarButtonItem!
     @IBOutlet weak var profileTableView: UITableView!
     
@@ -61,6 +63,9 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         } else if indexPath.row == 2 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "goalsTableViewCell", for: indexPath) as? GoalsTableViewCell else { return UITableViewCell() }
+            
+            cell.goalLabel.text = goalList[0].content
+            cell.goalSavedDateLabel.text = goalList[0].date
             
             return cell
         } else {
