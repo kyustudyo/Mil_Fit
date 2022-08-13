@@ -14,7 +14,7 @@ import FSCalendar
 
 class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSource  {
 
-    var 전역가까움: Float = 0.9
+    var 전역가까움: Double = 0.8
     let eatPercent = 70.0
     let workoutPercent = 45.0
     let basicPercent = 40.0
@@ -35,37 +35,47 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
 //        return label
 //    }()
     
+    //TODO: gradient
     
-    fileprivate let endDayBar: UIProgressView = {
-        
-        let newbar = GradientProgressView(progressViewStyle: UIProgressView.Style.bar)
-        let col1 = UIColor(red: 170/255.0, green: 144/255.0, blue: 239/255.0, alpha: 1)
-        let col2 = UIColor(red: 113/255.0, green: 87/255.0, blue: 219/255.0, alpha: 1)
-        newbar.firstColor = col2
-        newbar.secondColor = col1
-        newbar.setHeight(height: 38)
-        newbar.clipsToBounds = true
-        newbar.layer.cornerRadius = 20
-        newbar.layer.sublayers![1].cornerRadius = 20
-        newbar.subviews[1].clipsToBounds = true
-        newbar.trackTintColor = .연보라
-        
-//        let bar = UIProgressView()
-//        bar.setHeight(height: 38)
-//        bar.progressTintColor = .진보라
-//        bar.trackTintColor = .연보라
-//        bar.clipsToBounds = true
-//        bar.layer.cornerRadius = 20
-        
-        
-        
-//        let gradient = CAGradientLayer()
-//        gradient.frame = bar.bounds
-//        gradient.colors = [col1, col2]
-//        bar.layer.sublayers![1].insertSublayer(gradient, at: 0)
-        
-        return newbar
+    fileprivate let endDayBar: UIView = {
+       let view = UIView()
+        return view
     }()
+//    fileprivate let endDayBar: UIProgressView = {
+//
+////        let newbar = GradientProgressView(progressViewStyle: UIProgressView.Style.bar)
+//        let newbar = UIProgressView(progressViewStyle: .bar)
+//        let col1 = UIColor(red: 170/255.0, green: 144/255.0, blue: 239/255.0, alpha: 1)
+//        let col2 = UIColor(red: 113/255.0, green: 87/255.0, blue: 219/255.0, alpha: 1)
+////        let _ = UIImage.gradientImage(with: newbar.frame,
+////                                                  colors: [col2.cgColor, col1.cgColor],
+////                                                locations: nil)
+////        newbar.progressImage = gradientImage ?? UIImage(systemName: "circle")
+////        newbar.firstColor = col1
+////        newbar.secondColor = col1
+////        newbar.tintColor = col2
+//        newbar.setHeight(height: 20)
+//        newbar.tintColor = .clear
+//        newbar.clipsToBounds = true
+//        newbar.layer.cornerRadius = 10
+//        newbar.layer.sublayers![1].cornerRadius = 10
+//        newbar.subviews[1].clipsToBounds = true
+////        newbar.trackTintColor = CustomColor.verySubtlePurple
+//
+////        let bar = UIProgressView()
+////        bar.setHeight(height: 38)
+////        bar.progressTintColor = .진보라
+////        bar.trackTintColor = .연보라
+////        bar.clipsToBounds = true
+////        bar.layer.cornerRadius = 20
+//
+////        let gradient = CAGradientLayer()
+////        gradient.frame = bar.bounds
+////        gradient.colors = [col1, col2]
+////        bar.layer.sublayers![1].insertSublayer(gradient, at: 0)
+//
+//        return newbar
+//    }()
     
     fileprivate let 전역일: UILabel = {
         let label = UILabel()
@@ -103,12 +113,14 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         button.addTarget(self, action: #selector(goMoreMeal), for: .touchUpInside)
         return button
     }()
-    fileprivate let moreLabel: UILabel = {
-        let label = UILabel()
-        label.text = "더보기"
-        label.font = UIFont.systemFont(ofSize: Constants.smallText)
-        label.textColor = .systemGray2
-        return label
+    
+    fileprivate let moreButtonForCalorie: UIButton = {
+       let button = UIButton()
+        button.setTitle("더보기", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: Constants.smallText, weight: .light)
+        button.setTitleColor(UIColor.systemGray2, for: .normal)
+        button.addTarget(self, action: #selector(goMoreCalorie), for: .touchUpInside)
+        return button
     }()
     
     fileprivate let calLabel: UILabel = {
@@ -128,7 +140,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     fileprivate lazy var basicRoundedView: UIView = {
         let roundedView = Bar()
         roundedView.progressValue = basicPercent
-        roundedView.progressColor = .연빨강
+        roundedView.progressColor = CustomColor.strongPurple ?? UIColor.purple
         roundedView.trackColor = .clear
         return roundedView
     }()
@@ -162,10 +174,17 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         let vc = MainMealViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+    @objc fileprivate func goMoreCalorie() {
+        print("more meal")
+        let vc = MainCalorieViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     fileprivate lazy var workoutRoundedView: UIView = {
         let roundedView = Bar()
         roundedView.progressValue = basicPercent + workoutPercent
-        roundedView.progressColor = .연노랑
+        roundedView.progressColor = CustomColor.red ?? UIColor.red
         roundedView.trackColor = .clear
         return roundedView
     }()
@@ -173,7 +192,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     fileprivate lazy var eatRoundedView: UIView = {
         let roundedView = Bar()
         roundedView.progressValue = eatPercent
-        roundedView.progressColor = .연보라
+        roundedView.progressColor = CustomColor.subtlePurple ?? UIColor.purple
         roundedView.trackColor = .clear
         return roundedView
     }()
@@ -245,25 +264,42 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         
 
         //MARK: 전역일 프로그레스
-
-
         
-        emptyView.addSubview(전역일)
-        전역일.anchor(top: stack.bottomAnchor, left: stack.leftAnchor, paddingTop: 24.0, paddingLeft: 0)
-        emptyView.addSubview(dDay)
-        dDay.anchor(top: dateLabel.bottomAnchor, right: emptyView.leftAnchor,paddingTop: 24.0, paddingRight: 전역가까움 > 0.1 ? -CGFloat(전역가까움) * (UIScreen.main.bounds.width - 16) : -60)
+        let 전역일들ContainerView = UIView()
+        emptyView.addSubview(전역일들ContainerView)
+        전역일들ContainerView.layer.cornerRadius = 16
+        전역일들ContainerView.backgroundColor = .white
+        전역일들ContainerView.setHeight(height: 100)
+        전역일들ContainerView.anchor(top: stack.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 16.0, paddingLeft: 0, paddingRight: 0)
         
-        emptyView.addSubview(endDayBar)
-        endDayBar.anchor(top:전역일.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor,paddingTop: 12, paddingLeft: 0, paddingRight: 0)
-        endDayBar.progress = 전역가까움
         
+        
+        let 전역일들 = UIStackView(arrangedSubviews: [전역일, dDay])
+        
+//        emptyView.addSubview(전역일들)
+        전역일들ContainerView.addSubview(전역일들)
+        
+        
+//        전역일들.anchor(top: stack.bottomAnchor, left: stack.leftAnchor, paddingTop: 24.0, paddingLeft: 0)
+        전역일들.anchor(top: 전역일들ContainerView.topAnchor, left: 전역일들ContainerView.leftAnchor, paddingTop: 26.0, paddingLeft: 16.0)
+        
+//        emptyView.addSubview(endDayBar)
+        전역일들ContainerView.addSubview(endDayBar)
+        
+//        endDayBar.anchor(top:전역일들.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor,paddingTop: 12, paddingLeft: 0, paddingRight: 0)
+        endDayBar.anchor(top:전역일들.bottomAnchor, left: 전역일들ContainerView.leftAnchor, right: 전역일들ContainerView.rightAnchor,paddingTop: 12, paddingLeft: 16, paddingRight: 16)
+        
+        let col1 = UIColor(red: 170/255.0, green: 144/255.0, blue: 239/255.0, alpha: 1)
+        let col2 = UIColor(red: 113/255.0, green: 87/255.0, blue: 219/255.0, alpha: 1)
+        endDayBar.setGradient(color1: col2, color2: col1, width: (UIScreen.main.bounds.width - Constants.sideSpacing*4) * 전역가까움)
+        dDay.anchor(right:전역일들ContainerView.leftAnchor, paddingRight: 전역가까움 > 0.1 ? -(UIScreen.main.bounds.width - Constants.sideSpacing*3) * 전역가까움 : -(전역일.intrinsicContentSize.width + 60))
         
         //MARK: (목표들)
         let purposeStack = UIStackView(arrangedSubviews: [purposeLabel, purposeCollectionView])
         purposeStack.axis = .vertical
         purposeStack.spacing = 8
         emptyView.addSubview(purposeStack)
-        purposeStack.anchor(top: endDayBar.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 40, paddingLeft: 0, paddingRight: 0)
+        purposeStack.anchor(top: 전역일들ContainerView.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 40, paddingLeft: 0, paddingRight: 0)
         purposeCollectionView.anchor(left: stack.leftAnchor, right: stack.rightAnchor, paddingLeft: 0, paddingRight: 0)
         purposeCollectionView.setHeight(height: Constants.purposeCellHeight)
         purposeCollectionView.backgroundColor = .systemGray6
@@ -319,13 +355,17 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         
         //MARK: 칼로리
         
-        emptyView.addSubview(calLabel)
-        calLabel.anchor(top: mealStack.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 40, paddingLeft: 0, paddingRight: 0)
+        let calHStack = UIStackView(arrangedSubviews: [calLabel, moreButtonForCalorie])
+        calHStack.alignment = .firstBaseline
+        moreButtonForCalorie.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        
+        emptyView.addSubview(calHStack)
+        calHStack.anchor(top: mealStack.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 40, paddingLeft: 0, paddingRight: 0)
         let calContainerView = UIView()
         calContainerView.layer.cornerRadius = 16
         emptyView.addSubview(calContainerView)
         calContainerView.backgroundColor = .white
-        calContainerView.anchor(top: calLabel.bottomAnchor, left: stack.leftAnchor, bottom: emptyView.bottomAnchor,right: stack.rightAnchor, paddingTop: 8, paddingLeft: 0, paddingBottom: 60,paddingRight: 0, height: 160)
+        calContainerView.anchor(top: calHStack.bottomAnchor, left: stack.leftAnchor, bottom: emptyView.bottomAnchor,right: stack.rightAnchor, paddingTop: 8, paddingLeft: 0, paddingBottom: 60,paddingRight: 0, height: 160)
         
         calContainerView.addSubview(eatRoundedView)
         eatRoundedView.anchor(top: calContainerView.topAnchor, left: calContainerView.leftAnchor, right: calContainerView.rightAnchor, paddingTop: 26, paddingLeft: 22, paddingRight: 0, height: 14)
@@ -336,26 +376,26 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         calContainerView.addSubview(basicRoundedView)
         basicRoundedView.anchor(top: eatRoundedView.bottomAnchor, left: eatRoundedView.leftAnchor, right: eatRoundedView.rightAnchor, paddingTop: 13, paddingLeft: 0, paddingRight: 0, height: 14)
         
-        let tapButton = UIButton()
-        calContainerView.addSubview(tapButton)
-        tapButton.anchor(top: calContainerView.topAnchor, left: calContainerView.leftAnchor, bottom: calContainerView.bottomAnchor, right: calContainerView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
-        tapButton.addTarget(self, action: #selector(goCalorie), for: .touchUpInside)
+//        let tapButton = UIButton()
+//        calContainerView.addSubview(tapButton)
+//        tapButton.anchor(top: calContainerView.topAnchor, left: calContainerView.leftAnchor, bottom: calContainerView.bottomAnchor, right: calContainerView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
+//        tapButton.addTarget(self, action: #selector(goCalorie), for: .touchUpInside)
         //TODO: 중복
-        let eatCal = shortRoundedView(color: .연보라)
+        let eatCal = shortRoundedView(color: CustomColor.subtlePurple ?? .purple)
         let eatMentVstack = shortMent(ment: "먹은 대사량", value: 1700)
         let 먹은칼로리 = UIStackView(arrangedSubviews: [eatCal, eatMentVstack])
         먹은칼로리.axis = .vertical
         먹은칼로리.spacing = 6
         먹은칼로리.alignment = .leading
         
-        let basicCal = shortRoundedView(color: .연빨강)
+        let basicCal = shortRoundedView(color: CustomColor.strongPurple ?? .purple)
         let basicMentVstack = shortMent(ment: "기초 대사량", value: 1700)
         let 기초칼로리 = UIStackView(arrangedSubviews: [basicCal, basicMentVstack])
         기초칼로리.axis = .vertical
         기초칼로리.spacing = 6
         기초칼로리.alignment = .leading
         
-        let workOutCal = shortRoundedView(color: .연노랑)
+        let workOutCal = shortRoundedView(color: CustomColor.red ?? .red)
         let workoutMentVstack = shortMent(ment: "운동 칼로리", value: 1700)
         let 운동칼로리 = UIStackView(arrangedSubviews: [workOutCal, workoutMentVstack])
         운동칼로리.axis = .vertical
@@ -368,10 +408,12 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         세개칼로리스택.anchor(top: basicRoundedView.bottomAnchor, left: calContainerView.leftAnchor, right: calContainerView.rightAnchor, paddingTop: 24, paddingLeft: 22, paddingRight: 16)
 
     }
-    @objc fileprivate func goCalorie() {
-        print("qwe")
-        navigationController?.pushViewController(MainCalorieViewController(), animated: true)
-    }
+    
+//    @objc fileprivate func goCalorie() {
+//        print("qwe")
+//        navigationController?.pushViewController(MainCalorieViewController(), animated: true)
+//    }
+    
     func setUpEvents() {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
@@ -578,6 +620,7 @@ extension MainViewController: FSCalendarDelegateAppearance {
 }
 
 enum Constants {
+    static let sideSpacing = 16.0
     static let lineSpacing = 16.0
     static let weekLineSpacing = 6.0
     static let purposeCellHeight = 107.0
