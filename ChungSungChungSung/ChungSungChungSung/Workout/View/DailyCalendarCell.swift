@@ -14,15 +14,15 @@ class DailyCalendarCell: UICollectionViewCell {
     @IBOutlet weak var dayHighlightView: UIView!
     @IBOutlet weak var dateHighlightCircleView: UIView!
  
-    override var isSelected: Bool {
-        didSet {
-            if isSelected {
-                dayHighlightView.alpha = 1.0
-                dayNameView.textColor = .white
-            } else {
-                dayHighlightView.alpha = 0.0
-                dayNameView.textColor = .black
-            }
-        }
-    }
+//    override var isSelected: Bool {
+//        didSet {
+//            if isSelected {
+//                dayHighlightView.alpha = 1.0
+//                dayNameView.textColor = .white
+//            } else {
+//                dayHighlightView.alpha = 0.0
+////                dayNameView.textColor = .black
+//            }
+//        }
+//    }
 }

@@ -24,7 +24,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fac-Mu-Q6o">
-                                <rect key="frame" x="0.0" y="139" width="414" height="105"/>
+                                <rect key="frame" x="16" y="139" width="382" height="105"/>
                                 <color key="backgroundColor" red="0.97647058819999999" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="105" id="ETy-7s-S92"/>
@@ -45,7 +45,7 @@
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t7e-NX-eaR">
                                                     <rect key="frame" x="4" y="19" width="45" height="67"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8gf-ZF-lef">
                                                     <rect key="frame" x="7.5" y="28.5" width="38" height="38"/>
@@ -212,7 +212,7 @@
                         <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="xxo-T0-OJU" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="28" id="27R-Zh-36f"/>
-                            <constraint firstItem="fac-Mu-Q6o" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="4qV-hQ-Vl2"/>
+                            <constraint firstItem="fac-Mu-Q6o" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" constant="-16" id="4qV-hQ-Vl2"/>
                             <constraint firstItem="HvS-DX-hak" firstAttribute="top" secondItem="fac-Mu-Q6o" secondAttribute="bottom" constant="48" id="5Dn-3V-3l9"/>
                             <constraint firstItem="bmp-TX-8Tl" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="FXN-WX-ssy"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="CYm-sk-Cg7" secondAttribute="trailing" id="GZ5-H4-27x"/>
@@ -223,7 +223,7 @@
                             <constraint firstItem="bmp-TX-8Tl" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="25" id="TqE-FQ-zEL"/>
                             <constraint firstAttribute="trailing" secondItem="HvS-DX-hak" secondAttribute="trailing" constant="16" id="VH3-4M-eL9"/>
                             <constraint firstItem="Ybn-W0-4Ct" firstAttribute="top" secondItem="9sK-HQ-deI" secondAttribute="bottom" constant="9" id="dBu-h3-MxP"/>
-                            <constraint firstItem="fac-Mu-Q6o" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="dLi-lh-W0y"/>
+                            <constraint firstItem="fac-Mu-Q6o" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="dLi-lh-W0y"/>
                             <constraint firstItem="9sK-HQ-deI" firstAttribute="top" secondItem="CYm-sk-Cg7" secondAttribute="bottom" constant="35" id="fNm-iD-OXy"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="9sK-HQ-deI" secondAttribute="trailing" constant="16" id="hF8-Gv-tUk"/>
                             <constraint firstItem="xxo-T0-OJU" firstAttribute="bottom" secondItem="9sK-HQ-deI" secondAttribute="bottom" id="hIp-gk-F1G"/>
