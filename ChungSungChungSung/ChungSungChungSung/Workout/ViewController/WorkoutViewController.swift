@@ -23,6 +23,8 @@ class WorkoutViewController: UIViewController {
     
     private var workoutList = WorkoutData().list
     private var workout: WorkoutModel?
+    var todaysWorkout: [WorkoutModel] = []
+    var numberOfTodaysWorkout: Int?
     
     @IBOutlet weak var selectedDateView: UILabel!
     @IBOutlet weak var dailyCalendarView: UICollectionView!
@@ -154,7 +156,13 @@ extension WorkoutViewController: UICollectionViewDelegateFlowLayout {
 
 extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return workoutList.count
+//        if tableView == todaysWorkoutView {
+//            if let numberOfTodaysWorkout = numberOfTodaysWorkout {
+//                return numberOfTodaysWorkout
+//            }
+//        } else {
+            return workoutList.count
+//        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -162,10 +170,18 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
         
         if tableView == todaysWorkoutView {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "todaysWorkoutCell", for: indexPath) as? TodaysWorkoutCell else { return UITableViewCell() }
-            
+
+//            todaysWorkout = workoutList.filter {
+//                if $0.isToday == true {
+//                    return true
+//                } else {
+//                    return false
+//                }
+//            }
+//            let workout = todaysWorkout[indexPath.row]
             let workout = workoutList[indexPath.row]
             cell.todayWorkoutTitle.text = workout.title
-            
+//            numberOfTodaysWorkout = todaysWorkout.count
             returnCell = cell
             
         } else if tableView == workoutListView {
