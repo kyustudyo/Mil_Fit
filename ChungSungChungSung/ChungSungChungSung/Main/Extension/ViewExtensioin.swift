@@ -80,15 +80,32 @@ extension UIView {
 
 }
 extension UIView{
-    func setGradient(color1:UIColor,color2:UIColor, width: CGFloat){
+    
+    public enum GradientOrientation {
+        case vertical
+        case horizontal
+    }
+    
+    func setGradient(color1:UIColor,color2:UIColor, width: CGFloat? = nil, bounds: CGRect? = nil, orientation: GradientOrientation? = nil) {
         let gradient: CAGradientLayer = CAGradientLayer()
         gradient.colors = [color1.cgColor,color2.cgColor]
         gradient.locations = [0.0 , 1.0]
-        gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
-        gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
-        print(bounds)
-        gradient.cornerRadius = 10
-        gradient.frame = CGRect(x: 0, y: 0, width: width, height: 20)
+        if orientation == .vertical {
+            gradient.startPoint = CGPoint(x: 0.5, y: 0.0)
+            gradient.endPoint = CGPoint(x: 0.5, y: 1.0)
+        } else {
+            gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
+            gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
+        }
+        if let width = width {
+            gradient.frame = CGRect(x: 0, y: 0, width: width, height: 20)
+            gradient.cornerRadius = 10
+        }
+        if let bounds = bounds {
+            gradient.frame = bounds
+            gradient.cornerRadius = 25
+        }
+//        gradient.fillMode = .both
         layer.addSublayer(gradient)
     }
 }

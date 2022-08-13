@@ -78,7 +78,7 @@ class MainMealTableViewCell: UITableViewCell {
         let forkAndWhenMeal = UIStackView(arrangedSubviews: [forkKnife, whenMealLabel])
         forkAndWhenMeal.spacing = 4
         contentView.addSubview(forkAndWhenMeal)
-        forkAndWhenMeal.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, paddingTop: 22, paddingLeft: 28)
+        forkAndWhenMeal.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, paddingTop: 18, paddingLeft: 20)
         contentView.addSubview(calorieLabel)
         calorieLabel.anchor(top: forkAndWhenMeal.bottomAnchor, left: whenMealLabel.leftAnchor, paddingTop: 6, paddingLeft: 0)
         calorieLabel.text? += "kcal"
@@ -92,7 +92,8 @@ class MainMealTableViewCell: UITableViewCell {
         let mealVstack = UIStackView(arrangedSubviews: mealLabels)
         mealVstack.axis = .vertical
         contentView.addSubview(mealVstack)
-        mealVstack.anchor(top: forkAndWhenMeal.topAnchor, left: forkAndWhenMeal.rightAnchor, right: contentView.rightAnchor, paddingTop: 0, paddingRight: 61)
+        mealVstack.anchor(top: forkAndWhenMeal.topAnchor, paddingTop: 0)
+        mealVstack.leftAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         
         self.backgroundColor = .white
     }

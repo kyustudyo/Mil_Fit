@@ -25,7 +25,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     fileprivate let dateLabel: UILabel = {
         let label = UILabel()
         label.text = "2022년 8월 21일"
-        label.font = UIFont.systemFont(ofSize: Constants.bigText, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: Constants.bigText + 8, weight: .regular)
         return label
     }()
     

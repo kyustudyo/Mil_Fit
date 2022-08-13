@@ -110,13 +110,13 @@ class MainMealViewController: UIViewController, UICollectionViewDelegate, UIColl
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        tableView.rowHeight = 125
+        tableView.rowHeight = 110
         tableView.backgroundColor = .systemGray6
         tableView.sectionHeaderTopPadding = 12
         
         let containerView = UIView()
         view.addSubview(containerView)
-        containerView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 12, paddingBottom: 0, paddingRight: 12)
+        containerView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 12, paddingBottom: 0, paddingRight: 12)
         
         let previousButton = UIButton()
         previousButton.addTarget(self, action: #selector(previousTapped), for: .touchUpInside)
@@ -134,7 +134,8 @@ class MainMealViewController: UIViewController, UICollectionViewDelegate, UIColl
         let calenderHeaderStack = UIStackView(arrangedSubviews: [previousButton,headerLabel,nextButton])
         calenderHeaderStack.spacing = 35
         containerView.addSubview(calenderHeaderStack)
-        calenderHeaderStack.anchor(top: containerView.topAnchor, left: containerView.leftAnchor, paddingTop: 24, paddingLeft: 0)
+        calenderHeaderStack.anchor(top: containerView.topAnchor, paddingTop: 24, paddingLeft: 0)
+        calenderHeaderStack.centerX(inView: containerView)
         
         containerView.addSubview(collectionView)
         collectionView.anchor(top: calenderHeaderStack.bottomAnchor, left: containerView.leftAnchor, right: containerView.rightAnchor, paddingTop: 19, paddingLeft: 0, paddingRight: 0, height: 74)
@@ -160,13 +161,19 @@ class MainMealViewController: UIViewController, UICollectionViewDelegate, UIColl
         cell.dayLabel.text = String(CalendarHelper().dayOfMonth(date: date))
         
         if(date == selectedDate) {
-            cell.backgroundColor = UIColor.진보라
+//            cell.backgroundColor = UIColor.진보라
+            let view = UIView()
+            cell.backgroundView = view
+            let col1 = UIColor(red: 170/255.0, green: 144/255.0, blue: 239/255.0, alpha: 1)
+            let col2 = UIColor(red: 113/255.0, green: 87/255.0, blue: 219/255.0, alpha: 1)
+            view.setGradient(color1: col1, color2: col2, bounds: cell.bounds, orientation: .vertical)
             cell.dayLabel.textColor = .white
             cell.weekdayLabel.textColor = .white
         }
         
         else {
-            cell.backgroundColor = UIColor.clear
+            let view = UIView()
+            cell.backgroundView = view
             cell.dayLabel.textColor = .black
             cell.weekdayLabel.textColor = .black
         }
@@ -304,6 +311,8 @@ class CalendarHelper {
 
 class CalendarCell: UICollectionViewCell {
     
+    let gradientLayer = CAGradientLayer()
+    
     let weekdayLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: Constants.middleText - 6, weight: .light)
@@ -323,10 +332,31 @@ class CalendarCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         setupUI()
+        
+    }
+    override class func awakeFromNib() {
+        super.awakeFromNib()
     }
     
+//    override func layoutSublayers(of layer: CALayer) {
+//        
+//        super.layoutSublayers(of: self.layer)
+////        let view = UIView()
+////        self.backgroundView = view
+////        let col1 = UIColor(red: 170/255.0, green: 144/255.0, blue: 239/255.0, alpha: 1)
+////        let col2 = UIColor(red: 113/255.0, green: 87/255.0, blue: 219/255.0, alpha: 1)
+////        view.setGradient(color1: col1, color2: col2, bounds: self.bounds)
+////        let colorSet = [UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0),
+////                                UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 1.0)]
+////        let location = [0.2, 1.0]
+////
+////        self.addGradient(with: gradientLayer, colorSet: colorSet, locations: location)
+//        
+//        }
+    
+    
     fileprivate func setupUI() {
-        self.layer.cornerRadius = 21
+//        self.layer.cornerRadius = 21
         
         let vstack = UIStackView(arrangedSubviews: [weekdayLabel, dayLabel])
         vstack.alignment = .center
@@ -337,5 +367,4 @@ class CalendarCell: UICollectionViewCell {
         vstack.centerX(inView: contentView)
         vstack.centerY(inView: contentView)
     }
-    
 }
