@@ -15,9 +15,9 @@ class FitnessHistoryViewController: UIViewController {
     var fitnessRecord = [18.0, 17.0, 11.0, 30.0, 21.0]
     override func viewDidLoad() {
         super.viewDidLoad()
-        serChart(lineValues: fitnessRecord)
+        setChart(lineValues: fitnessRecord)
     }
-    func serChart(lineValues: [Double]) {
+    private func setChart(lineValues: [Double]) {
         var lineDataEntries: [ChartDataEntry] = []
 
         for i in 0..<lineValues.count {

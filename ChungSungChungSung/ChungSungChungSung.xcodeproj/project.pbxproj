@@ -49,6 +49,10 @@
 		AB21160F28A1308B0050E9F8 /* FitnessHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB21160E28A1308B0050E9F8 /* FitnessHistoryViewController.swift */; };
 		AB21161228A4C5F20050E9F8 /* FitnessHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB21161128A4C5F20050E9F8 /* FitnessHistoryTableViewCell.swift */; };
 		AB460BAF28A7A32000765A1D /* BasicWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB460BAE28A7A32000765A1D /* BasicWorkout.swift */; };
+		AB460BB128A7D96F00765A1D /* ProfileBodyInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB460BB028A7D96F00765A1D /* ProfileBodyInfo.storyboard */; };
+		AB460BB328A7D9DD00765A1D /* BodyInfoProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB460BB228A7D9DD00765A1D /* BodyInfoProfileViewController.swift */; };
+		AB460BB528A7E68800765A1D /* TodoListAdd.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB460BB428A7E68800765A1D /* TodoListAdd.storyboard */; };
+		AB460BB728A7E69C00765A1D /* TodoListAddProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB460BB628A7E69C00765A1D /* TodoListAddProfileViewController.swift */; };
 		AB8623BE289E5B4200F71283 /* TestMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8623BD289E5B4200F71283 /* TestMainViewController.swift */; };
 		AB8623C0289E5B4A00F71283 /* TestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB8623BF289E5B4A00F71283 /* TestStoryboard.storyboard */; };
 		AB8623C2289ECD8900F71283 /* TestMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8623C1289ECD8900F71283 /* TestMainTableViewCell.swift */; };
@@ -101,6 +105,10 @@
 		AB21160E28A1308B0050E9F8 /* FitnessHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessHistoryViewController.swift; sourceTree = "<group>"; };
 		AB21161128A4C5F20050E9F8 /* FitnessHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		AB460BAE28A7A32000765A1D /* BasicWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicWorkout.swift; sourceTree = "<group>"; };
+		AB460BB028A7D96F00765A1D /* ProfileBodyInfo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProfileBodyInfo.storyboard; sourceTree = "<group>"; };
+		AB460BB228A7D9DD00765A1D /* BodyInfoProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyInfoProfileViewController.swift; sourceTree = "<group>"; };
+		AB460BB428A7E68800765A1D /* TodoListAdd.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TodoListAdd.storyboard; sourceTree = "<group>"; };
+		AB460BB628A7E69C00765A1D /* TodoListAddProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListAddProfileViewController.swift; sourceTree = "<group>"; };
 		AB8623BD289E5B4200F71283 /* TestMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMainViewController.swift; sourceTree = "<group>"; };
 		AB8623BF289E5B4A00F71283 /* TestStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TestStoryboard.storyboard; sourceTree = "<group>"; };
 		AB8623C1289ECD8900F71283 /* TestMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMainTableViewCell.swift; sourceTree = "<group>"; };
@@ -239,6 +247,8 @@
 		79F6763A289C2F2C00850FF0 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				AB460BB228A7D9DD00765A1D /* BodyInfoProfileViewController.swift */,
+				AB460BB628A7E69C00765A1D /* TodoListAddProfileViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -278,6 +288,8 @@
 		79F6763E289C2F6000850FF0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AB460BB028A7D96F00765A1D /* ProfileBodyInfo.storyboard */,
+				AB460BB428A7E68800765A1D /* TodoListAdd.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -400,6 +412,8 @@
 				794B601228A527BB00621A27 /* WorkoutAddTwoTableViewCell.xib in Resources */,
 				79BBF6A0289AB50D0003FAD8 /* LaunchScreen.storyboard in Resources */,
 				7E37333928A4CBD1008F7EFA /* TodaysWorkoutEdit.storyboard in Resources */,
+				AB460BB528A7E68800765A1D /* TodoListAdd.storyboard in Resources */,
+				AB460BB128A7D96F00765A1D /* ProfileBodyInfo.storyboard in Resources */,
 				794B601128A527BB00621A27 /* WorkoutAddPlusTableViewCell.xib in Resources */,
 				794B600A28A527BB00621A27 /* WorkoutAddOneTableViewCell.xib in Resources */,
 				AB8623C0289E5B4A00F71283 /* TestStoryboard.storyboard in Resources */,
@@ -471,6 +485,7 @@
 				79BBF698289AB50B0003FAD8 /* ViewController.swift in Sources */,
 				79F676CE28A39D0C00850FF0 /* MainMealTableViewCell.swift in Sources */,
 				79F676CA28A163F300850FF0 /* UIImageExtension.swift in Sources */,
+				AB460BB728A7E69C00765A1D /* TodoListAddProfileViewController.swift in Sources */,
 				AB21161228A4C5F20050E9F8 /* FitnessHistoryTableViewCell.swift in Sources */,
 				79BBF694289AB50B0003FAD8 /* AppDelegate.swift in Sources */,
 				325F8E1128A3F1BC004ACF9E /* UIView.swift in Sources */,
@@ -493,6 +508,7 @@
 				AB8623BE289E5B4200F71283 /* TestMainViewController.swift in Sources */,
 				ABE51DD1289F90B2005BFB0E /* FitnessCircularGraphSwiftUIView.swift in Sources */,
 				7ED2F7B7289ED9A700DAEEC9 /* DailyCalendarCell.swift in Sources */,
+				AB460BB328A7D9DD00765A1D /* BodyInfoProfileViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
