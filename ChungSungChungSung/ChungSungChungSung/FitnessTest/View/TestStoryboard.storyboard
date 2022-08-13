@@ -400,6 +400,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="historyTableView" destination="9zn-Nd-Cdq" id="FHf-kC-X5C"/>
                         <outlet property="lineChartView" destination="euy-jN-prP" id="1me-Ev-Whj"/>
                         <outlet property="sortedButton" destination="dDo-h3-zKQ" id="rsP-50-wUL"/>
                     </connections>

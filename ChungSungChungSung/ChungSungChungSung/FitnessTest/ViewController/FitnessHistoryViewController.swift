@@ -12,10 +12,13 @@ class FitnessHistoryViewController: UIViewController {
     
     @IBOutlet weak var lineChartView: LineChartView!
     @IBOutlet weak var sortedButton: UIButton!
+    @IBOutlet weak var historyTableView: UITableView!
     
     var fitnessRecord = [18.0, 17.0, 11.0, 30.0, 21.0]
     override func viewDidLoad() {
         super.viewDidLoad()
+        historyTableView.dataSource = self
+        historyTableView.delegate = self
         serChart(lineValues: fitnessRecord)
         configureSortedButton()
     }
@@ -55,3 +58,16 @@ class FitnessHistoryViewController: UIViewController {
     }
     
 }
+
+extension FitnessHistoryViewController: UITableViewDataSource, UITableViewDelegate
+func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    <#code#>
+}
+
+func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    <#code#>
+}
+{
+    
+}
+
