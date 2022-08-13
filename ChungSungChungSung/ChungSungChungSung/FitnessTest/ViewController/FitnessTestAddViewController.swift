@@ -31,9 +31,7 @@ class FitnessTestAddViewController: UIViewController {
     }
     
     private func onClickSwitch(sender: UISwitch) {
-        if runningSwitch.isOn = true {
-            
-        }
+        
     }
     
     private func configureDatePicker(){
