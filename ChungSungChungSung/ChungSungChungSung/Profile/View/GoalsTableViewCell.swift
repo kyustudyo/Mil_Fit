@@ -8,13 +8,17 @@
 import UIKit
 
 class GoalsTableViewCell: UITableViewCell {
+    var goalsDetailViewDelegate: GoalsDetailViewDelegate?
     
     @IBOutlet weak var cellRectangle: UIView!
     @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var goalLabel: UILabel!
     @IBOutlet weak var goalSavedDateLabel: UILabel!
-    
 
+    @IBAction func didTapGoalsMoreAction(_ sender: UIButton) {
+        goalsDetailViewDelegate?.didTapGoalsMoreButton()
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         

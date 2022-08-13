@@ -48,7 +48,16 @@ class ProfileViewController: UIViewController {
     }
 }
 
-extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
+protocol GoalsDetailViewDelegate {
+    func didTapGoalsMoreButton()
+}
+
+extension ProfileViewController: UITableViewDelegate, UITableViewDataSource, GoalsDetailViewDelegate {
+    func didTapGoalsMoreButton() {
+        guard let goalsDetailView = UIStoryboard(name: "GoalsDetail", bundle: .main).instantiateViewController(withIdentifier: "GoalsDetailViewController") as? GoalsDetailViewController else { return }
+        self.navigationController?.pushViewController(goalsDetailView, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4
     }
@@ -66,6 +75,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.goalLabel.text = goalList[0].content
             cell.goalSavedDateLabel.text = goalList[0].date
+            cell.goalsDetailViewDelegate = self
             
             return cell
         } else {

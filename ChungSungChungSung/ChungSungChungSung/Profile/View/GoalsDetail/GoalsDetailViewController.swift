@@ -35,7 +35,11 @@ class GoalsDetailViewController: UIViewController {
         
         let editBarButton = UIBarButtonItem(customView: editButton)
         let plusBarButton = UIBarButtonItem(customView: plusButton)
-        self.navigationItem.rightBarButtonItems = [editBarButton, plusBarButton]
+        self.navigationItem.rightBarButtonItems = [plusBarButton, editBarButton]
+    }
+    
+    private func didTapEditButton() {
+        
     }
 }
 
