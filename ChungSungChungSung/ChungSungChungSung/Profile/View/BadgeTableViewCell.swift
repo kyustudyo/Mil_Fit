@@ -9,6 +9,9 @@ import UIKit
 
 class BadgeTableViewCell: UITableViewCell {
     var badgeDetailViewDelegate: BadgeDetailViewDelegate?
+    var earnedBadges: [BadgeModel] = []
+    
+    private var badgeList = BadgeData().list
     
     private var badgeImageList = ["badge100Percent", "medal1Achiver", "medal30Days", "trophy", "medal1Achiver", "badge100Percent", ]
     private var badgeNameList = ["일주일 연속 운동", "체력검정 1급", "한 달 연속 운동", "특급전사", "운동의 시작", "목표 달성"]
@@ -23,6 +26,7 @@ class BadgeTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        setNumberOfBadgeEarned()
         self.backgroundColor = CustomColor.bgGray
         moreButton.tintColor = CustomColor.editGray
         badgeCollectionView.backgroundColor = CustomColor.bgGray
@@ -35,6 +39,16 @@ class BadgeTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    private func setNumberOfBadgeEarned() {
+        earnedBadges = badgeList.filter {
+            if $0.date?.isEmpty == false {
+                return true
+            } else {
+                return false
+            }
+        }
     }
 }
 
@@ -59,15 +73,16 @@ extension BadgeTableViewCell: UICollectionViewDelegateFlowLayout {
 
 extension BadgeTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return badgeImageList.count
+        return earnedBadges.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "badgeCollectionViewCell", for: indexPath) as? BadgeCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.badgeImageView.image = UIImage(named: badgeImageList[indexPath.row])
-        cell.badgeNameLabel.text = badgeNameList[indexPath.row]
+        
+        cell.badgeImageView.image = UIImage(named: earnedBadges[indexPath.row].image)
+        cell.badgeNameLabel.text = earnedBadges[indexPath.row].title
         
         return cell
     }

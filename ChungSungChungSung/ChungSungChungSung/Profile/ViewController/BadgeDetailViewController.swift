@@ -9,6 +9,7 @@ import UIKit
 
 class BadgeDetailViewController: UIViewController {
     private var badgeList = BadgeData().list
+    private var numberOfBadgeEarned: Int = 0
     
     @IBOutlet weak var numberOfBadgeLabel: UILabel!
     @IBOutlet weak var badgeDetailCollectionView: UICollectionView!
@@ -16,6 +17,8 @@ class BadgeDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setNumberOfBadgeEarned()
+        
         self.view.backgroundColor = CustomColor.bgGray
         self.navigationController?.navigationBar.tintColor = CustomColor.mainPurple
         self.navigationItem.title = "획득한 뱃지"
@@ -23,6 +26,19 @@ class BadgeDetailViewController: UIViewController {
         
         let badgeCollectionViewCellNib = UINib(nibName: "BadgeCollectionViewCell", bundle: nil)
         badgeDetailCollectionView.register(badgeCollectionViewCellNib, forCellWithReuseIdentifier: "badgeCollectionViewCell")
+    }
+    
+    private func setNumberOfBadgeEarned() {
+        var earnedBadges: [BadgeModel] = []
+        earnedBadges = badgeList.filter {
+            if $0.date?.isEmpty == false {
+                return true
+            } else {
+                return false
+            }
+        }
+        numberOfBadgeEarned = earnedBadges.count
+        numberOfBadgeLabel.text = "\(numberOfBadgeEarned) / 15"
     }
 }
 
@@ -53,9 +69,27 @@ extension BadgeDetailViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "badgeCollectionViewCell", for: indexPath) as? BadgeCollectionViewCell else { return UICollectionViewCell() }
         
-        cell.badgeImageView.image = UIImage(named: badgeList[indexPath.row].image)
+        if badgeList[indexPath.row].date?.isEmpty == false {
+            cell.badgeImageView.image = UIImage(named: badgeList[indexPath.row].image)
+        } else {
+            cell.badgeImageView.image = UIImage(named: badgeList[indexPath.row].image)?.tonal
+        }
+        
         cell.badgeNameLabel.text = badgeList[indexPath.row].title
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let badgeDetailInfoView = UIStoryboard(name: "BadgeDetailInfo", bundle: .main).instantiateViewController(withIdentifier: "BadgeDetailInfoViewController") as? BadgeDetailInfoViewController else { return }
+        
+        badgeDetailInfoView.badge = badgeList[indexPath.row]
+        
+        badgeDetailInfoView.modalPresentationStyle = .pageSheet
+        if let sheet = badgeDetailInfoView.sheetPresentationController {
+            sheet.detents = [.medium()]
+        }
+        
+        present(badgeDetailInfoView, animated: true, completion: nil)
     }
 }
