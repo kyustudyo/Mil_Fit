@@ -460,7 +460,7 @@ extension MainViewController {
         if date1 == date2 {
             return .white
         } else if events2.contains(date) {
-            return .진보라
+            return .black
         } else {
             return .black
         }
@@ -485,7 +485,7 @@ extension MainViewController {
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillDefaultColorFor date: Date) -> UIColor? {
         
         if events2.contains(date) {
-            return .연보라
+            return CustomColor.calendarRedColor
         }
         return nil
     }

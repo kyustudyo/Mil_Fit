@@ -44,4 +44,5 @@ class CustomColor {
     static let subtlePurple = UIColor(hex: "7D93F8")
     static let strongPurple = UIColor(hex: "8E79E1")
     static let verySubtlePurple = UIColor(hex: "6452B0")?.withAlphaComponent(0.1)
+    static let calendarRedColor = UIColor(hex: "FEB4B4")
 }
