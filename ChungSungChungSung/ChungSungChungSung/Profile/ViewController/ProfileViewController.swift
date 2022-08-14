@@ -20,6 +20,7 @@ class ProfileViewController: UIViewController {
         
         configNavigationTitle()
         self.view.backgroundColor = CustomColor.bgGray
+        self.navigationController?.navigationBar.shadowImage = UIImage()
         profileTableView.backgroundColor = CustomColor.bgGray
         profileTableView.contentInset.top = 35
         

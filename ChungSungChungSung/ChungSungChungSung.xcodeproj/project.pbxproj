@@ -25,6 +25,8 @@
 		328AB9C428A8100D00000A85 /* GoalsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328AB9C328A8100D00000A85 /* GoalsDetailViewController.swift */; };
 		328AB9C628A81A1500000A85 /* GoalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328AB9C528A81A1500000A85 /* GoalModel.swift */; };
 		328AB9C928A8225700000A85 /* GoalsDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328AB9C828A8225700000A85 /* GoalsDetailCell.swift */; };
+		328AB9CC28A8C56A00000A85 /* BadgeDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 328AB9CB28A8C56A00000A85 /* BadgeDetail.storyboard */; };
+		328AB9CE28A8C5AB00000A85 /* BadgeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328AB9CD28A8C5AB00000A85 /* BadgeDetailViewController.swift */; };
 		4ACE80F58EE9B4CABE58C574 /* Pods_ChungSungChungSung.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FF3882342AE3CFD66EC86C9 /* Pods_ChungSungChungSung.framework */; };
 		794B600A28A527BB00621A27 /* WorkoutAddOneTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 794B600028A527BB00621A27 /* WorkoutAddOneTableViewCell.xib */; };
 		794B600B28A527BB00621A27 /* TodaysWorkoutEditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794B600128A527BB00621A27 /* TodaysWorkoutEditCell.swift */; };
@@ -90,6 +92,8 @@
 		328AB9C328A8100D00000A85 /* GoalsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsDetailViewController.swift; sourceTree = "<group>"; };
 		328AB9C528A81A1500000A85 /* GoalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalModel.swift; sourceTree = "<group>"; };
 		328AB9C828A8225700000A85 /* GoalsDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsDetailCell.swift; sourceTree = "<group>"; };
+		328AB9CB28A8C56A00000A85 /* BadgeDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BadgeDetail.storyboard; sourceTree = "<group>"; };
+		328AB9CD28A8C5AB00000A85 /* BadgeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeDetailViewController.swift; sourceTree = "<group>"; };
 		3FF3882342AE3CFD66EC86C9 /* Pods_ChungSungChungSung.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChungSungChungSung.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		794B600028A527BB00621A27 /* WorkoutAddOneTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorkoutAddOneTableViewCell.xib; sourceTree = "<group>"; };
 		794B600128A527BB00621A27 /* TodaysWorkoutEditCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodaysWorkoutEditCell.swift; sourceTree = "<group>"; };
@@ -165,10 +169,17 @@
 			isa = PBXGroup;
 			children = (
 				328AB9C128A80FE500000A85 /* GoalsDetail.storyboard */,
-				328AB9C328A8100D00000A85 /* GoalsDetailViewController.swift */,
 				328AB9C828A8225700000A85 /* GoalsDetailCell.swift */,
 			);
 			path = GoalsDetail;
+			sourceTree = "<group>";
+		};
+		328AB9CA28A8C55600000A85 /* BadgeDetail */ = {
+			isa = PBXGroup;
+			children = (
+				328AB9CB28A8C56A00000A85 /* BadgeDetail.storyboard */,
+			);
+			path = BadgeDetail;
 			sourceTree = "<group>";
 		};
 		79BBF687289AB50B0003FAD8 = {
@@ -282,6 +293,8 @@
 			isa = PBXGroup;
 			children = (
 				328AB9AB28A638C200000A85 /* ProfileViewController.swift */,
+				328AB9C328A8100D00000A85 /* GoalsDetailViewController.swift */,
+				328AB9CD28A8C5AB00000A85 /* BadgeDetailViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -321,6 +334,7 @@
 		79F6763E289C2F6000850FF0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				328AB9CA28A8C55600000A85 /* BadgeDetail */,
 				328AB9C728A8220800000A85 /* GoalsDetail */,
 				328AB9A928A638A000000A85 /* Profile.storyboard */,
 				328AB9AD28A63B6500000A85 /* ArmyInfoTableViewCell.swift */,
@@ -467,6 +481,7 @@
 				794B600F28A527BB00621A27 /* WorkoutAddCalorieTableViewCell.xib in Resources */,
 				328AB9B028A63B6500000A85 /* ArmyInfoTableViewCell.xib in Resources */,
 				79BBF69D289AB50D0003FAD8 /* Assets.xcassets in Resources */,
+				328AB9CC28A8C56A00000A85 /* BadgeDetail.storyboard in Resources */,
 				328AB9BC28A6A35400000A85 /* BadgeTableViewCell.xib in Resources */,
 				79BBF69B289AB50B0003FAD8 /* Main.storyboard in Resources */,
 				794B601028A527BB00621A27 /* WorkoutAdd.storyboard in Resources */,
@@ -533,6 +548,7 @@
 				325F8E0F28A3C962004ACF9E /* WorkoutListCell.swift in Sources */,
 				7E37333D28A4CC5A008F7EFA /* TodaysWorkoutEditViewController.swift in Sources */,
 				7ED2F78F289E482600DAEEC9 /* WorkoutAddViewController.swift in Sources */,
+				328AB9CE28A8C5AB00000A85 /* BadgeDetailViewController.swift in Sources */,
 				79BBF698289AB50B0003FAD8 /* ViewController.swift in Sources */,
 				79F676CE28A39D0C00850FF0 /* MainMealTableViewCell.swift in Sources */,
 				79F676CA28A163F300850FF0 /* UIImageExtension.swift in Sources */,
