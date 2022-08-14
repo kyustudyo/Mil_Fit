@@ -8,6 +8,8 @@
 import UIKit
 
 class WorkoutViewController: UIViewController {
+    
+    var events = [String]()
     private let workoutViewTitle = "운동"
     private let calInset: CGFloat = 17.0
     private let numberOfCellsShown = 6
@@ -50,9 +52,25 @@ class WorkoutViewController: UIViewController {
         present(workoutListEditView, animated: true, completion: nil)
     }
     
+    func setUpEvents() {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+//        let sampledate5 = formatter.date(from: "2022-08-1")
+//        let sampledate6 = formatter.date(from: "2022-08-5")
+//        let sampledate7 = formatter.date(from: "2022-08-6")
+        let sampledate5 = formatter.string(from: CalendarHelper().addDays(date: Date(), days: -1))
+        let sampledate6 = formatter.string(from: CalendarHelper().addDays(date: Date(), days: -3))
+        let sampledate7 = formatter.string(from: CalendarHelper().addDays(date: Date(), days: -6))
+        print(sampledate5, sampledate6, sampledate7)
+        print("qw",formatter.string(from: CalendarHelper().addDays(date: Date(), days: 0)))
+//        events = [sampledate5!, sampledate6!, sampledate7!]
+        events = [sampledate5, sampledate6, sampledate7]
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setUpEvents()
         configNavigationTitle()
         
         let backBarButtonItem = UIBarButtonItem(title: workoutViewTitle, style: .plain, target: nil, action: nil)
@@ -73,8 +91,6 @@ class WorkoutViewController: UIViewController {
         todaysWorkoutView.dataSource = self
         workoutListView.delegate = self
         workoutListView.dataSource = self
-        
-        dailyCalendarView.backgroundColor = .red
         setWeekView()
     }
     
@@ -108,7 +124,7 @@ class WorkoutViewController: UIViewController {
             DispatchQueue.main.async {
                 self.dailyCalendarView.scrollToItem(at: [0, index], at: .centeredHorizontally, animated: false)
                 self.updateHeaderLabel()
-//                self.dailyCalendarView.reloadData()
+                self.dailyCalendarView.reloadData()
             }
             
         }
@@ -151,24 +167,38 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
         cell.dayNameView.text = CalendarHelper().weekDataAt(indexPath.row%7)
 //        cell.dayLabel.text = String(CalendarHelper().dayOfMonth(date: date))
         cell.dateNumberView.text = String(CalendarHelper().dayOfMonth(date: date))
+        
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = " yyyy-MM-dd"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         
         
         if(dateFormatter.string(from: date) == dateFormatter.string(from: selectedDate)) {
 //            cell.backgroundColor = UIColor.진보라
-            let view = UIView()
-            cell.backgroundView = view
+            
+            
+//            let view = UIView()
+//            cell.backgroundView = view
+            print("???")
             let col1 = UIColor(red: 170/255.0, green: 144/255.0, blue: 239/255.0, alpha: 1)
             let col2 = UIColor(red: 113/255.0, green: 87/255.0, blue: 219/255.0, alpha: 1)
-            view.setGradient2(color1: col1, color2: col2, bounds: cell.bounds)
+//            view.setGradient2(color1: col1, color2: col2, bounds: cell.bounds)
+            
+            cell.dayHighlightView.setGradient2(color1: col1, color2: col2, bounds: cell.dayHighlightView.bounds)
+            cell.dayHighlightView.isHidden = false
+//            cell.dayHighlightView.backgroundColor = .red
 //            cell.dayLabel.textColor = .white
-//            cell.weekdayLabel.textColor = .white
+            cell.dayNameView.textColor = .white
         }
         
         else {
-            let view = UIView()
-            cell.backgroundView = view
+            cell.dayHighlightView.isHidden = true
+            cell.dayNameView.textColor = .black
+//            let view = UIView()
+//            cell.backgroundView = view
+//            cell.dayHighlightView.backgroundColor = .blue
+//            if let superview = cell.dayHighlightView.layer. {
+//                cell.dayHighlightView.layer.removeFromSuperlayer()
+//            }
 //            cell.dayLabel.textColor = .black
 //            cell.weekdayLabel.textColor = .black
         }
@@ -180,11 +210,18 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
 //        cell.dayHighlightView.setGradient(color1: (CustomColor.gradientPurple)!, color2: (CustomColor.mainPurple)!, cornerRadius: cornerRadius)
 //
 //        cell.dateHighlightCircleView.backgroundColor = CustomColor.dateGreen
+//        print("qwer",dateFormatter.string(from: date))
+        
         cell.dateHighlightCircleView.layer.cornerRadius = 19
-        cell.dateHighlightCircleView.layer.backgroundColor = CustomColor.dateGreen?.cgColor
-        cell.dateHighlightCircleView.layer.shadowColor = UIColor.systemGray5.cgColor
-        cell.dateHighlightCircleView.layer.shadowRadius = 20
-        cell.dateHighlightCircleView.layer.shadowOpacity = 1
+//        cell.dateHighlightCircleView.layer.shadowRadius = 20
+        cell.dateHighlightCircleView.layer.shadowOpacity = 0.1
+        
+        if events.contains(dateFormatter.string(from: date)) {
+            cell.dateHighlightCircleView.backgroundColor = UIColor(hex: "FEB4B4")
+        } else {
+            cell.dateHighlightCircleView.backgroundColor = UIColor.white
+        }
+        
 
 //        if(indexPath.row == initialSelectedCell) {
 //            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .right)
@@ -333,7 +370,7 @@ extension UIView {
         }
         if let bounds = bounds {
             gradient.frame = bounds
-            gradient.cornerRadius = 25
+            gradient.cornerRadius = ( bounds.width ) / 2
         }
 //        gradient.fillMode = .both
         layer.addSublayer(gradient)
