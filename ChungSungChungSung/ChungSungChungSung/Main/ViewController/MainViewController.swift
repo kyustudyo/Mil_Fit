@@ -28,54 +28,11 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         label.font = UIFont.systemFont(ofSize: Constants.bigText + 8, weight: .regular)
         return label
     }()
-    
-//    fileprivate let todayMent: UILabel = {
-//        let label = UILabel()
-//        label.text = "오늘도 열심히 운동해요!"
-//        return label
-//    }()
-    
-    //TODO: gradient
-    
+
     fileprivate let endDayBar: UIView = {
        let view = UIView()
         return view
     }()
-//    fileprivate let endDayBar: UIProgressView = {
-//
-////        let newbar = GradientProgressView(progressViewStyle: UIProgressView.Style.bar)
-//        let newbar = UIProgressView(progressViewStyle: .bar)
-//        let col1 = UIColor(red: 170/255.0, green: 144/255.0, blue: 239/255.0, alpha: 1)
-//        let col2 = UIColor(red: 113/255.0, green: 87/255.0, blue: 219/255.0, alpha: 1)
-////        let _ = UIImage.gradientImage(with: newbar.frame,
-////                                                  colors: [col2.cgColor, col1.cgColor],
-////                                                locations: nil)
-////        newbar.progressImage = gradientImage ?? UIImage(systemName: "circle")
-////        newbar.firstColor = col1
-////        newbar.secondColor = col1
-////        newbar.tintColor = col2
-//        newbar.setHeight(height: 20)
-//        newbar.tintColor = .clear
-//        newbar.clipsToBounds = true
-//        newbar.layer.cornerRadius = 10
-//        newbar.layer.sublayers![1].cornerRadius = 10
-//        newbar.subviews[1].clipsToBounds = true
-////        newbar.trackTintColor = CustomColor.verySubtlePurple
-//
-////        let bar = UIProgressView()
-////        bar.setHeight(height: 38)
-////        bar.progressTintColor = .진보라
-////        bar.trackTintColor = .연보라
-////        bar.clipsToBounds = true
-////        bar.layer.cornerRadius = 20
-//
-////        let gradient = CAGradientLayer()
-////        gradient.frame = bar.bounds
-////        gradient.colors = [col1, col2]
-////        bar.layer.sublayers![1].insertSublayer(gradient, at: 0)
-//
-//        return newbar
-//    }()
     
     fileprivate let 전역일: UILabel = {
         let label = UILabel()
@@ -199,25 +156,20 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     
     private let purposeCollectionViewFlowLayout: UICollectionViewFlowLayout = {
         let view = UICollectionViewFlowLayout()
-//        view.itemSize = Constants.itemSize
         view.minimumLineSpacing = Constants.lineSpacing
-//        view.minimumInteritemSpacing = Constants.minimumInteritemSpacing
         view.scrollDirection = .horizontal
         return view
       }()
     
     private let mealCollectionViewFlowLayout: UICollectionViewFlowLayout = {
         let view = UICollectionViewFlowLayout()
-//        view.itemSize = Constants.itemSize
         view.minimumLineSpacing = Constants.lineSpacing
-//        view.minimumInteritemSpacing = Constants.minimumInteritemSpacing
         view.scrollDirection = .horizontal
         return view
       }()
     
      private lazy var purposeCollectionView: UICollectionView = {
          let view = UICollectionView(frame: .zero, collectionViewLayout: purposeCollectionViewFlowLayout)
-         
          view.register(PurposeCollectionViewCell.self, forCellWithReuseIdentifier: PurposeCollectionViewCell.cellID)
          view.dataSource = self
          view.delegate = self
@@ -257,14 +209,10 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     
         //MARK: (날짜 + 멘트)
         let stack = UIStackView(arrangedSubviews: [dateLabel])
-//        stack.axis = .vertical
         emptyView.addSubview(stack)
         stack.anchor(top: emptyView.topAnchor, left: emptyView.leftAnchor, right: emptyView.rightAnchor, paddingTop: 40, paddingLeft: 16, paddingRight: 16)
-        //TODO
-        
 
         //MARK: 전역일 프로그레스
-        
         let 전역일들ContainerView = UIView()
         emptyView.addSubview(전역일들ContainerView)
         전역일들ContainerView.layer.cornerRadius = 16
@@ -272,23 +220,11 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         전역일들ContainerView.setHeight(height: 100)
         전역일들ContainerView.anchor(top: stack.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 16.0, paddingLeft: 0, paddingRight: 0)
         
-        
-        
         let 전역일들 = UIStackView(arrangedSubviews: [전역일, dDay])
-        
-//        emptyView.addSubview(전역일들)
         전역일들ContainerView.addSubview(전역일들)
-        
-        
-//        전역일들.anchor(top: stack.bottomAnchor, left: stack.leftAnchor, paddingTop: 24.0, paddingLeft: 0)
         전역일들.anchor(top: 전역일들ContainerView.topAnchor, left: 전역일들ContainerView.leftAnchor, paddingTop: 26.0, paddingLeft: 16.0)
-        
-//        emptyView.addSubview(endDayBar)
         전역일들ContainerView.addSubview(endDayBar)
-        
-//        endDayBar.anchor(top:전역일들.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor,paddingTop: 12, paddingLeft: 0, paddingRight: 0)
         endDayBar.anchor(top:전역일들.bottomAnchor, left: 전역일들ContainerView.leftAnchor, right: 전역일들ContainerView.rightAnchor,paddingTop: 12, paddingLeft: 16, paddingRight: 16)
-        
         let col1 = UIColor(red: 170/255.0, green: 144/255.0, blue: 239/255.0, alpha: 1)
         let col2 = UIColor(red: 113/255.0, green: 87/255.0, blue: 219/255.0, alpha: 1)
         endDayBar.setGradient(color1: col2, color2: col1, width: (UIScreen.main.bounds.width - Constants.sideSpacing*4) * 전역가까움)
@@ -307,12 +243,10 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
 
         emptyView.addSubview(workoutLabel)
         workoutLabel.anchor(top: purposeStack.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 40, paddingLeft: 0, paddingRight: 0)
-        
         emptyView.addSubview(calendar)
         calendar.anchor(top: workoutLabel.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 8, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, height: 300)
         calendar.backgroundColor = .white
         calendar.layer.cornerRadius = 16
-        
         calendar.appearance.todayColor = .진보라
         calendar.allowsSelection = false
         calendar.headerHeight = 80
@@ -358,7 +292,6 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         let calHStack = UIStackView(arrangedSubviews: [calLabel, moreButtonForCalorie])
         calHStack.alignment = .firstBaseline
         moreButtonForCalorie.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        
         emptyView.addSubview(calHStack)
         calHStack.anchor(top: mealStack.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 40, paddingLeft: 0, paddingRight: 0)
         let calContainerView = UIView()
@@ -366,20 +299,13 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         emptyView.addSubview(calContainerView)
         calContainerView.backgroundColor = .white
         calContainerView.anchor(top: calHStack.bottomAnchor, left: stack.leftAnchor, bottom: emptyView.bottomAnchor,right: stack.rightAnchor, paddingTop: 8, paddingLeft: 0, paddingBottom: 60,paddingRight: 0, height: 160)
-        
         calContainerView.addSubview(eatRoundedView)
         eatRoundedView.anchor(top: calContainerView.topAnchor, left: calContainerView.leftAnchor, right: calContainerView.rightAnchor, paddingTop: 26, paddingLeft: 22, paddingRight: 0, height: 14)
-        
         calContainerView.addSubview(workoutRoundedView)
         workoutRoundedView.anchor(top: eatRoundedView.bottomAnchor, left: eatRoundedView.leftAnchor, right: eatRoundedView.rightAnchor, paddingTop: 13, paddingLeft: 0, paddingRight: 0, height: 14)
-        
         calContainerView.addSubview(basicRoundedView)
         basicRoundedView.anchor(top: eatRoundedView.bottomAnchor, left: eatRoundedView.leftAnchor, right: eatRoundedView.rightAnchor, paddingTop: 13, paddingLeft: 0, paddingRight: 0, height: 14)
         
-//        let tapButton = UIButton()
-//        calContainerView.addSubview(tapButton)
-//        tapButton.anchor(top: calContainerView.topAnchor, left: calContainerView.leftAnchor, bottom: calContainerView.bottomAnchor, right: calContainerView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
-//        tapButton.addTarget(self, action: #selector(goCalorie), for: .touchUpInside)
         //TODO: 중복
         let eatCal = shortRoundedView(color: CustomColor.subtlePurple ?? .purple)
         let eatMentVstack = shortMent(ment: "먹은 대사량", value: 1700)
@@ -408,12 +334,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         세개칼로리스택.anchor(top: basicRoundedView.bottomAnchor, left: calContainerView.leftAnchor, right: calContainerView.rightAnchor, paddingTop: 24, paddingLeft: 22, paddingRight: 16)
 
     }
-    
-//    @objc fileprivate func goCalorie() {
-//        print("qwe")
-//        navigationController?.pushViewController(MainCalorieViewController(), animated: true)
-//    }
-    
+
     func setUpEvents() {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
@@ -422,11 +343,13 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         let sampledate7 = formatter.date(from: "2022-08-6")
         events2 = [sampledate5!, sampledate6!, sampledate7!]
     }
+    
     fileprivate lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter
     }()
+    
 }
 
 //MARK: 목표 collectionView
@@ -435,15 +358,12 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
         case purposeCollectionView:
-            print("count purposeCollectionView")
             return 2
         case mealCollectionView:
-            print("count mealCollectionView")
             return 3
         default:
             return 0
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -465,89 +385,28 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
     }
     
-    
 }
 
-//extension MainViewController {
-//    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-//        UIView.animate(withDuration: 0.5) { [weak self] in
-//            guard velocity.y != 0 else { return }
-//            if velocity.y < 0 {
-//                let height = self?.tabBarController?.tabBar.frame.height ?? 0.0
-//                self?.tabBarController?.tabBar.alpha = 1.0
-//                self?.tabBarController?.tabBar.frame.origin = CGPoint(x: 0, y: UIScreen.main.bounds.maxY - height)
-//            } else {
-//                self?.tabBarController?.tabBar.alpha = 0.0
-//                self?.tabBarController?.tabBar.frame.origin = CGPoint(x: 0, y: UIScreen.main.bounds.maxY)
-//            }
-//        }
-//    }
-//}
 extension MainViewController: UICollectionViewDelegateFlowLayout {
-    // 셀 사이즈 어떻게 할까?
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-//        print(collectionView)
         switch collectionView {
         case purposeCollectionView:
-//            let width: CGFloat = (view.bounds.width - (20 * 5))
             let width: CGFloat = Constants.purposeCellWidth
-    //        let height: CGFloat = width + 35
             let height: CGFloat = Constants.purposeCellHeight
             return CGSize(width: width, height: height)
-            
         case mealCollectionView:
             let width: CGFloat = Constants.mealCellWidth
-    //        let height: CGFloat = width + 35
             let height: CGFloat = Constants.mealCellHeight
             return CGSize(width: width, height: height)
-            
         default:
             return CGSize()
         }
-
-        
     }
-    
 }
 
 //MARK: 식단 collectionView
 
-
-
 extension MainViewController {
-//    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-//
-//        if self.events2.contains(date){
-//            return 2
-//        }
-//        return 0
-//    }
-//
-          // Default Event Dot 색상 분기처리 - FSCalendarDelegateAppearance
-//      func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventDefaultColorsFor date: Date) -> [UIColor]?{
-//          if self.events.contains(date){
-//              return [UIColor.red]
-//          }
-//
-//          if self.events2.contains(date){
-//              return [UIColor.black]
-//          }
-//
-//          return nil
-//      }
-//
-//    // 이벤트 누르면 변함
-//      func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventSelectionColorsFor date: Date) -> [UIColor]? {
-//          if self.events.contains(date){
-//              return [UIColor.brown]
-//          }
-//
-//          if self.events2.contains(date){
-//              return [UIColor.yellow]
-//          }
-//          return nil
-//      }
     
     func calendar(_ calendar: FSCalendar, willDisplay cell: FSCalendarCell, for date: Date, at monthPosition: FSCalendarMonthPosition) {
             let eventScaleFactor: CGFloat = 1.8
@@ -574,14 +433,7 @@ extension MainViewController {
         }
 
     }
-//    func maximumDate(for calendar: FSCalendar) -> Date {
-//        return Date()
-//    }
-//
-//    func minimumDate(for calendar: FSCalendar) -> Date {
-//        return Date()
-//    }
-    
+
     @objc func nextTapped(_ sender:UIButton) {
         calendar.setCurrentPage(getNextMonth(date: calendar.currentPage), animated: true)
     }
@@ -602,9 +454,6 @@ extension MainViewController {
         if events2.contains(date) {
             return .연보라
         }
-//        if let color = self.fillDefaultColors[key] {
-//            return UIColor.systemPink
-//        }
         return nil
     }
     
