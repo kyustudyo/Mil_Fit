@@ -19,6 +19,9 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     let workoutPercent = 45.0
     let basicPercent = 40.0
     
+    let isMealCollectionView: Bool = false// 부대선택했는지
+    let isMealData: Bool = false// 있는 부대인지
+    
     var events2: [Date] = []
     var calendar = FSCalendar()
     
@@ -275,18 +278,41 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         setUpEvents()
         
         //MARK: 식단
-        let mealHStack = UIStackView(arrangedSubviews: [mealLabel, moreButton])
+        let moreButtons = isMealData ? moreButton : UIView()
+        let mealHStack = UIStackView(arrangedSubviews: [mealLabel, moreButtons])
         mealHStack.alignment = .firstBaseline
-        moreButton.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        let mealStack = UIStackView(arrangedSubviews: [mealHStack, mealCollectionView])
+        moreButtons.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        
+        let selectArmyView = UIView()
+        let selectArmyLabel = UILabel()
+        selectArmyView.backgroundColor = .white
+        selectArmyView.layer.cornerRadius = 16
+        selectArmyLabel.text = isMealData ? "부대를\n선택하세요" : "해당 부대는 식단 정보를\n제공하지 않습니다"
+        selectArmyLabel.textColor = .systemBlue
+        selectArmyLabel.numberOfLines = 0
+        selectArmyLabel.textAlignment = .center
+        selectArmyView.addSubview(selectArmyLabel)
+        selectArmyLabel.centerX(inView: selectArmyView)
+        selectArmyLabel.centerY(inView: selectArmyView)
+        
+        let mealOrNothing = isMealCollectionView ? mealCollectionView : selectArmyView
+        let mealStack = UIStackView(arrangedSubviews: [mealHStack, mealOrNothing])
         mealCollectionView.backgroundColor = .systemGray6
         mealStack.axis = .vertical
         mealStack.spacing = 8
         emptyView.addSubview(mealStack)
         mealStack.anchor(top: calendar.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 40, paddingLeft: 0, paddingRight: 0)
-        mealCollectionView.anchor(left: stack.leftAnchor, right: stack.rightAnchor, paddingLeft: 0, paddingRight: 0)
-        mealCollectionView.setHeight(height: Constants.mealCellHeight)
         
+        mealOrNothing.anchor(left: stack.leftAnchor, right: stack.rightAnchor, paddingLeft: 0, paddingRight: 0)
+        mealOrNothing.setHeight(height: Constants.mealCellHeight)
+        
+        if !isMealCollectionView {
+            let selectArmyButton = UIButton()
+            emptyView.addSubview(selectArmyButton)
+            selectArmyButton.addTarget(self, action: #selector(goSelectArmyViewController), for: .touchUpInside)
+            selectArmyButton.backgroundColor = .clear
+            selectArmyButton.anchor(top: mealOrNothing.topAnchor, left: mealOrNothing.leftAnchor, bottom: mealOrNothing.bottomAnchor, right: mealOrNothing.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
+        }
         //MARK: 칼로리
         
         let calHStack = UIStackView(arrangedSubviews: [calLabel, moreButtonForCalorie])
@@ -350,6 +376,11 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         return formatter
     }()
     
+    @objc fileprivate func goSelectArmyViewController() {
+        let selectArmyViewController = SelectArmyViewController()
+        navigationController?.pushViewController(selectArmyViewController, animated: true)
+    }
+    
 }
 
 //MARK: 목표 collectionView
@@ -378,7 +409,9 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         case mealCollectionView:
             print("cell mealCollectionView")
             guard let cell = mealCollectionView.dequeueReusableCell(withReuseIdentifier: mealCollectionViewCell.cellID, for: indexPath) as? mealCollectionViewCell else { return UICollectionViewCell() }
+            
             cell.backgroundColor = .white
+            
             return cell
         default:
             return UICollectionViewCell()
