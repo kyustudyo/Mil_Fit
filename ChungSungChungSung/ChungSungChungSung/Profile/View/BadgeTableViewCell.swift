@@ -8,12 +8,18 @@
 import UIKit
 
 class BadgeTableViewCell: UITableViewCell {
+    var badgeDetailViewDelegate: BadgeDetailViewDelegate?
+    
     private var badgeImageList = ["badge100Percent", "medal1Achiver", "medal30Days", "trophy", "medal1Achiver", "badge100Percent", ]
     private var badgeNameList = ["일주일 연속 운동", "체력검정 1급", "한 달 연속 운동", "특급전사", "운동의 시작", "목표 달성"]
     
     @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var badgeCollectionView: UICollectionView!
 
+    @IBAction func didTapBadgeMoreAction(_ sender: UIButton) {
+        badgeDetailViewDelegate?.didTapBadgeMoreButton()
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         

@@ -53,11 +53,27 @@ protocol GoalsDetailViewDelegate {
     func didTapGoalsMoreButton()
 }
 
-extension ProfileViewController: UITableViewDelegate, UITableViewDataSource, GoalsDetailViewDelegate {
+protocol BadgeDetailViewDelegate {
+    func didTapBadgeMoreButton()
+}
+
+extension ProfileViewController: GoalsDetailViewDelegate, BadgeDetailViewDelegate {
     func didTapGoalsMoreButton() {
         guard let goalsDetailView = UIStoryboard(name: "GoalsDetail", bundle: .main).instantiateViewController(withIdentifier: "GoalsDetailViewController") as? GoalsDetailViewController else { return }
         self.navigationController?.pushViewController(goalsDetailView, animated: true)
     }
+    
+    func didTapBadgeMoreButton() {
+        guard let badgeDetailView = UIStoryboard(name: "BadgeDetail", bundle: .main).instantiateViewController(withIdentifier: "BadgeDetailViewController") as? BadgeDetailViewController else { return }
+        self.navigationController?.pushViewController(badgeDetailView, animated: true)
+    }
+}
+
+extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
+//    func didTapGoalsMoreButton() {
+//        guard let goalsDetailView = UIStoryboard(name: "GoalsDetail", bundle: .main).instantiateViewController(withIdentifier: "GoalsDetailViewController") as? GoalsDetailViewController else { return }
+//        self.navigationController?.pushViewController(goalsDetailView, animated: true)
+//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4
@@ -81,6 +97,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource, Goa
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "badgeTableViewCell", for: indexPath) as? BadgeTableViewCell else { return UITableViewCell() }
+            
+            cell.badgeDetailViewDelegate = self
             
             return cell
         }
