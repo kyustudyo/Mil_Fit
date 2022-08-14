@@ -20,6 +20,9 @@ class WorkoutViewController: UIViewController {
     var selectedDate = Date()
     var totalSquares = [Date]()
     
+    var currentIndex: CGFloat = 0
+    var isOneStepPaging = true
+    
     @IBOutlet weak var selectedDateView: UILabel!
     @IBOutlet weak var dailyCalendarView: UICollectionView!
 
@@ -53,7 +56,7 @@ class WorkoutViewController: UIViewController {
         super.viewDidLoad()
         setUpEvents()
         configNavigationTitle()
-        
+//        self.dailyCalendarView.isPagingEnabled = true
         let backBarButtonItem = UIBarButtonItem(title: workoutViewTitle, style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backBarButtonItem
         
@@ -100,7 +103,10 @@ class WorkoutViewController: UIViewController {
             return dateFormatter.string(from: date) == dateFormatter.string(from: Date())
         }) {
             DispatchQueue.main.async {
+//                self.dailyCalendarView.isPagingEnabled = true
                 self.dailyCalendarView.scrollToItem(at: [0, index], at: .centeredHorizontally, animated: false)
+                self.dailyCalendarView.decelerationRate = .fast
+                self.dailyCalendarView.isPagingEnabled = false
                 self.updateHeaderLabel()
                 self.dailyCalendarView.reloadData()
             }
@@ -148,7 +154,7 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
             cell.dayHighlightView.isHidden = true
             cell.dayNameView.textColor = .black
         }
-        cell.dateHighlightCircleView.layer.cornerRadius = 19
+        cell.dateHighlightCircleView.layer.cornerRadius = cell.dateHighlightCircleView.bounds.width / 2 
         cell.dateHighlightCircleView.layer.shadowOpacity = 0.2
 //        cell.dateHighlightCircleView.layer.shadowRadius = 4
         cell.dateHighlightCircleView.layer.shadowOffset = CGSize(width: 2, height: 3)
@@ -157,6 +163,8 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
         } else {
             cell.dateHighlightCircleView.backgroundColor = UIColor.white
         }
+//        cell.backgroundColor = .red
+//        dailyCalendarView.backgroundColor = .yellow
         return cell
     }
     
@@ -243,5 +251,26 @@ extension UIView {
         }
         layer.addSublayer(gradient)
     }
+
+}
+
+extension WorkoutViewController: UIScrollViewDelegate {
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+            guard let layout = self.dailyCalendarView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
+            
+            let cellWidthIncludingSpacing = layout.itemSize.width + layout.minimumLineSpacing
+            
+            let estimatedIndex = scrollView.contentOffset.x / cellWidthIncludingSpacing
+            let index: Int
+            if velocity.x > 0 {
+                index = Int(ceil(estimatedIndex))
+            } else if velocity.x < 0 {
+                index = Int(floor(estimatedIndex))
+            } else {
+                index = Int(round(estimatedIndex))
+            }
+            
+            targetContentOffset.pointee = CGPoint(x: CGFloat(index) * cellWidthIncludingSpacing, y: 0)
+        }
 
 }
