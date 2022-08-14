@@ -11,23 +11,10 @@ class WorkoutViewController: UIViewController {
     
     var events = [String]()
     private let workoutViewTitle = "운동"
-    private let calInset: CGFloat = 17.0
-    private let numberOfCellsShown = 6
-    private var selectedCell: Int = 6
-    private var initialSelectedCell: Int = 6
-    private var weekdays: [String] = ["월", "화", "수", "목", "금", "토", "일"]
-    private var dates: [String] = ["8", "9", "10", "11", "12", "13", "14"]
-    
-//    private var selectedMonth: String = "8"
-//    private var selectedDate: String = "10"
-    
-    private var selectedDateText: String?
-    private var selectedTodayText: String?
-    
     private var workoutList = WorkoutData().list
-    private var workout: WorkoutModel?
-    var todaysWorkout: [WorkoutModel] = []
-    var numberOfTodaysWorkout: Int?
+//    private var workout: WorkoutModel?
+//    var todaysWorkout: [WorkoutModel] = []
+//    var numberOfTodaysWorkout: Int?
     //TODO 시작일 설정
     let 시작일 = CalendarHelper().addDays(date: Date(), days: -300)
     var selectedDate = Date()
@@ -157,19 +144,19 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
             cell.dayHighlightView.isHidden = false
             cell.dayNameView.textColor = .white
         }
-        
         else {
             cell.dayHighlightView.isHidden = true
             cell.dayNameView.textColor = .black
         }
         cell.dateHighlightCircleView.layer.cornerRadius = 19
-        cell.dateHighlightCircleView.layer.shadowOpacity = 0.1
+        cell.dateHighlightCircleView.layer.shadowOpacity = 0.2
+//        cell.dateHighlightCircleView.layer.shadowRadius = 4
+        cell.dateHighlightCircleView.layer.shadowOffset = CGSize(width: 2, height: 3)
         if events.contains(dateFormatter.string(from: date)) {
             cell.dateHighlightCircleView.backgroundColor = UIColor(hex: "FEB4B4")
         } else {
             cell.dateHighlightCircleView.backgroundColor = UIColor.white
         }
-        
         return cell
     }
     
@@ -177,12 +164,7 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
         selectedDate = totalSquares[indexPath.item]
         updateHeaderLabel()
         dailyCalendarView.reloadData()
-
     }
-    
-    
-    
-
 
 }
 
@@ -190,10 +172,12 @@ extension WorkoutViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         Constants.weekLineSpacing
+//        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (collectionView.frame.size.width - 6 * Constants.weekLineSpacing) / 7
+        let width = (collectionView.frame.size.width - 6 * Constants.weekLineSpacing) / 7.0
+
         let height = (collectionView.frame.size.height)
         return  CGSize(width: width, height: height)
     }
