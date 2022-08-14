@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BadgeDetailViewController: UIViewController {
+class BadgeDetailViewController: UIViewController/*, UIViewControllerTransitioningDelegate*/ {
     private var badgeList = BadgeData().list
     private var numberOfBadgeEarned: Int = 0
     
@@ -40,7 +40,19 @@ class BadgeDetailViewController: UIViewController {
         numberOfBadgeEarned = earnedBadges.count
         numberOfBadgeLabel.text = "\(numberOfBadgeEarned) / 15"
     }
+    
+//    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+//        return SetSizePresentationController(presentedViewController: presented, presenting: presenting)
+//    }
 }
+//
+//class SetSizePresentationController: UIPresentationController {
+//    override var frameOfPresentedViewInContainerView: CGRect {
+//        get {
+//            return CGRect(x: 0, y: (containerView?.bounds.height ?? 0)/2, width: containerView?.bounds.width ?? 0, height: (containerView?.bounds.height ?? 0)/2)
+//        }
+//    }
+//}
 
 extension BadgeDetailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -54,8 +66,10 @@ extension BadgeDetailViewController: UICollectionViewDelegateFlowLayout {
         let width = (viewWidth - (inset * 2) - (spacing * 2)) / 3
         let height = width
         
-        flow.minimumInteritemSpacing = spacing
+//        flow.minimumInteritemSpacing = spacing
         flow.minimumLineSpacing = spacing
+        flow.sectionInset.left = inset
+        flow.sectionInset.right = inset
         
         return CGSize(width: width, height: height)
     }
@@ -86,9 +100,15 @@ extension BadgeDetailViewController: UICollectionViewDelegate, UICollectionViewD
         badgeDetailInfoView.badge = badgeList[indexPath.row]
         
         badgeDetailInfoView.modalPresentationStyle = .pageSheet
+//        badgeDetailInfoView.transitioningDelegate = self
+        
         if let sheet = badgeDetailInfoView.sheetPresentationController {
             sheet.detents = [.medium()]
+            sheet.preferredCornerRadius = 20
+            sheet.prefersGrabberVisible = true
         }
+        
+
         
         present(badgeDetailInfoView, animated: true, completion: nil)
     }

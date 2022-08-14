@@ -24,9 +24,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zMd-5g-yUP">
-                                <rect key="frame" x="16" y="119" width="382" height="777"/>
+                                <rect key="frame" x="0.0" y="119" width="414" height="777"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="eB4-YR-Pjk">
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="eB4-YR-Pjk">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -51,12 +51,12 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="zMd-5g-yUP" secondAttribute="trailing" constant="16" id="7Om-dc-STW"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="zMd-5g-yUP" secondAttribute="trailing" id="7Om-dc-STW"/>
                             <constraint firstItem="zMd-5g-yUP" firstAttribute="top" secondItem="pCo-0U-qWV" secondAttribute="bottom" constant="24" id="I7O-pN-Uer"/>
                             <constraint firstItem="pCo-0U-qWV" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="QJi-pV-OAs"/>
                             <constraint firstItem="pCo-0U-qWV" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="24" id="aCv-Ae-7yT"/>
                             <constraint firstAttribute="bottom" secondItem="zMd-5g-yUP" secondAttribute="bottom" id="ifv-gq-DTr"/>
-                            <constraint firstItem="zMd-5g-yUP" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="jYd-cG-MfL"/>
+                            <constraint firstItem="zMd-5g-yUP" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="jYd-cG-MfL"/>
                         </constraints>
                     </view>
                     <connections>

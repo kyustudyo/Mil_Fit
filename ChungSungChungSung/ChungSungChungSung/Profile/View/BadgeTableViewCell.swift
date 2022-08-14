@@ -13,9 +13,6 @@ class BadgeTableViewCell: UITableViewCell {
     
     private var badgeList = BadgeData().list
     
-    private var badgeImageList = ["badge100Percent", "medal1Achiver", "medal30Days", "trophy", "medal1Achiver", "badge100Percent", ]
-    private var badgeNameList = ["일주일 연속 운동", "체력검정 1급", "한 달 연속 운동", "특급전사", "운동의 시작", "목표 달성"]
-    
     @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var badgeCollectionView: UICollectionView!
 
@@ -64,8 +61,10 @@ extension BadgeTableViewCell: UICollectionViewDelegateFlowLayout {
         let width = (viewWidth - (inset * 2) - (spacing * 2)) / 3
         let height = width
         
-        flow.minimumInteritemSpacing = spacing
+//        flow.minimumInteritemSpacing = spacing
         flow.minimumLineSpacing = spacing
+        flow.sectionInset.left = inset
+        flow.sectionInset.right = inset
         
         return CGSize(width: width, height: height)
     }
