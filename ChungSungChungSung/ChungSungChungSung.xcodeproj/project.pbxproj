@@ -72,7 +72,7 @@
 		AB21161228A4C5F20050E9F8 /* FitnessHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB21161128A4C5F20050E9F8 /* FitnessHistoryTableViewCell.swift */; };
 		AB460BAF28A7A32000765A1D /* BasicWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB460BAE28A7A32000765A1D /* BasicWorkout.swift */; };
 		AB8623BE289E5B4200F71283 /* TestMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8623BD289E5B4200F71283 /* TestMainViewController.swift */; };
-		AB8623C0289E5B4A00F71283 /* TestMainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB8623BF289E5B4A00F71283 /* TestMainStoryboard.storyboard */; };
+		AB8623C0289E5B4A00F71283 /* TestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB8623BF289E5B4A00F71283 /* TestStoryboard.storyboard */; };
 		AB8623C2289ECD8900F71283 /* TestMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8623C1289ECD8900F71283 /* TestMainTableViewCell.swift */; };
 		ABE51DD1289F90B2005BFB0E /* FitnessCircularGraphSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE51DD0289F90B2005BFB0E /* FitnessCircularGraphSwiftUIView.swift */; };
 /* End PBXBuildFile section */
@@ -146,7 +146,7 @@
 		AB21161128A4C5F20050E9F8 /* FitnessHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		AB460BAE28A7A32000765A1D /* BasicWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicWorkout.swift; sourceTree = "<group>"; };
 		AB8623BD289E5B4200F71283 /* TestMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMainViewController.swift; sourceTree = "<group>"; };
-		AB8623BF289E5B4A00F71283 /* TestMainStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TestMainStoryboard.storyboard; sourceTree = "<group>"; };
+		AB8623BF289E5B4A00F71283 /* TestStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TestStoryboard.storyboard; sourceTree = "<group>"; };
 		AB8623C1289ECD8900F71283 /* TestMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMainTableViewCell.swift; sourceTree = "<group>"; };
 		ABE51DD0289F90B2005BFB0E /* FitnessCircularGraphSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessCircularGraphSwiftUIView.swift; sourceTree = "<group>"; };
 		E04FA59EA467D82C0CE448CA /* Pods-ChungSungChungSung.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChungSungChungSung.release.xcconfig"; path = "Target Support Files/Pods-ChungSungChungSung/Pods-ChungSungChungSung.release.xcconfig"; sourceTree = "<group>"; };
@@ -336,7 +336,7 @@
 		79F6763D289C2F5200850FF0 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				AB8623BF289E5B4A00F71283 /* TestMainStoryboard.storyboard */,
+				AB8623BF289E5B4A00F71283 /* TestStoryboard.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -489,7 +489,7 @@
 				794B601128A527BB00621A27 /* WorkoutAddPlusTableViewCell.xib in Resources */,
 				328AB9AA28A638A000000A85 /* Profile.storyboard in Resources */,
 				794B600A28A527BB00621A27 /* WorkoutAddOneTableViewCell.xib in Resources */,
-				AB8623C0289E5B4A00F71283 /* TestMainStoryboard.storyboard in Resources */,
+				AB8623C0289E5B4A00F71283 /* TestStoryboard.storyboard in Resources */,
 				794B600F28A527BB00621A27 /* WorkoutAddCalorieTableViewCell.xib in Resources */,
 				328AB9B028A63B6500000A85 /* ArmyInfoTableViewCell.xib in Resources */,
 				79BBF69D289AB50D0003FAD8 /* Assets.xcassets in Resources */,
