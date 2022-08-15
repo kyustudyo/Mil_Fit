@@ -67,6 +67,8 @@
 		ABE51DD1289F90B2005BFB0E /* FitnessCircularGraphSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE51DD0289F90B2005BFB0E /* FitnessCircularGraphSwiftUIView.swift */; };
 		DD639DD828A9628200219504 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD639DD728A9628200219504 /* OnboardingViewController.swift */; };
 		DD639DDA28A9629100219504 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD639DD928A9629100219504 /* Onboarding.storyboard */; };
+		DD639DDE28A9C1A600219504 /* OnboardingSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD639DDD28A9C1A600219504 /* OnboardingSecondViewController.swift */; };
+		DD639DE028A9C1B300219504 /* OnboardingLastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD639DDF28A9C1B300219504 /* OnboardingLastViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -133,6 +135,8 @@
 		ABE51DD0289F90B2005BFB0E /* FitnessCircularGraphSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessCircularGraphSwiftUIView.swift; sourceTree = "<group>"; };
 		DD639DD728A9628200219504 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		DD639DD928A9629100219504 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
+		DD639DDD28A9C1A600219504 /* OnboardingSecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSecondViewController.swift; sourceTree = "<group>"; };
+		DD639DDF28A9C1B300219504 /* OnboardingLastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingLastViewController.swift; sourceTree = "<group>"; };
 		E04FA59EA467D82C0CE448CA /* Pods-ChungSungChungSung.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChungSungChungSung.release.xcconfig"; path = "Target Support Files/Pods-ChungSungChungSung/Pods-ChungSungChungSung.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -390,6 +394,8 @@
 			isa = PBXGroup;
 			children = (
 				DD639DD728A9628200219504 /* OnboardingViewController.swift */,
+				DD639DDD28A9C1A600219504 /* OnboardingSecondViewController.swift */,
+				DD639DDF28A9C1B300219504 /* OnboardingLastViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -535,6 +541,7 @@
 				79F67694289E52F100850FF0 /* TabViewController.swift in Sources */,
 				328AB9BF28A6AFB000000A85 /* BadgeCollectionViewCell.swift in Sources */,
 				AB21160F28A1308B0050E9F8 /* FitnessHistoryViewController.swift in Sources */,
+				DD639DE028A9C1B300219504 /* OnboardingLastViewController.swift in Sources */,
 				7E9A47C4289D478A005B98B4 /* WorkoutViewController.swift in Sources */,
 				794B600C28A527BB00621A27 /* WorkoutAddPlusTableViewCell.swift in Sources */,
 				328AB9B728A64D5A00000A85 /* GoalsTableViewCell.swift in Sources */,
@@ -563,6 +570,7 @@
 				79F676A0289EC65C00850FF0 /* Bar.swift in Sources */,
 				794B600B28A527BB00621A27 /* TodaysWorkoutEditCell.swift in Sources */,
 				AB460BAF28A7A32000765A1D /* BasicWorkout.swift in Sources */,
+				DD639DDE28A9C1A600219504 /* OnboardingSecondViewController.swift in Sources */,
 				79F67696289E53AF00850FF0 /* MainViewController.swift in Sources */,
 				79F676C828A00A4B00850FF0 /* ColorExtension.swift in Sources */,
 				DD639DD828A9628200219504 /* OnboardingViewController.swift in Sources */,
@@ -720,7 +728,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = H5PD3P95F5;
+				DEVELOPMENT_TEAM = 848PGS94YW;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChungSungChungSung/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -749,7 +757,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = H5PD3P95F5;
+				DEVELOPMENT_TEAM = 848PGS94YW;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChungSungChungSung/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
