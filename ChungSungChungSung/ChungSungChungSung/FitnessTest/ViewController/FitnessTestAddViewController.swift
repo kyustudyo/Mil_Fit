@@ -13,7 +13,10 @@ class FitnessTestAddViewController: UIViewController {
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var runningMinute: UITextField!
     @IBOutlet weak var runningSecond: UITextField!
-
+    @IBOutlet weak var pushupSwitch: UISwitch!
+    @IBOutlet weak var situpSwitch: UISwitch!
+    @IBOutlet weak var pushupCount: UITextField!
+    @IBOutlet weak var situpCount: UITextField!
     
     private let datePicker = UIDatePicker()
     private var diaryDate: Date?
@@ -22,13 +25,15 @@ class FitnessTestAddViewController: UIViewController {
         super.viewDidLoad()
         
         runningMinute.delegate = self
+        pushupCount.delegate = self
+        situpCount.delegate = self
         configureDatePicker()
     }
     
-    private func ActiveSwitch() {
-        runningSwitch.isOn = false
-        runningSwitch.addTarget(self, action: #selector(onClickSwitch(sender:)), for: UIControlEvents.valueChanged)
-    }
+//    private func ActiveSwitch() {
+//        runningSwitch.isOn = false
+//        runningSwitch.addTarget(self, action: #selector(onClickSwitch(sender:)), for: UIControlEvents.valueChanged)
+//    }
     
     private func onClickSwitch(sender: UISwitch) {
         
@@ -75,5 +80,17 @@ extension FitnessTestAddViewController: UITextFieldDelegate {
         } else {
             return text.count < 2
         }
+//        guard let text = pushupCount.text else { return true }
+//        if string.isEmpty {
+//            return true
+//        } else {
+//            return text.count < 3
+//        }
+//        guard let text = situpCount.text else { return true }
+//        if string.isEmpty {
+//            return true
+//        } else {
+//            return text.count < 3
+//        }
     }
 }
