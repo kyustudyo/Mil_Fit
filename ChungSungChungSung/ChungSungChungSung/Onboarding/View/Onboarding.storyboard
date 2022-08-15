@@ -84,6 +84,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="inputAge" destination="JlW-Cb-G8E" id="Tap-UT-ZZn"/>
+                        <outlet property="nextButton" destination="Ig0-QH-Qce" id="IJZ-ge-rSt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -94,7 +95,7 @@
         <scene sceneID="WpJ-Z0-6Q8">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Ra-pG-kPu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <viewController storyboardIdentifier="OnboardingSecondViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YC7-ri-Isn" customClass="OnboardingSecondViewController" customModule="ChungSungChungSung" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OnboardingSecondViewController" id="YC7-ri-Isn" customClass="OnboardingSecondViewController" customModule="ChungSungChungSung" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7vw-f1-0Fp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -183,6 +184,11 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="heightTextField" destination="2WM-Ee-UsV" id="riF-z3-8Eg"/>
+                        <outlet property="nextButton" destination="vyI-jA-uvq" id="kpJ-Q5-tvx"/>
+                        <outlet property="weightTextField" destination="tRz-jF-FxC" id="cnk-LN-ldo"/>
+                    </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="832" y="102"/>
@@ -219,8 +225,11 @@
                             <constraint firstItem="zQw-sm-wtI" firstAttribute="top" secondItem="OtX-PK-UDW" secondAttribute="top" constant="24" id="h9G-yn-hTW"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="BxD-wG-8w8"/>
+                    <navigationItem key="navigationItem" id="BxD-wG-8w8">
+                        <barButtonItem key="rightBarButtonItem" title="완료" id="Kok-ei-irQ"/>
+                    </navigationItem>
                     <connections>
+                        <outlet property="backButton" destination="BxD-wG-8w8" id="xmz-m9-pwZ"/>
                         <outlet property="dateTF" destination="gbW-lc-Pvq" id="pwV-dV-UY9"/>
                     </connections>
                 </viewController>

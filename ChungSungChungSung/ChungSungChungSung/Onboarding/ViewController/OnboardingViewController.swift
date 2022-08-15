@@ -11,6 +11,7 @@ import SwiftUI
 
 class OnboardingViewController: UIViewController {
     @IBOutlet weak var inputAge: UITextField!
+    @IBOutlet weak var nextButton: UIBarButtonItem!
     private var age = ["19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32"]
     private let picker = UIPickerView()
     
@@ -18,31 +19,20 @@ class OnboardingViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = CustomColor.bgGray
-        inputAge.setBottomBorder()
+        nextButton.tintColor = CustomColor.mainPurple
         configPickerView()
         configToolbar()
     }
 }
 
-extension UITextField {
-    func setBottomBorder() {
-        self.layer.masksToBounds = false
-        self.layer.shadowColor = UIColor.systemGray3.cgColor
-        self.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
-        self.layer.shadowOpacity = 1.0
-        self.layer.shadowRadius = 0.0
-    }
-}
-
+// age picker 설정
 extension OnboardingViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-    
     func configPickerView() {
         picker.delegate = self
         picker.dataSource = self
         inputAge.inputView = picker
         
         configToolbar()
-        textFieldDidBeginEditing(inputAge)
         textFieldDidEndEditing(inputAge)
     }
     
@@ -89,22 +79,18 @@ extension OnboardingViewController: UIPickerViewDelegate, UIPickerViewDataSource
 }
 
 extension OnboardingViewController: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.underlined(viewSize: view.bounds.width, color: UIColor.systemOrange)
-    }
-    
     func textFieldDidEndEditing(_ textField: UITextField) {
         textField.underlined(viewSize: view.bounds.width, color: UIColor.systemGray5)
     }
 }
 
+// textfield underline
 extension UITextField {
     func underlined(viewSize: CGFloat, color: UIColor) {
         let border = CALayer()
-        let width = CGFloat(1)
         border.borderColor = color.cgColor
-        border.frame = CGRect(x: 0, y: self.frame.size.height + 10, width: viewSize - 48, height: width)
-        border.borderWidth = width
+        border.frame = CGRect(x: 0, y: self.frame.size.height + 10, width: viewSize - 48, height: 1)
+        border.borderWidth = 1
         self.layer.addSublayer(border)
     }
 }

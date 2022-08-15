@@ -8,22 +8,24 @@
 import UIKit
 
 class OnboardingSecondViewController: UIViewController {
-
+    @IBOutlet weak var heightTextField: UITextField!
+    @IBOutlet weak var weightTextField: UITextField!
+    @IBOutlet weak var nextButton: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        view.backgroundColor = CustomColor.bgGray
+        textFieldDidEndEditing(heightTextField)
+        textFieldDidEndEditing(weightTextField)
+        self.navigationController?.navigationBar.tintColor = CustomColor.mainPurple
+        self.navigationController?.navigationBar.topItem?.title = ""
+        nextButton.tintColor = CustomColor.mainPurple
     }
-    
+}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension OnboardingSecondViewController: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textField.underlined(viewSize: view.bounds.width / 2, color: UIColor.systemGray5)
     }
-    */
-
 }
