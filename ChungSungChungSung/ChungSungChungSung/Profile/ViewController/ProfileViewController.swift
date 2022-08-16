@@ -10,6 +10,8 @@ import UIKit
 class ProfileViewController: UIViewController {
     private let profileViewTitle = "프로필"
     
+    private var goalList = GoalData().list
+    
     @IBOutlet weak var settingsButton: UIBarButtonItem!
     @IBOutlet weak var profileTableView: UITableView!
     
@@ -18,6 +20,8 @@ class ProfileViewController: UIViewController {
         
         configNavigationTitle()
         self.view.backgroundColor = CustomColor.bgGray
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         profileTableView.backgroundColor = CustomColor.bgGray
         profileTableView.contentInset.top = 35
         
@@ -46,7 +50,32 @@ class ProfileViewController: UIViewController {
     }
 }
 
+protocol GoalsDetailViewDelegate {
+    func didTapGoalsMoreButton()
+}
+
+protocol BadgeDetailViewDelegate {
+    func didTapBadgeMoreButton()
+}
+
+extension ProfileViewController: GoalsDetailViewDelegate, BadgeDetailViewDelegate {
+    func didTapGoalsMoreButton() {
+        guard let goalsDetailView = UIStoryboard(name: "GoalsDetail", bundle: .main).instantiateViewController(withIdentifier: "GoalsDetailViewController") as? GoalsDetailViewController else { return }
+        self.navigationController?.pushViewController(goalsDetailView, animated: true)
+    }
+    
+    func didTapBadgeMoreButton() {
+        guard let badgeDetailView = UIStoryboard(name: "BadgeDetail", bundle: .main).instantiateViewController(withIdentifier: "BadgeDetailViewController") as? BadgeDetailViewController else { return }
+        self.navigationController?.pushViewController(badgeDetailView, animated: true)
+    }
+}
+
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
+//    func didTapGoalsMoreButton() {
+//        guard let goalsDetailView = UIStoryboard(name: "GoalsDetail", bundle: .main).instantiateViewController(withIdentifier: "GoalsDetailViewController") as? GoalsDetailViewController else { return }
+//        self.navigationController?.pushViewController(goalsDetailView, animated: true)
+//    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4
     }
@@ -62,9 +91,15 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         } else if indexPath.row == 2 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "goalsTableViewCell", for: indexPath) as? GoalsTableViewCell else { return UITableViewCell() }
             
+            cell.goalLabel.text = goalList[0].content
+            cell.goalSavedDateLabel.text = goalList[0].date
+            cell.goalsDetailViewDelegate = self
+            
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "badgeTableViewCell", for: indexPath) as? BadgeTableViewCell else { return UITableViewCell() }
+            
+            cell.badgeDetailViewDelegate = self
             
             return cell
         }
