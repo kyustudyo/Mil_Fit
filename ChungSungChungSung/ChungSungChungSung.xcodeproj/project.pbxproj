@@ -85,6 +85,10 @@
 		ABE51DD1289F90B2005BFB0E /* FitnessCircularGraphSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE51DD0289F90B2005BFB0E /* FitnessCircularGraphSwiftUIView.swift */; };
 		DD3AC80E28A645DA000D2E38 /* FitnessTestAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AC80D28A645DA000D2E38 /* FitnessTestAddViewController.swift */; };
 		DD3AC81028A64692000D2E38 /* FitnessTestAddStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD3AC80F28A64692000D2E38 /* FitnessTestAddStoryboard.storyboard */; };
+		DD639DD828A9628200219504 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD639DD728A9628200219504 /* OnboardingViewController.swift */; };
+		DD639DDA28A9629100219504 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD639DD928A9629100219504 /* Onboarding.storyboard */; };
+		DD639DDE28A9C1A600219504 /* OnboardingSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD639DDD28A9C1A600219504 /* OnboardingSecondViewController.swift */; };
+		DD639DE028A9C1B300219504 /* OnboardingLastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD639DDF28A9C1B300219504 /* OnboardingLastViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -171,6 +175,10 @@
 		B180C28E5034187EE8032A64 /* Pods_ChungSungChungSung.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChungSungChungSung.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD3AC80D28A645DA000D2E38 /* FitnessTestAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessTestAddViewController.swift; sourceTree = "<group>"; };
 		DD3AC80F28A64692000D2E38 /* FitnessTestAddStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FitnessTestAddStoryboard.storyboard; sourceTree = "<group>"; };
+		DD639DD728A9628200219504 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		DD639DD928A9629100219504 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
+		DD639DDD28A9C1A600219504 /* OnboardingSecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSecondViewController.swift; sourceTree = "<group>"; };
+		DD639DDF28A9C1B300219504 /* OnboardingLastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingLastViewController.swift; sourceTree = "<group>"; };
 		E04FA59EA467D82C0CE448CA /* Pods-ChungSungChungSung.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChungSungChungSung.release.xcconfig"; path = "Target Support Files/Pods-ChungSungChungSung/Pods-ChungSungChungSung.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -244,6 +252,7 @@
 		79BBF692289AB50B0003FAD8 /* ChungSungChungSung */ = {
 			isa = PBXGroup;
 			children = (
+				DD639DD428A9625200219504 /* Onboarding */,
 				79F67693289E52F100850FF0 /* TabViewController.swift */,
 				79F67636289C2DAF00850FF0 /* Main */,
 				79F67633289C2D4700850FF0 /* Workout */,
@@ -458,6 +467,33 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		DD639DD428A9625200219504 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				DD639DD528A9626100219504 /* ViewController */,
+				DD639DD628A9626900219504 /* View */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		DD639DD528A9626100219504 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DD639DD728A9628200219504 /* OnboardingViewController.swift */,
+				DD639DDD28A9C1A600219504 /* OnboardingSecondViewController.swift */,
+				DD639DDF28A9C1B300219504 /* OnboardingLastViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		DD639DD628A9626900219504 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DD639DD928A9629100219504 /* Onboarding.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -536,6 +572,7 @@
 				79BBF69D289AB50D0003FAD8 /* Assets.xcassets in Resources */,
 				328AB9CC28A8C56A00000A85 /* BadgeDetail.storyboard in Resources */,
 				328AB9BC28A6A35400000A85 /* BadgeTableViewCell.xib in Resources */,
+				DD639DDA28A9629100219504 /* Onboarding.storyboard in Resources */,
 				79BBF69B289AB50B0003FAD8 /* Main.storyboard in Resources */,
 				32D3F1A428A558E60096FAFC /* WorkoutListEdit.storyboard in Resources */,
 				794B601028A527BB00621A27 /* WorkoutAdd.storyboard in Resources */,
@@ -596,6 +633,8 @@
 				79F67694289E52F100850FF0 /* TabViewController.swift in Sources */,
 				794B601528A6241200621A27 /* WorkoutPreviousViewController.swift in Sources */,
 				328AB9BF28A6AFB000000A85 /* BadgeCollectionViewCell.swift in Sources */,
+				AB21160F28A1308B0050E9F8 /* FitnessHistoryViewController.swift in Sources */,
+				DD639DE028A9C1B300219504 /* OnboardingLastViewController.swift in Sources */,
 				7E9A47C4289D478A005B98B4 /* WorkoutViewController.swift in Sources */,
 				DD3AC80E28A645DA000D2E38 /* FitnessTestAddViewController.swift in Sources */,
 				794B600C28A527BB00621A27 /* WorkoutAddPlusTableViewCell.swift in Sources */,
@@ -635,8 +674,10 @@
 				79F676A0289EC65C00850FF0 /* Bar.swift in Sources */,
 				794B600B28A527BB00621A27 /* TodaysWorkoutEditCell.swift in Sources */,
 				AB460BAF28A7A32000765A1D /* BasicWorkout.swift in Sources */,
+				DD639DDE28A9C1A600219504 /* OnboardingSecondViewController.swift in Sources */,
 				79F67696289E53AF00850FF0 /* MainViewController.swift in Sources */,
 				79F676C828A00A4B00850FF0 /* ColorExtension.swift in Sources */,
+				DD639DD828A9628200219504 /* OnboardingViewController.swift in Sources */,
 				AB8623C2289ECD8900F71283 /* TestMainTableViewCell.swift in Sources */,
 				328AB9C628A81A1500000A85 /* GoalModel.swift in Sources */,
 				328AB9AF28A63B6500000A85 /* ArmyInfoTableViewCell.swift in Sources */,
