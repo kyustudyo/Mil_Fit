@@ -19,8 +19,8 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     let workoutPercent = 45.0
     let basicPercent = 40.0
     
-    let isMealCollectionView: Bool = false// 부대선택했는지
-    let isMealData: Bool = false// 있는 부대인지
+    var isMealCollectionView: String = ""// 부대
+    var isMealData: Bool = false// 있는 부대인지
     
     var events2: [Date] = []
     var calendar = FSCalendar()
@@ -199,6 +199,11 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         calendar.delegate = self
         calendar.dataSource = self
         
+        setupUI()
+       
+    }
+
+    func setupUI() {
         let scrollView = UIScrollView()
         view.addSubview(scrollView)
         
@@ -287,7 +292,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         let selectArmyLabel = UILabel()
         selectArmyView.backgroundColor = .white
         selectArmyView.layer.cornerRadius = 16
-        selectArmyLabel.text = isMealData ? "부대를\n선택하세요" : "해당 부대는 식단 정보를\n제공하지 않습니다"
+        selectArmyLabel.text =  isMealCollectionView.isEmpty ? "부대를\n선택하세요" : "해당 부대는 식단 정보를\n제공하지 않습니다"
         selectArmyLabel.textColor = .systemBlue
         selectArmyLabel.numberOfLines = 0
         selectArmyLabel.textAlignment = .center
@@ -295,7 +300,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         selectArmyLabel.centerX(inView: selectArmyView)
         selectArmyLabel.centerY(inView: selectArmyView)
         
-        let mealOrNothing = isMealCollectionView ? mealCollectionView : selectArmyView
+        let mealOrNothing = !isMealCollectionView.isEmpty && isMealData ? mealCollectionView : selectArmyView
         let mealStack = UIStackView(arrangedSubviews: [mealHStack, mealOrNothing])
         mealCollectionView.backgroundColor = .systemGray6
         mealStack.axis = .vertical
@@ -306,7 +311,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         mealOrNothing.anchor(left: stack.leftAnchor, right: stack.rightAnchor, paddingLeft: 0, paddingRight: 0)
         mealOrNothing.setHeight(height: Constants.mealCellHeight)
         
-        if !isMealCollectionView {
+        if isMealCollectionView.isEmpty {
             let selectArmyButton = UIButton()
             emptyView.addSubview(selectArmyButton)
             selectArmyButton.addTarget(self, action: #selector(goSelectArmyViewController), for: .touchUpInside)
@@ -358,9 +363,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         calContainerView.addSubview(세개칼로리스택)
         세개칼로리스택.distribution = .equalCentering
         세개칼로리스택.anchor(top: basicRoundedView.bottomAnchor, left: calContainerView.leftAnchor, right: calContainerView.rightAnchor, paddingTop: 24, paddingLeft: 22, paddingRight: 16)
-
     }
-
     func setUpEvents() {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
@@ -378,6 +381,8 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     
     @objc fileprivate func goSelectArmyViewController() {
         let selectArmyViewController = SelectArmyViewController()
+        selectArmyViewController.isMealCollectionView = isMealCollectionView
+        selectArmyViewController.delegate = self
         navigationController?.pushViewController(selectArmyViewController, animated: true)
     }
     
@@ -539,5 +544,13 @@ class GradientProgressView: UIProgressView {
         if let gradientImage = UIImage(bounds: self.bounds, colors: [firstColor, secondColor]) {
             self.progressImage = gradientImage
         }
+    }
+}
+
+extension MainViewController: ArmySelection {
+    func selectArmy(selectedArmy: String) {
+        isMealCollectionView = selectedArmy
+        isMealData = isMealCollectionView == "없음" ? false : true
+        self.setupUI()
     }
 }

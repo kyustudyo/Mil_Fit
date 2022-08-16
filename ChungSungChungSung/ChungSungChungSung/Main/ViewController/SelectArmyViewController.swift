@@ -12,6 +12,10 @@ class SelectArmyViewController: UIViewController {
     let tableView = UITableView()
     //TODO: 기존것 가져가도록
     var selectedArmyIndex = 0
+    var isMealCollectionView = "부대"
+    
+    weak var delegate: ArmySelection?
+    
     let totalArmy = ["제5322부대", "제6282부대", "제8623부대", "제7369부대", "제8902부대", "제9030부대", "제5021부대", "제8623부대", "제3389부대", "제1691부대", "제2171부대", "제3296부대", "제6335부대", "제1575부대", "제2291부대", "제3182부대", "제2621부대", "제5397부대", "제7162부대", "제3296부대", "제6176부대", "제1862부대", "없음"]
     
     override func viewDidLoad() {
@@ -57,6 +61,11 @@ extension SelectArmyViewController: UITableViewDelegate, UITableViewDataSource {
         selectedArmyIndex = indexPath.row
         tableView.deselectRow(at: indexPath, animated: true)
         tableView.reloadData()
+        delegate?.selectArmy(selectedArmy: totalArmy[selectedArmyIndex])
     }
     
+}
+
+protocol ArmySelection: AnyObject {
+    func selectArmy(selectedArmy: String)
 }
