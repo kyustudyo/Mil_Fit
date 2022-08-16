@@ -17,6 +17,10 @@ class TodaysWorkoutEditViewController: UIViewController {
     @IBAction func cancel(_ sender: Any) {
         self.presentingViewController?.dismiss(animated: true)
     }
+    //TODO: 기능
+    @IBAction func doneEditing(_ sender: Any) {
+        self.presentingViewController?.dismiss(animated: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

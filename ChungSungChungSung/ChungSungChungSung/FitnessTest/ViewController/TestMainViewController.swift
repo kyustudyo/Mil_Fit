@@ -36,16 +36,18 @@ class TestMainViewController: UIViewController {
     @IBOutlet weak var recordTableViewTitleLabel: UILabel!
 
     @IBOutlet weak var fitnessMainTableView: UITableView!
-    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationItem.title = "체력검정"
+//        navigationController?.navigationBar.prefersLargeTitles = true
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
         fitnessMainTableView.dataSource = self
         fitnessMainTableView.delegate = self
-        navigationController?.navigationBar.prefersLargeTitles = true
-        title = "체력검정"
-        let standardButton = UIBarButtonItem(image: UIImage(systemName: "info.circle"), style: .plain, target: self, action: "didTapStandardButton")
-        let addButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: "didTapAddButton")
+        
+        let standardButton = UIBarButtonItem(image: UIImage(systemName: "info.circle"), style: .plain, target: self, action: #selector(didTapStandardButton))
+        let addButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(didTapAddButton))
         navigationItem.rightBarButtonItems = [standardButton, addButton]
         
         fitnessGraphButton.tintColor = UIColor.clear
@@ -57,10 +59,20 @@ class TestMainViewController: UIViewController {
         configurePushupGraphView()
         configureSitupGraphView()
     }
-    
+    //TODO: 어딨지
+    @objc fileprivate func didTapStandardButton() {
+        let sb = UIStoryboard(name: "TestStoryboard", bundle: nil)
+        guard let vc = sb.instantiateViewController(withIdentifier: "HistoryTestViewController") as? HistoryTestViewController else {return}
+    }
+    @objc fileprivate func didTapAddButton() {
+        let sb = UIStoryboard(name: "FitnessTestAddStoryboard", bundle: nil)
+        guard let vc = sb.instantiateViewController(withIdentifier: "FitnessTestAdd") as? FitnessTestAddViewController else {return}
+        navigationController?.pushViewController(vc, animated: true)
+    }
     @IBAction func tapHistoryTestButton(_ sender: UIButton) {
-        //
-        print("눌렀다")
+        let sb = UIStoryboard(name: "TestStoryboard", bundle: nil)
+        guard let vc = sb.instantiateViewController(withIdentifier: "HistoryTestViewController") as? HistoryTestViewController else {return}
+        navigationController?.pushViewController(vc, animated: true)
     }
     func drawGraphViewRectangleUI() {
         graphRoundedRectangleView.layer.cornerRadius = 20

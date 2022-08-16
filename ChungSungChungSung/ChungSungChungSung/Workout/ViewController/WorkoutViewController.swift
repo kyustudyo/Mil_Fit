@@ -51,14 +51,20 @@ class WorkoutViewController: UIViewController {
         events = [sampledate5, sampledate6, sampledate7]
         
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        configNavigationTitle()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpEvents()
-        configNavigationTitle()
+        view.backgroundColor = .systemGray6
+//        configNavigationTitle()
 //        self.dailyCalendarView.isPagingEnabled = true
-        let backBarButtonItem = UIBarButtonItem(title: workoutViewTitle, style: .plain, target: nil, action: nil)
-        navigationItem.backBarButtonItem = backBarButtonItem
+//        let backBarButtonItem = UIBarButtonItem(title: workoutViewTitle, style: .plain, target: nil, action: nil)
+//        navigationItem.backBarButtonItem = backBarButtonItem
+        
+        let editBarButton = UIBarButtonItem(title: "변경", style: .plain, target: self, action: #selector(goPreviousViewController))
+        self.navigationItem.rightBarButtonItems = [editBarButton]
         
         self.dailyCalendarView.backgroundColor = .clear
         todaysWorkoutView.backgroundColor = .clear
@@ -76,14 +82,23 @@ class WorkoutViewController: UIViewController {
         setWeekView()
     }
     
+    @objc fileprivate func goPreviousViewController() {
+        let vc = WorkoutPreviousViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     private func configNavigationTitle() {
-        let viewWidth = self.view.bounds.width - 140
-        let workoutViewTitleLabel = UILabel(frame: CGRect(x: 25, y: 0, width: viewWidth, height: 20))
-        workoutViewTitleLabel.textAlignment = .left
-        workoutViewTitleLabel.font = UIFont.boldSystemFont(ofSize: 28)
-        workoutViewTitleLabel.text = workoutViewTitle
-        
-        self.navigationItem.titleView = workoutViewTitleLabel
+        navigationItem.title = "운동"
+//        let backBarButtonItem = UIBarButtonItem(title: workoutViewTitle, style: .plain, target: nil, action: nil)
+//        navigationItem.backBarButtonItem = backBarButtonItem
+//        navigationController?.navigationBar.topItem?.backButtonTitle = "메인"
+//        let viewWidth = self.view.bounds.width - 140
+//        let workoutViewTitleLabel = UILabel(frame: CGRect(x: 16, y: 0, width: viewWidth, height: 20))
+//        workoutViewTitleLabel.textAlignment = .left
+//        workoutViewTitleLabel.font = UIFont.boldSystemFont(ofSize: 28)
+//        workoutViewTitleLabel.text = workoutViewTitle
+//        navigationController?.navigationItem.titleView = workoutViewTitleLabel
+//        self.navigationItem.titleView = workoutViewTitleLabel
     }
     func setWeekView()
     {
@@ -227,6 +242,7 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
             guard let workoutAddView = UIStoryboard(name: "WorkoutAdd", bundle: .main).instantiateViewController(withIdentifier: "WorkoutAddViewController") as? WorkoutAddViewController else { return }
             workoutAddView.workoutAddTitleText = workout.title
             workoutAddView.workout = workout
+            print(navigationController)
             self.navigationController?.pushViewController(workoutAddView, animated: true)
         }
     }

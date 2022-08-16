@@ -14,6 +14,9 @@ class WorkoutPreviousViewController: UIViewController {
     fileprivate let calendar = FSCalendar()
     fileprivate let tableView = UITableView()
     var 운동들 = ["푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝"]
+    
+    private var workoutList = WorkoutData().list
+    
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = false
     }
@@ -22,6 +25,7 @@ class WorkoutPreviousViewController: UIViewController {
         navigationItem.title = "지난 기록"
         navigationController?.navigationBar.topItem?.backButtonTitle = "운동"
         view.backgroundColor = .systemGray6
+        
         calendar.delegate = self
         calendar.dataSource = self
         tableView.delegate = self
@@ -150,16 +154,24 @@ extension WorkoutPreviousViewController: FSCalendarDelegate, FSCalendarDataSourc
 extension WorkoutPreviousViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 운동들.count
+//        return 운동들.count
+        return workoutList.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: WorkoutPreviousTableViewCell.cellID, for: indexPath) as? WorkoutPreviousTableViewCell else { return UITableViewCell() }
-        cell.workoutNameLabel.text = 운동들[indexPath.row]
+//        cell.workoutNameLabel.text = 운동들[indexPath.row]
+        cell.workoutNameLabel.text = workoutList[indexPath.row].title
         cell.separatorInset = (indexPath.row == 운동들.count - 1) ? UIEdgeInsets(top: 0, left: 0, bottom: 0, right: tableView.bounds.width) : UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 
         
         return cell
     }
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let vc = UIStoryboard(name: "WorkoutAdd", bundle: .main).instantiateViewController(withIdentifier: "WorkoutAddViewController") as? WorkoutAddViewController else { return }
+        let workout = workoutList[indexPath.row]
+        vc.workoutAddTitleText = workout.title
+        vc.workout = workout
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }

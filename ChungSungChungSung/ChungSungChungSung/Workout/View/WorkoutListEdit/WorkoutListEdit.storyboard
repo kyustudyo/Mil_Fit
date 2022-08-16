@@ -25,7 +25,11 @@
                                                 <action selector="cancelEditing:" destination="Y6W-OH-hqX" id="xgi-Jc-DMB"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="완료" id="jvb-3f-odO"/>
+                                        <barButtonItem key="rightBarButtonItem" title="완료" id="jvb-3f-odO">
+                                            <connections>
+                                                <action selector="doneEditing:" destination="Y6W-OH-hqX" id="gDW-b4-DUf"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
