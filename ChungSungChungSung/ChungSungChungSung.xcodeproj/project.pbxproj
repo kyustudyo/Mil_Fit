@@ -79,6 +79,8 @@
 		DD639DDA28A9629100219504 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD639DD928A9629100219504 /* Onboarding.storyboard */; };
 		DD639DDE28A9C1A600219504 /* OnboardingSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD639DDD28A9C1A600219504 /* OnboardingSecondViewController.swift */; };
 		DD639DE028A9C1B300219504 /* OnboardingLastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD639DDF28A9C1B300219504 /* OnboardingLastViewController.swift */; };
+		DD639DE828ABFB4300219504 /* DischargeDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD639DE728ABFB4300219504 /* DischargeDetail.storyboard */; };
+		DD639DEA28ABFB5800219504 /* DischargeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD639DE928ABFB5800219504 /* DischargeDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -157,6 +159,8 @@
 		DD639DD928A9629100219504 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		DD639DDD28A9C1A600219504 /* OnboardingSecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSecondViewController.swift; sourceTree = "<group>"; };
 		DD639DDF28A9C1B300219504 /* OnboardingLastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingLastViewController.swift; sourceTree = "<group>"; };
+		DD639DE728ABFB4300219504 /* DischargeDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DischargeDetail.storyboard; sourceTree = "<group>"; };
+		DD639DE928ABFB5800219504 /* DischargeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DischargeDetailViewController.swift; sourceTree = "<group>"; };
 		E04FA59EA467D82C0CE448CA /* Pods-ChungSungChungSung.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChungSungChungSung.release.xcconfig"; path = "Target Support Files/Pods-ChungSungChungSung/Pods-ChungSungChungSung.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -315,6 +319,7 @@
 				328AB9C328A8100D00000A85 /* GoalsDetailViewController.swift */,
 				328AB9CD28A8C5AB00000A85 /* BadgeDetailViewController.swift */,
 				328AB9D528A9021A00000A85 /* BadgeDetailInfoViewController.swift */,
+				DD639DE928ABFB5800219504 /* DischargeDetailViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -353,6 +358,7 @@
 		79F6763E289C2F6000850FF0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				DD639DE628ABFB2E00219504 /* DischargeDetail */,
 				328AB9CA28A8C55600000A85 /* BadgeDetail */,
 				328AB9C728A8220800000A85 /* GoalsDetail */,
 				328AB9A928A638A000000A85 /* Profile.storyboard */,
@@ -454,6 +460,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		DD639DE628ABFB2E00219504 /* DischargeDetail */ = {
+			isa = PBXGroup;
+			children = (
+				DD639DE728ABFB4300219504 /* DischargeDetail.storyboard */,
+			);
+			path = DischargeDetail;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -522,6 +536,7 @@
 				328AB9B828A64D5A00000A85 /* GoalsTableViewCell.xib in Resources */,
 				79BBF6A0289AB50D0003FAD8 /* LaunchScreen.storyboard in Resources */,
 				7E37333928A4CBD1008F7EFA /* TodaysWorkoutEdit.storyboard in Resources */,
+				DD639DE828ABFB4300219504 /* DischargeDetail.storyboard in Resources */,
 				794B601128A527BB00621A27 /* WorkoutAddPlusTableViewCell.xib in Resources */,
 				328AB9AA28A638A000000A85 /* Profile.storyboard in Resources */,
 				794B600A28A527BB00621A27 /* WorkoutAddOneTableViewCell.xib in Resources */,
@@ -595,6 +610,7 @@
 				794B600C28A527BB00621A27 /* WorkoutAddPlusTableViewCell.swift in Sources */,
 				328AB9B728A64D5A00000A85 /* GoalsTableViewCell.swift in Sources */,
 				7E5BF64228A23A5400B6DD26 /* WorkoutModel.swift in Sources */,
+				DD639DEA28ABFB5800219504 /* DischargeDetailViewController.swift in Sources */,
 				7ED2F7BA289EDE0E00DAEEC9 /* UIColor.swift in Sources */,
 				325F8E0F28A3C962004ACF9E /* WorkoutListCell.swift in Sources */,
 				7E37333D28A4CC5A008F7EFA /* TodaysWorkoutEditViewController.swift in Sources */,
