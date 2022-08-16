@@ -53,16 +53,15 @@
 		79F676CC28A372F800850FF0 /* MainMealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F676CB28A372F800850FF0 /* MainMealViewController.swift */; };
 		79F676CE28A39D0C00850FF0 /* MainMealTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F676CD28A39D0C00850FF0 /* MainMealTableViewCell.swift */; };
 		79F676D028A4CBD900850FF0 /* MainCalorieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F676CF28A4CBD900850FF0 /* MainCalorieViewController.swift */; };
+		79FA607C28AB8A4300A233AC /* WorkoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5BF64128A23A5400B6DD26 /* WorkoutModel.swift */; };
 		7E37333928A4CBD1008F7EFA /* TodaysWorkoutEdit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E37333828A4CBD1008F7EFA /* TodaysWorkoutEdit.storyboard */; };
 		7E37333D28A4CC5A008F7EFA /* TodaysWorkoutEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E37333C28A4CC5A008F7EFA /* TodaysWorkoutEditViewController.swift */; };
-		7E5BF64228A23A5400B6DD26 /* WorkoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5BF64128A23A5400B6DD26 /* WorkoutModel.swift */; };
 		7E5BF64428A2450900B6DD26 /* TodaysWorkoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5BF64328A2450900B6DD26 /* TodaysWorkoutCell.swift */; };
 		7E9A47C2289D4774005B98B4 /* Workout.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E9A47C1289D4774005B98B4 /* Workout.storyboard */; };
 		7E9A47C4289D478A005B98B4 /* WorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9A47C3289D478A005B98B4 /* WorkoutViewController.swift */; };
 		7ED2F78F289E482600DAEEC9 /* WorkoutAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED2F78E289E482600DAEEC9 /* WorkoutAddViewController.swift */; };
 		7ED2F7B7289ED9A700DAEEC9 /* DailyCalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED2F7B6289ED9A700DAEEC9 /* DailyCalendarCell.swift */; };
 		7ED2F7BA289EDE0E00DAEEC9 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED2F7B9289EDE0E00DAEEC9 /* UIColor.swift */; };
-		AB21160F28A1308B0050E9F8 /* FitnessHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB21160E28A1308B0050E9F8 /* FitnessHistoryViewController.swift */; };
 		AB21161228A4C5F20050E9F8 /* FitnessHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB21161128A4C5F20050E9F8 /* FitnessHistoryTableViewCell.swift */; };
 		AB460BAF28A7A32000765A1D /* BasicWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB460BAE28A7A32000765A1D /* BasicWorkout.swift */; };
 		AB8623BE289E5B4200F71283 /* TestMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8623BD289E5B4200F71283 /* TestMainViewController.swift */; };
@@ -530,6 +529,7 @@
 				79F676CE28A39D0C00850FF0 /* MainMealTableViewCell.swift in Sources */,
 				790B0C4228A9189A00A3A988 /* SelectArmyViewController.swift in Sources */,
 				79F676CA28A163F300850FF0 /* UIImageExtension.swift in Sources */,
+				79FA607C28AB8A4300A233AC /* WorkoutModel.swift in Sources */,
 				AB21161228A4C5F20050E9F8 /* FitnessHistoryTableViewCell.swift in Sources */,
 				79BBF694289AB50B0003FAD8 /* AppDelegate.swift in Sources */,
 				325F8E1128A3F1BC004ACF9E /* UIView.swift in Sources */,
