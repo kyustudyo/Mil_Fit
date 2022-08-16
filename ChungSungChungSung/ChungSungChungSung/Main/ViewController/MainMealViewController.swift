@@ -23,6 +23,8 @@ class MainMealViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     fileprivate var tableView: UITableView = UITableView()
     
+    weak var delegate: ArmySelection?
+    
     fileprivate let previousButton: UIButton = {
         let previousButton = UIButton()
         previousButton.addTarget(MainMealViewController.self, action: #selector(previousTapped), for: .touchUpInside)
@@ -97,11 +99,18 @@ class MainMealViewController: UIViewController, UICollectionViewDelegate, UIColl
         super.viewDidLoad()
         
 //
+//        let changeArmyButton = UIButton()
+//        changeArmyButton.setTitle("변경", for: .normal)
+//        changeArmyButton.addTarget(self, action: #selector(changeArmy), for: .touchUpInside)
+        let editBarButton = UIBarButtonItem(title: "변경", style: .plain, target: self, action: #selector(changeArmy))
+        
 //        let navigationBarAppearance = UINavigationBarAppearance()
 //        navigationBarAppearance.shadowColor = .clear
         
         navigationItem.title = "식단"
         navigationController?.navigationBar.topItem?.backButtonTitle = "메인"
+        
+        self.navigationItem.rightBarButtonItems = [editBarButton]
         tableView.register(MainMealTableViewCell.self, forCellReuseIdentifier: mainMealTableViewCellID)
         tableView.delegate = self
         tableView.dataSource = self
@@ -181,6 +190,12 @@ class MainMealViewController: UIViewController, UICollectionViewDelegate, UIColl
         return cell
     }
     
+    @objc fileprivate func changeArmy() {
+        let selectArmyViewController = SelectArmyViewController()
+        selectArmyViewController.delegate = delegate
+        selectArmyViewController.pastViewName = "식단"
+        navigationController?.pushViewController(selectArmyViewController, animated: true)
+    }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedDate = totalSquares[indexPath.item]
         collectionView.reloadData()

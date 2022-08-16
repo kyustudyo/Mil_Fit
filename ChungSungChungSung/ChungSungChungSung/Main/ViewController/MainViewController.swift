@@ -132,6 +132,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     @objc fileprivate func goMoreMeal() {
         print("more meal")
         let vc = MainMealViewController()
+        vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
     }
     
