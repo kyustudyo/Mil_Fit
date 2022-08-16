@@ -9,9 +9,6 @@
 /* Begin PBXBuildFile section */
 		325F8E0F28A3C962004ACF9E /* WorkoutListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325F8E0E28A3C962004ACF9E /* WorkoutListCell.swift */; };
 		325F8E1128A3F1BC004ACF9E /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325F8E1028A3F1BC004ACF9E /* UIView.swift */; };
-		32D3F1A428A558E60096FAFC /* WorkoutListEdit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32D3F1A328A558E60096FAFC /* WorkoutListEdit.storyboard */; };
-		32D3F1A628A559880096FAFC /* WorkoutListEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D3F1A528A559880096FAFC /* WorkoutListEditViewController.swift */; };
-		32D3F1AA28A5728F0096FAFC /* WorkoutListEditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D3F1A928A5728F0096FAFC /* WorkoutListEditCell.swift */; };
 		328AB9AA28A638A000000A85 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 328AB9A928A638A000000A85 /* Profile.storyboard */; };
 		328AB9AC28A638C200000A85 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328AB9AB28A638C200000A85 /* ProfileViewController.swift */; };
 		328AB9AF28A63B6500000A85 /* ArmyInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328AB9AD28A63B6500000A85 /* ArmyInfoTableViewCell.swift */; };
@@ -24,6 +21,9 @@
 		328AB9BC28A6A35400000A85 /* BadgeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 328AB9BA28A6A35400000A85 /* BadgeTableViewCell.xib */; };
 		328AB9BF28A6AFB000000A85 /* BadgeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328AB9BD28A6AFB000000A85 /* BadgeCollectionViewCell.swift */; };
 		328AB9C028A6AFB000000A85 /* BadgeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 328AB9BE28A6AFB000000A85 /* BadgeCollectionViewCell.xib */; };
+		32D3F1A428A558E60096FAFC /* WorkoutListEdit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32D3F1A328A558E60096FAFC /* WorkoutListEdit.storyboard */; };
+		32D3F1A628A559880096FAFC /* WorkoutListEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D3F1A528A559880096FAFC /* WorkoutListEditViewController.swift */; };
+		32D3F1AA28A5728F0096FAFC /* WorkoutListEditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D3F1A928A5728F0096FAFC /* WorkoutListEditCell.swift */; };
 		4ACE80F58EE9B4CABE58C574 /* Pods_ChungSungChungSung.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FF3882342AE3CFD66EC86C9 /* Pods_ChungSungChungSung.framework */; };
 		794B600A28A527BB00621A27 /* WorkoutAddOneTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 794B600028A527BB00621A27 /* WorkoutAddOneTableViewCell.xib */; };
 		794B600B28A527BB00621A27 /* TodaysWorkoutEditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794B600128A527BB00621A27 /* TodaysWorkoutEditCell.swift */; };
@@ -73,9 +73,6 @@
 /* Begin PBXFileReference section */
 		325F8E0E28A3C962004ACF9E /* WorkoutListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutListCell.swift; sourceTree = "<group>"; };
 		325F8E1028A3F1BC004ACF9E /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
-		32D3F1A328A558E60096FAFC /* WorkoutListEdit.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WorkoutListEdit.storyboard; sourceTree = "<group>"; };
-		32D3F1A528A559880096FAFC /* WorkoutListEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutListEditViewController.swift; sourceTree = "<group>"; };
-		32D3F1A928A5728F0096FAFC /* WorkoutListEditCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutListEditCell.swift; sourceTree = "<group>"; };
 		328AB9A928A638A000000A85 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		328AB9AB28A638C200000A85 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		328AB9AD28A63B6500000A85 /* ArmyInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmyInfoTableViewCell.swift; sourceTree = "<group>"; };
@@ -88,6 +85,9 @@
 		328AB9BA28A6A35400000A85 /* BadgeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BadgeTableViewCell.xib; sourceTree = "<group>"; };
 		328AB9BD28A6AFB000000A85 /* BadgeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeCollectionViewCell.swift; sourceTree = "<group>"; };
 		328AB9BE28A6AFB000000A85 /* BadgeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BadgeCollectionViewCell.xib; sourceTree = "<group>"; };
+		32D3F1A328A558E60096FAFC /* WorkoutListEdit.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WorkoutListEdit.storyboard; sourceTree = "<group>"; };
+		32D3F1A528A559880096FAFC /* WorkoutListEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutListEditViewController.swift; sourceTree = "<group>"; };
+		32D3F1A928A5728F0096FAFC /* WorkoutListEditCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutListEditCell.swift; sourceTree = "<group>"; };
 		3FF3882342AE3CFD66EC86C9 /* Pods_ChungSungChungSung.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChungSungChungSung.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		794B600028A527BB00621A27 /* WorkoutAddOneTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorkoutAddOneTableViewCell.xib; sourceTree = "<group>"; };
 		794B600128A527BB00621A27 /* TodaysWorkoutEditCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodaysWorkoutEditCell.swift; sourceTree = "<group>"; };
@@ -157,16 +157,6 @@
 				E04FA59EA467D82C0CE448CA /* Pods-ChungSungChungSung.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		32D3F1A728A571F10096FAFC /* TodaysWorkoutEdit */ = {
-			isa = PBXGroup;
-			children = (
-				7E37333828A4CBD1008F7EFA /* TodaysWorkoutEdit.storyboard */,
-				7E37333C28A4CC5A008F7EFA /* TodaysWorkoutEditViewController.swift */,
-				794B600128A527BB00621A27 /* TodaysWorkoutEditCell.swift */,
-			);
-			path = TodaysWorkoutEdit;
 			sourceTree = "<group>";
 		};
 		32D3F1A828A572110096FAFC /* WorkoutListEdit */ = {
@@ -307,8 +297,9 @@
 		79F6763C289C2F5000850FF0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7E37333828A4CBD1008F7EFA /* TodaysWorkoutEdit.storyboard */,
+				7E37333C28A4CC5A008F7EFA /* TodaysWorkoutEditViewController.swift */,
 				7E37333728A4CBA1008F7EFA /* WorkoutAdd */,
-				32D3F1A728A571F10096FAFC /* TodaysWorkoutEdit */,
 				32D3F1A828A572110096FAFC /* WorkoutListEdit */,
 				7E9A47C1289D4774005B98B4 /* Workout.storyboard */,
 				7ED2F7B6289ED9A700DAEEC9 /* DailyCalendarCell.swift */,
@@ -358,6 +349,7 @@
 		7E37333728A4CBA1008F7EFA /* WorkoutAdd */ = {
 			isa = PBXGroup;
 			children = (
+				794B600128A527BB00621A27 /* TodaysWorkoutEditCell.swift */,
 				794B600628A527BB00621A27 /* WorkoutAdd.storyboard */,
 				794B600428A527BB00621A27 /* WorkoutAddCalorieTableViewCell.swift */,
 				794B600528A527BB00621A27 /* WorkoutAddCalorieTableViewCell.xib */,
