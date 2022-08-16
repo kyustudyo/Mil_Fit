@@ -300,8 +300,8 @@
 			isa = PBXGroup;
 			children = (
 				AB8623BD289E5B4200F71283 /* TestMainViewController.swift */,
-				AB21160E28A1308B0050E9F8 /* FitnessHistoryViewController.swift */,
 				AB8623C1289ECD8900F71283 /* TestMainTableViewCell.swift */,
+				AB21160E28A1308B0050E9F8 /* FitnessHistoryViewController.swift */,
 				AB21161128A4C5F20050E9F8 /* FitnessHistoryTableViewCell.swift */,
 			);
 			path = ViewController;
