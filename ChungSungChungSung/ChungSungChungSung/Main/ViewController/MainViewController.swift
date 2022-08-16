@@ -311,7 +311,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         mealOrNothing.anchor(left: stack.leftAnchor, right: stack.rightAnchor, paddingLeft: 0, paddingRight: 0)
         mealOrNothing.setHeight(height: Constants.mealCellHeight)
         
-        if isMealCollectionView.isEmpty {
+        if (isMealCollectionView.isEmpty || isMealCollectionView == "없음") && !isMealData {
             let selectArmyButton = UIButton()
             emptyView.addSubview(selectArmyButton)
             selectArmyButton.addTarget(self, action: #selector(goSelectArmyViewController), for: .touchUpInside)

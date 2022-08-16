@@ -11,7 +11,7 @@ class SelectArmyViewController: UIViewController {
 
     let tableView = UITableView()
     //TODO: 기존것 가져가도록
-    var selectedArmyIndex = 0
+    var selectedArmyIndex = -1
     var isMealCollectionView = "부대"
     
     weak var delegate: ArmySelection?
