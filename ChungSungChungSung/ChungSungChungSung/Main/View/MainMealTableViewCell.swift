@@ -92,7 +92,7 @@ class MainMealTableViewCell: UITableViewCell {
         let mealVstack = UIStackView(arrangedSubviews: mealLabels)
         mealVstack.axis = .vertical
         contentView.addSubview(mealVstack)
-        mealVstack.anchor(top: forkAndWhenMeal.topAnchor, paddingTop: 0)
+        mealVstack.anchor(top: forkAndWhenMeal.topAnchor, right: contentView.rightAnchor, paddingTop: 0, paddingRight: 8)
         mealVstack.leftAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         
         self.backgroundColor = .white
