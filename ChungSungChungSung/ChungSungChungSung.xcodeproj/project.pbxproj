@@ -78,6 +78,8 @@
 		AB8623C0289E5B4A00F71283 /* TestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB8623BF289E5B4A00F71283 /* TestStoryboard.storyboard */; };
 		AB8623C2289ECD8900F71283 /* TestMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8623C1289ECD8900F71283 /* TestMainTableViewCell.swift */; };
 		ABE51DD1289F90B2005BFB0E /* FitnessCircularGraphSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE51DD0289F90B2005BFB0E /* FitnessCircularGraphSwiftUIView.swift */; };
+		DD3AC80E28A645DA000D2E38 /* FitnessTestAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AC80D28A645DA000D2E38 /* FitnessTestAddViewController.swift */; };
+		DD3AC81028A64692000D2E38 /* FitnessTestAddStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD3AC80F28A64692000D2E38 /* FitnessTestAddStoryboard.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -157,6 +159,9 @@
 		AB8623C1289ECD8900F71283 /* TestMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMainTableViewCell.swift; sourceTree = "<group>"; };
 		ABE51DD0289F90B2005BFB0E /* FitnessCircularGraphSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessCircularGraphSwiftUIView.swift; sourceTree = "<group>"; };
 		B180C28E5034187EE8032A64 /* Pods_ChungSungChungSung.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChungSungChungSung.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD3AC80D28A645DA000D2E38 /* FitnessTestAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessTestAddViewController.swift; sourceTree = "<group>"; };
+		DD3AC80F28A64692000D2E38 /* FitnessTestAddStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FitnessTestAddStoryboard.storyboard; sourceTree = "<group>"; };
+		E04FA59EA467D82C0CE448CA /* Pods-ChungSungChungSung.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChungSungChungSung.release.xcconfig"; path = "Target Support Files/Pods-ChungSungChungSung/Pods-ChungSungChungSung.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -303,6 +308,7 @@
 				AB8623C1289ECD8900F71283 /* TestMainTableViewCell.swift */,
 				AB21160E28A1308B0050E9F8 /* FitnessHistoryViewController.swift */,
 				AB21161128A4C5F20050E9F8 /* FitnessHistoryTableViewCell.swift */,
+				DD3AC80D28A645DA000D2E38 /* FitnessTestAddViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -348,6 +354,7 @@
 			isa = PBXGroup;
 			children = (
 				AB8623BF289E5B4A00F71283 /* TestStoryboard.storyboard */,
+				DD3AC80F28A64692000D2E38 /* FitnessTestAddStoryboard.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -489,6 +496,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD3AC81028A64692000D2E38 /* FitnessTestAddStoryboard.storyboard in Resources */,
 				328AB9C228A80FE500000A85 /* GoalsDetail.storyboard in Resources */,
 				7E9A47C2289D4774005B98B4 /* Workout.storyboard in Resources */,
 				328AB9B428A64A9700000A85 /* BodyInfoTableViewCell.xib in Resources */,
@@ -565,6 +573,7 @@
 				794B601528A6241200621A27 /* WorkoutPreviousViewController.swift in Sources */,
 				328AB9BF28A6AFB000000A85 /* BadgeCollectionViewCell.swift in Sources */,
 				7E9A47C4289D478A005B98B4 /* WorkoutViewController.swift in Sources */,
+				DD3AC80E28A645DA000D2E38 /* FitnessTestAddViewController.swift in Sources */,
 				794B600C28A527BB00621A27 /* WorkoutAddPlusTableViewCell.swift in Sources */,
 				794B601728A62A7400621A27 /* WorkoutPreviousTableViewCell.swift in Sources */,
 				328AB9B728A64D5A00000A85 /* GoalsTableViewCell.swift in Sources */,
