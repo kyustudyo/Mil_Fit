@@ -4,33 +4,41 @@ PODS:
   - Charts/Core (4.0.3):
     - SwiftAlgorithms (~> 1.0)
   - FSCalendar (2.8.4)
+  - IQKeyboardManagerSwift (6.5.10)
   - Realm (10.28.4):
     - Realm/Headers (= 10.28.4)
   - Realm/Headers (10.28.4)
   - RealmSwift (10.28.4):
     - Realm (= 10.28.4)
   - SwiftAlgorithms (1.0.0)
+  - Toast-Swift (5.0.1)
 
 DEPENDENCIES:
   - Charts
   - FSCalendar
+  - IQKeyboardManagerSwift
   - RealmSwift (~> 10)
+  - Toast-Swift (~> 5.0.1)
 
 SPEC REPOS:
   trunk:
     - Charts
     - FSCalendar
+    - IQKeyboardManagerSwift
     - Realm
     - RealmSwift
     - SwiftAlgorithms
+    - Toast-Swift
 
 SPEC CHECKSUMS:
   Charts: d959d6723c8eedfdd0735dfc28cb0a71762ac4d9
   FSCalendar: 2d1d0d9398f12d439f55c1fe0f01525b151b8260
+  IQKeyboardManagerSwift: 52962c76ab33532f15ad9f3ff4e5715eda5335bb
   Realm: 8ab5176275b4123e84383b33385d47f09507acac
   RealmSwift: 0851105ca8c6d5722678c98e4d4e53637d1704c8
   SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
+  Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: c026f36ea84222ce0c2aebb69d78ff9341c4814e
+PODFILE CHECKSUM: 3c57cfb6d2846f364ad08a49fe82680e690b1c00
 
 COCOAPODS: 1.11.3
