@@ -33,16 +33,6 @@ class OnboardingLastViewController: UIViewController {
         dateTF.inputView = datePicker
     }
     
-    //    @objc func dateChange(datePicker: UIDatePicker) {
-    //        dateTF.text = formatData(date: datePicker.date)
-    //    }
-    //
-    //    func formatData(date: Date) -> String {
-    //        let formatter = DateFormatter()
-    //        formatter.locale = Locale(identifier: "ko")
-    //        formatter.dateFormat = "yyyy년 M월 dd일"
-    //        return formatter.string(from: date)
-    //    }
     @objc private func datePickerValueDidChange(_ datePicker: UIDatePicker) {
         let formatter = DateFormatter() // Date 타입과 관련된 포맷터
         formatter.dateFormat = "yyyy년 M월 dd일"
