@@ -64,7 +64,7 @@ class TestMainViewController: UIViewController {
     }
     func drawGraphViewRectangleUI() {
         graphRoundedRectangleView.layer.cornerRadius = 20
-        graphRoundedRectangleView.backgroundColor = UIColor.systemGray6 //
+        graphRoundedRectangleView.backgroundColor = CustomColor.bgGray //
         historyFitnessTestLabel.text = "지난 체력검정 결과"
         historyFitnessTestLabel.textColor = UIColor.gray //
         lastFitnessTestDateLabel.text = "2022.08.07"//
@@ -156,6 +156,7 @@ extension TestMainViewController: UITableViewDelegate, UITableViewDataSource {
         }
         return cell
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 75
     }

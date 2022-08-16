@@ -8,4 +8,5 @@ target 'ChungSungChungSung' do
   # Pods for ChungSungChungSung
 pod 'FSCalendar'
 pod 'Charts'
+pod 'RealmSwift', '~>10'
 end
