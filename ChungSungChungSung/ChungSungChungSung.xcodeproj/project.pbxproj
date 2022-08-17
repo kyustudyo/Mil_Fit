@@ -83,6 +83,10 @@
 		AB8623BE289E5B4200F71283 /* TestMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8623BD289E5B4200F71283 /* TestMainViewController.swift */; };
 		AB8623C0289E5B4A00F71283 /* TestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB8623BF289E5B4A00F71283 /* TestStoryboard.storyboard */; };
 		AB8623C2289ECD8900F71283 /* TestMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8623C1289ECD8900F71283 /* TestMainTableViewCell.swift */; };
+		ABE43C3628ACB0DF005C272C /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE43C3528ACB0DE005C272C /* RealmManager.swift */; };
+		ABE43C3828ACB0E9005C272C /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE43C3728ACB0E9005C272C /* UserDefaultManager.swift */; };
+		ABE43C3A28ACB0F6005C272C /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE43C3928ACB0F6005C272C /* RealmModel.swift */; };
+		ABE43C3C28ACB244005C272C /* FuncCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE43C3B28ACB244005C272C /* FuncCollection.swift */; };
 		ABE51DD1289F90B2005BFB0E /* FitnessCircularGraphSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE51DD0289F90B2005BFB0E /* FitnessCircularGraphSwiftUIView.swift */; };
 		DD3AC80E28A645DA000D2E38 /* FitnessTestAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AC80D28A645DA000D2E38 /* FitnessTestAddViewController.swift */; };
 		DD3AC81028A64692000D2E38 /* FitnessTestAddStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD3AC80F28A64692000D2E38 /* FitnessTestAddStoryboard.storyboard */; };
@@ -173,6 +177,10 @@
 		AB8623BD289E5B4200F71283 /* TestMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMainViewController.swift; sourceTree = "<group>"; };
 		AB8623BF289E5B4A00F71283 /* TestStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TestStoryboard.storyboard; sourceTree = "<group>"; };
 		AB8623C1289ECD8900F71283 /* TestMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMainTableViewCell.swift; sourceTree = "<group>"; };
+		ABE43C3528ACB0DE005C272C /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		ABE43C3728ACB0E9005C272C /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
+		ABE43C3928ACB0F6005C272C /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
+		ABE43C3B28ACB244005C272C /* FuncCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuncCollection.swift; sourceTree = "<group>"; };
 		ABE51DD0289F90B2005BFB0E /* FitnessCircularGraphSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessCircularGraphSwiftUIView.swift; sourceTree = "<group>"; };
 		B180C28E5034187EE8032A64 /* Pods_ChungSungChungSung.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChungSungChungSung.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD3AC80D28A645DA000D2E38 /* FitnessTestAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessTestAddViewController.swift; sourceTree = "<group>"; };
@@ -253,6 +261,7 @@
 		79BBF692289AB50B0003FAD8 /* ChungSungChungSung */ = {
 			isa = PBXGroup;
 			children = (
+				ABE43C3428ACB0CD005C272C /* Manager */,
 				DD639DD428A9625200219504 /* Onboarding */,
 				79F67693289E52F100850FF0 /* TabViewController.swift */,
 				79F67636289C2DAF00850FF0 /* Main */,
@@ -448,6 +457,7 @@
 				AB460BAE28A7A32000765A1D /* BasicWorkout.swift */,
 				328AB9C528A81A1500000A85 /* GoalModel.swift */,
 				7E37333E28A8D18E008F7EFA /* BadgeModel.swift */,
+				ABE43C3928ACB0F6005C272C /* RealmModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -468,6 +478,16 @@
 				B180C28E5034187EE8032A64 /* Pods_ChungSungChungSung.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ABE43C3428ACB0CD005C272C /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				ABE43C3528ACB0DE005C272C /* RealmManager.swift */,
+				ABE43C3728ACB0E9005C272C /* UserDefaultManager.swift */,
+				ABE43C3B28ACB244005C272C /* FuncCollection.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		DD639DD428A9625200219504 /* Onboarding */ = {
@@ -639,6 +659,7 @@
 				DD639DE028A9C1B300219504 /* OnboardingLastViewController.swift in Sources */,
 				7E9A47C4289D478A005B98B4 /* WorkoutViewController.swift in Sources */,
 				DD3AC80E28A645DA000D2E38 /* FitnessTestAddViewController.swift in Sources */,
+				ABE43C3C28ACB244005C272C /* FuncCollection.swift in Sources */,
 				794B600C28A527BB00621A27 /* WorkoutAddPlusTableViewCell.swift in Sources */,
 				794B601728A62A7400621A27 /* WorkoutPreviousTableViewCell.swift in Sources */,
 				328AB9B728A64D5A00000A85 /* GoalsTableViewCell.swift in Sources */,
@@ -654,6 +675,7 @@
 				790B0C4228A9189A00A3A988 /* SelectArmyViewController.swift in Sources */,
 				79F676CA28A163F300850FF0 /* UIImageExtension.swift in Sources */,
 				79FA607C28AB8A4300A233AC /* WorkoutModel.swift in Sources */,
+				ABE43C3A28ACB0F6005C272C /* RealmModel.swift in Sources */,
 				79EB055728ABC4D200CA2A11 /* TodaysWorkoutEditViewController.swift in Sources */,
 				7E37333F28A8D18E008F7EFA /* BadgeModel.swift in Sources */,
 				AB21161228A4C5F20050E9F8 /* FitnessHistoryTableViewCell.swift in Sources */,
@@ -666,6 +688,7 @@
 				794B600D28A527BB00621A27 /* WorkoutAddOneTableViewCell.swift in Sources */,
 				79F67699289E557200850FF0 /* ViewExtensioin.swift in Sources */,
 				328AB9C928A8225700000A85 /* GoalsDetailCell.swift in Sources */,
+				ABE43C3828ACB0E9005C272C /* UserDefaultManager.swift in Sources */,
 				79F6769D289EACF900850FF0 /* mealCollectionViewCell.swift in Sources */,
 				328AB9D628A9021A00000A85 /* BadgeDetailInfoViewController.swift in Sources */,
 				79F676D028A4CBD900850FF0 /* MainCalorieViewController.swift in Sources */,
@@ -683,6 +706,7 @@
 				DD639DD828A9628200219504 /* OnboardingViewController.swift in Sources */,
 				AB8623C2289ECD8900F71283 /* TestMainTableViewCell.swift in Sources */,
 				328AB9C628A81A1500000A85 /* GoalModel.swift in Sources */,
+				ABE43C3628ACB0DF005C272C /* RealmManager.swift in Sources */,
 				328AB9AF28A63B6500000A85 /* ArmyInfoTableViewCell.swift in Sources */,
 				794B601328A527BB00621A27 /* WorkoutAddTwoTableViewCell.swift in Sources */,
 				AB8623BE289E5B4200F71283 /* TestMainViewController.swift in Sources */,
