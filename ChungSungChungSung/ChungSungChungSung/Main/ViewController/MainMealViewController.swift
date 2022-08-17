@@ -22,7 +22,7 @@ class MainMealViewController: UIViewController, UICollectionViewDelegate, UIColl
     }()
     
     fileprivate var tableView: UITableView = UITableView()
-    
+    var isMealCollectionView: String = ""
     weak var delegate: ArmySelection?
     
     fileprivate let previousButton: UIButton = {
@@ -93,8 +93,10 @@ class MainMealViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = false
+        print(isMealCollectionView)
         
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -194,6 +196,7 @@ class MainMealViewController: UIViewController, UICollectionViewDelegate, UIColl
         let selectArmyViewController = SelectArmyViewController()
         selectArmyViewController.delegate = delegate
         selectArmyViewController.pastViewName = "식단"
+        selectArmyViewController.isMealCollectionView = isMealCollectionView
         navigationController?.pushViewController(selectArmyViewController, animated: true)
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -366,7 +369,6 @@ class CalendarCell: UICollectionViewCell {
 ////        let location = [0.2, 1.0]
 ////
 ////        self.addGradient(with: gradientLayer, colorSet: colorSet, locations: location)
-//        
 //        }
     
     

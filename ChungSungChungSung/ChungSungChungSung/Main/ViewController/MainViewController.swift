@@ -132,6 +132,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     @objc fileprivate func goMoreMeal() {
         print("more meal")
         let vc = MainMealViewController()
+        vc.isMealCollectionView = isMealCollectionView
         vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -271,7 +272,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         previousButton.centerY(inView: calendar.calendarHeaderView)
         previousButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
         previousButton.tintColor = .black
-        
+        print(isMealCollectionView)
         let nextButton = UIButton()
         nextButton.addTarget(self, action: #selector(nextTapped(_:)), for: .touchUpInside)
         nextButton.tintColor = .black

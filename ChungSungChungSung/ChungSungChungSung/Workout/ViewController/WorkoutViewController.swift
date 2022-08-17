@@ -63,7 +63,8 @@ class WorkoutViewController: UIViewController {
 //        let backBarButtonItem = UIBarButtonItem(title: workoutViewTitle, style: .plain, target: nil, action: nil)
 //        navigationItem.backBarButtonItem = backBarButtonItem
         
-        let editBarButton = UIBarButtonItem(title: "변경", style: .plain, target: self, action: #selector(goPreviousViewController))
+        let editBarButton = UIBarButtonItem(image: UIImage(systemName: "calendar"), style: .plain, target: self, action: #selector(goPreviousViewController))
+        editBarButton.tintColor = .black
         self.navigationItem.rightBarButtonItems = [editBarButton]
         
         self.dailyCalendarView.backgroundColor = .clear

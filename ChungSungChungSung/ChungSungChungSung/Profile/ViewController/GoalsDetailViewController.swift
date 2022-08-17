@@ -40,7 +40,8 @@ class GoalsDetailViewController: UIViewController {
     }
     
     @objc private func didTapEditButton() {
-        goalsDetailTableView.setEditing(true, animated: true)
+        
+        goalsDetailTableView.setEditing(goalsDetailTableView.isEditing ? false : true, animated: true)
     }
 }
 

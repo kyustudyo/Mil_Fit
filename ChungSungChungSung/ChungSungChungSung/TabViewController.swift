@@ -27,7 +27,9 @@ class TabViewController: UITabBarController {
         let tempFitnessViewController = firnessStoryboard.instantiateViewController(identifier: "TestMainViewController")
         let fitnessViewController = UINavigationController.init(rootViewController: tempFitnessViewController)
         let profileStroyboard = UIStoryboard(name: "Profile", bundle: Bundle.main)
-        let profileViewController = profileStroyboard.instantiateViewController(identifier: "ProfileViewController")
+        let tempProfileViewController = profileStroyboard.instantiateViewController(identifier: "ProfileViewController")
+        let profileViewController = UINavigationController.init(rootViewController: tempProfileViewController)
+        
         self.viewControllers = [mainViewController, workoutViewController, fitnessViewController, profileViewController]
         
         let myBoardTabBarItem = UITabBarItem(title: "My Board", image: UIImage(systemName: "keyboard"), tag: 0)

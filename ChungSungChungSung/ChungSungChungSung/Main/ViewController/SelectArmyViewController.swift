@@ -11,13 +11,13 @@ class SelectArmyViewController: UIViewController {
 
     let tableView = UITableView()
     //TODO: 기존것 가져가도록
-    var selectedArmyIndex = -1
-    var isMealCollectionView = "부대"
+//    var selectedArmyIndex = -1
+    var isMealCollectionView = ""
     
     weak var delegate: ArmySelection?
     var pastViewName: String = "메인"
     
-    let totalArmy = ["제5322부대", "제6282부대", "제8623부대", "제7369부대", "제8902부대", "제9030부대", "제5021부대", "제8623부대", "제3389부대", "제1691부대", "제2171부대", "제3296부대", "제6335부대", "제1575부대", "제2291부대", "제3182부대", "제2621부대", "제5397부대", "제7162부대", "제3296부대", "제6176부대", "제1862부대", "없음"]
+    let totalArmy = ["제5322부대", "제6282부대", "제8623부대", "제7369부대", "제8902부대", "제9030부대", "제5021부대", "제3389부대", "제1691부대", "제2171부대", "제3296부대", "제6335부대", "제1575부대", "제2291부대", "제3182부대", "제2621부대", "제5397부대", "제7162부대", "제3296부대", "제6176부대", "제1862부대", "없음"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,16 +53,17 @@ extension SelectArmyViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SelectArmyTableViewCell.cellID, for: indexPath) as? SelectArmyTableViewCell else { return UITableViewCell() }
         cell.armyLabel.text = totalArmy[indexPath.row]
         cell.separatorInset = (indexPath.row == totalArmy.count - 1) ? UIEdgeInsets(top: 0, left: 0, bottom: 0, right: tableView.bounds.width) : UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        cell.accessoryType = indexPath.row == selectedArmyIndex ? .checkmark : .none
+        cell.accessoryType = totalArmy[indexPath.row] == isMealCollectionView ? .checkmark : .none
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        selectedArmyIndex = indexPath.row
+//        selectedArmyIndex = indexPath.row
+        isMealCollectionView = totalArmy[indexPath.row]
         tableView.deselectRow(at: indexPath, animated: true)
         tableView.reloadData()
-        delegate?.selectArmy(selectedArmy: totalArmy[selectedArmyIndex])
+        delegate?.selectArmy(selectedArmy: isMealCollectionView)
     }
     
 }

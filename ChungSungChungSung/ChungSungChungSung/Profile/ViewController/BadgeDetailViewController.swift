@@ -16,7 +16,7 @@ class BadgeDetailViewController: UIViewController/*, UIViewControllerTransitioni
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setNumberOfBadgeEarned()
         
         self.view.backgroundColor = CustomColor.bgGray
@@ -77,7 +77,7 @@ extension BadgeDetailViewController: UICollectionViewDelegateFlowLayout {
 
 extension BadgeDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        badgeList.count
+        return badgeList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -90,7 +90,6 @@ extension BadgeDetailViewController: UICollectionViewDelegate, UICollectionViewD
         }
         
         cell.badgeNameLabel.text = badgeList[indexPath.row].title
-        
         return cell
     }
     
