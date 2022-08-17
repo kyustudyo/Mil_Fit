@@ -20,6 +20,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: scene)
         window?.rootViewController = TabViewController()
         window?.makeKeyAndVisible()
+        
+//        guard let scene = (scene as? UIWindowScene) else { return }
+//                window = UIWindow(windowScene: scene)
+//
+//                guard let DischargeDetailView = UIStoryboard(name: "DischargeDetail", bundle: .main).instantiateViewController(withIdentifier: "DischargeDetailViewController") as? DischargeDetailViewController else { return }
+//
+//                window?.rootViewController = DischargeDetailView
+//                window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
