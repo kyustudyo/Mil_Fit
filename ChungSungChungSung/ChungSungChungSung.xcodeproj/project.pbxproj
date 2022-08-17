@@ -90,6 +90,9 @@
 		ABE51DD1289F90B2005BFB0E /* FitnessCircularGraphSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE51DD0289F90B2005BFB0E /* FitnessCircularGraphSwiftUIView.swift */; };
 		DD3AC80E28A645DA000D2E38 /* FitnessTestAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3AC80D28A645DA000D2E38 /* FitnessTestAddViewController.swift */; };
 		DD3AC81028A64692000D2E38 /* FitnessTestAddStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD3AC80F28A64692000D2E38 /* FitnessTestAddStoryboard.storyboard */; };
+		DD3E9F4728AD2A21004EC88B /* FitnessTestStandard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD3E9F4628AD2A21004EC88B /* FitnessTestStandard.storyboard */; };
+		DD3E9F4928AD2A2B004EC88B /* FitnessTestStandardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3E9F4828AD2A2B004EC88B /* FitnessTestStandardTableViewCell.swift */; };
+		DD3E9F4B28AD2A33004EC88B /* FitnessTestStandardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3E9F4A28AD2A33004EC88B /* FitnessTestStandardViewController.swift */; };
 		DD639DD828A9628200219504 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD639DD728A9628200219504 /* OnboardingViewController.swift */; };
 		DD639DDA28A9629100219504 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD639DD928A9629100219504 /* Onboarding.storyboard */; };
 		DD639DDE28A9C1A600219504 /* OnboardingSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD639DDD28A9C1A600219504 /* OnboardingSecondViewController.swift */; };
@@ -185,6 +188,9 @@
 		B180C28E5034187EE8032A64 /* Pods_ChungSungChungSung.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChungSungChungSung.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD3AC80D28A645DA000D2E38 /* FitnessTestAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessTestAddViewController.swift; sourceTree = "<group>"; };
 		DD3AC80F28A64692000D2E38 /* FitnessTestAddStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FitnessTestAddStoryboard.storyboard; sourceTree = "<group>"; };
+		DD3E9F4628AD2A21004EC88B /* FitnessTestStandard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FitnessTestStandard.storyboard; sourceTree = "<group>"; };
+		DD3E9F4828AD2A2B004EC88B /* FitnessTestStandardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessTestStandardTableViewCell.swift; sourceTree = "<group>"; };
+		DD3E9F4A28AD2A33004EC88B /* FitnessTestStandardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessTestStandardViewController.swift; sourceTree = "<group>"; };
 		DD639DD728A9628200219504 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		DD639DD928A9629100219504 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		DD639DDD28A9C1A600219504 /* OnboardingSecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSecondViewController.swift; sourceTree = "<group>"; };
@@ -349,6 +355,8 @@
 				AB21161128A4C5F20050E9F8 /* FitnessHistoryTableViewCell.swift */,
 				DD3AC80D28A645DA000D2E38 /* FitnessTestAddViewController.swift */,
 				797C370628AC01C800B6132D /* HistoryTestViewController.swift */,
+				DD3E9F4828AD2A2B004EC88B /* FitnessTestStandardTableViewCell.swift */,
+				DD3E9F4A28AD2A33004EC88B /* FitnessTestStandardViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -398,6 +406,7 @@
 			children = (
 				AB8623BF289E5B4A00F71283 /* TestStoryboard.storyboard */,
 				DD3AC80F28A64692000D2E38 /* FitnessTestAddStoryboard.storyboard */,
+				DD3E9F4628AD2A21004EC88B /* FitnessTestStandard.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -587,6 +596,7 @@
 				79BBF6A0289AB50D0003FAD8 /* LaunchScreen.storyboard in Resources */,
 				7E37333928A4CBD1008F7EFA /* TodaysWorkoutEdit.storyboard in Resources */,
 				794B601128A527BB00621A27 /* WorkoutAddPlusTableViewCell.xib in Resources */,
+				DD3E9F4728AD2A21004EC88B /* FitnessTestStandard.storyboard in Resources */,
 				328AB9AA28A638A000000A85 /* Profile.storyboard in Resources */,
 				794B600A28A527BB00621A27 /* WorkoutAddOneTableViewCell.xib in Resources */,
 				AB8623C0289E5B4A00F71283 /* TestStoryboard.storyboard in Resources */,
@@ -660,6 +670,7 @@
 				7E9A47C4289D478A005B98B4 /* WorkoutViewController.swift in Sources */,
 				DD3AC80E28A645DA000D2E38 /* FitnessTestAddViewController.swift in Sources */,
 				ABE43C3C28ACB244005C272C /* FuncCollection.swift in Sources */,
+				DD3E9F4B28AD2A33004EC88B /* FitnessTestStandardViewController.swift in Sources */,
 				794B600C28A527BB00621A27 /* WorkoutAddPlusTableViewCell.swift in Sources */,
 				794B601728A62A7400621A27 /* WorkoutPreviousTableViewCell.swift in Sources */,
 				328AB9B728A64D5A00000A85 /* GoalsTableViewCell.swift in Sources */,
@@ -714,6 +725,7 @@
 				ABE51DD1289F90B2005BFB0E /* FitnessCircularGraphSwiftUIView.swift in Sources */,
 				328AB9C428A8100D00000A85 /* GoalsDetailViewController.swift in Sources */,
 				797C370928AC82AF00B6132D /* AddGoalViewController.swift in Sources */,
+				DD3E9F4928AD2A2B004EC88B /* FitnessTestStandardTableViewCell.swift in Sources */,
 				7ED2F7B7289ED9A700DAEEC9 /* DailyCalendarCell.swift in Sources */,
 				79D0F52728ABB4510099E944 /* TodaysWorkoutEditViewController.swift in Sources */,
 			);
