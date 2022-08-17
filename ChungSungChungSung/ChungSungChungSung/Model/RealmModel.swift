@@ -113,7 +113,7 @@ class MealRealm: Object {
     @Persisted var date: Date
     @Persisted var mealTime: String
     @Persisted var calories: Int
-    let mealList: List<String> = List<String>()
+    @Persisted var mealList: List<String> = List<String>()
     var mealArray: [String] {
         get {
             return mealList.map{$0}

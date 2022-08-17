@@ -7,6 +7,7 @@
 
 import UIKit
 import FSCalendar
+import RealmSwift
 
 //TODO: scrollview
 
@@ -190,7 +191,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     }()
     
     override func viewWillAppear(_ animated: Bool) {
-        //다른 뷰컨에서 navi를 보이므로 
+        //다른 뷰컨에서 navi를 보이므로
         navigationController?.isNavigationBarHidden = true
     }
     
@@ -200,7 +201,8 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         
         calendar.delegate = self
         calendar.dataSource = self
-        
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
+        Webservice.shared.fetchMeals300(army: "제5322부대")
         setupUI()
        
     }
