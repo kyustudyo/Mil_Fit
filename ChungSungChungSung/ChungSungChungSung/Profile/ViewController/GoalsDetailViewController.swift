@@ -33,6 +33,7 @@ class GoalsDetailViewController: UIViewController {
         let plusButton = UIButton()
         let plusImage = UIImage(systemName: "plus")
         plusButton.setImage(plusImage, for: .normal)
+        plusButton.addTarget(self, action: #selector(goAddGoalViewController), for: .touchUpInside)
         
         let editBarButton = UIBarButtonItem(customView: editButton)
         let plusBarButton = UIBarButtonItem(customView: plusButton)
@@ -42,6 +43,11 @@ class GoalsDetailViewController: UIViewController {
     @objc private func didTapEditButton() {
         
         goalsDetailTableView.setEditing(goalsDetailTableView.isEditing ? false : true, animated: true)
+    }
+    @objc private func goAddGoalViewController() {
+        let sb = UIStoryboard(name: "GoalsDetail", bundle: nil)
+        guard let vc = sb.instantiateViewController(withIdentifier: "AddGoalViewController") as? AddGoalViewController else {return}
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
