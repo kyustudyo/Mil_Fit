@@ -10,6 +10,16 @@ import SwiftUI
 import Charts
 import RealmSwift
 
+class GraphData: ObservableObject {
+    @Published var level: String
+    @Published var rate: Double
+    
+    init(level: String, rate: Double) {
+        self.level = level
+        self.rate = rate
+    }
+}
+
 class TestMainViewController: UIViewController {
     
     //그래프안에 Label
@@ -37,6 +47,13 @@ class TestMainViewController: UIViewController {
     @IBOutlet weak var recordTableViewTitleLabel: UILabel!
 
     @IBOutlet weak var fitnessMainTableView: UITableView!
+    
+//    var runningData: GraphData
+//    var pushupData: GraphData
+//    var situpData: GraphData
+    let localRealm = try! Realm()
+    var fitnessTestRealm: Results<FitnessTestRealm>!
+    
     override func viewWillAppear(_ animated: Bool) {
         navigationItem.title = "체력검정"
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -45,6 +62,8 @@ class TestMainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        fitnessTestRealm = localRealm.objects(FitnessTestRealm.self).sorted(byKeyPath: "dateSorting")
+//        runningData = GraphData(level: fitnessTestRealm.first?.level ?? "없음 ", rate: calculateGraphRate()
         fitnessMainTableView.dataSource = self
         fitnessMainTableView.delegate = self
         
@@ -55,11 +74,15 @@ class TestMainViewController: UIViewController {
         fitnessGraphButton.tintColor = UIColor.clear
         fitnessGraphButton.titleLabel?.text = ""
         
-        drawGraphViewRectangleUI()
         drawTableViewUI()
-        configureRunningGraphView()
-        configurePushupGraphView()
-        configureSitupGraphView()
+        if fitnessTestRealm.filter("isPractice == false").count == 0 {
+            drawEmptyView()
+        }else {
+            drawGraphViewRectangleUI()
+            configureRunningGraphView()
+            configurePushupGraphView()
+            configureSitupGraphView()
+        }
     }
     //TODO: 어딨지
     @objc fileprivate func didTapStandardButton() {
@@ -76,7 +99,31 @@ class TestMainViewController: UIViewController {
         guard let vc = sb.instantiateViewController(withIdentifier: "HistoryTestViewController") as? HistoryTestViewController else {return}
         navigationController?.pushViewController(vc, animated: true)
     }
+    func drawEmptyView() {
+        let emptyView = UIView()
+        let emptyLabel = UILabel()
+        emptyView.translatesAutoresizingMaskIntoConstraints = false
+        graphRoundedRectangleView.addSubview(emptyView)
+        emptyView.addSubview(emptyLabel)
+        emptyLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            emptyView.widthAnchor.constraint(equalTo: graphRoundedRectangleView.widthAnchor, multiplier: 1),
+            emptyView.heightAnchor.constraint(equalTo: graphRoundedRectangleView.heightAnchor, multiplier: 1),
+            emptyView.centerXAnchor.constraint(equalTo: graphRoundedRectangleView.centerXAnchor),
+            emptyView.centerYAnchor.constraint(equalTo: graphRoundedRectangleView.centerYAnchor)
+        ])
+        emptyView.backgroundColor = CustomColor.bgGray
+        emptyView.layer.cornerRadius = 20
+        fitnessGraphButton.isHidden = true
+        emptyLabel.centerX(inView: emptyView)
+        emptyLabel.centerY(inView: emptyView)
+        emptyLabel.text = "체력검정 기록을 추가해주세요."
+        emptyLabel.textColor = CustomColor.editGray
+
+        
+    }
     func drawGraphViewRectangleUI() {
+        fitnessGraphButton.isHidden = false
         graphRoundedRectangleView.layer.cornerRadius = 20
         graphRoundedRectangleView.backgroundColor = CustomColor.bgGray //
         historyFitnessTestLabel.text = "지난 체력검정 결과"
@@ -106,39 +153,45 @@ class TestMainViewController: UIViewController {
         //폰트크기
     }
     func configureRunningGraphView() {
-    let controller = UIHostingController(rootView: RunningGraphSwiftUIView())
-    controller.view.translatesAutoresizingMaskIntoConstraints = false
-    addChild(controller)
-    runningGraphView.addSubview(controller.view)
-    NSLayoutConstraint.activate([
-        controller.view.widthAnchor.constraint(equalTo: runningGraphView.widthAnchor, multiplier: 0.6),
-        controller.view.heightAnchor.constraint(equalTo: runningGraphView.widthAnchor, multiplier: 0.6),
-        controller.view.centerXAnchor.constraint(equalTo: runningGraphView.centerXAnchor),
-        controller.view.centerYAnchor.constraint(equalTo: runningGraphView.centerYAnchor)
-    ])
+        let data = GraphData(level: "특급", rate: 1)
+        let controller = UIHostingController(rootView: RunningGraphSwiftUIView(graphData: data))
+        controller.view.translatesAutoresizingMaskIntoConstraints = false
+        controller.view.backgroundColor = .clear
+        addChild(controller)
+        runningGraphView.addSubview(controller.view)
+        NSLayoutConstraint.activate([
+            controller.view.widthAnchor.constraint(equalTo: runningGraphView.widthAnchor, multiplier: 0.7),
+            controller.view.heightAnchor.constraint(equalTo: runningGraphView.heightAnchor, multiplier: 0.7),
+            controller.view.centerXAnchor.constraint(equalTo: runningGraphView.centerXAnchor),
+            controller.view.centerYAnchor.constraint(equalTo: runningGraphView.centerYAnchor)
+        ])
     }
     
     func configurePushupGraphView() {
-    let controller = UIHostingController(rootView: PushupGraphSwiftUIView())
+        let data = GraphData(level: "특급", rate: 1)
+    let controller = UIHostingController(rootView: PushupGraphSwiftUIView(graphData: data))
     controller.view.translatesAutoresizingMaskIntoConstraints = false
+    controller.view.backgroundColor = .clear
     addChild(controller)
     pushupGraphView.addSubview(controller.view)
     NSLayoutConstraint.activate([
-        controller.view.widthAnchor.constraint(equalTo: pushupGraphView.widthAnchor, multiplier: 0.6),
-        controller.view.heightAnchor.constraint(equalTo: pushupGraphView.widthAnchor, multiplier: 0.6),
+        controller.view.widthAnchor.constraint(equalTo: pushupGraphView.widthAnchor, multiplier: 0.7),
+        controller.view.heightAnchor.constraint(equalTo: pushupGraphView.heightAnchor, multiplier: 0.7),
         controller.view.centerXAnchor.constraint(equalTo:pushupGraphView.centerXAnchor),
         controller.view.centerYAnchor.constraint(equalTo: pushupGraphView.centerYAnchor)
     ])
     }
     
     func configureSitupGraphView() {
-    let controller = UIHostingController(rootView: SitupGraphSwiftUIView())
+        let data = GraphData(level: "특급", rate: 1)
+    let controller = UIHostingController(rootView: SitupGraphSwiftUIView(graphData: data))
     controller.view.translatesAutoresizingMaskIntoConstraints = false
+    controller.view.backgroundColor = .clear
     addChild(controller)
     situpGraphView.addSubview(controller.view)
     NSLayoutConstraint.activate([
-        controller.view.widthAnchor.constraint(equalTo: situpGraphView.widthAnchor, multiplier: 0.6),
-        controller.view.heightAnchor.constraint(equalTo: situpGraphView.widthAnchor, multiplier: 0.6),
+        controller.view.widthAnchor.constraint(equalTo: situpGraphView.widthAnchor, multiplier: 0.7),
+        controller.view.heightAnchor.constraint(equalTo: situpGraphView.heightAnchor, multiplier: 0.7),
         controller.view.centerXAnchor.constraint(equalTo: situpGraphView.centerXAnchor),
         controller.view.centerYAnchor.constraint(equalTo: situpGraphView.centerYAnchor)
     ])

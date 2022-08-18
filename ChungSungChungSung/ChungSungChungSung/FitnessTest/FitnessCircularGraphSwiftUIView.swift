@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct RunningGraphSwiftUIView: View {
+    @ObservedObject var graphData: GraphData
     var body: some View {
         ZStack {
             Circle()
@@ -28,6 +29,7 @@ struct RunningGraphSwiftUIView: View {
 }
 
 struct PushupGraphSwiftUIView: View {
+    @ObservedObject var graphData: GraphData
     var body: some View {
         ZStack {
             Circle()
@@ -48,6 +50,7 @@ struct PushupGraphSwiftUIView: View {
 }
 
 struct SitupGraphSwiftUIView: View {
+    @ObservedObject var graphData: GraphData
     var body: some View {
         ZStack {
             Circle()
@@ -66,8 +69,8 @@ struct SitupGraphSwiftUIView: View {
         }.background(Color.clear)
     }
 }
-struct RunningGraphSwiftUIView_Previews: PreviewProvider {
-    static var previews: some View {
-        RunningGraphSwiftUIView()
-    }
-}
+//struct RunningGraphSwiftUIView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RunningGraphSwiftUIView()
+//    }
+//}
