@@ -8,6 +8,7 @@
 import UIKit
 import SwiftUI
 import Charts
+import RealmSwift
 
 class TestMainViewController: UIViewController {
     
@@ -38,7 +39,8 @@ class TestMainViewController: UIViewController {
     @IBOutlet weak var fitnessMainTableView: UITableView!
     override func viewWillAppear(_ animated: Bool) {
         navigationItem.title = "체력검정"
-//        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode =  .always
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,10 +66,10 @@ class TestMainViewController: UIViewController {
         let sb = UIStoryboard(name: "TestStoryboard", bundle: nil)
         guard let vc = sb.instantiateViewController(withIdentifier: "HistoryTestViewController") as? HistoryTestViewController else {return}
     }
-    @objc fileprivate func didTapAddButton() {
+    @objc fileprivate func didTapAddButton(_ sender: UIBarButtonItem) {
         let sb = UIStoryboard(name: "FitnessTestAddStoryboard", bundle: nil)
         guard let vc = sb.instantiateViewController(withIdentifier: "FitnessTestAdd") as? FitnessTestAddViewController else {return}
-        navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     @IBAction func tapHistoryTestButton(_ sender: UIButton) {
         let sb = UIStoryboard(name: "TestStoryboard", bundle: nil)

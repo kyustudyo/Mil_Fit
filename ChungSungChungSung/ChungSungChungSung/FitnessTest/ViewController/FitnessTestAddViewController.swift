@@ -22,9 +22,10 @@ class FitnessTestAddViewController: UIViewController {
     private var diaryDate: Date?
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationItem.title = "체력검정 기록"
-        navigationController?.navigationBar.topItem?.backButtonTitle = "체력검정"
-        navigationController?.navigationBar.prefersLargeTitles = false
+        title = "체력검정 기록"
+//        navigationController?.navigationBar.topItem?.backButtonTitle = "체력검정"
+//        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.largeTitleDisplayMode = .never
     }
     
     override func viewDidLoad() {
