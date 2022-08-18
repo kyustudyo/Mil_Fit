@@ -9,6 +9,8 @@ import UIKit
 import RealmSwift
 
 class TodaysWorkoutEditViewController: UIViewController {
+    let didDismissTodaysWorkoutEditView: Notification.Name = Notification.Name("DidDismissTodaysWorkoutEditView")
+    
     var workoutList: [WorkoutModel] = []
     
     var selectedDateString: String?
@@ -23,6 +25,7 @@ class TodaysWorkoutEditViewController: UIViewController {
 //    }
     //TODO: 기능
     @IBAction func doneEditing(_ sender: Any) {
+        NotificationCenter.default.post(name: didDismissTodaysWorkoutEditView, object: nil, userInfo: nil)
         self.presentingViewController?.dismiss(animated: true)
     }
     

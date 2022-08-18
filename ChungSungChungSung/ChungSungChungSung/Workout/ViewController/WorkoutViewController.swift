@@ -14,7 +14,6 @@ class WorkoutViewController: UIViewController {
     private var favoriteWorkouts: [String]?
     
     var workoutRealm: Results<WorkoutRealm>!
-    let localWorkoutRealm = try! Realm()
 //    var todaysWorkout: [WorkoutRealm] = []
     
     var events = [String]()
@@ -65,8 +64,10 @@ class WorkoutViewController: UIViewController {
         
     }
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("viewWillAppear")
+        
         configNavigationTitle()
-        todaysWorkoutView.reloadData()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,12 +77,15 @@ class WorkoutViewController: UIViewController {
         
         numberOfTodaysWorkout = workoutList.count
         
+        let localWorkoutRealm = try! Realm()
         workoutRealm = localWorkoutRealm.objects(WorkoutRealm.self)
         print("Realm저장위치=\n\(Realm.Configuration.defaultConfiguration.fileURL!)\n")
         
         dateFormatterForFilter.dateFormat = "yyyyMMdd"
         dateFormatterForFilter.locale = Locale(identifier: "ko_KR")
         selectedDateString = dateFormatterForFilter.string(from: selectedDate)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didCompletedTodaysWorkoutEdit(_:)), name: Notification.Name("DidDismissTodaysWorkoutEditView"), object: nil)
         
         setUpEvents()
         
@@ -119,6 +123,12 @@ class WorkoutViewController: UIViewController {
     @objc fileprivate func goPreviousViewController() {
         let vc = WorkoutPreviousViewController()
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func didCompletedTodaysWorkoutEdit(_ notification: Notification) {
+        DispatchQueue.main.async {
+            self.todaysWorkoutView.reloadData()
+        }
     }
     
     private func configNavigationTitle() {
@@ -290,7 +300,7 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
         if tableView == todaysWorkoutView {
             if let selectedDateString = selectedDateString {
                 let todaysWorkout = workoutRealm.where {
-                    $0.dateSearching == selectedDateString
+                    $0.dateSearching == selectedDateString && $0.set == 1
                 }
                 if todaysWorkout.count == 0 {
                     returnNumber = 1

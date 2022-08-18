@@ -13,13 +13,13 @@ class WorkoutListEditViewController: UIViewController {
     var notFavoriteWorkout: [WorkoutModel] = []
     private var workout: WorkoutModel?
     
-    @IBOutlet weak var cancelEditingButton: UIBarButtonItem!
+//    @IBOutlet weak var cancelEditingButton: UIBarButtonItem!
     @IBOutlet weak var doneEditingButton: UIBarButtonItem!
     @IBOutlet weak var workoutListEditTable: UITableView!
     
-    @IBAction func cancelEditing(_ sender: Any) {
-        self.presentingViewController?.dismiss(animated: true)
-    }
+//    @IBAction func cancelEditing(_ sender: Any) {
+//        self.presentingViewController?.dismiss(animated: true)
+//    }
     //TODO: 기능
     @IBAction func doneEditing(_ sender: Any) {
         self.presentingViewController?.dismiss(animated: true)
@@ -29,7 +29,7 @@ class WorkoutListEditViewController: UIViewController {
         super.viewDidLoad()
 
         self.view.backgroundColor = CustomColor.bgGray
-        cancelEditingButton.tintColor = CustomColor.mainPurple
+//        cancelEditingButton.tintColor = CustomColor.mainPurple
         doneEditingButton.tintColor = CustomColor.mainPurple
         
         workoutListEditTable.backgroundColor = .clear
