@@ -8,11 +8,11 @@
 import UIKit
 
 class WorkoutAddViewController: UIViewController {
-    private let numberOfRows: Int = 5
+    private var numberOfSets: Int = 1
     private var estimatedCalorie: Double = 0
     
     var workoutAddTitleText: String = "text"
-//    var workout: WorkoutModel?
+    var workout: WorkoutModel?
     
     @IBOutlet weak var workoutAddTable: UITableView!
     
@@ -41,11 +41,14 @@ class WorkoutAddViewController: UIViewController {
 
 extension WorkoutAddViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return numberOfRows + 1
+        return numberOfSets + 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == numberOfRows {
+        
+        
+        
+        if indexPath.row == numberOfSets + 1 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "workoutAddCalorieTableViewCell", for: indexPath) as? WorkoutAddCalorieTableViewCell else {
                 return UITableViewCell()
             }
@@ -54,7 +57,7 @@ extension WorkoutAddViewController: UITableViewDelegate, UITableViewDataSource {
             cell.estimatedCalorieView.text = "추정 칼로리: \(estimatedCalorie) kcal"
 
             return cell
-        } else if (indexPath.row == numberOfRows - 1) {
+        } else if (indexPath.row == numberOfSets) {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "workoutAddPlusTableViewCell", for: indexPath) as? WorkoutAddPlusTableViewCell else {
                 return UITableViewCell()
             }
@@ -84,6 +87,15 @@ extension WorkoutAddViewController: UITableViewDelegate, UITableViewDataSource {
             cell.backgroundColor = CustomColor.bgGray
             
             return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == numberOfSets {
+            numberOfSets = numberOfSets + 1
+            print(indexPath.row)
+            print(numberOfSets)
+            workoutAddTable.reloadData()
         }
     }
 }

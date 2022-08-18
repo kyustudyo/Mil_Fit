@@ -14,6 +14,7 @@ class WorkoutAddTwoTableViewCell: UITableViewCell {
     @IBOutlet weak var firstInputField: UITextField!
     @IBOutlet weak var secondInputType: UILabel!
     @IBOutlet weak var secondInputField: UITextField!
+    @IBOutlet weak var deleteButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,5 +32,4 @@ class WorkoutAddTwoTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
 }

@@ -63,7 +63,7 @@
                                     <constraint firstAttribute="width" constant="46" id="9aH-uz-whw"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="light" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -94,6 +94,7 @@
             <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
             <connections>
                 <outlet property="cellRectangle" destination="AXz-if-mEA" id="paF-Ea-QD3"/>
+                <outlet property="deleteButton" destination="6sI-jP-RF0" id="YFn-eM-mds"/>
                 <outlet property="firstInputField" destination="oII-22-cFe" id="AYE-2l-g8j"/>
                 <outlet property="firstInputType" destination="Fuy-h4-6Vu" id="6wJ-7f-1m4"/>
                 <outlet property="secondInputField" destination="43R-OD-gVo" id="gFt-Oc-uz6"/>
