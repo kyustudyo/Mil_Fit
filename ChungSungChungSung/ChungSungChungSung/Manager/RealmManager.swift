@@ -65,11 +65,10 @@ public class RealmManager {
             })
     }
         
-    static func saveMealData(date: Date, mealTime: String, calories: Int, meals: [String]) {
-        
+    static func saveMealData(date: String, mealTime: String, calories: Int, meals: [String]) {
+        let localRealm = try! Realm()
         let mealList = MealRealm(date: date, mealTime: mealTime, calories: calories)
         mealList.mealArray = meals
-        
         try! localRealm.write({
             localRealm.add(mealList)
         })
@@ -112,5 +111,28 @@ public class RealmManager {
     }
 }
 
-
+extension RealmManager {
+    static func searchMealDataByDate(date: String) -> Results<MealRealm> {
+        let localRealm = try! Realm()
+        let realm = localRealm.objects(MealRealm.self)
+        print(date)
+        let target = realm.filter("date == '\(date)'")
+        print(target)
+        return target
+    }
+    
+    static func deleteAllMealsData() {
+        
+        let localRealm = try! Realm()
+        let alls = localRealm.objects(MealRealm.self)
+        try! localRealm.write {
+            localRealm.delete(alls)
+        }
+    }
+    static func allMealData() -> Results<MealRealm> {
+        let localRealm = try! Realm()
+        let realm = localRealm.objects(MealRealm.self)
+        return realm
+    }
+}
 

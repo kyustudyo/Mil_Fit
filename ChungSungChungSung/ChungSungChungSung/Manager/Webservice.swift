@@ -25,13 +25,17 @@ class Webservice {
     
     private init() { }
     
-    func fetchMeals300(army: String) {
-        print((String(Array(army)[1..<5])))
-        let armyNumber = (String(Array(army)[1..<5]))
+    func fetchMeals300(army: String, completion: @escaping () -> () ) {
+//        print((String(Array(army)[1..<5])))
+//        let armyNumber = (String(Array(army)[1..<5]))
+        guard army != "없음" && army != "" else {
+            completion()
+            return
+        }
         let url: URL = URL(string: "https://openapi.mnd.go.kr/\(keyValues.getId())/json/DS_TB_MNDT_DATEBYMLSVC_\(String(Array(army)[1..<5]))/1/10000/")!
         URLSession.shared.dataTask(with: url) { data, _, error in
+            RealmManager.deleteAllMealsData()
             if let data = data {
-//              print(String(decoding: data, as: UTF8.self))
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .custom { keys in
                     if keys.count == 1 {
@@ -46,28 +50,17 @@ class Webservice {
                 let dateformatter = DateFormatter()
                 dateformatter.dateFormat = "yyyy-MM-dd"
                 dateformatter.locale = Locale(identifier: "ko_KR")
-//                let 오늘식단 = army.mealInfo?.rows?.filter{$0.dates == dateformatter.string(from: Date())}//실무
-//                guard let 매일매일 = army.mealInfo?.rows else { return }
+    
                 
-                let 많은날짜 = army.mealInfo?.rows
-                
-//                let 오늘날짜 = dateformatter.string(from: Date())
-                let 앞으로30일뒤Date = Calendar.current.date(byAdding: .day, value: 30, to: Date()) ?? Date()
-                let 앞으로30일전Date = Calendar.current.date(byAdding: .day, value: -30, to: Date()) ?? Date()
-                
-//                let 앞으로30일뒤String = dateformatter.string(from: 앞으로30일뒤Date)
-//                let 앞으로30일전String = dateformatter.string(from: 앞으로30일전Date)
-                
-                
-                var current = 앞으로30일전Date
-                
-                
-                while 앞으로30일전Date < 앞으로30일뒤Date {
+                let 앞으로15일뒤Date = Calendar.current.date(byAdding: .day, value: 15, to: Date()) ?? Date()
+                let 앞으로15일전Date = Calendar.current.date(byAdding: .day, value: -15, to: Date()) ?? Date()
+                var current = 앞으로15일전Date
+                while current < 앞으로15일뒤Date {
                     if let 오늘식단 = army.mealInfo?.rows?.filter{$0.dates == dateformatter.string(from: current)} {
-                        
                         let date = 오늘식단.compactMap { meals in
-                            return meals.dates?.toDate()
+                            return meals.dates
                         }
+                        current = CalendarHelper().addDays(date: current, days: 1)
                         guard !date.isEmpty else { continue }
                         let 아침들 = 오늘식단.compactMap { meals in
                             meals.brst?.components(separatedBy: "(")[0]
@@ -83,35 +76,19 @@ class Webservice {
                             let slicedString = calString.components(separatedBy: ".")[0]
                             return Int(slicedString) ?? 0
                         }
-                        print(current)
+                        
                         RealmManager.saveMealData(date: date[0], mealTime: "조식", calories: 총칼로리[0], meals: 아침들)
                         RealmManager.saveMealData(date: date[0], mealTime: "중식", calories: 총칼로리[0], meals: 점심들)
                         RealmManager.saveMealData(date: date[0], mealTime: "석식", calories: 총칼로리[0], meals: 저녁들)
-                        current = CalendarHelper().addDays(date: current, days: 1)
+                    
+                        
+                        
                     }
                 }
-                
-                
-                
-               
-                
-//                print("점심:", 점심들 ?? [])
-//                print("저녁:", 저녁들 ?? [])
-//                if let 총칼 = 총칼로리{
-//                    print("칼로리:", 총칼.count != 0 ? 총칼[0] : "개수 0 입니다.")
-//                } else {
-//                    print("칼로리 제공 안합니다.")
-//                }
-//                print("-------------------")
+                completion()
             }
         }.resume()
-        
     }
-
-    
-    
-    
-    func abc() { }
 }
 
 // 식단 API 모델
@@ -169,3 +146,5 @@ extension String {
         }
     }
 }
+
+

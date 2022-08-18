@@ -51,6 +51,7 @@
 		797C370728AC01C800B6132D /* HistoryTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797C370628AC01C800B6132D /* HistoryTestViewController.swift */; };
 		797C370928AC82AF00B6132D /* AddGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797C370828AC82AF00B6132D /* AddGoalViewController.swift */; };
 		797C372D28AD47E400B6132D /* Webservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797C372C28AD47E400B6132D /* Webservice.swift */; };
+		797C372F28AD501500B6132D /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797C372E28AD501500B6132D /* DateExtension.swift */; };
 		79BBF694289AB50B0003FAD8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BBF693289AB50B0003FAD8 /* AppDelegate.swift */; };
 		79BBF696289AB50B0003FAD8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BBF695289AB50B0003FAD8 /* SceneDelegate.swift */; };
 		79BBF698289AB50B0003FAD8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BBF697289AB50B0003FAD8 /* ViewController.swift */; };
@@ -143,6 +144,7 @@
 		797C370628AC01C800B6132D /* HistoryTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTestViewController.swift; sourceTree = "<group>"; };
 		797C370828AC82AF00B6132D /* AddGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGoalViewController.swift; sourceTree = "<group>"; };
 		797C372C28AD47E400B6132D /* Webservice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Webservice.swift; sourceTree = "<group>"; };
+		797C372E28AD501500B6132D /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		79BBF690289AB50B0003FAD8 /* ChungSungChungSung.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChungSungChungSung.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79BBF693289AB50B0003FAD8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79BBF695289AB50B0003FAD8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -431,6 +433,7 @@
 				79F6769F289EC65C00850FF0 /* Bar.swift */,
 				79F676C728A00A4B00850FF0 /* ColorExtension.swift */,
 				79F676C928A163F300850FF0 /* UIImageExtension.swift */,
+				797C372E28AD501500B6132D /* DateExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -716,6 +719,7 @@
 				AB8623BE289E5B4200F71283 /* TestMainViewController.swift in Sources */,
 				328AB9BB28A6A35400000A85 /* BadgeTableViewCell.swift in Sources */,
 				ABE51DD1289F90B2005BFB0E /* FitnessCircularGraphSwiftUIView.swift in Sources */,
+				797C372F28AD501500B6132D /* DateExtension.swift in Sources */,
 				328AB9C428A8100D00000A85 /* GoalsDetailViewController.swift in Sources */,
 				797C370928AC82AF00B6132D /* AddGoalViewController.swift in Sources */,
 				7ED2F7B7289ED9A700DAEEC9 /* DailyCalendarCell.swift in Sources */,

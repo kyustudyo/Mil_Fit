@@ -110,7 +110,7 @@ class FitnessTestRealm: Object {
 }
 
 class MealRealm: Object {
-    @Persisted var date: Date
+    @Persisted var date: String
     @Persisted var mealTime: String
     @Persisted var calories: Int
     @Persisted var mealList: List<String> = List<String>()
@@ -125,7 +125,7 @@ class MealRealm: Object {
     }
     
     @Persisted(primaryKey: true) var _id: ObjectId
-    convenience init(date: Date, mealTime: String, calories: Int) {
+    convenience init(date: String, mealTime: String, calories: Int) {
         self.init()
         self.date = date
         self.mealTime = mealTime
