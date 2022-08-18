@@ -23,7 +23,9 @@ class WorkoutPreviousViewController: UIViewController {
     
     override func viewDidLoad() {
         navigationItem.title = "지난 기록"
+        navigationItem.largeTitleDisplayMode = .never
         navigationController?.navigationBar.topItem?.backButtonTitle = "운동"
+        navigationController?.navigationBar.tintColor = CustomColor.mainPurple
         view.backgroundColor = .systemGray6
         
         calendar.delegate = self

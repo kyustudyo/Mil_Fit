@@ -6,16 +6,28 @@
 //
 
 import UIKit
+import RealmSwift
+
 
 class WorkoutViewController: UIViewController {
+    private let defaults = UserDefaults.standard
+    private var favoriteWorkouts: [String]?
+    
+    var workoutRealm: Results<WorkoutRealm>!
+    let localWorkoutRealm = try! Realm()
+//    var todaysWorkout: [WorkoutRealm] = []
     
     var events = [String]()
     private let workoutViewTitle = "운동"
     private var workoutList = WorkoutData().list
+    private var numberOfTodaysWorkout: Int?
 //    private var workout: WorkoutModel?
 //    var todaysWorkout: [WorkoutModel] = []
 //    var numberOfTodaysWorkout: Int?
     //TODO 시작일 설정
+    let dateFormatter = DateFormatter()
+    var selectedDateString: String?
+    
     let 시작일 = CalendarHelper().addDays(date: Date(), days: -300)
     var selectedDate = Date()
     var totalSquares = [Date]()
@@ -56,8 +68,25 @@ class WorkoutViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setFavoriteWorkout()    // TODO: 즐겨찾기 운동 10가지 먼저 넣어놓는 함수. 나중에 온보딩쪽에 옮겨야함
+        favoriteWorkouts = defaults.stringArray(forKey: "WorkoutList")
+        
+        numberOfTodaysWorkout = workoutList.count
+        
+        workoutRealm = localWorkoutRealm.objects(WorkoutRealm.self)
+        print("Realm저장위치=\n\(Realm.Configuration.defaultConfiguration.fileURL!)\n")
+        
+        selectedDateString = dateFormatter.string(from: selectedDate)
+
+        //        todaysWorkout = workoutRealm.filter("dateSearching == \(dateString)")
+
+        
         setUpEvents()
-        view.backgroundColor = .systemGray6
+        
+        self.view.backgroundColor = CustomColor.bgGray
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        setTableViewShadow()
 //        configNavigationTitle()
 //        self.dailyCalendarView.isPagingEnabled = true
 //        let backBarButtonItem = UIBarButtonItem(title: workoutViewTitle, style: .plain, target: nil, action: nil)
@@ -139,6 +168,63 @@ class WorkoutViewController: UIViewController {
             selectedDateView.text? += ", 오늘"
         }
     }
+    
+    func setTableViewShadow() {
+        todaysWorkoutView.layer.shadowColor = UIColor.systemGray6.cgColor
+        todaysWorkoutView.layer.shadowRadius = 20
+        todaysWorkoutView.layer.shadowOpacity = 1
+        
+        workoutListView.layer.shadowColor = UIColor.systemGray6.cgColor
+        workoutListView.layer.shadowRadius = 20
+        workoutListView.layer.shadowOpacity = 1
+    }
+    
+    // TODO: 즐겨찾기 운동 10가지 먼저 넣어놓는 함수. 나중에 온보딩쪽에 옮겨야함
+    func setFavoriteWorkout() {
+        let workouts = ["달리기", "팔굽혀펴기", "윗몸일으키기", "풀업", "플랭크", "런지", "스쿼트", "상체근력운동", "하체근력운동", "복근운동"]
+        
+        defaults.set(workouts, forKey: "WorkoutList")
+    }
+    
+    func showToast() {
+        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 100, y: 60, width: 200, height: 50))
+        toastLabel.backgroundColor = UIColor.white.withAlphaComponent(1.0)
+        toastLabel.layer.borderColor = UIColor.systemGray5.cgColor
+        toastLabel.layer.borderWidth = 1
+        toastLabel.textColor = UIColor.black
+        toastLabel.font = UIFont.systemFont(ofSize: 15)
+        toastLabel.text = "이미 추가된 운동입니다."
+        toastLabel.textAlignment = .center
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 25
+        toastLabel.clipsToBounds = true
+        self.view.addSubview(toastLabel)
+        UIView.animate(withDuration: 3.0, delay: 0.1, options: .curveEaseOut, animations: {
+            toastLabel.alpha = 0.0
+        }, completion: {(isCompleted) in
+            toastLabel.removeFromSuperview()
+        })
+    }
+    
+//    //가데이터 넣기 위한 함수
+//    func saveTempData() {
+//        let today = Date()
+//        let dateFormatter = DateFormatter()
+//        var workoutTempList: [WorkoutTemp] = []
+//
+//        dateFormatter.dateFormat = "yyyyMMddHHmmss"
+//        dateFormatter.locale = Locale(identifier: "ko_KR")
+//
+//        let convertInt = Int(dateFormatter.string(from: today))
+//
+//        let dateSearching = dateFormatter.string(from: today)
+//
+//        if let convertInt = convertInt {
+//            let workoutTemp1 = WorkoutTemp(date: today, name: "런지", set: 1, dateSorting: convertInt, dateSearching: dateSearching)
+//        }
+//
+//
+//    }
 }
 
 extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -186,6 +272,7 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedDate = totalSquares[indexPath.item]
+        selectedDateString = dateFormatter.string(from: selectedDate)
         updateHeaderLabel()
         dailyCalendarView.reloadData()
     }
@@ -208,8 +295,21 @@ extension WorkoutViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return workoutList.count
+        var returnNumber = Int()
+        
+        if tableView == todaysWorkoutView {
+//            returnNumber = workoutRealm.filter("dateSearching == \(String(describing: selectedDateString))").count
+            returnNumber = workoutList.count
+            
+        } else if tableView == workoutListView {
+            if let numberOfFavoriteWorkouts = favoriteWorkouts?.count {
+                returnNumber = numberOfFavoriteWorkouts
+            }
+        }
+        
+        return returnNumber
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -223,8 +323,26 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
             
         } else if tableView == workoutListView {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "workoutListCell", for: indexPath) as? WorkoutListCell else { return UITableViewCell() }
-            let workout = workoutList[indexPath.row]
-            cell.workoutTitle.text = workout.title
+//            let workout = workoutList[indexPath.row]
+//            cell.workoutTitle.text = workout.title
+            
+//            selectedDateString = dateFormatter.string(from: selectedDate)
+//
+//            let selectedDateWorkout = workoutRealm.filter("dateSearching == \(String(describing: selectedDateString))")
+//
+//            var workoutListNames: [String] = []
+//            workoutListNames = favoriteWorkouts.filter {
+//                if favoriteWorkouts.contains(selectedDateWorkout[0].name) {
+//                    return false
+//                } else {
+//                    return true
+//                }
+//            }
+            
+            if let favoriteWorkoutName = favoriteWorkouts?[indexPath.row] {
+                cell.workoutTitle.text = favoriteWorkoutName
+            }
+            
             
             returnCell = cell
         }
@@ -239,12 +357,26 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
         let workout = workoutList[indexPath.row]
         print("\(indexPath.row) \(workout.title) selected.")
   
+        if let selectedDateString = selectedDateString {
+            let todaysWorkout = workoutRealm.where {
+                $0.dateSearching == selectedDateString
+            }
+        }
+        print(selectedDateString)
+        
         if tableView == todaysWorkoutView {
             guard let workoutAddView = UIStoryboard(name: "WorkoutAdd", bundle: .main).instantiateViewController(withIdentifier: "WorkoutAddViewController") as? WorkoutAddViewController else { return }
             workoutAddView.workoutAddTitleText = workout.title
             workoutAddView.workout = workout
-            print(navigationController)
             self.navigationController?.pushViewController(workoutAddView, animated: true)
+            
+        } else if tableView == workoutListView {
+            if let workoutName = favoriteWorkouts?[indexPath.row] {
+                
+                
+                RealmManager.saveWorkoutData(date: selectedDate, name: workoutName, count: nil, minutes: nil, seconds: nil, weight: nil, calories: nil)
+            }
+            showToast()
         }
     }
 }
@@ -271,23 +403,23 @@ extension UIView {
 
 }
 
-extension WorkoutViewController: UIScrollViewDelegate {
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-            guard let layout = self.dailyCalendarView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
-            
-            let cellWidthIncludingSpacing = layout.itemSize.width + layout.minimumLineSpacing
-            
-            let estimatedIndex = scrollView.contentOffset.x / cellWidthIncludingSpacing
-            let index: Int
-            if velocity.x > 0 {
-                index = Int(ceil(estimatedIndex))
-            } else if velocity.x < 0 {
-                index = Int(floor(estimatedIndex))
-            } else {
-                index = Int(round(estimatedIndex))
-            }
-            
-            targetContentOffset.pointee = CGPoint(x: CGFloat(index) * cellWidthIncludingSpacing, y: 0)
-        }
-
-}
+//extension WorkoutViewController: UIScrollViewDelegate {
+//    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+//            guard let layout = self.dailyCalendarView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
+//
+//            let cellWidthIncludingSpacing = layout.itemSize.width + layout.minimumLineSpacing
+//
+//            let estimatedIndex = scrollView.contentOffset.x / cellWidthIncludingSpacing
+//            let index: Int
+//            if velocity.x > 0 {
+//                index = Int(ceil(estimatedIndex))
+//            } else if velocity.x < 0 {
+//                index = Int(floor(estimatedIndex))
+//            } else {
+//                index = Int(round(estimatedIndex))
+//            }
+//
+//            targetContentOffset.pointee = CGPoint(x: CGFloat(index) * cellWidthIncludingSpacing, y: 0)
+//        }
+//
+//}
