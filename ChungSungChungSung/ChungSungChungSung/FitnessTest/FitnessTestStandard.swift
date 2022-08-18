@@ -7,8 +7,44 @@
 
 import Foundation
 
+enum TestAge {
+    case one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve, thirteen
+    init?(age: Int) {
+        switch age {
+        case 0..<26: self = .one
+        case 26..<31: self = .two
+        case 31..<36: self = .three
+        case 36..<41: self = .four
+        case 41..<44: self = .five
+        case 44..<47: self = .six
+        case 47..<50: self = .seven
+        case 50..<52: self = .eight
+        case 52..<54: self = .nine
+        case 54..<56: self = .ten
+        case 56..<58: self = .eleven
+        case 58..<60: self = .twelve
+        case 60..<99: self = .thirteen
+        case _: return nil
+        }
+    }
+}
+
+enum TestType: String {
+    case running = "3km 달리기"
+    case pushup = "팔굽혀펴기(2분)"
+    case situp = "윗몸일으키기"
+}
+
+struct FitnessTest {
+    let type: TestType
+    let standard: [String : (Int, Int)]
+}
+
+
+let testStandard: [TestAge: [FitnessTest]] = [.one: [FitnessTest(type: .running, standard: ["특급" : (1, 12 * 60 + 30), "1급" : (12 * 60 + 46, 13 * 60 + 52)])]]
+
 public class FitnessTestStandard {
-    static func calculateLevel(age: Int, type: String, count: Int?, minutes: Int?, seconds: Int?) -> String {
+    static func calculateLevel(age: Int, type: String, count: Int?, minutes: Int?, seconds: Int?) -> [String, Int] {
         var totalTime: Int = 0
         if minutes != nil && seconds != nil {
             totalTime = minutes! * 60 + seconds!
@@ -16,15 +52,15 @@ public class FitnessTestStandard {
         if type == "running" {
             if age < 26 {
                 if totalTime <= 12 * 6 + 30 {
-                    return "특급"
+                    return ["특급", (12 * 6 + 30)]
                 }else if totalTime <= 13 * 6 + 32 {
-                    return "1급"
+                    return ["1급", (13 * 6 + 32)]
                 }else if totalTime <= 14 * 6 + 34 {
-                    return "2급"
+                    return ["2급", 14 * 6 + 34]
                 }else if totalTime <= 15 * 6 + 36 {
-                    return "3급"
+                    return ["3급", 15 * 6 + 36]
                 }else {
-                    return "불합격"
+                    return ["불합격"
                 }
             }else if age < 31 {
                 if totalTime <= 12 * 6 + 45 {
