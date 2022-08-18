@@ -44,6 +44,9 @@ class WorkoutViewController: UIViewController {
     @IBAction private func didTapTodaysWorkoutEditButton(_ sender: UIButton) {
         guard let todaysWorkoutEditView = UIStoryboard(name: "TodaysWorkoutEdit", bundle: .main).instantiateViewController(withIdentifier: "TodaysWorkoutEditViewController") as? TodaysWorkoutEditViewController else { return }
         todaysWorkoutEditView.workoutList = workoutList
+        
+        todaysWorkoutEditView.workoutRealm = workoutRealm
+        todaysWorkoutEditView.selectedDateString = selectedDateString
         present(todaysWorkoutEditView, animated: true, completion: nil)
     }
     
@@ -63,6 +66,7 @@ class WorkoutViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         configNavigationTitle()
+        todaysWorkoutView.reloadData()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -311,7 +315,7 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
             
             if let selectedDateString = selectedDateString {
                 let todaysWorkout = workoutRealm.where {
-                    $0.dateSearching == selectedDateString
+                    $0.dateSearching == selectedDateString && $0.set == 1
                 }
                 if todaysWorkout.count == 0 {
                     guard let cell = tableView.dequeueReusableCell(withIdentifier: "todaysWorkoutEmptyTableViewCell", for: indexPath) as? TodaysWorkoutEmptyTableViewCell else { return UITableViewCell() }
