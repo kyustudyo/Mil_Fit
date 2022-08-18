@@ -31,6 +31,8 @@
 		328AB9D028A8F76200000A85 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328AB9CF28A8F76200000A85 /* UIImage.swift */; };
 		328AB9D228A901CB00000A85 /* BadgeDetailInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 328AB9D128A901CA00000A85 /* BadgeDetailInfo.storyboard */; };
 		328AB9D628A9021A00000A85 /* BadgeDetailInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328AB9D528A9021A00000A85 /* BadgeDetailInfoViewController.swift */; };
+		32CC750F28AE1BBC00742668 /* TodaysWorkoutEmptyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CC750D28AE1BBC00742668 /* TodaysWorkoutEmptyTableViewCell.swift */; };
+		32CC751028AE1BBC00742668 /* TodaysWorkoutEmptyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32CC750E28AE1BBC00742668 /* TodaysWorkoutEmptyTableViewCell.xib */; };
 		32D3F1A428A558E60096FAFC /* WorkoutListEdit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32D3F1A328A558E60096FAFC /* WorkoutListEdit.storyboard */; };
 		32D3F1A628A559880096FAFC /* WorkoutListEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D3F1A528A559880096FAFC /* WorkoutListEditViewController.swift */; };
 		32D3F1AA28A5728F0096FAFC /* WorkoutListEditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D3F1A928A5728F0096FAFC /* WorkoutListEditCell.swift */; };
@@ -120,6 +122,8 @@
 		328AB9CF28A8F76200000A85 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		328AB9D128A901CA00000A85 /* BadgeDetailInfo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BadgeDetailInfo.storyboard; sourceTree = "<group>"; };
 		328AB9D528A9021A00000A85 /* BadgeDetailInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeDetailInfoViewController.swift; sourceTree = "<group>"; };
+		32CC750D28AE1BBC00742668 /* TodaysWorkoutEmptyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaysWorkoutEmptyTableViewCell.swift; sourceTree = "<group>"; };
+		32CC750E28AE1BBC00742668 /* TodaysWorkoutEmptyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodaysWorkoutEmptyTableViewCell.xib; sourceTree = "<group>"; };
 		32D3F1A328A558E60096FAFC /* WorkoutListEdit.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WorkoutListEdit.storyboard; sourceTree = "<group>"; };
 		32D3F1A528A559880096FAFC /* WorkoutListEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutListEditViewController.swift; sourceTree = "<group>"; };
 		32D3F1A928A5728F0096FAFC /* WorkoutListEditCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutListEditCell.swift; sourceTree = "<group>"; };
@@ -389,6 +393,8 @@
 				325F8E0E28A3C962004ACF9E /* WorkoutListCell.swift */,
 				7E37333828A4CBD1008F7EFA /* TodaysWorkoutEdit.storyboard */,
 				794B601628A62A7400621A27 /* WorkoutPreviousTableViewCell.swift */,
+				32CC750D28AE1BBC00742668 /* TodaysWorkoutEmptyTableViewCell.swift */,
+				32CC750E28AE1BBC00742668 /* TodaysWorkoutEmptyTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -590,6 +596,7 @@
 				328AB9AA28A638A000000A85 /* Profile.storyboard in Resources */,
 				794B600A28A527BB00621A27 /* WorkoutAddOneTableViewCell.xib in Resources */,
 				AB8623C0289E5B4A00F71283 /* TestStoryboard.storyboard in Resources */,
+				32CC751028AE1BBC00742668 /* TodaysWorkoutEmptyTableViewCell.xib in Resources */,
 				794B600F28A527BB00621A27 /* WorkoutAddCalorieTableViewCell.xib in Resources */,
 				328AB9B028A63B6500000A85 /* ArmyInfoTableViewCell.xib in Resources */,
 				79BBF69D289AB50D0003FAD8 /* Assets.xcassets in Resources */,
@@ -657,6 +664,7 @@
 				794B601528A6241200621A27 /* WorkoutPreviousViewController.swift in Sources */,
 				328AB9BF28A6AFB000000A85 /* BadgeCollectionViewCell.swift in Sources */,
 				DD639DE028A9C1B300219504 /* OnboardingLastViewController.swift in Sources */,
+				32CC750F28AE1BBC00742668 /* TodaysWorkoutEmptyTableViewCell.swift in Sources */,
 				7E9A47C4289D478A005B98B4 /* WorkoutViewController.swift in Sources */,
 				DD3AC80E28A645DA000D2E38 /* FitnessTestAddViewController.swift in Sources */,
 				ABE43C3C28ACB244005C272C /* FuncCollection.swift in Sources */,

@@ -21,11 +21,9 @@ class WorkoutViewController: UIViewController {
     private let workoutViewTitle = "운동"
     private var workoutList = WorkoutData().list
     private var numberOfTodaysWorkout: Int?
-//    private var workout: WorkoutModel?
-//    var todaysWorkout: [WorkoutModel] = []
-//    var numberOfTodaysWorkout: Int?
+    
     //TODO 시작일 설정
-    let dateFormatter = DateFormatter()
+    let dateFormatterForFilter = DateFormatter()
     var selectedDateString: String?
     
     let 시작일 = CalendarHelper().addDays(date: Date(), days: -300)
@@ -77,10 +75,9 @@ class WorkoutViewController: UIViewController {
         workoutRealm = localWorkoutRealm.objects(WorkoutRealm.self)
         print("Realm저장위치=\n\(Realm.Configuration.defaultConfiguration.fileURL!)\n")
         
-        selectedDateString = dateFormatter.string(from: selectedDate)
-
-        //        todaysWorkout = workoutRealm.filter("dateSearching == \(dateString)")
-
+        dateFormatterForFilter.dateFormat = "yyyyMMdd"
+        dateFormatterForFilter.locale = Locale(identifier: "ko_KR")
+        selectedDateString = dateFormatterForFilter.string(from: selectedDate)
         
         setUpEvents()
         
@@ -91,6 +88,9 @@ class WorkoutViewController: UIViewController {
 //        self.dailyCalendarView.isPagingEnabled = true
 //        let backBarButtonItem = UIBarButtonItem(title: workoutViewTitle, style: .plain, target: nil, action: nil)
 //        navigationItem.backBarButtonItem = backBarButtonItem
+        
+        let todaysWorkoutEmptyTableViewCellNib = UINib(nibName: "TodaysWorkoutEmptyTableViewCell", bundle: nil)
+        todaysWorkoutView.register(todaysWorkoutEmptyTableViewCellNib, forCellReuseIdentifier: "todaysWorkoutEmptyTableViewCell")
         
         let editBarButton = UIBarButtonItem(image: UIImage(systemName: "calendar"), style: .plain, target: self, action: #selector(goPreviousViewController))
         editBarButton.tintColor = .black
@@ -205,26 +205,6 @@ class WorkoutViewController: UIViewController {
             toastLabel.removeFromSuperview()
         })
     }
-    
-//    //가데이터 넣기 위한 함수
-//    func saveTempData() {
-//        let today = Date()
-//        let dateFormatter = DateFormatter()
-//        var workoutTempList: [WorkoutTemp] = []
-//
-//        dateFormatter.dateFormat = "yyyyMMddHHmmss"
-//        dateFormatter.locale = Locale(identifier: "ko_KR")
-//
-//        let convertInt = Int(dateFormatter.string(from: today))
-//
-//        let dateSearching = dateFormatter.string(from: today)
-//
-//        if let convertInt = convertInt {
-//            let workoutTemp1 = WorkoutTemp(date: today, name: "런지", set: 1, dateSorting: convertInt, dateSearching: dateSearching)
-//        }
-//
-//
-//    }
 }
 
 extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -272,7 +252,11 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedDate = totalSquares[indexPath.item]
-        selectedDateString = dateFormatter.string(from: selectedDate)
+        dateFormatterForFilter.dateFormat = "yyyyMMdd"
+        dateFormatterForFilter.locale = Locale(identifier: "ko_KR")
+        selectedDateString = dateFormatterForFilter.string(from: selectedDate)
+        print(selectedDate)
+        print(selectedDateString)
         updateHeaderLabel()
         dailyCalendarView.reloadData()
     }
@@ -300,8 +284,16 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
         var returnNumber = Int()
         
         if tableView == todaysWorkoutView {
-//            returnNumber = workoutRealm.filter("dateSearching == \(String(describing: selectedDateString))").count
-            returnNumber = workoutList.count
+            if let selectedDateString = selectedDateString {
+                let todaysWorkout = workoutRealm.where {
+                    $0.dateSearching == selectedDateString
+                }
+                if todaysWorkout.count == 0 {
+                    returnNumber = 1
+                } else {
+                    returnNumber = todaysWorkout.count
+                }
+            }
             
         } else if tableView == workoutListView {
             if let numberOfFavoriteWorkouts = favoriteWorkouts?.count {
@@ -316,33 +308,28 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
         var returnCell = UITableViewCell()
         
         if tableView == todaysWorkoutView {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "todaysWorkoutCell", for: indexPath) as? TodaysWorkoutCell else { return UITableViewCell() }
-            let workout = workoutList[indexPath.row]
-            cell.todayWorkoutTitle.text = workout.title
-            returnCell = cell
+            
+            if let selectedDateString = selectedDateString {
+                let todaysWorkout = workoutRealm.where {
+                    $0.dateSearching == selectedDateString
+                }
+                if todaysWorkout.count == 0 {
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: "todaysWorkoutEmptyTableViewCell", for: indexPath) as? TodaysWorkoutEmptyTableViewCell else { return UITableViewCell() }
+                    returnCell = cell
+                    
+                } else {
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: "todaysWorkoutCell", for: indexPath) as? TodaysWorkoutCell else { return UITableViewCell() }
+                    cell.todayWorkoutTitle.text = todaysWorkout[indexPath.row].name
+                    returnCell = cell
+                }
+            }
             
         } else if tableView == workoutListView {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "workoutListCell", for: indexPath) as? WorkoutListCell else { return UITableViewCell() }
-//            let workout = workoutList[indexPath.row]
-//            cell.workoutTitle.text = workout.title
-            
-//            selectedDateString = dateFormatter.string(from: selectedDate)
-//
-//            let selectedDateWorkout = workoutRealm.filter("dateSearching == \(String(describing: selectedDateString))")
-//
-//            var workoutListNames: [String] = []
-//            workoutListNames = favoriteWorkouts.filter {
-//                if favoriteWorkouts.contains(selectedDateWorkout[0].name) {
-//                    return false
-//                } else {
-//                    return true
-//                }
-//            }
             
             if let favoriteWorkoutName = favoriteWorkouts?[indexPath.row] {
                 cell.workoutTitle.text = favoriteWorkoutName
             }
-            
             
             returnCell = cell
         }
@@ -356,13 +343,6 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let workout = workoutList[indexPath.row]
         print("\(indexPath.row) \(workout.title) selected.")
-  
-        if let selectedDateString = selectedDateString {
-            let todaysWorkout = workoutRealm.where {
-                $0.dateSearching == selectedDateString
-            }
-        }
-        print(selectedDateString)
         
         if tableView == todaysWorkoutView {
             guard let workoutAddView = UIStoryboard(name: "WorkoutAdd", bundle: .main).instantiateViewController(withIdentifier: "WorkoutAddViewController") as? WorkoutAddViewController else { return }
@@ -372,11 +352,18 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
             
         } else if tableView == workoutListView {
             if let workoutName = favoriteWorkouts?[indexPath.row] {
-                
-                
-                RealmManager.saveWorkoutData(date: selectedDate, name: workoutName, count: nil, minutes: nil, seconds: nil, weight: nil, calories: nil)
+                if let selectedDateString = selectedDateString {
+                    let todaysWorkout = workoutRealm.where {
+                        $0.dateSearching == selectedDateString && $0.name == workoutName
+                    }
+                    if todaysWorkout.count == 0 {
+                        RealmManager.saveWorkoutData(date: selectedDate, name: workoutName, count: nil, minutes: nil, seconds: nil, weight: nil, calories: nil)
+                        todaysWorkoutView.reloadData()
+                    } else {
+                        showToast()
+                    }
+                }
             }
-            showToast()
         }
     }
 }
