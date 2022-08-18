@@ -14,7 +14,6 @@ class WorkoutViewController: UIViewController {
     private var favoriteWorkouts: [String]?
     
     var workoutRealm: Results<WorkoutRealm>!
-//    var todaysWorkout: [WorkoutRealm] = []
     
     var events = [String]()
     private let workoutViewTitle = "운동"
@@ -72,7 +71,7 @@ class WorkoutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setFavoriteWorkout()    // TODO: 즐겨찾기 운동 10가지 먼저 넣어놓는 함수. 나중에 온보딩쪽에 옮겨야함
+        setWorkoutList()    // TODO: 운동 목록 먼저 넣어놓는 함수. 나중에 온보딩쪽에 옮겨야함
         favoriteWorkouts = defaults.stringArray(forKey: "WorkoutList")
         
         numberOfTodaysWorkout = workoutList.count
@@ -193,11 +192,13 @@ class WorkoutViewController: UIViewController {
         workoutListView.layer.shadowOpacity = 1
     }
     
-    // TODO: 즐겨찾기 운동 10가지 먼저 넣어놓는 함수. 나중에 온보딩쪽에 옮겨야함
-    func setFavoriteWorkout() {
-        let workouts = ["달리기", "팔굽혀펴기", "윗몸일으키기", "풀업", "플랭크", "런지", "스쿼트", "상체 근력운동", "하체 근력운동", "복근 운동"]
+    // TODO: 운동 목록 먼저 넣어놓는 함수. 나중에 온보딩쪽에 옮겨야함
+    func setWorkoutList() {
+        let favoriteWorkouts = ["달리기", "팔굽혀펴기", "윗몸일으키기", "풀업", "플랭크", "런지", "스쿼트", "상체 근력운동", "하체 근력운동", "복근 운동"]
+        let otherWorkouts = ["레그 레이즈", "체스트 프레스", "숄더 프레스", "레그 프레스", "벤치 프레스", "레그 익스텐션", "레그 컬", "데드 리프트", "축구", "족구"]
         
-        defaults.set(workouts, forKey: "WorkoutList")
+        defaults.set(favoriteWorkouts, forKey: "WorkoutList")
+        defaults.set(otherWorkouts, forKey: "OtherWorkoutList")
     }
     
     func showToast() {
