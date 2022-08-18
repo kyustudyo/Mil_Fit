@@ -181,7 +181,7 @@ class WorkoutViewController: UIViewController {
     
     // TODO: 즐겨찾기 운동 10가지 먼저 넣어놓는 함수. 나중에 온보딩쪽에 옮겨야함
     func setFavoriteWorkout() {
-        let workouts = ["달리기", "팔굽혀펴기", "윗몸일으키기", "풀업", "플랭크", "런지", "스쿼트", "상체근력운동", "하체근력운동", "복근운동"]
+        let workouts = ["달리기", "팔굽혀펴기", "윗몸일으키기", "풀업", "플랭크", "런지", "스쿼트", "상체 근력운동", "하체 근력운동", "복근 운동"]
         
         defaults.set(workouts, forKey: "WorkoutList")
     }
@@ -256,9 +256,9 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
         dateFormatterForFilter.locale = Locale(identifier: "ko_KR")
         selectedDateString = dateFormatterForFilter.string(from: selectedDate)
         print(selectedDate)
-        print(selectedDateString)
         updateHeaderLabel()
         dailyCalendarView.reloadData()
+        todaysWorkoutView.reloadData()
     }
 
 }
@@ -346,9 +346,15 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
         
         if tableView == todaysWorkoutView {
             guard let workoutAddView = UIStoryboard(name: "WorkoutAdd", bundle: .main).instantiateViewController(withIdentifier: "WorkoutAddViewController") as? WorkoutAddViewController else { return }
-            workoutAddView.workoutAddTitleText = workout.title
-            workoutAddView.workout = workout
-            self.navigationController?.pushViewController(workoutAddView, animated: true)
+            
+            if let selectedDateString = selectedDateString {
+                let todaysWorkout = workoutRealm.where {
+                    $0.dateSearching == selectedDateString
+                }
+                workoutAddView.workoutAddTitleText = todaysWorkout[indexPath.row].name
+//                workoutAddView.workout = workout
+                self.navigationController?.pushViewController(workoutAddView, animated: true)
+            }
             
         } else if tableView == workoutListView {
             if let workoutName = favoriteWorkouts?[indexPath.row] {
@@ -358,6 +364,7 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
                     }
                     if todaysWorkout.count == 0 {
                         RealmManager.saveWorkoutData(date: selectedDate, name: workoutName, count: nil, minutes: nil, seconds: nil, weight: nil, calories: nil)
+                        UserDefaultManager.saveIsWorkoutDate(date: selectedDate)
                         todaysWorkoutView.reloadData()
                     } else {
                         showToast()

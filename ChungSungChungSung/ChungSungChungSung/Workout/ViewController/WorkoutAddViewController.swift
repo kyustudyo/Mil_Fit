@@ -12,7 +12,7 @@ class WorkoutAddViewController: UIViewController {
     private var estimatedCalorie: Double = 0
     
     var workoutAddTitleText: String = "text"
-    var workout: WorkoutModel?
+//    var workout: WorkoutModel?
     
     @IBOutlet weak var workoutAddTable: UITableView!
     
@@ -68,14 +68,19 @@ extension WorkoutAddViewController: UITableViewDelegate, UITableViewDataSource {
             let setNumber = indexPath.row + 1
             cell.setNumberView.text = "\(setNumber)세트"
             
-            if let workout = workout {
-                if let firstInput = workout.firstInputType {
-                    cell.firstInputType.text = firstInput
-                } else {
-                    cell.firstInputField.isHidden = true
-                }
-                cell.secondInputType.text = workout.secondInputType
+            if basicWorkoutData[workoutAddTitleText]?.0 == .시간운동 {
+                cell.firstInputType.text = nil
+                cell.firstInputField.isHidden = true
+                cell.secondInputType.text = "분"
+            } else if basicWorkoutData[workoutAddTitleText]?.0 == .무게운동 {
+                cell.firstInputType.text = "kg"
+                cell.secondInputType.text = "회"
+            } else {
+                cell.firstInputType.text = nil
+                cell.firstInputField.isHidden = true
+                cell.secondInputType.text = "회"
             }
+            
             cell.backgroundColor = CustomColor.bgGray
             
             return cell
