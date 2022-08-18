@@ -134,17 +134,27 @@ struct AnyKey: CodingKey {
     }
 }
 
-extension String {
-    func toDate() -> Date? { //"yyyy-MM-dd HH:mm:ss"
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        dateFormatter.locale = Locale(identifier: "ko_KR")
-        if let date = dateFormatter.date(from: self) {
-            return date
-        } else {
-            return nil
-        }
-    }
+
+//    func toDate() -> Date? {
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "yyyy-MM-dd"
+//        dateFormatter.locale = Locale.current
+//        dateFormatter.timeZone = TimeZone.current
+//
+//        if let date = dateFormatter.date(from: self) {
+//            return date
+//        } else {
+//            return nil
+//        }
+//    }
+func geToDate2(strDate: String) -> Date {
+    let df = DateFormatter()
+    df.locale = Locale(identifier: "ko_KR")
+    df.timeZone = TimeZone(abbreviation: "KST")
+    df.dateFormat = "yyyy-MM-dd"
+    return df.date(from: strDate)!
 }
+
+
 
 

@@ -15,7 +15,7 @@ import RealmSwift
 
 class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSource  {
 
-    var 전역가까움: Double = 0.8
+    var 전역가까움: Double = 0.0
     let eatPercent = 70.0
     let workoutPercent = 45.0
     let basicPercent = 40.0
@@ -194,7 +194,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     private var mealStack: UIStackView = {
         return UIStackView()
     }()
-    private let purposeCollectionViewFlowLayout: UICollectionViewFlowLayout = {
+    private let todoCollectionViewFlowLayout: UICollectionViewFlowLayout = {
         let view = UICollectionViewFlowLayout()
         view.minimumLineSpacing = Constants.lineSpacing
         view.scrollDirection = .horizontal
@@ -208,8 +208,8 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         return view
       }()
     
-     private lazy var purposeCollectionView: UICollectionView = {
-         let view = UICollectionView(frame: .zero, collectionViewLayout: purposeCollectionViewFlowLayout)
+     private lazy var todoCollectionView: UICollectionView = {
+         let view = UICollectionView(frame: .zero, collectionViewLayout: todoCollectionViewFlowLayout)
          view.register(PurposeCollectionViewCell.self, forCellWithReuseIdentifier: PurposeCollectionViewCell.cellID)
          view.dataSource = self
          view.delegate = self
@@ -235,17 +235,113 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     private let selectArmyView: UIView = {
         return UIView()
     }()
+    
+    private let 전역일들ContainerView: UIView = {
+        return UIView()
+    }()
     var mealData = RealmManager.searchMealDataByDate(date: Date().formatterAppliedString())
+    var todoData: Results<ToDoListRealm> = RealmManager.notDoneTodoData()
+//    {
+//        willSet {
+//            todoCollectionView.reloadData()
+//        }
+//    }
     
     override func viewWillAppear(_ animated: Bool) {
         //다른 뷰컨에서 navi를 보이므로
         navigationController?.isNavigationBarHidden = true
+        UserDefaultManager.saveDischargeDate(date: "2022-08-21".String2DateType()!)
+        UserDefaultManager.saveStartDate(date: "2022-08-07".String2DateType()!)
+        
+        RealmManager.deleteAlTodosData()
+        RealmManager.saveTodoListData(date: "2022-08-20".String2DateType()!, content: "1", isDone: false)
+        RealmManager.saveTodoListData(date: "2022-08-21".String2DateType()!, content: "2", isDone: false)
+        RealmManager.saveTodoListData(date: "2022-08-19".String2DateType()!, content: "0", isDone: false)
+        RealmManager.saveTodoListData(date: "2022-08-22".String2DateType()!, content: "3", isDone: false)
+//        RealmManager.saveTodoListData(date: "2022-08-23".String2DateType()!, content: "4", isDone: false)
+//        RealmManager.saveTodoListData(date: "2022-08-24".String2DateType()!, content: "5", isDone: false)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.dateFormat = "yyyy년M월dd일"
+        
+        dateLabel.text = dateFormatter.string(from: Date())
+        
+        if let finishDay = UserDefaultManager.loadDischargeDate(),
+           let startDay = UserDefaultManager.loadStartDate() {
+            print(Calendar.current.dateComponents([.day], from: startDay, to: finishDay))
+            if let 시작부터전역일까지 = Calendar.current.dateComponents([.day], from: startDay, to: finishDay).day {
+                if let 시작부터오늘까지 = Calendar.current.dateComponents([.day], from: startDay, to: Date().addingTimeInterval(60*60*9)).day {
+                    print(시작부터전역일까지, 시작부터오늘까지)
+                    print(Double(시작부터오늘까지)/Double(시작부터전역일까지))
+                    전역가까움 = Double(시작부터오늘까지)/Double(시작부터전역일까지)
+                    let col1 = UIColor(red: 170/255.0, green: 144/255.0, blue: 239/255.0, alpha: 1)
+                    let col2 = UIColor(red: 113/255.0, green: 87/255.0, blue: 219/255.0, alpha: 1)
+                    endDayBar.setGradient(color1: col2, color2: col1, width: (UIScreen.main.bounds.width - Constants.sideSpacing*4) * 전역가까움)
+                    dDay.anchor(right:전역일들ContainerView.leftAnchor, paddingRight: 전역가까움 > 0.1 ? -(UIScreen.main.bounds.width - Constants.sideSpacing*3) * 전역가까움 : -(전역일.intrinsicContentSize.width + 60))
+                    dDay.text = "D-\(시작부터전역일까지 - 시작부터오늘까지)"
+                    dDay.layoutIfNeeded()
+//                    print(RealmManager.allTodoData())
+                }
+            }
+            
+            
+        }
+        
+        todoData = RealmManager.notDoneTodoData()
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGray6
+//        print("2022-09-22".toDate()!)
+        UserDefaultManager.removeFirstTimeExperience()
+      
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+//        print(dateFormatter.string(from: Date()))
+//        print(dateFormatter.date(from: dateFormatter.string(from: Date())))
+//        print("??",Calendar.current.dateComponents([.day], from: "2022-08-18".String2DateType()!, to: "2022-08-19".String2DateType()!))
+//        print(String2DateType(string: "2020-01-02"))
+//        print(Calendar.current.date(byAdding: .day, value: 1, to: Date()))
+//        UserDefaultManager.saveDischargeDate(date: Calendar.current.date(byAdding: .day, value: 120, to: Date()) ?? Date())
+        UserDefaultManager.saveDischargeDate(date: "2022-08-18".String2DateType()!)
+//        print(UserDefaultManager.loadDischargeDate())
+//        print(UserDefaultManager.loadStartDate())
         
+        
+//        let today = Calendar.current.date(byAdding: .day, value: -5, to: Date()) ?? Date()
+        
+//        print("is", UserDefaultManager.isFirstTimeComleted())
+//        print(formatter.string(from: Date()))
+//        print(formatter.date(from: formatter.string(from: Date())))
+//        print("??",Calendar.current.dateComponents([.day], from: today, to: dated.toDateTime()))
+//        print(Calendar.current.date(byAdding: .day, value: 0, to: Date()) ?? Date())
+//        print(dated.toDateTime())
+////        UserDefaultManager.removeFirstTimeExperience()
+//        print(UserDefaultManager.isFirstTimeComleted())
+//        let date: DateFormatter = {
+//                let df = DateFormatter()
+//                df.locale = Locale(identifier: "ko_KR")
+//                df.timeZone = TimeZone(abbreviation: "KST")
+//                df.dateFormat = "yyyy-MM-dd-hh"
+//                return df
+//            }()
+//        print(date.date(from: "2022-08-22-03"))
+//        print(date.string(from: Date()))
+//        print(Date())
+//        let date = Date() // 현재 시간 가져오기
+//        let formatter = DateFormatter()
+//        formatter.locale = Locale(identifier: "ko") // 로케일 변경
+//        formatter.timeZone = .current
+//        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+//        formatter.dateFormat = "yyyy-MM-dd"
+//        print(formatter.date(from: "2022-08-19"))
+        
+//        print("2022-09-22T00:00:00+0000".toDateTime())
+//        print(UserDefaultManager.loadDischargeDate())
         calendar.delegate = self
         calendar.dataSource = self
         print(Realm.Configuration.defaultConfiguration.fileURL!)
@@ -275,32 +371,33 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         stack.anchor(top: emptyView.topAnchor, left: emptyView.leftAnchor, right: emptyView.rightAnchor, paddingTop: 40, paddingLeft: 16, paddingRight: 16)
 
         //MARK: 전역일 프로그레스
-        let 전역일들ContainerView = UIView()
+//        let 전역일들ContainerView = UIView()
         emptyView.addSubview(전역일들ContainerView)
         전역일들ContainerView.layer.cornerRadius = 16
         전역일들ContainerView.backgroundColor = .white
         전역일들ContainerView.setHeight(height: 100)
-        전역일들ContainerView.anchor(top: stack.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 16.0, paddingLeft: 0, paddingRight: 0)
+        전역일들ContainerView.anchor(top: stack.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 32.0, paddingLeft: 0, paddingRight: 0)
         
         let 전역일들 = UIStackView(arrangedSubviews: [전역일, dDay])
         전역일들ContainerView.addSubview(전역일들)
         전역일들.anchor(top: 전역일들ContainerView.topAnchor, left: 전역일들ContainerView.leftAnchor, paddingTop: 26.0, paddingLeft: 16.0)
         전역일들ContainerView.addSubview(endDayBar)
         endDayBar.anchor(top:전역일들.bottomAnchor, left: 전역일들ContainerView.leftAnchor, right: 전역일들ContainerView.rightAnchor,paddingTop: 12, paddingLeft: 16, paddingRight: 16)
-        let col1 = UIColor(red: 170/255.0, green: 144/255.0, blue: 239/255.0, alpha: 1)
-        let col2 = UIColor(red: 113/255.0, green: 87/255.0, blue: 219/255.0, alpha: 1)
-        endDayBar.setGradient(color1: col2, color2: col1, width: (UIScreen.main.bounds.width - Constants.sideSpacing*4) * 전역가까움)
-        dDay.anchor(right:전역일들ContainerView.leftAnchor, paddingRight: 전역가까움 > 0.1 ? -(UIScreen.main.bounds.width - Constants.sideSpacing*3) * 전역가까움 : -(전역일.intrinsicContentSize.width + 60))
+//        let col1 = UIColor(red: 170/255.0, green: 144/255.0, blue: 239/255.0, alpha: 1)
+//        let col2 = UIColor(red: 113/255.0, green: 87/255.0, blue: 219/255.0, alpha: 1)
+//        endDayBar.setGradient(color1: col2, color2: col1, width: (UIScreen.main.bounds.width - Constants.sideSpacing*4) * 전역가까움)
+//        print(전역가까움)
+//        dDay.anchor(right:전역일들ContainerView.leftAnchor, paddingRight: 전역가까움 > 0.1 ? -(UIScreen.main.bounds.width - Constants.sideSpacing*3) * 전역가까움 : -(전역일.intrinsicContentSize.width + 60))
         
         //MARK: (목표들)
-        let purposeStack = UIStackView(arrangedSubviews: [purposeLabel, purposeCollectionView])
+        let purposeStack = UIStackView(arrangedSubviews: [purposeLabel, todoCollectionView])
         purposeStack.axis = .vertical
         purposeStack.spacing = 8
         emptyView.addSubview(purposeStack)
         purposeStack.anchor(top: 전역일들ContainerView.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 40, paddingLeft: 0, paddingRight: 0)
-        purposeCollectionView.anchor(left: stack.leftAnchor, right: stack.rightAnchor, paddingLeft: 0, paddingRight: 0)
-        purposeCollectionView.setHeight(height: Constants.purposeCellHeight)
-        purposeCollectionView.backgroundColor = .systemGray6
+        todoCollectionView.anchor(left: stack.leftAnchor, right: stack.rightAnchor, paddingLeft: 0, paddingRight: 0)
+        todoCollectionView.setHeight(height: Constants.purposeCellHeight)
+        todoCollectionView.backgroundColor = .systemGray6
         //MARK: 운동 달력
 
         emptyView.addSubview(workoutLabel)
@@ -541,8 +638,8 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
-        case purposeCollectionView:
-            return 2
+        case todoCollectionView:
+            return todoData.count
         case mealCollectionView:
             return mealData.count
         default:
@@ -553,9 +650,18 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         switch collectionView {
-        case purposeCollectionView:
+        case todoCollectionView:
             print("cell purposeCollectionView")
-            guard let cell = purposeCollectionView.dequeueReusableCell(withReuseIdentifier: PurposeCollectionViewCell.cellID, for: indexPath) as? PurposeCollectionViewCell else { return UICollectionViewCell() }
+            guard let cell = todoCollectionView.dequeueReusableCell(withReuseIdentifier: PurposeCollectionViewCell.cellID, for: indexPath) as? PurposeCollectionViewCell else { return UICollectionViewCell() }
+//            let cell = PurposeCollectionViewCell(todo:  todoData[indexPath.row])
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale(identifier: "ko_KR")
+            dateFormatter.dateFormat = "yyyy.MM.dd"
+            cell.todoID = todoData[indexPath.row].dateSorting
+            cell.dateLabel.text = dateFormatter.string(from: todoData[indexPath.row].date)
+            cell.purposeLabel.text = todoData[indexPath.row].content
+            cell.thumbButton.tintColor = todoData[indexPath.row].isDone == false ? .gray : .none
             cell.delegate = self
             cell.backgroundColor = .white
             return cell
@@ -602,7 +708,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 extension MainViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch collectionView {
-        case purposeCollectionView:
+        case todoCollectionView:
             let width: CGFloat = Constants.purposeCellWidth
             let height: CGFloat = Constants.purposeCellHeight
             return CGSize(width: width, height: height)
@@ -694,8 +800,16 @@ enum Constants {
   }
 
 extension MainViewController: didPurpose {
-    func getThumbUp() {
-        print("get thumb up in vc")
+    func getThumbUp(todoID: Int) {
+        RealmManager.todoDoneAt(todoID)
+        todoCollectionView.isScrollEnabled = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.14) {
+            self.todoCollectionView.reloadData()
+            self.todoCollectionView.isScrollEnabled = true
+        }
+        print(RealmManager.notDoneTodoData().count)
+        print(todoData.count)
+//        print("get thumb up in vc")
     }
 }
 

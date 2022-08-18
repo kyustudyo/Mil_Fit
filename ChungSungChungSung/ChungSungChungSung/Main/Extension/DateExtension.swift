@@ -15,3 +15,23 @@ extension Date {
         return dateformatter.string(from: self)
     }
 }
+
+
+extension String {
+
+    func String2DateType() -> Date?{
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.date(from: self)?.addingTimeInterval(60*60*9)
+    }
+//func toDateTime() -> Date {
+//    let dateFormatter = DateFormatter()
+//    dateFormatter.dateFormat = "yyyy-MM-dd"
+//    dateFormatter.timeZone = .current
+//    dateFormatter.locale = .current
+//    guard let date = dateFormatter.date(from: self) else {
+//        preconditionFailure("Take a look to your format")
+//    }
+//    return date
+//}
+}

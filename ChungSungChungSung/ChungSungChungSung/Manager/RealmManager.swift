@@ -112,6 +112,62 @@ public class RealmManager {
 }
 
 extension RealmManager {
+    
+    
+    
+//    static func saveTodoListData(date: Date, content: String, isDone: Bool) {
+//
+//        let toDoList = ToDoListRealm(content: content, isDone: isDone, date: date)
+//        try! localRealm.write {
+//            localRealm.add(toDoList)
+//        }
+//    }
+    
+    //tododata
+    static func notDoneTodoData() -> Results<ToDoListRealm> {
+        let localRealm = try! Realm()
+        let realm = localRealm.objects(ToDoListRealm.self)
+                            .filter("isDone = false")
+                            .sorted(byKeyPath: "dateSorting", ascending: false)
+        return realm
+    }
+    
+    static func todoDoneAt(_ id: Int) {
+        print(id)
+        let localRealm = try! Realm()
+        let todoDone = localRealm.objects(ToDoListRealm.self)
+                            .filter("dateSorting == %@", id)
+                            .first
+        try! localRealm.write {
+            todoDone?.isDone.toggle()
+        }
+    }
+    
+    static func deleteAlTodosData() {
+        
+        let localRealm = try! Realm()
+        let alls = localRealm.objects(ToDoListRealm.self)
+        try! localRealm.write {
+            localRealm.delete(alls)
+        }
+    }
+    
+    //meal
+    static func deleteAllMealsData() {
+        
+        let localRealm = try! Realm()
+        let alls = localRealm.objects(MealRealm.self)
+        try! localRealm.write {
+            localRealm.delete(alls)
+        }
+    }
+    
+    static func allMealData() -> Results<MealRealm> {
+        let localRealm = try! Realm()
+        let realm = localRealm.objects(MealRealm.self)
+        return realm
+    }
+    
     static func searchMealDataByDate(date: String) -> Results<MealRealm> {
         let localRealm = try! Realm()
         let realm = localRealm.objects(MealRealm.self)
@@ -121,18 +177,5 @@ extension RealmManager {
         return target
     }
     
-    static func deleteAllMealsData() {
-        
-        let localRealm = try! Realm()
-        let alls = localRealm.objects(MealRealm.self)
-        try! localRealm.write {
-            localRealm.delete(alls)
-        }
-    }
-    static func allMealData() -> Results<MealRealm> {
-        let localRealm = try! Realm()
-        let realm = localRealm.objects(MealRealm.self)
-        return realm
-    }
 }
 
