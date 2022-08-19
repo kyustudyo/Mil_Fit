@@ -375,6 +375,7 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
                     $0.dateSearching == selectedDateString
                 }
                 workoutAddView.workoutAddTitleText = todaysWorkout[indexPath.row].name
+                workoutAddView.selectedDate = selectedDate
 //                workoutAddView.workout = workout
                 self.navigationController?.pushViewController(workoutAddView, animated: true)
             }

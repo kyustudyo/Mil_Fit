@@ -33,18 +33,14 @@ struct WorkoutData {
     ]
 }
 
-//struct WorkoutTemp {
-//    var date: Date
-//    var name: String
-//    var set: Int
-//    var count: Int?
-//    var minutes: Int?
-//    var seconds: Int?
-//    var weight: Int?
-//    var calories: Int?
-//    var dateSorting: Int
-//    var dateSearching: String
-//}
+struct WorkoutTemp {
+    var set: Int
+    var count: Int?
+    var minutes: Int?
+    var seconds: Int?
+    var weight: Int?
+    var calories: Int?
+}
 
 //struct WorkoutTempData {
 //
