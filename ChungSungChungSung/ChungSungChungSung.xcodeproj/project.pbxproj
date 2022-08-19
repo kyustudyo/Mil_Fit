@@ -82,6 +82,7 @@
 		AB460BAF28A7A32000765A1D /* BasicWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB460BAE28A7A32000765A1D /* BasicWorkout.swift */; };
 		AB80ECAC28AE898E00D6A5A5 /* FitnessTestStandard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB80ECAB28AE898E00D6A5A5 /* FitnessTestStandard.swift */; };
 		AB80ECAE28AF9A7500D6A5A5 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB80ECAD28AF9A7500D6A5A5 /* UILabel.swift */; };
+		AB80ECB028AFEC0700D6A5A5 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB80ECAF28AFEC0600D6A5A5 /* ErrorHandler.swift */; };
 		AB8623BE289E5B4200F71283 /* TestMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8623BD289E5B4200F71283 /* TestMainViewController.swift */; };
 		AB8623C0289E5B4A00F71283 /* TestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB8623BF289E5B4A00F71283 /* TestStoryboard.storyboard */; };
 		AB8623C2289ECD8900F71283 /* TestMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8623C1289ECD8900F71283 /* TestMainTableViewCell.swift */; };
@@ -178,6 +179,7 @@
 		AB460BAE28A7A32000765A1D /* BasicWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicWorkout.swift; sourceTree = "<group>"; };
 		AB80ECAB28AE898E00D6A5A5 /* FitnessTestStandard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessTestStandard.swift; sourceTree = "<group>"; };
 		AB80ECAD28AF9A7500D6A5A5 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
+		AB80ECAF28AFEC0600D6A5A5 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		AB8623BD289E5B4200F71283 /* TestMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMainViewController.swift; sourceTree = "<group>"; };
 		AB8623BF289E5B4A00F71283 /* TestStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TestStoryboard.storyboard; sourceTree = "<group>"; };
 		AB8623C1289ECD8900F71283 /* TestMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMainTableViewCell.swift; sourceTree = "<group>"; };
@@ -492,6 +494,7 @@
 				ABE43C3528ACB0DE005C272C /* RealmManager.swift */,
 				ABE43C3728ACB0E9005C272C /* UserDefaultManager.swift */,
 				ABE43C3B28ACB244005C272C /* FuncCollection.swift */,
+				AB80ECAF28AFEC0600D6A5A5 /* ErrorHandler.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -689,6 +692,7 @@
 				79BBF694289AB50B0003FAD8 /* AppDelegate.swift in Sources */,
 				325F8E1128A3F1BC004ACF9E /* UIView.swift in Sources */,
 				328AB9D028A8F76200000A85 /* UIImage.swift in Sources */,
+				AB80ECB028AFEC0700D6A5A5 /* ErrorHandler.swift in Sources */,
 				328AB9B328A64A9700000A85 /* BodyInfoTableViewCell.swift in Sources */,
 				7E5BF64428A2450900B6DD26 /* TodaysWorkoutCell.swift in Sources */,
 				79BBF696289AB50B0003FAD8 /* SceneDelegate.swift in Sources */,

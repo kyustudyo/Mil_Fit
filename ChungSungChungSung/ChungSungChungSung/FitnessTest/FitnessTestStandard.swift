@@ -41,7 +41,7 @@ struct FitnessTest {
 }
 
 
-let testStandard: [TestAge: [FitnessTest]] = [.one: [FitnessTest(type: .running, standard: ["특급" : (1, 12 * 60 + 30), "1급" : (12 * 60 + 46, 13 * 60 + 52)])]]
+let testStandard: [TestAge: [FitnessTest]] = [.one: [FitnessTest(type: .running, standard: ["특급" : (1, 12 * 60 + 30), "1급" : (12 * 60 + 46, 13 * 60 + 52)]), FitnessTest(type: .pushup, standard: ["특급": (44,89), "1급": (24, 43)]), FitnessTest(type: .situp, standard: ["특급": (44,89), "1급": (24, 43)])]]
 
 
 func calculateLevel(testType: TestType, minutes: Int?, seconds: Int?, count: Int?) -> String {
@@ -56,6 +56,8 @@ func calculateLevel(testType: TestType, minutes: Int?, seconds: Int?, count: Int
        if i.type == testType {
            for (key, value) in i.standard {
                if totalTime >= value.0 && totalTime <= value.1 {
+                   return key
+               }else if count ?? 0 >= value.0 && count ?? 0 <= value.1 {
                    return key
                }
            }

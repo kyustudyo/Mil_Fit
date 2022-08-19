@@ -58,7 +58,7 @@ class TestMainViewController: UIViewController {
         navigationItem.title = "체력검정"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode =  .always
-        fitnessTestRealm = localRealm.objects(FitnessTestRealm.self).sorted(byKeyPath: "dateSorting")
+        fitnessTestRealm = localRealm.objects(FitnessTestRealm.self).sorted(byKeyPath: "dateSorting", ascending: false)
         fitnessMainTableView.reloadData()
         if fitnessTestRealm.filter("isPractice == false").count == 0 {
             drawEmptyView()
@@ -72,17 +72,20 @@ class TestMainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fitnessTestRealm = localRealm.objects(FitnessTestRealm.self).sorted(byKeyPath: "dateSorting")
+        fitnessTestRealm = localRealm.objects(FitnessTestRealm.self).sorted(byKeyPath: "dateSorting", ascending: false)
         fitnessMainTableView.dataSource = self
         fitnessMainTableView.delegate = self
-        
         let standardButton = UIBarButtonItem(image: UIImage(systemName: "info.circle"), style: .plain, target: self, action: #selector(didTapStandardButton))
         let addButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(didTapAddButton))
         navigationItem.rightBarButtonItems = [standardButton, addButton]
-        
+        view.backgroundColor = CustomColor.bgGray
         fitnessGraphButton.tintColor = UIColor.clear
         fitnessGraphButton.titleLabel?.text = ""
         drawTableViewUI()
+        
+        //test 코드
+        UserDefaultManager.saveAge(age: 23)
+        print("Realm저장위치=\n\(Realm.Configuration.defaultConfiguration.fileURL!)\n")
         
     }
     //TODO: 어딨지
@@ -113,7 +116,7 @@ class TestMainViewController: UIViewController {
             emptyView.centerXAnchor.constraint(equalTo: graphRoundedRectangleView.centerXAnchor),
             emptyView.centerYAnchor.constraint(equalTo: graphRoundedRectangleView.centerYAnchor)
         ])
-        emptyView.backgroundColor = CustomColor.bgGray
+        emptyView.backgroundColor = UIColor.systemGray6
         emptyView.layer.cornerRadius = 20
         fitnessGraphButton.isHidden = true
         emptyLabel.centerX(inView: emptyView)
@@ -124,10 +127,15 @@ class TestMainViewController: UIViewController {
         
     }
     func drawGraphViewRectangleUI() {
+        print(#function)
         let date = fitnessTestRealm.filter("isPractice == false").first!.date
-        let runningRealm = fitnessTestRealm.filter("testType == running").filter("isPractice == false").first!
-        let pushupRealm = fitnessTestRealm.filter("testType == pushup").filter("isPractice == false").first!
-        let situpRealm = fitnessTestRealm.filter("testType == situp").filter("isPractice == false").first!
+        //test
+        let runningRealm = fitnessTestRealm.filter("testType == 'running'").filter("isPractice == false").first!
+        print("running\(runningRealm)")
+        let pushupRealm = fitnessTestRealm.filter("testType == 'pushup'").filter("isPractice == false").first!
+        print("pushupRealm\(pushupRealm)")
+        let situpRealm = fitnessTestRealm.filter("testType == 'situp'").filter("isPractice == false").first!
+        print("situpRealm\(situpRealm)")
         let runningMaxStandard = getMaxStandard(testType: .running, level: "특급")
         let pushupMaxStandard = getMaxStandard(testType: .pushup, level: "특급")
         let situpMaxStandard = getMaxStandard(testType: .situp, level: "특급")
@@ -137,7 +145,7 @@ class TestMainViewController: UIViewController {
         let convertString = dateFormatter.string(from: date)
         fitnessGraphButton.isHidden = false
         graphRoundedRectangleView.layer.cornerRadius = 20
-        graphRoundedRectangleView.backgroundColor = CustomColor.bgGray
+        graphRoundedRectangleView.backgroundColor = UIColor.systemGray6
         historyFitnessTestLabel.text = "지난 체력검정 결과"
         historyFitnessTestLabel.textColor = UIColor.systemGray2
         lastFitnessTestDateLabel.text = convertString
@@ -164,10 +172,12 @@ class TestMainViewController: UIViewController {
         situpGraphRecordLabel.setTargetStringColor(targetString: "\(situpRealm.count!)회", color: CustomColor.blue!)
         }
     func drawTableViewUI() {
+        print(#function)
         recordTableViewTitleLabel.text = "종목별 최고 기록"
     }
     func configureRunningGraphView() {
-        let runningRealm = fitnessTestRealm.filter("testType == running").filter("isPractice == false").first
+        print(#function)
+        let runningRealm = fitnessTestRealm.filter("testType == 'running'").filter("isPractice == false").first
         let maxStandard = getMaxStandard(testType: .running, level: "특급")
         let rate = Double(maxStandard - (runningRealm?.totalTime ?? 0)) / Double(maxStandard)
         runningData = GraphData(level: runningRealm?.level ?? "불합격", rate: rate)
@@ -185,7 +195,8 @@ class TestMainViewController: UIViewController {
     }
     
     func configurePushupGraphView() {
-    let pushupRealm = fitnessTestRealm.filter("testType == pushup").filter("isPractice == false").first
+        print(#function)
+    let pushupRealm = fitnessTestRealm.filter("testType == 'pushup'").filter("isPractice == false").first
     let maxStandard = getMaxStandard(testType: .pushup, level: "특급")
     let rate = Double(maxStandard - (pushupRealm?.count ?? 0)) / Double(maxStandard)
     pushupData = GraphData(level: pushupRealm?.level ?? "불합격", rate: rate)
@@ -203,7 +214,8 @@ class TestMainViewController: UIViewController {
     }
     
     func configureSitupGraphView() {
-    let situpRealm = fitnessTestRealm.filter("testType == situp").filter("isPractice == false").first
+        print(#function)
+    let situpRealm = fitnessTestRealm.filter("testType == 'situp'").filter("isPractice == false").first
     let maxStandard = getMaxStandard(testType: .situp, level: "특급")
     let rate = Double(maxStandard - (situpRealm?.count ?? 0)) / Double(maxStandard)
     situpData = GraphData(level: situpRealm?.level ?? "불합격", rate: rate)
@@ -227,19 +239,20 @@ extension TestMainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print(#function)
         guard let cell = fitnessMainTableView.dequeueReusableCell(withIdentifier: TestMainTableViewCell.identifier, for: indexPath) as? TestMainTableViewCell else { return UITableViewCell() }
-        let runningRealm = fitnessTestRealm.filter("testType == running")
-        let runningBest = runningRealm.sorted(byKeyPath: "totalTime").first ?? nil
-        let pushupRealm = fitnessTestRealm.filter("testType == pushup")
-        let pushupBest = pushupRealm.sorted(byKeyPath: "count").first ?? nil
-        let situpRealm = fitnessTestRealm.filter("testType == situp")
-        let situpBest = situpRealm.sorted(byKeyPath: "count").first ?? nil
+        let runningRealm: Results<FitnessTestRealm>? = fitnessTestRealm.filter("testType == 'running'")
+        let runningBest = runningRealm?.sorted(byKeyPath: "totalTime").first ?? nil
+        let pushupRealm: Results<FitnessTestRealm>? = fitnessTestRealm.filter("testType == 'pushup'")
+        let pushupBest = pushupRealm?.sorted(byKeyPath: "count").first ?? nil
+        let situpRealm: Results<FitnessTestRealm>? = fitnessTestRealm.filter("testType == 'situp'")
+        let situpBest = situpRealm?.sorted(byKeyPath: "count").first ?? nil
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy.MM.dd"
         dateFormatter.locale = Locale(identifier: "ko_KR")
         if indexPath.row == 0 {
-            cell.fitnessTitleLabel.text = "1.5km 달리기"
-            if runningRealm.isEmpty {
+            cell.fitnessTitleLabel.text = "3km 달리기"
+            if runningRealm?.count == 0 {
                 cell.fitnessRecordDateLabel.isHidden = true
                 cell.fitnessRecordLabel.text = "기록을 추가해주세요."
             }else {
@@ -250,7 +263,7 @@ extension TestMainViewController: UITableViewDelegate, UITableViewDataSource {
  
         }else if indexPath.row == 1 {
             cell.fitnessTitleLabel.text = "팔굽혀펴기"
-            if pushupRealm.isEmpty {
+            if pushupRealm?.count == 0 {
                 cell.fitnessRecordDateLabel.isHidden = true
                 cell.fitnessRecordLabel.text = "기록을 추가해주세요."
             }else {
@@ -260,7 +273,7 @@ extension TestMainViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }else {
             cell.fitnessTitleLabel.text = "윗몸일으키기"
-            if situpRealm.isEmpty {
+            if situpRealm?.count == 0 {
                 cell.fitnessRecordDateLabel.isHidden = true
                 cell.fitnessRecordLabel.text = "기록을 추가해주세요."
             }else {
