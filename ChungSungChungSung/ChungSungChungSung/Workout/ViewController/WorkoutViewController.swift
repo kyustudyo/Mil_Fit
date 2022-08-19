@@ -8,12 +8,13 @@
 import UIKit
 import RealmSwift
 
-
 class WorkoutViewController: UIViewController {
     private let defaults = UserDefaults.standard
     private var favoriteWorkouts: [String]?
     
     var workoutRealm: Results<WorkoutRealm>!
+    
+    var workoutDates = [String]()
     
     var events = [String]()
     private let workoutViewTitle = "운동"
@@ -247,7 +248,6 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         
-        
         if(dateFormatter.string(from: date) == dateFormatter.string(from: selectedDate)) {
             let col1 = UIColor(red: 170/255.0, green: 144/255.0, blue: 239/255.0, alpha: 1)
             let col2 = UIColor(red: 113/255.0, green: 87/255.0, blue: 219/255.0, alpha: 1)
@@ -263,11 +263,19 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
         cell.dateHighlightCircleView.layer.shadowOpacity = 0.2
 //        cell.dateHighlightCircleView.layer.shadowRadius = 4
         cell.dateHighlightCircleView.layer.shadowOffset = CGSize(width: 2, height: 3)
-        if events.contains(dateFormatter.string(from: date)) {
-            cell.dateHighlightCircleView.backgroundColor = UIColor(hex: "FEB4B4")
+        
+        let dateFormatterForHighlight = DateFormatter()
+        dateFormatterForHighlight.dateFormat = "yyyyMMdd"
+        dateFormatterForHighlight.locale = Locale(identifier: "ko_KR")
+        
+        workoutDates = defaults.stringArray(forKey: "workoutDate") ?? [String]()
+        if workoutDates.contains(dateFormatterForHighlight.string(from: date)) {
+//                cell.dateHighlightCircleView.backgroundColor = UIColor(hex: "FEB4B4")
+            cell.dateHighlightCircleView.backgroundColor = CustomColor.calendarRedColor
         } else {
             cell.dateHighlightCircleView.backgroundColor = UIColor.white
         }
+
 //        cell.backgroundColor = .red
 //        dailyCalendarView.backgroundColor = .yellow
         return cell
@@ -389,7 +397,9 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
                     if todaysWorkout.count == 0 {
                         RealmManager.saveWorkoutData(date: selectedDate, name: workoutName, count: nil, minutes: nil, seconds: nil, weight: nil, calories: nil)
                         UserDefaultManager.saveIsWorkoutDate(date: selectedDate)
+                        workoutDates = defaults.stringArray(forKey: "workoutDate") ?? [String]()
                         todaysWorkoutView.reloadData()
+                        dailyCalendarView.reloadData()
                     } else {
                         showToast()
                     }
