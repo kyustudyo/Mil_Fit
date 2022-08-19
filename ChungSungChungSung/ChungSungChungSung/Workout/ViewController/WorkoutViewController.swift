@@ -85,6 +85,7 @@ class WorkoutViewController: UIViewController {
         selectedDateString = dateFormatterForFilter.string(from: selectedDate)
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.didCompletedTodaysWorkoutEdit(_:)), name: Notification.Name("DidDismissTodaysWorkoutEditView"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didCompletedWorkoutListEdit(_:)), name: Notification.Name("DidDismissWorkoutListEditView"), object: nil)
         
         setUpEvents()
         
@@ -127,6 +128,13 @@ class WorkoutViewController: UIViewController {
     @objc func didCompletedTodaysWorkoutEdit(_ notification: Notification) {
         DispatchQueue.main.async {
             self.todaysWorkoutView.reloadData()
+        }
+    }
+    
+    @objc func didCompletedWorkoutListEdit(_ notification: Notification) {
+        DispatchQueue.main.async {
+            self.favoriteWorkouts = self.defaults.stringArray(forKey: "WorkoutList")
+            self.workoutListView.reloadData()
         }
     }
     

@@ -8,6 +8,8 @@
 import UIKit
 
 class WorkoutListEditViewController: UIViewController {
+    let didDismissWorkoutListEditView: Notification.Name = Notification.Name("DidDismissWorkoutListEditView")
+    
     private let defaults = UserDefaults.standard
     private var favoriteWorkouts: [String]?
     private var otherWorkouts: [String]?
@@ -28,6 +30,7 @@ class WorkoutListEditViewController: UIViewController {
     @IBAction func doneEditing(_ sender: Any) {
         defaults.set(favoriteWorkouts, forKey: "WorkoutList")
         defaults.set(otherWorkouts, forKey: "OtherWorkoutList")
+        NotificationCenter.default.post(name: didDismissWorkoutListEditView, object: nil, userInfo: nil)
         self.presentingViewController?.dismiss(animated: true)
     }
     
@@ -46,6 +49,7 @@ class WorkoutListEditViewController: UIViewController {
         print("즐겨찾기 \(favoriteWorkouts?.count)")
         print("그 외 목록 \(otherWorkouts?.count)")
     }
+    
 }
 
 extension WorkoutListEditViewController: UITableViewDelegate, UITableViewDataSource {

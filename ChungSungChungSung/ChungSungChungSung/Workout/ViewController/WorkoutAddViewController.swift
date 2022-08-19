@@ -14,6 +14,8 @@ class WorkoutAddViewController: UIViewController {
     var workoutAddTitleText: String = "text"
     var workout: WorkoutModel?
     
+    var editDoneButton: UIButton = UIButton()
+    
     @IBOutlet weak var workoutAddTable: UITableView!
     
     override func viewDidLoad() {
@@ -23,6 +25,14 @@ class WorkoutAddViewController: UIViewController {
         navigationItem.title = workoutAddTitleText
         navigationItem.largeTitleDisplayMode = .never
         navigationController?.navigationBar.topItem?.backButtonTitle = "운동"
+
+        
+        editDoneButton.addTarget(self, action: #selector(editDoneAction), for: .touchUpInside)
+        editDoneButton.setTitle("편집", for: .normal)
+        editDoneButton.tintColor = CustomColor.mainPurple
+        let editDoneBarButton = UIBarButtonItem(customView: editDoneButton)
+        editDoneBarButton.tintColor = CustomColor.mainPurple
+        self.navigationItem.rightBarButtonItems = [editDoneBarButton]
         
         let workoutAddTwoTableViewCellNib = UINib(nibName: "WorkoutAddTwoTableViewCell", bundle: nil)
         let workoutAddOneTableViewCellNib = UINib(nibName: "WorkoutAddOneTableViewCell", bundle: nil)
@@ -37,6 +47,16 @@ class WorkoutAddViewController: UIViewController {
         workoutAddTable.backgroundColor = CustomColor.bgGray
         workoutAddTable.contentInset.top = 24
     }
+    
+    @objc func editDoneAction() {
+        if self.workoutAddTable.isEditing {
+            editDoneButton.setTitle("편집", for: .normal)
+            self.workoutAddTable.setEditing(false, animated: true)
+        } else {
+            editDoneButton.setTitle("완료", for: .normal)
+            self.workoutAddTable.setEditing(true, animated: true)
+        }
+    }
 }
 
 extension WorkoutAddViewController: UITableViewDelegate, UITableViewDataSource {
@@ -45,9 +65,6 @@ extension WorkoutAddViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        
-        
         if indexPath.row == numberOfSets + 1 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "workoutAddCalorieTableViewCell", for: indexPath) as? WorkoutAddCalorieTableViewCell else {
                 return UITableViewCell()
@@ -75,6 +92,9 @@ extension WorkoutAddViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.firstInputType.text = nil
                 cell.firstInputField.isHidden = true
                 cell.secondInputType.text = "분"
+                
+                
+                
             } else if basicWorkoutData[workoutAddTitleText]?.0 == .무게운동 {
                 cell.firstInputType.text = "kg"
                 cell.secondInputType.text = "회"
@@ -88,6 +108,19 @@ extension WorkoutAddViewController: UITableViewDelegate, UITableViewDataSource {
             
             return cell
         }
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        if indexPath.row < numberOfSets {
+            return .delete
+        } else if indexPath.row >= numberOfSets {
+            return .none
+        }
+        return .delete
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

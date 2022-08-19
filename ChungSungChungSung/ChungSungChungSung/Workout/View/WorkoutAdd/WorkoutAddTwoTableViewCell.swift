@@ -8,6 +8,9 @@
 import UIKit
 
 class WorkoutAddTwoTableViewCell: UITableViewCell {
+    var firstInputText: String?
+    var secondInputText: String?
+    
     @IBOutlet weak var cellRectangle: UIView!
     @IBOutlet weak var setNumberView: UILabel!
     @IBOutlet weak var firstInputType: UILabel!

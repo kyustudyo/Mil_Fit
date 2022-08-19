@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="workoutAdd" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="76" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vM9-se-7Ti">
-                                <rect key="frame" x="0.0" y="10" width="414" height="886"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Y6W-OH-hqX" id="bNQ-KF-rwm"/>
@@ -30,7 +30,7 @@
                         <constraints>
                             <constraint firstItem="vM9-se-7Ti" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="FWa-IK-5at"/>
                             <constraint firstItem="vM9-se-7Ti" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="G8Q-fH-Txx"/>
-                            <constraint firstItem="vM9-se-7Ti" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="10" id="Tya-Wh-GZm"/>
+                            <constraint firstItem="vM9-se-7Ti" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="VRy-p0-7R8"/>
                             <constraint firstAttribute="bottom" secondItem="vM9-se-7Ti" secondAttribute="bottom" id="mgy-JK-Kns"/>
                         </constraints>
                     </view>
