@@ -43,8 +43,46 @@ struct FitnessTest {
 
 let testStandard: [TestAge: [FitnessTest]] = [.one: [FitnessTest(type: .running, standard: ["특급" : (1, 12 * 60 + 30), "1급" : (12 * 60 + 46, 13 * 60 + 52)])]]
 
+
+func calculateLevel(testType: TestType, minutes: Int?, seconds: Int?, count: Int?) -> String {
+    let age = UserDefaults.standard.integer(forKey: "age")
+    var totalTime = 0
+    if minutes != nil && seconds != nil {
+        totalTime = minutes! * 60 + seconds!
+    }
+    let testAge = TestAge(age: age)!
+    let testAll = testStandard[testAge]!
+    for i in testAll {
+       if i.type == testType {
+           for (key, value) in i.standard {
+               if totalTime >= value.0 && totalTime <= value.1 {
+                   return key
+               }
+           }
+        }
+    }
+    return "없음"
+}
+
+func getMaxStandard(testType: TestType, level: String) -> Int {
+    let age = UserDefaults.standard.integer(forKey: "age")
+    let testAge = TestAge(age: age)!
+    let testAll = testStandard[testAge]!
+    for i in testAll {
+       if i.type == testType {
+           for (key, value) in i.standard {
+               if key == level {
+                   return value.0
+               }
+           }
+        }
+    }
+    return 0
+}
+
+/*
 public class FitnessTestStandard {
-    static func calculateLevel(age: Int, type: String, count: Int?, minutes: Int?, seconds: Int?) -> [String, Int] {
+    static func calculateLevel2(age: Int, type: String, count: Int?, minutes: Int?, seconds: Int?) -> [String, Int] {
         var totalTime: Int = 0
         if minutes != nil && seconds != nil {
             totalTime = minutes! * 60 + seconds!
@@ -532,3 +570,4 @@ public class FitnessTestStandard {
         }
     }
 }
+*/
