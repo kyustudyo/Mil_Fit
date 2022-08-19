@@ -45,4 +45,14 @@ class Bar: UIView {
         self.progressView.clipsToBounds = true
         self.progressView.layer.cornerRadius = self.frame.height / 2.0
     }
+    func update(progressValue: Double) {
+        let total =  Double(self.frame.width)
+        let width =  ((total * progressValue) / 100.0).rounded()
+        let height = Double(self.frame.height)
+        progressView = UIView(frame: CGRect(x: 0, y: 0, width:  width, height: height))
+        self.addSubview(progressView)
+        progressView.backgroundColor = progressColor
+        self.progressView.clipsToBounds = true
+        self.progressView.layer.cornerRadius = self.frame.height / 2.0
+    }
 }

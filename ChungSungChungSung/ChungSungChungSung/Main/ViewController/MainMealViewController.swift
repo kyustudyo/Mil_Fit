@@ -243,7 +243,7 @@ class MainMealViewController: UIViewController, UICollectionViewDelegate, UIColl
 extension MainMealViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return mealData.count
+        return mealData?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -263,6 +263,7 @@ extension MainMealViewController: UITableViewDelegate, UITableViewDataSource {
 //        print("qwer")
 //        cell.mealStrings = cell.mealStrings.isEmpty ? mealData[indexPath.section].mealArray : []
 //        cell.label1.text = mealData[indexPath.section].mealArray[0]
+        guard let mealData = mealData else { return cell }
         print(mealData[indexPath.section].mealArray)
         let array = mealData[indexPath.section].mealArray
         if array.count > 0 {

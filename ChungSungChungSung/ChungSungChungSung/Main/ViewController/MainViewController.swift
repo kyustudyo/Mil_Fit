@@ -16,14 +16,18 @@ import RealmSwift
 class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSource  {
 
     var 전역가까움: Double = 0.0
-    let eatPercent = 70.0
-    let workoutPercent = 45.0
-    let basicPercent = 40.0
+    var eatPercent = 0.3
+    var workoutPercent = 0.4
+    var basicPercent = 0.5
     
     var isMealCollectionView: String = ""// 부대
     var isMealData: Bool = false// 있는 부대인지
     
-    var events2: [Date] = []
+    var events2: [Date] = [] {
+        willSet {
+            calendar.reloadData()
+        }
+    }
     var calendar = FSCalendar()
     
     private var emptyView: UIView = {
@@ -110,9 +114,9 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         return label
     }()
     
-    fileprivate lazy var basicRoundedView: UIView = {
+    fileprivate lazy var basicRoundedView: Bar = {
         let roundedView = Bar()
-        roundedView.progressValue = basicPercent
+        roundedView.progressValue = Double(basicPercent)
         roundedView.progressColor = CustomColor.strongPurple ?? UIColor.purple
         roundedView.trackColor = .clear
         return roundedView
@@ -161,9 +165,9 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    fileprivate lazy var workoutRoundedView: UIView = {
+    fileprivate lazy var workoutRoundedView: Bar = {
         let roundedView = Bar()
-        roundedView.progressValue = basicPercent + workoutPercent
+        roundedView.progressValue = Double(basicPercent) + Double(workoutPercent)
         roundedView.progressColor = CustomColor.red ?? UIColor.red
         roundedView.trackColor = .clear
         return roundedView
@@ -183,9 +187,9 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         return button
     }()
     
-    fileprivate lazy var eatRoundedView: UIView = {
+    fileprivate lazy var eatRoundedView: Bar = {
         let roundedView = Bar()
-        roundedView.progressValue = eatPercent
+        roundedView.progressValue = 90.0
         roundedView.progressColor = CustomColor.subtlePurple ?? UIColor.purple
         roundedView.trackColor = .clear
         return roundedView
@@ -239,8 +243,8 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     private let 전역일들ContainerView: UIView = {
         return UIView()
     }()
-    var mealData = RealmManager.searchMealDataByDate(date: Date().formatterAppliedString())
-    var todoData: Results<ToDoListRealm> = RealmManager.notDoneTodoData()
+    var mealData:Results<MealRealm>? = RealmManager.searchMealDataByDate(date: Date().formatterAppliedString())
+    var todoData:Results<ToDoListRealm>? = RealmManager.notDoneTodoData()
 //    {
 //        willSet {
 //            todoCollectionView.reloadData()
@@ -248,6 +252,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
 //    }
     
     override func viewWillAppear(_ animated: Bool) {
+        print("viewWillAppear")
         //다른 뷰컨에서 navi를 보이므로
         navigationController?.isNavigationBarHidden = true
         UserDefaultManager.saveDischargeDate(date: "2022-08-21".String2DateType()!)
@@ -260,6 +265,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         RealmManager.saveTodoListData(date: "2022-08-22".String2DateType()!, content: "3", isDone: false)
 //        RealmManager.saveTodoListData(date: "2022-08-23".String2DateType()!, content: "4", isDone: false)
 //        RealmManager.saveTodoListData(date: "2022-08-24".String2DateType()!, content: "5", isDone: false)
+//        setUpEvents()
         
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ko_KR")
@@ -290,8 +296,101 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         
         todoData = RealmManager.notDoneTodoData()
         
+        
+        RealmManager.deleteAllWorkoutData()
+        RealmManager.saveWorkoutData(date: "20220815".String2DateTypeForWorkout()!, name: "팔굽", set: 3, count: 2, minutes: 3, seconds: 3, weight: 4, calories: 300)
+        RealmManager.saveWorkoutData(date: "20220816".String2DateTypeForWorkout()!, name: "팔굽2", set: 3, count: 2, minutes: 3, seconds: 3, weight: 4, calories: 200)
+        RealmManager.saveWorkoutData(date: "20220819".String2DateTypeForWorkout()!, name: "팔굽3", set: 3, count: 2, minutes: 3, seconds: 3, weight: 4, calories: 100)
+        
+        
+        let dateFormatterForWorkout = DateFormatter()
+        dateFormatterForWorkout.locale = Locale(identifier: "ko_KR")
+        dateFormatterForWorkout.dateFormat = "yyyyMMdd"
+        
+        let dateFormatterForMeal = DateFormatter()
+        dateFormatterForMeal.locale = Locale(identifier: "ko_KR")
+        dateFormatterForMeal.dateFormat = "yyyy-MM-dd"
+//        let sampledate5 = "2022-08-01".String2DateType()
+//        let sampledate6 = "2022-08-05".String2DateType()
+//        let sampledate7 = "2022-08-06".String2DateType()
+//        print("qwer",sampledate5)
+//        events2 = [sampledate5!, sampledate6!, sampledate7!]
+        let a = RealmManager.fetchSearchDidWorkoutDates()
+        events2 = RealmManager.fetchSearchDidWorkoutDates() ?? []
+        
+//        let todayWorkout = RealmManager.fetchWorkOutDataByDate(date: dateFormatterForWorkout.string(from: Date()))
+        
+//        if let meal = RealmManager.searchMealDataByDate(date: dateFormatterForMeal.string(from: Date())) {
+//            if meal.count == 0 {
+//                eatPercent = 50.0
+//            } else {
+//                eatPercent = Double(meal[0].calories) / 5000.0 * 100.0
+//            }
+//        }
+        updateMealRoundedView()
+        
+        
+//        print(dateFormatter.string(from: Date()))
+        if let workOut = RealmManager.searchWorkoutDataByDateK(date: dateFormatterForWorkout.string(from: Date())) {
+            guard workOut.count != 0 else { return }
+            print("qwqw운동칼로리", workOut[0].calories)
+            workoutPercent = Double(Array(workOut.map { $0.calories ?? 0}).reduce(0, +)) / 5000 * 100.0
+            workoutRoundedView.progressValue = workoutPercent
+        }
+        
+//        RealmManager.deleteAllWeightData()
+        
+        //몸무게
+//        RealmManager.saveWeightData(date: Date().addingTimeInterval(60*60*9), weight: 40)
+        
+        //키
+//        UserDefaultManager.saveHeight(height: 191)
+//        print(UserDefaultManager.loadHeight())
+        
+        //bmr
+        UserDefaultManager.saveBMR(BMR: 1400)
+        print(UserDefaultManager.loadBMR())
+        let bmr = UserDefaultManager.loadBMR() ?? 0
+        basicPercent = Double(bmr) / 5000.0 * 100.0
+        basicRoundedView.progressValue = basicPercent
+        print("percent", eatPercent, basicPercent, workoutPercent)
+        updateMealView()
+//        view.layoutIfNeeded()
+        
+        
+        
+//        RealmManager.saveWeightData(date: "2022-08-22".String2DateType()!, weight: 33)
+//        RealmManager.saveWeightData(date: "2022-08-11".String2DateType()!, weight: 45)
+//        RealmManager.saveWeightData(date: "2022-08-24".String2DateType()!, weight: 50)
+//        RealmManager.saveWeightData(date: "2022-08-19".String2DateType()!, weight: 56)
+//        RealmManager.saveWeightData(date: "2022-08-27".String2DateType()!, weight: 55)
+//        RealmManager.saveWeightData(date: "2022-08-27".String2DateType()!, weight: 59)
+//        print("wewe",RealmManager.searchCurrentWeight())
+        
+//        print("qwerr",RealmManager.searchMealDataByDate(date: "2022-08-15")?.count)
+//        print("qwerr",RealmManager.searchMealDataByDate(date: "2022-08-15"))
+//        print(RealmManager.searchWorkoutDataByDateK(date: "20220815")?.count)
+//        print(RealmManager.searchWorkoutDataByDateK(date: "20220819"))
+        
+//        let k = mealData.map{ $0.calories }
+        
     }
-    
+    private func updateMealRoundedView() {
+        let dateFormatterForMeal = DateFormatter()
+        dateFormatterForMeal.locale = Locale(identifier: "ko_KR")
+        dateFormatterForMeal.dateFormat = "yyyy-MM-dd"
+        
+        if let meal = RealmManager.searchMealDataByDate(date: dateFormatterForMeal.string(from: Date())) {
+            if meal.count == 0 {
+                eatPercent = 50.0
+            } else {
+                print("cal", Double(meal[0].calories))
+//                eatPercent = Double(meal[0].calories) / 3000.0 * 100.0
+            }
+            eatRoundedView.progressValue = eatPercent == 50.0 ? 12.0 : 40.0
+            
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGray6
@@ -344,6 +443,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
 //        print(UserDefaultManager.loadDischargeDate())
         calendar.delegate = self
         calendar.dataSource = self
+        
         print(Realm.Configuration.defaultConfiguration.fileURL!)
 //        Webservice.shared.fetchMeals300(army: "제5322부대")
         setupUI()
@@ -431,7 +531,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         nextButton.setImage(UIImage(systemName: "chevron.right"), for: .normal)
         calendar.placeholderType = .none//현재달만
         calendar.appearance.titleFont = UIFont.systemFont(ofSize: 13)
-        setUpEvents()
+//        setUpEvents()
         
         //MARK: 식단
 //        moreButtons = isMealData ? moreButton : UIView()
@@ -519,14 +619,14 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
 //        세개칼로리스택.distribution = .equalCentering
 //        세개칼로리스택.anchor(top: basicRoundedView.bottomAnchor, left: calContainerView.leftAnchor, right: calContainerView.rightAnchor, paddingTop: 24, paddingLeft: 22, paddingRight: 16)
     }
-    func setUpEvents() {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        let sampledate5 = formatter.date(from: "2022-08-1")
-        let sampledate6 = formatter.date(from: "2022-08-5")
-        let sampledate7 = formatter.date(from: "2022-08-6")
-        events2 = [sampledate5!, sampledate6!, sampledate7!]
-    }
+//    func setUpEvents() {
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyyy-MM-dd"
+//        let sampledate5 = formatter.date(from: "2022-08-1")
+//        let sampledate6 = formatter.date(from: "2022-08-5")
+//        let sampledate7 = formatter.date(from: "2022-08-6")
+//        events2 = [sampledate5!, sampledate6!, sampledate7!]
+//    }
     
     fileprivate lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -535,10 +635,13 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     }()
     
     @objc fileprivate func goSelectArmyViewController() {
-        let selectArmyViewController = SelectArmyViewController()
-        selectArmyViewController.isMealCollectionView = isMealCollectionView
-        selectArmyViewController.delegate = self
-        navigationController?.pushViewController(selectArmyViewController, animated: true)
+        print("eer")
+        eatRoundedView.update(progressValue: 90.0)
+        view.reloadInputViews()
+//        let selectArmyViewController = SelectArmyViewController()
+//        selectArmyViewController.isMealCollectionView = isMealCollectionView
+//        selectArmyViewController.delegate = self
+//        navigationController?.pushViewController(selectArmyViewController, animated: true)
     }
     
     private func updateMealView() {
@@ -639,9 +742,9 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
         case todoCollectionView:
-            return todoData.count
+            return todoData?.count ?? 0
         case mealCollectionView:
-            return mealData.count
+            return mealData?.count ?? 0
         default:
             return 0
         }
@@ -658,12 +761,15 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let dateFormatter = DateFormatter()
             dateFormatter.locale = Locale(identifier: "ko_KR")
             dateFormatter.dateFormat = "yyyy.MM.dd"
+            cell.delegate = self
+            cell.backgroundColor = .white
+            guard let todoData = todoData else {
+                return cell
+            }
             cell.todoID = todoData[indexPath.row].dateSorting
             cell.dateLabel.text = dateFormatter.string(from: todoData[indexPath.row].date)
             cell.purposeLabel.text = todoData[indexPath.row].content
             cell.thumbButton.tintColor = todoData[indexPath.row].isDone == false ? .gray : .none
-            cell.delegate = self
-            cell.backgroundColor = .white
             return cell
         case mealCollectionView:
             print("cell mealCollectionView")
@@ -671,8 +777,12 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.mealLabel.text = ["조식", "중식", "석식"][indexPath.row]
 //            cell.반찬들 = mealData[indexPath.row].mealArray
 //            cell.calLabel.text = "\(mealData[indexPath.row].calories)kcal"
-            
+            cell.backgroundColor = .white
+            guard let mealData = mealData else {
+                return cell
+            }
             let array = mealData[indexPath.row].mealArray
+            
             if array.count > 0 {
                 cell.label1.text = array[0]
             }
@@ -694,9 +804,6 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             if array.count > 6 {
                 cell.label7.text = array[6]
             }
-            
-            cell.backgroundColor = .white
-            
             return cell
         default:
             return UICollectionViewCell()
@@ -769,8 +876,10 @@ extension MainViewController {
     }
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillDefaultColorFor date: Date) -> UIColor? {
         
-        if events2.contains(date) {
+        if events2.contains(date.addingTimeInterval(60*60*9)) {
             return CustomColor.calendarRedColor
+        } else {
+            print("not")
         }
         return nil
     }
@@ -807,8 +916,8 @@ extension MainViewController: didPurpose {
             self.todoCollectionView.reloadData()
             self.todoCollectionView.isScrollEnabled = true
         }
-        print(RealmManager.notDoneTodoData().count)
-        print(todoData.count)
+//        print(RealmManager.notDoneTodoData().count)
+//        print(todoData.count)
 //        print("get thumb up in vc")
     }
 }
@@ -871,6 +980,7 @@ extension MainViewController: ArmySelection {
                     self.selectArmyButton.isUserInteractionEnabled = false
                     self.moreButton.isHidden = false
                     self.moreButton.isUserInteractionEnabled = true
+                    self.updateMealRoundedView()
                 } else {
                     self.selectArmyLabel.isHidden = false
                     self.mealCollectionView.isHidden = true

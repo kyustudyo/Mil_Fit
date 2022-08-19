@@ -160,11 +160,25 @@ class TotalOutputCaloriesRealm: Object {
 class WeightRealm: Object {
     @Persisted var date: Date
     @Persisted var weight: Int
+    @Persisted var dateSorting: Int
     @Persisted(primaryKey: true) var _id: ObjectId
     
     convenience init(date: Date, weight: Int) {
         self.init()
+        self.date = date
         self.weight = weight
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyyMMddHHmmss"
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        let convertInt = Int(dateFormatter.string(from: date))
+        print("convertInt", convertInt)
+        if let convertInt = convertInt {
+            self.dateSorting = convertInt
+        }else {
+            self.dateSorting = -1
+        }
+        
     }
 }
 

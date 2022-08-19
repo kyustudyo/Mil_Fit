@@ -24,6 +24,13 @@ extension String {
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter.date(from: self)?.addingTimeInterval(60*60*9)
     }
+    
+    func String2DateTypeForWorkout() -> Date?{
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMdd"
+        return formatter.date(from: self)?.addingTimeInterval(60*60*9)
+    }
+    
 //func toDateTime() -> Date {
 //    let dateFormatter = DateFormatter()
 //    dateFormatter.dateFormat = "yyyy-MM-dd"

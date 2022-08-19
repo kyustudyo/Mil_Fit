@@ -79,6 +79,20 @@ extension UserDefaultManager {
     }
     
     
+    static func loadBMR() -> Int? {
+        guard let bmr = UserDefaults.standard.object(forKey: "BMR") as? Int else {
+            return nil
+        }
+        return bmr
+    }
+    
+    static func loadHeight() -> Int? {
+        guard let bmr = UserDefaults.standard.object(forKey: "height") as? Int else {
+            return nil
+        }
+        return bmr
+    }
+    
     static func removeFirstTimeExperience()  {
         UserDefaults.standard.removeObject(forKey: "firstComplete")
     }
