@@ -97,6 +97,7 @@ class WorkoutViewController: UIViewController {
         setWorkoutList()    // TODO: 운동 목록 먼저 넣어놓는 함수. 나중에 온보딩쪽에 옮겨야함
         favoriteWorkouts = defaults.stringArray(forKey: "WorkoutList")
 //        RealmManager.deleteAllWorkoutData2()
+//        print(workoutDates.count)
         numberOfTodaysWorkout = workoutList.count
         
         let localWorkoutRealm = try! Realm()
