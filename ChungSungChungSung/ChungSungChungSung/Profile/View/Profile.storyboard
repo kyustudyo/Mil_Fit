@@ -34,14 +34,9 @@
                             <constraint firstItem="V4k-Ur-ab7" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="p5L-vY-KpT"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="N3Q-hk-TgT">
-                        <barButtonItem key="rightBarButtonItem" image="gearshape" catalog="system" id="2Mv-xY-naN">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="N3Q-hk-TgT"/>
                     <connections>
                         <outlet property="profileTableView" destination="V4k-Ur-ab7" id="0S3-Yp-qeW"/>
-                        <outlet property="settingsButton" destination="2Mv-xY-naN" id="jg3-QC-1k3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -68,7 +63,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="gearshape" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

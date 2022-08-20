@@ -12,7 +12,6 @@ class ProfileViewController: UIViewController {
     
     private var goalList = GoalData().list
     
-    @IBOutlet weak var settingsButton: UIBarButtonItem!
     @IBOutlet weak var profileTableView: UITableView!
     
     override func viewDidLoad() {
