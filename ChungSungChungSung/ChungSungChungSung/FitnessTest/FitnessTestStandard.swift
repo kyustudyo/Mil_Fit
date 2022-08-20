@@ -74,7 +74,7 @@ func getMaxStandard(testType: TestType, level: String) -> Int {
        if i.type == testType {
            for (key, value) in i.standard {
                if key == level {
-                   return value.0
+                   return value.1
                }
            }
         }

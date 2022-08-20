@@ -76,8 +76,11 @@ class TestMainViewController: UIViewController {
         fitnessMainTableView.dataSource = self
         fitnessMainTableView.delegate = self
         let standardButton = UIBarButtonItem(image: UIImage(systemName: "info.circle"), style: .plain, target: self, action: #selector(didTapStandardButton))
+        standardButton.tintColor = CustomColor.mainPurple
         let addButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(didTapAddButton))
+        addButton.tintColor = CustomColor.mainPurple
         navigationItem.rightBarButtonItems = [standardButton, addButton]
+        self.navigationController?.navigationBar.tintColor = .black
         view.backgroundColor = CustomColor.bgGray
         fitnessGraphButton.tintColor = UIColor.clear
         fitnessGraphButton.titleLabel?.text = ""
@@ -127,15 +130,11 @@ class TestMainViewController: UIViewController {
         
     }
     func drawGraphViewRectangleUI() {
-        print(#function)
         let date = fitnessTestRealm.filter("isPractice == false").first!.date
         //test
         let runningRealm = fitnessTestRealm.filter("testType == 'running'").filter("isPractice == false").first!
-        print("running\(runningRealm)")
         let pushupRealm = fitnessTestRealm.filter("testType == 'pushup'").filter("isPractice == false").first!
-        print("pushupRealm\(pushupRealm)")
         let situpRealm = fitnessTestRealm.filter("testType == 'situp'").filter("isPractice == false").first!
-        print("situpRealm\(situpRealm)")
         let runningMaxStandard = getMaxStandard(testType: .running, level: "특급")
         let pushupMaxStandard = getMaxStandard(testType: .pushup, level: "특급")
         let situpMaxStandard = getMaxStandard(testType: .situp, level: "특급")
@@ -147,36 +146,34 @@ class TestMainViewController: UIViewController {
         graphRoundedRectangleView.layer.cornerRadius = 20
         graphRoundedRectangleView.backgroundColor = UIColor.systemGray6
         historyFitnessTestLabel.text = "지난 체력검정 결과"
-        historyFitnessTestLabel.textColor = UIColor.systemGray2
+        historyFitnessTestLabel.textColor = UIColor.systemGray
         lastFitnessTestDateLabel.text = convertString
-        lastFitnessTestDateLabel.textColor = UIColor.systemGray2
+        lastFitnessTestDateLabel.textColor = UIColor.systemGray
         goToHistoryImageView.image = UIImage(systemName: "chevron.right")
-        goToHistoryImageView.tintColor = UIColor.systemGray2
+        goToHistoryImageView.tintColor = UIColor.systemGray
         runningGraphView.backgroundColor = UIColor.clear
         runningGraphTitleLabel.text = "3Km 달리기"
-        runningGraphTitleLabel.textColor = UIColor.systemGray2
+        runningGraphTitleLabel.textColor = UIColor.systemGray
         runningGraphRecordLabel.text = "\(runningRealm.minutes!):\(runningRealm.seconds!)/\(runningMaxStandard / 60):\(runningMaxStandard % 60)"
-        runningGraphRecordLabel.textColor = UIColor.systemGray2
+        runningGraphRecordLabel.textColor = UIColor.systemGray
         runningGraphRecordLabel.setTargetStringColor(targetString: "\(runningRealm.minutes!):\(runningRealm.seconds!)", color: CustomColor.red!)
         pushupGraphView.backgroundColor = UIColor.clear
         pushupGraphTitleLabel.text = "팔굽혀펴기"
-        pushupGraphTitleLabel.textColor = UIColor.systemGray2
+        pushupGraphTitleLabel.textColor = UIColor.systemGray
         pushupGraphRecordLabel.text = "\(pushupRealm.count!)개/\(pushupMaxStandard)개"
-        pushupGraphRecordLabel.textColor = UIColor.systemGray2
+        pushupGraphRecordLabel.textColor = UIColor.systemGray
         pushupGraphRecordLabel.setTargetStringColor(targetString: "\(pushupRealm.count!)개", color: CustomColor.strongPurple!)
         situpGraphView.backgroundColor = UIColor.clear
         situpGraphTitleLabel.text = "윗몸 일으키기"
-        situpGraphTitleLabel.textColor = UIColor.systemGray2
+        situpGraphTitleLabel.textColor = UIColor.systemGray
         situpGraphRecordLabel.text = "\(situpRealm.count!)회/\(situpMaxStandard)회"
-        situpGraphRecordLabel.textColor = UIColor.systemGray2
+        situpGraphRecordLabel.textColor = UIColor.systemGray
         situpGraphRecordLabel.setTargetStringColor(targetString: "\(situpRealm.count!)회", color: CustomColor.blue!)
         }
     func drawTableViewUI() {
-        print(#function)
         recordTableViewTitleLabel.text = "종목별 최고 기록"
     }
     func configureRunningGraphView() {
-        print(#function)
         let runningRealm = fitnessTestRealm.filter("testType == 'running'").filter("isPractice == false").first
         let maxStandard = getMaxStandard(testType: .running, level: "특급")
         let rate = Double(maxStandard - (runningRealm?.totalTime ?? 0)) / Double(maxStandard)
@@ -195,7 +192,6 @@ class TestMainViewController: UIViewController {
     }
     
     func configurePushupGraphView() {
-        print(#function)
     let pushupRealm = fitnessTestRealm.filter("testType == 'pushup'").filter("isPractice == false").first
     let maxStandard = getMaxStandard(testType: .pushup, level: "특급")
     let rate = Double(maxStandard - (pushupRealm?.count ?? 0)) / Double(maxStandard)
@@ -214,7 +210,6 @@ class TestMainViewController: UIViewController {
     }
     
     func configureSitupGraphView() {
-        print(#function)
     let situpRealm = fitnessTestRealm.filter("testType == 'situp'").filter("isPractice == false").first
     let maxStandard = getMaxStandard(testType: .situp, level: "특급")
     let rate = Double(maxStandard - (situpRealm?.count ?? 0)) / Double(maxStandard)
@@ -239,52 +234,66 @@ extension TestMainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print(#function)
         guard let cell = fitnessMainTableView.dequeueReusableCell(withIdentifier: TestMainTableViewCell.identifier, for: indexPath) as? TestMainTableViewCell else { return UITableViewCell() }
+
         let runningRealm: Results<FitnessTestRealm>? = fitnessTestRealm.filter("testType == 'running'")
-        let runningBest = runningRealm?.sorted(byKeyPath: "totalTime").first ?? nil
+//        print("러닝\(runningRealm?.sorted(byKeyPath: "totalTime", ascending: false))")
+        let runningBest = runningRealm?.sorted(byKeyPath: "totalTime", ascending: false).first ?? nil
         let pushupRealm: Results<FitnessTestRealm>? = fitnessTestRealm.filter("testType == 'pushup'")
-        let pushupBest = pushupRealm?.sorted(byKeyPath: "count").first ?? nil
+//        print("푸시\(pushupRealm?.sorted(byKeyPath: "count", ascending: false))")
+        let pushupBest = pushupRealm?.sorted(byKeyPath: "count", ascending: false).first ?? nil
         let situpRealm: Results<FitnessTestRealm>? = fitnessTestRealm.filter("testType == 'situp'")
-        let situpBest = situpRealm?.sorted(byKeyPath: "count").first ?? nil
+//        print("싯업\(situpRealm?.sorted(byKeyPath: "count", ascending: false))")
+        let situpBest = situpRealm?.sorted(byKeyPath: "count", ascending: false).first ?? nil
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy.MM.dd"
         dateFormatter.locale = Locale(identifier: "ko_KR")
         if indexPath.row == 0 {
             cell.fitnessTitleLabel.text = "3km 달리기"
+            cell.fitnessTitleLabel.textColor = CustomColor.red
             if runningRealm?.count == 0 {
                 cell.fitnessRecordDateLabel.isHidden = true
                 cell.fitnessRecordLabel.text = "기록을 추가해주세요."
             }else {
                 cell.fitnessRecordDateLabel.text = "\(dateFormatter.string(from: runningBest?.date ?? Date()))"
                 cell.fitnessRecordLabel.text = "\(runningBest?.minutes ?? 0)분 \(runningBest?.seconds ?? 0)초(\(runningBest?.level ?? "영급"))"
-                cell.fitnessImageView.backgroundColor = CustomColor.red
             }
- 
+            cell.fitnessImage.image = UIImage(named: "running")
+            cell.fitnessImageView.backgroundColor = CustomColor.red
         }else if indexPath.row == 1 {
             cell.fitnessTitleLabel.text = "팔굽혀펴기"
+            cell.fitnessTitleLabel.textColor = CustomColor.strongPurple
             if pushupRealm?.count == 0 {
                 cell.fitnessRecordDateLabel.isHidden = true
                 cell.fitnessRecordLabel.text = "기록을 추가해주세요."
             }else {
                 cell.fitnessRecordDateLabel.text = "\(dateFormatter.string(from: pushupBest?.date ?? Date()))"
                 cell.fitnessRecordLabel.text = "\(pushupBest?.count ?? 0)회(\(pushupBest?.level ?? "영급"))"
-                cell.fitnessImageView.backgroundColor = CustomColor.strongPurple
             }
+            cell.fitnessImage.image = UIImage(named: "pushup")
+            cell.fitnessImageView.backgroundColor = CustomColor.strongPurple
         }else {
             cell.fitnessTitleLabel.text = "윗몸일으키기"
+            cell.fitnessTitleLabel.textColor = CustomColor.blue
             if situpRealm?.count == 0 {
                 cell.fitnessRecordDateLabel.isHidden = true
                 cell.fitnessRecordLabel.text = "기록을 추가해주세요."
             }else {
                 cell.fitnessRecordDateLabel.text = "\(dateFormatter.string(from: situpBest?.date ?? Date()))"
                 cell.fitnessRecordLabel.text = "\(situpBest?.count ?? 0)회(\(situpBest?.level ?? "영급")"
-                cell.fitnessImageView.backgroundColor = CustomColor.blue
             }
+            cell.fitnessImage.image = UIImage(named: "situp")
+            cell.fitnessImageView.backgroundColor = CustomColor.blue
         }
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let sb = UIStoryboard(name: "TestStoryboard", bundle: nil)
+        guard let vc = sb.instantiateViewController(withIdentifier: "FitnessHistoryViewController") as? FitnessHistoryViewController else {return}
+        vc.index = indexPath.row
+        navigationController?.pushViewController(vc, animated: true)
+    }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 75
     }

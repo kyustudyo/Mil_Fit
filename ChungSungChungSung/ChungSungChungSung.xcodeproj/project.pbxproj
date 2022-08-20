@@ -80,6 +80,7 @@
 		7ED2F7BA289EDE0E00DAEEC9 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED2F7B9289EDE0E00DAEEC9 /* UIColor.swift */; };
 		AB21161228A4C5F20050E9F8 /* FitnessHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB21161128A4C5F20050E9F8 /* FitnessHistoryTableViewCell.swift */; };
 		AB460BAF28A7A32000765A1D /* BasicWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB460BAE28A7A32000765A1D /* BasicWorkout.swift */; };
+		AB7E9D0C28B0B10E00EA1EBB /* FitnessHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB21160E28A1308B0050E9F8 /* FitnessHistoryViewController.swift */; };
 		AB80ECAC28AE898E00D6A5A5 /* FitnessTestStandard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB80ECAB28AE898E00D6A5A5 /* FitnessTestStandard.swift */; };
 		AB80ECAE28AF9A7500D6A5A5 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB80ECAD28AF9A7500D6A5A5 /* UILabel.swift */; };
 		AB80ECB028AFEC0700D6A5A5 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB80ECAF28AFEC0600D6A5A5 /* ErrorHandler.swift */; };
@@ -675,6 +676,7 @@
 				328AB9B728A64D5A00000A85 /* GoalsTableViewCell.swift in Sources */,
 				794B601728A62A7400621A27 /* WorkoutPreviousTableViewCell.swift in Sources */,
 				7ED2F7BA289EDE0E00DAEEC9 /* UIColor.swift in Sources */,
+				AB7E9D0C28B0B10E00EA1EBB /* FitnessHistoryViewController.swift in Sources */,
 				797C370728AC01C800B6132D /* HistoryTestViewController.swift in Sources */,
 				790B0C4428A91ED000A3A988 /* SelectArmyTableViewCell.swift in Sources */,
 				325F8E0F28A3C962004ACF9E /* WorkoutListCell.swift in Sources */,

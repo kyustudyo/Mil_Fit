@@ -23,7 +23,7 @@ struct RunningGraphSwiftUIView: View {
             
             Text("특급")
                 .background(Color.clear)
-                .foregroundColor(Color.red)
+                .foregroundColor(Color(CustomColor.red!))
         }.background(Color.clear)
     }
 }
@@ -44,7 +44,7 @@ struct PushupGraphSwiftUIView: View {
             
             Text("1급")
                 .background(Color.clear)
-                .foregroundColor(.purple)
+                .foregroundColor(Color(CustomColor.strongPurple!))
         }.background(Color.clear)
     }
 }
@@ -65,7 +65,7 @@ struct SitupGraphSwiftUIView: View {
             
             Text("2급")
                 .background(Color.clear)
-                .foregroundColor(.blue)
+                .foregroundColor(Color(CustomColor.blue!))
         }.background(Color.clear)
     }
 }

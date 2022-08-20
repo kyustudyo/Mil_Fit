@@ -15,15 +15,15 @@ class TestMainTableViewCell: UITableViewCell {
     @IBOutlet weak var fitnessTitleLabel: UILabel!
     @IBOutlet weak var fitnessRecordDateLabel: UILabel!
     @IBOutlet weak var fitnessRecordLabel: UILabel!
-
+    @IBOutlet weak var fitnessImage: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         drawCellUI()
     }
 
     private func drawCellUI() {
-        fitnessTitleLabel.textColor = UIColor.red
-        fitnessRecordDateLabel.textColor = UIColor.systemGray
-        fitnessImageView.layer.cornerRadius = 20
+        fitnessRecordDateLabel.textColor = UIColor.systemGray2
+        fitnessImageView.layer.cornerRadius = 12
     }
 }
