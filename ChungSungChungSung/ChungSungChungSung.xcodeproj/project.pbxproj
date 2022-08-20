@@ -81,6 +81,7 @@
 		AB21161228A4C5F20050E9F8 /* FitnessHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB21161128A4C5F20050E9F8 /* FitnessHistoryTableViewCell.swift */; };
 		AB460BAF28A7A32000765A1D /* BasicWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB460BAE28A7A32000765A1D /* BasicWorkout.swift */; };
 		AB7E9D0C28B0B10E00EA1EBB /* FitnessHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB21160E28A1308B0050E9F8 /* FitnessHistoryViewController.swift */; };
+		AB7E9D0E28B0C43100EA1EBB /* HistoryTestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7E9D0D28B0C43100EA1EBB /* HistoryTestTableViewCell.swift */; };
 		AB80ECAC28AE898E00D6A5A5 /* FitnessTestStandard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB80ECAB28AE898E00D6A5A5 /* FitnessTestStandard.swift */; };
 		AB80ECAE28AF9A7500D6A5A5 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB80ECAD28AF9A7500D6A5A5 /* UILabel.swift */; };
 		AB80ECB028AFEC0700D6A5A5 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB80ECAF28AFEC0600D6A5A5 /* ErrorHandler.swift */; };
@@ -178,6 +179,7 @@
 		AB21160E28A1308B0050E9F8 /* FitnessHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessHistoryViewController.swift; sourceTree = "<group>"; };
 		AB21161128A4C5F20050E9F8 /* FitnessHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		AB460BAE28A7A32000765A1D /* BasicWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicWorkout.swift; sourceTree = "<group>"; };
+		AB7E9D0D28B0C43100EA1EBB /* HistoryTestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTestTableViewCell.swift; sourceTree = "<group>"; };
 		AB80ECAB28AE898E00D6A5A5 /* FitnessTestStandard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessTestStandard.swift; sourceTree = "<group>"; };
 		AB80ECAD28AF9A7500D6A5A5 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		AB80ECAF28AFEC0600D6A5A5 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
@@ -357,6 +359,7 @@
 				AB21161128A4C5F20050E9F8 /* FitnessHistoryTableViewCell.swift */,
 				DD3AC80D28A645DA000D2E38 /* FitnessTestAddViewController.swift */,
 				797C370628AC01C800B6132D /* HistoryTestViewController.swift */,
+				AB7E9D0D28B0C43100EA1EBB /* HistoryTestTableViewCell.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -707,6 +710,7 @@
 				79F676D028A4CBD900850FF0 /* MainCalorieViewController.swift in Sources */,
 				794B600E28A527BB00621A27 /* WorkoutAddCalorieTableViewCell.swift in Sources */,
 				79F676CC28A372F800850FF0 /* MainMealViewController.swift in Sources */,
+				AB7E9D0E28B0C43100EA1EBB /* HistoryTestTableViewCell.swift in Sources */,
 				79F6769B289E680000850FF0 /* purposeCollectionViewCell.swift in Sources */,
 				32D3F1A628A559880096FAFC /* WorkoutListEditViewController.swift in Sources */,
 				328AB9AC28A638C200000A85 /* ProfileViewController.swift in Sources */,
