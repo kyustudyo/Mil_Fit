@@ -31,6 +31,7 @@ class FitnessHistoryViewController: UIViewController {
             title = "윗몸일으키기 기록"
         }
         navigationItem.largeTitleDisplayMode = .never
+        view.backgroundColor = CustomColor.bgGray
         fitnessRealm = localRealm.objects(FitnessTestRealm.self)
         resultRealm = getTargetRealm(data: fitnessRealm, index: index)
         if resultRealm?.count == 0 {
@@ -44,6 +45,14 @@ class FitnessHistoryViewController: UIViewController {
         }
         fitnessRecord = setChartValue(data: resultRealm)
         lineChartView.noDataText = "기록이 없습니다."
+        lineChartView.noDataFont = UIFont.systemFont(ofSize: 17)
+        lineChartView.fitScreen()
+        lineChartView.backgroundColor = .systemGray6
+        lineChartView.layer.cornerRadius = 12
+        lineChartView.clipsToBounds = true
+        lineChartView.extraTopOffset = 10
+        lineChartView.extraLeftOffset = 20
+        lineChartView.extraRightOffset = 20
         sortedButton.titleLabel?.textColor = .black
         sortedButton.tintColor = .black
         serChart(lineValues: fitnessRecord)
@@ -89,18 +98,27 @@ class FitnessHistoryViewController: UIViewController {
             let lineDataEntry = ChartDataEntry(x: Double(i), y: lineValues[i])
             lineDataEntries.append(lineDataEntry)
         }
+        let valFormatter = NumberFormatter()
+        valFormatter.numberStyle = .currency
+        valFormatter.maximumFractionDigits = 2
+        valFormatter.currencySymbol = "$"
+        
+        let format = NumberFormatter()
+        format.numberStyle = .none
+        let formatter = DefaultValueFormatter(formatter: format)
+        
         let lineChartDataSet = LineChartDataSet(entries: lineDataEntries, label: "기록")
         lineChartDataSet.colors = [CustomColor.mainPurple!]
         lineChartDataSet.circleColors = [CustomColor.mainPurple!]
         lineChartDataSet.lineWidth = 3
         lineChartDataSet.circleHoleRadius = 3.0
         lineChartDataSet.circleRadius = 5.0
+        lineChartDataSet.highlightEnabled = false
  
         let data = LineChartData(dataSet: lineChartDataSet)
-        let formatter = NumberFormatter()
-        formatter.minimumFractionDigits = 0
-        data.setValueFormatter(DefaultValueFormatter(formatter:formatter))
+        data.setValueFormatter(formatter)
         data.setValueFont(.systemFont(ofSize: 10))
+        lineChartView.leftAxis.valueFormatter = DefaultAxisValueFormatter(formatter: valFormatter)
         lineChartView.data = data
         lineChartView.rightAxis.enabled = false
         lineChartView.drawGridBackgroundEnabled = false
@@ -108,15 +126,19 @@ class FitnessHistoryViewController: UIViewController {
         lineChartView.xAxis.enabled = false
         lineChartView.legend.enabled = false
         lineChartView.backgroundColor = .white
+        lineChartView.doubleTapToZoomEnabled = false
 
     }
     
+//    @IBAction func sortedButtonClcked(_ sender: UIButton) {
+//    }
+//
     func configureSortedButton() {
         let sortedByDate = UIAction(title: "최신순") { _ in
-            print("최신순")
+            self.historyTableView.reloadData()
         }
         let sortedByRecord = UIAction(title: "기록순") { _ in
-            print("기록순")
+            self.historyTableView.reloadData()
         }
         let buttonMenu = UIMenu(title: "정렬", children: [sortedByDate, sortedByRecord])
         sortedButton.menu = buttonMenu
@@ -146,22 +168,24 @@ extension FitnessHistoryViewController: UITableViewDataSource, UITableViewDelega
         dateFormatter.locale = Locale(identifier: "ko_KR")
         cell.dateLabel.text = "\(dateFormatter.string(from: realm[indexPath.row].date))"
         if index == 0 {
-            cell.recordLabel.text = "\(realm[indexPath.row].minutes!)분 \(realm[indexPath.row].seconds!)초"
+            cell.recordLabel.text = "\(realm[indexPath.row].minutes!)분 \(realm[indexPath.row].seconds!)초(\(realm[indexPath.row].level))"
         }else {
-            cell.recordLabel.text = "\(realm[indexPath.row].count!)개"
+            cell.recordLabel.text = "\(realm[indexPath.row].count!)개(\(realm[indexPath.row].level))"
         }
         if realm[indexPath.row].isPractice {
             cell.tagLabel.backgroundColor = CustomColor.blue
             cell.tagLabel.text = "연습"
         }else {
             cell.tagLabel.backgroundColor = CustomColor.red
-            cell.tagLabel.text = "정식"
+            cell.tagLabel.text = "정규"
         }
         cell.tagLabel.textColor = .white
         cell.tagLabel.layer.cornerRadius = 3
         cell.tagLabel.clipsToBounds = true
         return cell
     }
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 55
+    }
 }
 

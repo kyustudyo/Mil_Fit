@@ -20,6 +20,7 @@ class HistoryTestViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = self.editButtonItem
         self.navigationItem.rightBarButtonItem?.title = "편집"
         navigationItem.rightBarButtonItem?.tintColor = CustomColor.mainPurple
+        view.backgroundColor = CustomColor.bgGray
         localRealm = try! Realm()
         fitnessRealm = localRealm.objects(FitnessTestRealm.self)
         resultRealm = fitnessRealm.filter("isPractice == false").sorted(byKeyPath: "dateSorting", ascending: false)
@@ -57,7 +58,8 @@ extension HistoryTestViewController: UITableViewDelegate, UITableViewDataSource 
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy.MM.dd"
         dateFormatter.locale = Locale(identifier: "ko_KR")
-        cell.dateLabel.text = "\(tempArray[0].date)"
+        dateFormatter.string(from: tempArray[0].date)
+        cell.dateLabel.text = "\(dateFormatter.string(from: tempArray[0].date))"
         cell.pushupRecordLabel.text = "\(tempArray[1].count!)회(\(tempArray[1].level))"
         cell.situpRecordLabel.text = "\(tempArray[2].count!)회(\(tempArray[2].level))"
         cell.runningRecordLabel.text = "\(tempArray[0].minutes!)분 \(tempArray[0].seconds!)초"
