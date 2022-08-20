@@ -10,11 +10,11 @@ import UIKit
 class FitnessTestStandardTableViewCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var time: UILabel!
-    
+    @IBOutlet weak var age: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        age.text = "\(UserDefaults.standard.integer(forKey: "age"))세 기준"
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

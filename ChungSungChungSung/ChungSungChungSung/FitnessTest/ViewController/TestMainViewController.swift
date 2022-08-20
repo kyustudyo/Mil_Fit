@@ -92,9 +92,10 @@ class TestMainViewController: UIViewController {
         
     }
     //TODO: 어딨지
-    @objc fileprivate func didTapStandardButton() {
-        let sb = UIStoryboard(name: "TestStoryboard", bundle: nil)
-        guard let vc = sb.instantiateViewController(withIdentifier: "HistoryTestViewController") as? HistoryTestViewController else {return}
+    @objc fileprivate func didTapStandardButton(_ sender: UIBarButtonItem) {
+        let sb = UIStoryboard(name: "FitnessTestStandard", bundle: nil)
+        guard let vc = sb.instantiateViewController(withIdentifier: "FitnessTestStandardViewController") as? FitnessTestStandardViewController else {return}
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     @objc fileprivate func didTapAddButton(_ sender: UIBarButtonItem) {
         let sb = UIStoryboard(name: "FitnessTestAddStoryboard", bundle: nil)

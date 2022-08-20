@@ -16,14 +16,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G9U-hI-dFi">
-                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                                <items>
-                                    <navigationItem title="체력검정 기준표" id="AH2-EC-RdH"/>
-                                </items>
-                            </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="50" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="MGY-Yp-Fgk">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="95" width="414" height="777"/>
                                 <color key="backgroundColor" name="mainGray"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FitnessTestStandardTableViewCell" textLabel="feZ-5e-rof" detailTextLabel="b9b-gq-HFe" style="IBUITableViewCellStyleValue1" id="6up-D9-F7M" customClass="FitnessTestStandardTableViewCell" customModule="ChungSungChungSung" customModuleProvider="target">
@@ -50,6 +44,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="age" destination="RDh-IL-8eg" id="Nmc-eh-bIY"/>
                                             <outlet property="time" destination="b9b-gq-HFe" id="FCm-EZ-EEQ"/>
                                             <outlet property="title" destination="feZ-5e-rof" id="DUR-m7-dUM"/>
                                         </connections>
@@ -60,20 +55,24 @@
                                     <outlet property="delegate" destination="Y6W-OH-hqX" id="mNO-Nm-TVB"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RDh-IL-8eg">
+                                <rect key="frame" x="352" y="64" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="mainGray"/>
                         <constraints>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="MGY-Yp-Fgk" secondAttribute="bottom" id="Dyn-7z-qze"/>
-                            <constraint firstItem="MGY-Yp-Fgk" firstAttribute="top" secondItem="G9U-hI-dFi" secondAttribute="bottom" id="WiH-eR-isP"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="MGY-Yp-Fgk" secondAttribute="trailing" id="YaJ-6y-1zl"/>
-                            <constraint firstItem="G9U-hI-dFi" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="cfj-Mv-xC1"/>
-                            <constraint firstItem="G9U-hI-dFi" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="pse-I9-Gh1"/>
-                            <constraint firstItem="MGY-Yp-Fgk" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="u8a-CD-nhq"/>
-                            <constraint firstItem="G9U-hI-dFi" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="xcC-aE-Kwd"/>
+                            <constraint firstItem="MGY-Yp-Fgk" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="8jT-sx-xja"/>
+                            <constraint firstItem="RDh-IL-8eg" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="Ekm-kZ-i1Z"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="RDh-IL-8eg" secondAttribute="trailing" constant="20" id="Mld-Us-RmX"/>
+                            <constraint firstItem="MGY-Yp-Fgk" firstAttribute="top" secondItem="RDh-IL-8eg" secondAttribute="bottom" constant="10" id="V8o-9l-sTp"/>
+                            <constraint firstItem="MGY-Yp-Fgk" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" constant="10" id="eEa-Nd-u9V"/>
+                            <constraint firstItem="MGY-Yp-Fgk" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="fyH-Pg-ae3"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="zit-8r-Yzy"/>
                     <connections>
                         <outlet property="fitnessTestRunningTableView" destination="MGY-Yp-Fgk" id="Pdj-FU-V14"/>
                     </connections>

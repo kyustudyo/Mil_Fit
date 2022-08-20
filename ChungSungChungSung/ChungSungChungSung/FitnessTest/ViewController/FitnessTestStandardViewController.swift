@@ -25,13 +25,15 @@ var fitnessTestStandardRunningList = [
 class FitnessTestStandardViewController: UIViewController {
     @IBOutlet weak var fitnessTestRunningTableView: UITableView!
     @IBOutlet weak var fitnessTestStandardAge: UILabel!
-    
+    var age: Int!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        title = "체력검정 기준표"
+        navigationItem.largeTitleDisplayMode = .never
 //        fitnessTestRunningTableView.layer.shadowColor = UIColor.blue.cgColor
 //        fitnessTestRunningTableView.layer.shadowRadius = 20
 //        fitnessTestRunningTableView.layer.shadowOffset = CGSize(width: 4, height: 4)
+        age = UserDefaults.standard.integer(forKey: "age")
     }
 }
 
@@ -56,13 +58,13 @@ extension FitnessTestStandardViewController: UITableViewDelegate, UITableViewDat
         label.text = fitnessTestStandardSports[section]
         label.font = .systemFont(ofSize: 22, weight: .bold)
         
-        let label2 = UILabel()
-        label2.text = "25세 기준"
-        label2.font = .preferredFont(forTextStyle: .callout)
+//        let label2 = UILabel()
+//        label2.text = "\(age!)세 기준"
+//        label2.font = .preferredFont(forTextStyle: .callout)
+//        
+//        let stack = UIStackView(arrangedSubviews: [label, label2])
+//        label2.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
-        let stack = UIStackView(arrangedSubviews: [label, label2])
-        label2.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        
-        return stack
+        return label
     }
 }
