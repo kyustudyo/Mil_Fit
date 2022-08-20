@@ -7,16 +7,34 @@
 
 import UIKit
 import RealmSwift
-
+//순서바꾸기?
 class WorkoutViewController: UIViewController {
     private let defaults = UserDefaults.standard
     private var favoriteWorkouts: [String]?
     
     var workoutRealm: Results<WorkoutRealm>!
     
-    var workoutDates = [String]()
+    var workoutDates: [String] = [] {
+        didSet {
+            print("qwe",workoutDates)
+            dailyCalendarView.reloadData()
+            todaysWorkoutView.reloadData()
+        }
+    }
     
-    var events = [String]()
+    let dateFormatterForWorkout: DateFormatter = {
+        let df = DateFormatter()
+        df.locale = Locale(identifier: "ko_KR")
+        df.dateFormat = "yyyyMMdd"
+        return df
+    }()
+    
+    var events: [String] = [] {
+        willSet {
+            dailyCalendarView.reloadData()
+            todaysWorkoutView.reloadData()
+        }
+    }
     private let workoutViewTitle = "운동"
     private var workoutList = WorkoutData().list
     private var numberOfTodaysWorkout: Int?
@@ -42,6 +60,7 @@ class WorkoutViewController: UIViewController {
     
     @IBAction private func didTapTodaysWorkoutEditButton(_ sender: UIButton) {
         guard let todaysWorkoutEditView = UIStoryboard(name: "TodaysWorkoutEdit", bundle: .main).instantiateViewController(withIdentifier: "TodaysWorkoutEditViewController") as? TodaysWorkoutEditViewController else { return }
+        todaysWorkoutEditView.delegate = self
         todaysWorkoutEditView.workoutList = workoutList
         
         todaysWorkoutEditView.workoutRealm = workoutRealm
@@ -54,15 +73,15 @@ class WorkoutViewController: UIViewController {
         present(workoutListEditView, animated: true, completion: nil)
     }
     
-    func setUpEvents() {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        let sampledate5 = formatter.string(from: CalendarHelper().addDays(date: Date(), days: -1))
-        let sampledate6 = formatter.string(from: CalendarHelper().addDays(date: Date(), days: -3))
-        let sampledate7 = formatter.string(from: CalendarHelper().addDays(date: Date(), days: -6))
-        events = [sampledate5, sampledate6, sampledate7]
-        
-    }
+//    func setUpEvents() {
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyyy-MM-dd"
+//        let sampledate5 = formatter.string(from: CalendarHelper().addDays(date: Date(), days: -1))
+//        let sampledate6 = formatter.string(from: CalendarHelper().addDays(date: Date(), days: -3))
+//        let sampledate7 = formatter.string(from: CalendarHelper().addDays(date: Date(), days: -6))
+//        events = [sampledate5, sampledate6, sampledate7]
+//
+//    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("viewWillAppear")
@@ -71,10 +90,13 @@ class WorkoutViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        workoutDates = (RealmManager.fetchSearchDidWorkoutDates2() ?? []).map {
+            dateFormatterForWorkout.string(from: $0)
+        }
+//        UserDefaults().set([], forKey: "workoutDate")
         setWorkoutList()    // TODO: 운동 목록 먼저 넣어놓는 함수. 나중에 온보딩쪽에 옮겨야함
         favoriteWorkouts = defaults.stringArray(forKey: "WorkoutList")
-        
+//        RealmManager.deleteAllWorkoutData2()
         numberOfTodaysWorkout = workoutList.count
         
         let localWorkoutRealm = try! Realm()
@@ -88,7 +110,7 @@ class WorkoutViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.didCompletedTodaysWorkoutEdit(_:)), name: Notification.Name("DidDismissTodaysWorkoutEditView"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.didCompletedWorkoutListEdit(_:)), name: Notification.Name("DidDismissWorkoutListEditView"), object: nil)
         
-        setUpEvents()
+//        setUpEvents()
         
         self.view.backgroundColor = CustomColor.bgGray
         self.navigationController?.navigationBar.prefersLargeTitles = true
@@ -264,12 +286,15 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
 //        cell.dateHighlightCircleView.layer.shadowRadius = 4
         cell.dateHighlightCircleView.layer.shadowOffset = CGSize(width: 2, height: 3)
         
-        let dateFormatterForHighlight = DateFormatter()
-        dateFormatterForHighlight.dateFormat = "yyyyMMdd"
-        dateFormatterForHighlight.locale = Locale(identifier: "ko_KR")
+//        let dateFormatterForHighlight = DateFormatter()
+        dateFormatterForWorkout.dateFormat = "yyyyMMdd"
+        dateFormatterForWorkout.locale = Locale(identifier: "ko_KR")
         
-        workoutDates = defaults.stringArray(forKey: "workoutDate") ?? [String]()
-        if workoutDates.contains(dateFormatterForHighlight.string(from: date)) {
+//        workoutDates = defaults.stringArray(forKey: "workoutDate") ?? [String]()
+//        workoutDates = (RealmManager.fetchSearchDidWorkoutDates2() ?? []).map {
+//            dateFormatterForWorkout.string(from: $0)}
+        
+        if workoutDates.contains(dateFormatterForWorkout.string(from: date)) {
 //                cell.dateHighlightCircleView.backgroundColor = UIColor(hex: "FEB4B4")
             cell.dateHighlightCircleView.backgroundColor = CustomColor.calendarRedColor
         } else {
@@ -396,8 +421,11 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
                     }
                     if todaysWorkout.count == 0 {
                         RealmManager.saveWorkoutData(date: selectedDate, name: workoutName, count: nil, minutes: nil, seconds: nil, weight: nil, calories: nil)
-                        UserDefaultManager.saveIsWorkoutDate(date: selectedDate)
-                        workoutDates = defaults.stringArray(forKey: "workoutDate") ?? [String]()
+                        print("qwe",dateFormatterForWorkout.string(from: selectedDate))
+                        workoutDates.append(dateFormatterForWorkout.string(from: selectedDate))
+//                        UserDefaultManager.saveIsWorkoutDate(date: selectedDate)
+//                        workoutDates = defaults.stringArray(forKey: "workoutDate") ?? [String]()
+                        
                         todaysWorkoutView.reloadData()
                         dailyCalendarView.reloadData()
                     } else {
@@ -451,3 +479,9 @@ extension UIView {
 //        }
 //
 //}
+extension WorkoutViewController: WorkoutEdit {
+    func needUpdate() {
+        workoutDates = (RealmManager.fetchSearchDidWorkoutDates2() ?? []).map {
+            dateFormatterForWorkout.string(from: $0)}
+    }
+}

@@ -15,10 +15,10 @@ class WorkoutPreviousViewController: UIViewController {
     var workoutRealm: Results<WorkoutRealm>!
     
     
-    var workoutDates = [String]()
+//    var workoutDates = [String]()
     let dateFormatterHighlight = DateFormatter()
     let 운동안했습니다 = "운동을 하지 않았습니다."
-    var events2: [Date] = [] {
+    var events2: [String] = [] {
         willSet {
             calendar.reloadData()
         }
@@ -44,7 +44,7 @@ class WorkoutPreviousViewController: UIViewController {
     
     fileprivate let calendar = FSCalendar()
     fileprivate let tableView = UITableView()
-    var 운동들 = ["푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝"]
+    var 운동들:[String] = ["푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝"]
     
     private var workoutList = WorkoutData().list
     
@@ -79,34 +79,16 @@ class WorkoutPreviousViewController: UIViewController {
         navigationController?.navigationBar.tintColor = CustomColor.mainPurple
         view.backgroundColor = .systemGray6
         
-        RealmManager.deleteAllWorkoutData2()
-        RealmManager.saveWorkoutData(date: "20220731".String2DateTypeForWorkout2()!, name: "몸", set: 3, count: 2, minutes: 3, seconds: 3, weight: 4, calories: 300)
-        RealmManager.saveWorkoutData(date: "20220801".String2DateTypeForWorkout2()!, name: "맨몸", set: 3, count: 2, minutes: 3, seconds: 3, weight: 4, calories: 300)
-        RealmManager.saveWorkoutData(date: "20220804".String2DateTypeForWorkout2()!, name: "팔굽", set: 3, count: 2, minutes: 3, seconds: 3, weight: 4, calories: 300)
-        RealmManager.saveWorkoutData(date: "20220815".String2DateTypeForWorkout2()!, name: "팔굽", set: 3, count: 2, minutes: 3, seconds: 3, weight: 4, calories: 300)
-        RealmManager.saveWorkoutData(date: "20220815".String2DateTypeForWorkout2()!, name: "윗몸", set: 3, count: 2, minutes: 3, seconds: 3, weight: 4, calories: 300)
-        RealmManager.saveWorkoutData(date: "20220816".String2DateTypeForWorkout2()!, name: "팔굽2", set: 3, count: 2, minutes: 3, seconds: 3, weight: 4, calories: 200)
-        RealmManager.saveWorkoutData(date: "20220816".String2DateTypeForWorkout2()!, name: "양치", set: 3, count: 2, minutes: 3, seconds: 3, weight: 4, calories: 200)
-        RealmManager.saveWorkoutData(date: "20220820".String2DateTypeForWorkout2()!, name: "팔굽3", set: 3, count: 2, minutes: 3, seconds: 3, weight: 4, calories: 1000)
-        RealmManager.saveWorkoutData(date: "20220820".String2DateTypeForWorkout2()!, name: "팔굽3", set: 3, count: 2, minutes: 3, seconds: 3, weight: 4, calories: 1000)
-        RealmManager.saveWorkoutData(date: "20220820".String2DateTypeForWorkout2()!, name: "팔굽3", set: 3, count: 2, minutes: 3, seconds: 3, weight: 4, calories: 1000)
-        RealmManager.saveWorkoutData(date: "20220820".String2DateTypeForWorkout2()!, name: "팔굽3", set: 3, count: 2, minutes: 3, seconds: 3, weight: 4, calories: 1000)
-        RealmManager.saveWorkoutData(date: "20220820".String2DateTypeForWorkout2()!, name: "팔굽3", set: 3, count: 2, minutes: 3, seconds: 3, weight: 4, calories: 1000)
-        RealmManager.saveWorkoutData(date: "20220820".String2DateTypeForWorkout2()!, name: "팔굽3", set: 3, count: 2, minutes: 3, seconds: 3, weight: 4, calories: 1000)
-        RealmManager.saveWorkoutData(date: "20220820".String2DateTypeForWorkout2()!, name: "팔굽3", set: 3, count: 2, minutes: 3, seconds: 3, weight: 4, calories: 1000)
-        RealmManager.saveWorkoutData(date: "20220820".String2DateTypeForWorkout2()!, name: "팔굽3", set: 3, count: 2, minutes: 3, seconds: 3, weight: 4, calories: 1000)
-        RealmManager.saveWorkoutData(date: "20220820".String2DateTypeForWorkout2()!, name: "팔굽3", set: 3, count: 2, minutes: 3, seconds: 3, weight: 4, calories: 1000)
-        RealmManager.saveWorkoutData(date: "20220820".String2DateTypeForWorkout2()!, name: "팔굽3", set: 3, count: 2, minutes: 3, seconds: 3, weight: 4, calories: 1000)
-        RealmManager.saveWorkoutData(date: "20220820".String2DateTypeForWorkout2()!, name: "팔굽3", set: 3, count: 2, minutes: 3, seconds: 3, weight: 4, calories: 1000)
-        RealmManager.saveWorkoutData(date: "20220820".String2DateTypeForWorkout2()!, name: "팔굽3", set: 3, count: 2, minutes: 3, seconds: 3, weight: 4, calories: 1000)
-        RealmManager.saveWorkoutData(date: "20220820".String2DateTypeForWorkout2()!, name: "팔굽3", set: 3, count: 2, minutes: 3, seconds: 3, weight: 4, calories: 1000)
-        events2 = RealmManager.fetchSearchDidWorkoutDates2() ?? []
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.locale = Locale(identifier: "ko_KR")
+        
+        events2 = (RealmManager.fetchSearchDidWorkoutDates2() ?? []).map {
+            dateFormatterForWorkout.string(from: $0)
+        }
         
         fetchWorkouts(date: Date())
-        
-        
-        
-        
+
         calendar.delegate = self
         calendar.dataSource = self
         tableView.delegate = self
@@ -208,13 +190,18 @@ extension WorkoutPreviousViewController: FSCalendarDelegate, FSCalendarDataSourc
         }
     }
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillDefaultColorFor date: Date) -> UIColor? {
-        let selectedDate = dateFormatterHighlight.string(from: date)
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyyyMMdd"
+//        formatter.locale = Locale(identifier: "ko_KR")
+        
+        let selectedDate = dateFormatterForWorkout.string(from: date)
 //        print("123",selectedDate)
-        let today = dateFormatterHighlight.string(from: Date())
+        let today = dateFormatterForWorkout.string(from: Date())
 //        print("1234",today)
+        print("qwer", events2, dateFormatterForWorkout.string(from: date))
         if selectedDate == today {
             return CustomColor.mainPurple
-        } else if events2.contains(date.addingTimeInterval(60*60*9)) {
+        } else if events2.contains(dateFormatterForWorkout.string(from: date)) {
             return CustomColor.calendarRedColor
         }
 //        else if workoutDates.contains(dateFormatterHighlight.string(from: date)) {
@@ -226,11 +213,12 @@ extension WorkoutPreviousViewController: FSCalendarDelegate, FSCalendarDataSourc
     }
         
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-//        print(dateFormatter.string(from: date))
-        
-        
-        print(dateFormatterForWorkout.string(from: date))
-        
+
+//        if dateFormatterForWorkout.string(from: date) != dateFormatterForWorkout.string(from: Date()) {
+//            tableView.isUserInteractionEnabled = false
+//        } else {
+//            tableView.isUserInteractionEnabled = true
+//        }
         self.dismiss(animated: true, completion: nil)
         
        fetchWorkouts(date: date)
@@ -273,9 +261,15 @@ extension WorkoutPreviousViewController: UITableViewDelegate, UITableViewDataSou
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let vc = UIStoryboard(name: "WorkoutAdd", bundle: .main).instantiateViewController(withIdentifier: "WorkoutAddViewController") as? WorkoutAddViewController else { return }
-        let workout = workoutList[indexPath.row]
-        vc.workoutAddTitleText = workout.title
-        vc.workout = workout
+        let workout = 운동들[indexPath.row]
+        vc.workoutAddTitleText = workout
+        
+        guard workout != "운동을 하지 않았습니다." else {
+            showToast()
+            return
+        }
+//        vc.workout = workout
+        
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -313,7 +307,6 @@ extension RealmManager {
             localRealm.delete(alls)
         }
     }
-
     
 }
 
@@ -322,5 +315,30 @@ extension String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMdd"
         return formatter.date(from: self)?.addingTimeInterval(60*60*9)
+    }
+}
+
+extension WorkoutPreviousViewController {
+    func showToast() {
+        let toastLabel = UILabel()
+        view.addSubview(toastLabel)
+        toastLabel.anchor(top: view.bottomAnchor, paddingTop: -200, width: 200, height: 60)
+        toastLabel.centerX(inView: view)
+        toastLabel.backgroundColor = UIColor.white.withAlphaComponent(1.0)
+        toastLabel.layer.borderColor = UIColor.systemGray5.cgColor
+        toastLabel.layer.borderWidth = 1
+        toastLabel.textColor = UIColor.black
+        toastLabel.font = UIFont.systemFont(ofSize: 15)
+        toastLabel.text = "먼저 운동을 추가해주세요!"
+        toastLabel.textAlignment = .center
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 25
+        toastLabel.clipsToBounds = true
+//        self.view.addSubview(toastLabel)
+        UIView.animate(withDuration: 3.0, delay: 0.1, options: .curveEaseOut, animations: {
+            toastLabel.alpha = 0.0
+        }, completion: {(isCompleted) in
+            toastLabel.removeFromSuperview()
+        })
     }
 }

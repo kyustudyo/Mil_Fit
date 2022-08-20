@@ -15,7 +15,7 @@ class TodaysWorkoutEditViewController: UIViewController {
     
     var selectedDateString: String?
     var workoutRealm: Results<WorkoutRealm>!
-    
+    weak var delegate: WorkoutEdit?
 //    @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var doneButton: UIBarButtonItem!
     @IBOutlet weak var todaysWorkoutEditTable: UITableView!
@@ -26,6 +26,7 @@ class TodaysWorkoutEditViewController: UIViewController {
     //TODO: 기능
     @IBAction func doneEditing(_ sender: Any) {
         NotificationCenter.default.post(name: didDismissTodaysWorkoutEditView, object: nil, userInfo: nil)
+        delegate?.needUpdate()
         self.presentingViewController?.dismiss(animated: true)
     }
     
@@ -85,9 +86,13 @@ extension TodaysWorkoutEditViewController: UITableViewDelegate, UITableViewDataS
         tableView.deleteRows(at: [indexPath], with: .automatic)
     }
     
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let targetCell = workoutList[sourceIndexPath.row]
-        workoutList.remove(at: sourceIndexPath.row)
-        workoutList.insert(targetCell, at: destinationIndexPath.row)
-    }
+//    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+//        let targetCell = workoutList[sourceIndexPath.row]
+//        workoutList.remove(at: sourceIndexPath.row)
+//        workoutList.insert(targetCell, at: destinationIndexPath.row)
+//    }
+}
+
+protocol WorkoutEdit: AnyObject {
+    func needUpdate()
 }

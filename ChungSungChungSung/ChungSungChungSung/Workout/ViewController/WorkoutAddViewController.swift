@@ -23,7 +23,7 @@ class WorkoutAddViewController: UIViewController {
     var weight: [Int] = []
     
     var workoutAddTitleText: String = "text"
-    var workout: WorkoutModel?
+//    var workout: WorkoutModel?
     var selectedDate = Date()
     
     var editDoneButtonText: String = "편집"
