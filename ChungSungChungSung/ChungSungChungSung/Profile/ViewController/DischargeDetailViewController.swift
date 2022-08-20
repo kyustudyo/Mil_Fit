@@ -1,28 +1,27 @@
 //
-//  OnboardingLastViewController.swift
+//  DischargeDetailViewController.swift
 //  ChungSungChungSung
 //
-//  Created by Ayden on 2022/08/15.
+//  Created by Ayden on 2022/08/17.
 //
 
 import UIKit
 
-class OnboardingLastViewController: UIViewController {
-    @IBOutlet weak var dateTF: UITextField!
-    @IBOutlet weak var backButton: UINavigationItem!
+class DischargeDetailViewController: UIViewController {
+    @IBOutlet weak var dischargeDateTextField: UITextField!
     private let datePicker = UIDatePicker()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         view.backgroundColor = CustomColor.bgGray
-        self.navigationController?.navigationBar.tintColor = CustomColor.mainPurple
-        self.navigationController?.navigationBar.topItem?.title = ""
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        
         setDatePicker()
-        textFieldDidEndEditing(dateTF)
         configToolbar()
     }
-    
+
     func setDatePicker() {
         datePicker.datePickerMode = .date
         datePicker.addTarget(self, action: #selector(datePickerValueDidChange), for: .valueChanged)
@@ -30,25 +29,18 @@ class OnboardingLastViewController: UIViewController {
         datePicker.locale = Locale(identifier: "ko_KR")
         datePicker.preferredDatePickerStyle = .wheels
         
-        dateTF.inputView = datePicker
+        dischargeDateTextField.inputView = datePicker
     }
     
     @objc private func datePickerValueDidChange(_ datePicker: UIDatePicker) {
         let formatter = DateFormatter() // Date 타입과 관련된 포맷터
         formatter.dateFormat = "yyyy년 M월 dd일"
         formatter.locale = Locale(identifier: "ko_KR")
-        //            self.date = datePicker.date
-        self.dateTF.text = formatter.string(from: datePicker.date)
+        self.dischargeDateTextField.text = formatter.string(from: datePicker.date)
     }
 }
 
-extension OnboardingLastViewController: UITextFieldDelegate {
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        textField.underlined(viewSize: view.bounds.width, color: UIColor.systemGray5)
-    }
-}
-
-extension OnboardingLastViewController: UIPickerViewDelegate {
+extension DischargeDetailViewController: UIPickerViewDelegate {
     func configToolbar() {
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
@@ -59,12 +51,17 @@ extension OnboardingLastViewController: UIPickerViewDelegate {
         
         toolBar.setItems([cancelBT,flexibleSpace,doneBT], animated: false)
         
-        dateTF.inputAccessoryView = toolBar
+        dischargeDateTextField.inputAccessoryView = toolBar
     }
     
     @objc func donePicker() {
-        self.dateTF.text = formatData(date: datePicker.date)
-        self.dateTF.resignFirstResponder()
+        self.dischargeDateTextField.text = formatData(date: datePicker.date)
+        self.dischargeDateTextField.resignFirstResponder()
+    }
+    
+    @objc func cancelPicker() {
+        self.dischargeDateTextField.text = nil
+        self.dischargeDateTextField.resignFirstResponder()
     }
     
     func formatData(date: Date) -> String {
@@ -73,9 +70,5 @@ extension OnboardingLastViewController: UIPickerViewDelegate {
         formatter.dateFormat = "yyyy년 M월 dd일"
         return formatter.string(from: date)
     }
-    
-    @objc func cancelPicker() {
-        self.dateTF.text = nil
-        self.dateTF.resignFirstResponder()
-    }
 }
+
