@@ -449,8 +449,8 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         super.viewDidLoad()
         view.backgroundColor = .systemGray6
 //        print("2022-09-22".toDate()!)
-        UserDefaultManager.removeFirstTimeExperience()
-        RealmManager.deleteAllMealsData()
+//        UserDefaultManager.removeFirstTimeExperience()
+//        RealmManager.deleteAllMealsData()
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ko_KR")
         dateFormatter.dateFormat = "yyyy-MM-dd"

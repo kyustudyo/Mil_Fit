@@ -71,8 +71,6 @@ extension UserDefaultManager {
             dateFormatter.locale = Locale(identifier: "ko_KR")
             dateFormatter.dateFormat = "yyyy-MM-dd"
             print(Date().addingTimeInterval(60*60*9))
-            
-            
             UserDefaults.standard.set(Date().addingTimeInterval(60*60*9), forKey: "firstDayOfTheApp")
             return false
         }
