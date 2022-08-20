@@ -8,14 +8,12 @@
 import UIKit
 
 class ArmyInfoTableViewCell: UITableViewCell {
-    var armyCorpsName = "제 0000부대"
-    var dischargeDate = "2023.10.12."
     
     @IBOutlet weak var cellRectangle: UIView!
     @IBOutlet weak var editArmyInfoButton: UIButton!
     @IBOutlet weak var armyCorpsNameLabel: UILabel!
     @IBOutlet weak var dischargeDateLabel: UILabel!
-
+    weak var delegate: EditDischargeViewRelated?
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -25,14 +23,20 @@ class ArmyInfoTableViewCell: UITableViewCell {
         cellRectangle.layer.shadowOpacity = 1
         editArmyInfoButton.tintColor = CustomColor.editGray
         
-        armyCorpsNameLabel.text = armyCorpsName
-        dischargeDateLabel.text = dischargeDate
     }
-
+    
+    @IBAction func editTexts(_ sender: Any) {
+        delegate?.goDischargeDetailVC()
+        
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
     
+}
+protocol EditDischargeViewRelated: AnyObject {
+    func goDischargeDetailVC()
 }

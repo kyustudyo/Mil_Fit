@@ -19,7 +19,13 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cRh-N6-R77">
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <items>
-                                    <navigationItem title="전역 정보" id="i2B-RH-Dpv"/>
+                                    <navigationItem title="전역 정보" id="i2B-RH-Dpv">
+                                        <barButtonItem key="rightBarButtonItem" title="완료" id="Yw2-Pu-VMz">
+                                            <connections>
+                                                <action selector="completeEdit:" destination="Y6W-OH-hqX" id="UBE-t8-Tuh"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="전역일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aHm-dv-c0s">

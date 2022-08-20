@@ -9,7 +9,21 @@ import UIKit
 
 class BadgeTableViewCell: UITableViewCell {
     var badgeDetailViewDelegate: BadgeDetailViewDelegate?
-    var earnedBadges: [BadgeModel] = []
+    var earnedBadges: [BadgeModel] = [] {
+        willSet {
+            badgeCollectionView.reloadData()
+        }
+    }
+    var badgeNames: [String] {
+        get {
+            []
+        }
+        set {
+            earnedBadges = badgeList.filter {
+                newValue.contains($0.title)
+            }
+        }
+    }
     
     private var badgeList = BadgeData().list
     
@@ -23,7 +37,6 @@ class BadgeTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        setNumberOfBadgeEarned()
         self.backgroundColor = CustomColor.bgGray
         moreButton.tintColor = CustomColor.editGray
         badgeCollectionView.backgroundColor = CustomColor.bgGray
@@ -38,15 +51,6 @@ class BadgeTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    private func setNumberOfBadgeEarned() {
-        earnedBadges = badgeList.filter {
-            if $0.date?.isEmpty == false {
-                return true
-            } else {
-                return false
-            }
-        }
-    }
 }
 
 extension BadgeTableViewCell: UICollectionViewDelegateFlowLayout {

@@ -6,16 +6,60 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ProfileViewController: UIViewController {
     private let profileViewTitle = "프로필"
     
     private var goalList = GoalData().list
     
+    @IBOutlet weak var settingsButton: UIBarButtonItem!
     @IBOutlet weak var profileTableView: UITableView!
+    var unit: String?
+    var dischargeDate: Date?
+    var age: Int?
+    var weight: Int?
+    var height : Int?
+    var todo: ToDoListRealm?
+    var badgeNames: [String]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        UserDefaultManager.saveUnit(unit: "제 1234부대")
+//        print(UserDefaultManager.loadUnit())
+        unit = UserDefaultManager.loadUnit()
+        
+        UserDefaultManager.saveDischargeDate(date: Date().addingTimeInterval(60*60*9))
+//        print(UserDefaultManager.loadDischargeDate2())
+        dischargeDate = UserDefaultManager.loadDischargeDate2()
+        
+        UserDefaultManager.saveAge(age: 22)
+//        print(UserDefaultManager.loadAge())
+        age = UserDefaultManager.loadAge()
+        
+        RealmManager.saveWeightData(date: Date().addingTimeInterval(60*60*9), weight: 23)
+        RealmManager.saveWeightData(date: Date().addingTimeInterval(60*60*25), weight: 33)
+//        print(RealmManager.searchCurrentWeight2())
+        weight = RealmManager.searchCurrentWeight2()
+        
+        UserDefaultManager.saveHeight(height: 33)
+//        print(UserDefaultManager.loadHegiht2())
+        height = UserDefaultManager.loadHegiht2()
+        
+        RealmManager.saveTodoListData(date: Date().addingTimeInterval(60*60*9), content: "qwqwqw", isDone: false)
+        RealmManager.saveTodoListData(date: Date().addingTimeInterval(60*60*2), content: "rrrrrr", isDone: true)
+//        print(RealmManager.searchTodo())//둘다하자
+//        print(RealmManager.searchCurrentTodo()?.content)
+        todo = RealmManager.searchCurrentTodo()
+        
+        RealmManager.saveBadgeData(date: Date().addingTimeInterval(60*60*9), title: "우리의 시작")
+        RealmManager.saveBadgeData(date: Date().addingTimeInterval(60*60*9), title: "첫 기록의 기쁨")
+//        print(RealmManager.searchBadges())
+//        badges = RealmManager.searchBadges()
+        if let badges = RealmManager.searchBadges() {
+            badgeNames = badges.map { $0.title }
+        }
         
         configNavigationTitle()
         self.view.backgroundColor = CustomColor.bgGray
@@ -82,22 +126,59 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "armyInfoTableViewCell", for: indexPath) as? ArmyInfoTableViewCell else { return UITableViewCell() }
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale(identifier: "ko_KR")
+            dateFormatter.dateFormat = "yyyy.MM.dd"
+            
+//            cell.armyCorpsNameLabel.text = unit ?? "부대가 등록되어있지 않습니다."
+            cell.armyCorpsNameLabel.text = ""
+            if let dischargeDate = dischargeDate {
+                cell.dischargeDateLabel.text = dateFormatter.string(from: dischargeDate)
+            } else {
+                cell.dischargeDateLabel.text = "전역일이 등록되어있지 않습니다."
+            }
+            cell.delegate = self
             return cell
         } else if indexPath.row == 1 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "bodyInfoTableViewCell", for: indexPath) as? BodyInfoTableViewCell else { return UITableViewCell() }
+            if let age = age {
+                cell.ageLabel.text = "\(age)"
+            } else {
+                cell.ageLabel.text = "나이가 등록되어있지 않습니다."
+            }
+            
+            if let h = height,
+               let w = weight {
+                cell.heightAndWeightLabel.text = "\(h)cm / \(w)kg"
+            } else {
+                cell.heightAndWeightLabel.text = "- cm / - kg"
+            }
             
             return cell
         } else if indexPath.row == 2 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "goalsTableViewCell", for: indexPath) as? GoalsTableViewCell else { return UITableViewCell() }
             
-            cell.goalLabel.text = goalList[0].content
-            cell.goalSavedDateLabel.text = goalList[0].date
+            let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale(identifier: "ko_KR")
+            dateFormatter.dateFormat = "yyyy.MM.dd"
+            
+            if let todo = todo {
+                cell.goalLabel.text = todo.content
+                print("qwer", dateFormatter.string(from: todo.date))
+                cell.goalSavedDateLabel.text = dateFormatter.string(from: todo.date)
+            } else {
+                cell.goalLabel.text = "목표를 설정하세요."
+                cell.goalSavedDateLabel.text = dateFormatter.string(from: Date())
+            }
+//            cell.goalLabel.text = goalList[0].content
+//            cell.goalSavedDateLabel.text = goalList[0].date
             cell.goalsDetailViewDelegate = self
             
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "badgeTableViewCell", for: indexPath) as? BadgeTableViewCell else { return UITableViewCell() }
-            
+            cell.badgeNames = badgeNames ?? []
             cell.badgeDetailViewDelegate = self
             
             return cell
@@ -106,7 +187,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
-            return 152
+            return 112
         } else if indexPath.row == 1 {
             return 152
         } else if indexPath.row == 2 {
@@ -116,5 +197,116 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 //            return UITableView.automaticDimension
             // TODO: 뱃지 많아지면 자동으로 CollectionView 높이만큼 이 TableViewCell 높이도 길어졌으면 좋겠음.
         }
+    }
+    
+}
+
+extension UserDefaultManager {
+    static func loadUnit() -> String? {
+        guard let unit = UserDefaults.standard.object(forKey: "unit") as? String else {
+            return nil
+        }
+        return unit
+    }
+    
+    static func loadAge() -> Int? {
+        guard let age = UserDefaults.standard.object(forKey: "age") as? Int else {
+            return nil
+        }
+        return age
+    }
+    static func loadDischargeDate2() -> Date? {
+        guard let date = UserDefaults.standard.object(forKey: "dischargeDate") as? Date else {
+            return nil
+        }
+        return date
+    }
+    static func loadHegiht2() -> Int? {
+        guard let height = UserDefaults.standard.object(forKey: "height") as? Int else {
+            return nil
+        }
+        return height
+    }
+}
+
+extension RealmManager {
+    
+    static func searchTodo() -> Results<ToDoListRealm> {
+        let realm = localRealm.objects(ToDoListRealm.self)
+        return realm
+    }
+    
+    static func searchCurrentWeight2() -> Int? {
+        let localRealm = try! Realm()
+        let realm = localRealm.objects(WeightRealm.self)
+        let target = realm.sorted(byKeyPath: "dateSorting", ascending: false)
+        if target.count == 0 {
+            return nil
+        } else {
+            return target[0].weight
+        }
+    }
+    
+//    static func notDoneTodoData2() -> Results<ToDoListRealm>? {
+//        let localRealm = try! Realm()
+//        let realm = localRealm.objects(ToDoListRealm.self)
+//                            .filter("isDone = false")
+//                            .sorted(byKeyPath: "dateSorting", ascending: false)
+//        if realm.count == 0 {
+//            return nil
+//        } else {
+//            return realm
+//        }
+//    }
+//
+//    static func doneTodoData2() -> Results<ToDoListRealm>? {
+//        let localRealm = try! Realm()
+//        let realm = localRealm.objects(ToDoListRealm.self)
+//                            .filter("isDone = true")
+//                            .sorted(byKeyPath: "dateSorting", ascending: false)
+//        if realm.count == 0 {
+//            return nil
+//        } else {
+//            return realm
+//        }
+//    }
+    
+    static func searchCurrentTodo() -> ToDoListRealm? {
+        let localRealm = try! Realm()
+        let realm = localRealm.objects(ToDoListRealm.self)
+        let target = realm.sorted(byKeyPath: "dateSorting", ascending: false)
+        if target.count == 0 {
+            return nil
+        } else {
+            return target[0]
+        }
+    }
+    
+    static func searchBadges() -> Results<BadgeRealm>? {
+        let localRealm = try! Realm()
+        let realm = localRealm.objects(BadgeRealm.self)
+        if realm.count == 0 {
+            return nil
+        } else {
+            return realm
+        }
+    }
+    
+    
+}
+
+extension ProfileViewController: EditDischargeViewRelated {
+    func goDischargeDetailVC() {
+        guard let dischargeDetail = UIStoryboard(name: "DischargeDetail", bundle: .main).instantiateViewController(withIdentifier: "DischargeDetailViewController") as? DischargeDetailViewController else { return }
+        dischargeDetail.delegate = self
+        navigationController?.pushViewController(dischargeDetail, animated: true)
+    }
+}
+
+extension ProfileViewController: DischargeEdit {
+    func changeDischarge() {
+        dischargeDate = UserDefaultManager.loadDischargeDate2()
+        print(UserDefaultManager.loadDischargeDate2())
+        profileTableView.reloadData()
     }
 }

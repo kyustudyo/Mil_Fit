@@ -11,6 +11,8 @@ class DischargeDetailViewController: UIViewController {
     @IBOutlet weak var dischargeDateTextField: UITextField!
     private let datePicker = UIDatePicker()
     
+    weak var delegate: DischargeEdit?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,6 +24,18 @@ class DischargeDetailViewController: UIViewController {
         configToolbar()
     }
 
+    @IBAction func completeEdit(_ sender: Any) {
+        guard let a = self.dischargeDateTextField.text else { return }
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.dateFormat = "yyyy년 MM월 dd일"
+        
+        print(dateFormatter.date(from: a)?.addingTimeInterval(60*60*9))
+        guard let date = dateFormatter.date(from: a)?.addingTimeInterval(60*60*9) else { return }
+        UserDefaultManager.saveDischargeDate(date: date)
+        delegate?.changeDischarge()
+        navigationController?.popViewController(animated: true)
+    }
     func setDatePicker() {
         datePicker.datePickerMode = .date
         datePicker.addTarget(self, action: #selector(datePickerValueDidChange), for: .valueChanged)
@@ -70,5 +84,9 @@ extension DischargeDetailViewController: UIPickerViewDelegate {
         formatter.dateFormat = "yyyy년 M월 dd일"
         return formatter.string(from: date)
     }
+}
+
+protocol DischargeEdit: AnyObject {
+    func changeDischarge()
 }
 
