@@ -7,9 +7,15 @@
 
 import UIKit
 import FSCalendar
+import RealmSwift
 
 class WorkoutPreviousViewController: UIViewController {
+    private let defaults = UserDefaults.standard
 
+    var workoutRealm: Results<WorkoutRealm>!
+    var workoutDates = [String]()
+    let dateFormatterHighlight = DateFormatter()
+    
     var events2: [Date] = []
     fileprivate let calendar = FSCalendar()
     fileprivate let tableView = UITableView()
@@ -87,6 +93,10 @@ class WorkoutPreviousViewController: UIViewController {
         vstack.anchor(top: tempView.bottomAnchor, left: calendar.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: calendar.rightAnchor, paddingTop: 8, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
         tableView.anchor(top: vstack.topAnchor, left: calendar.leftAnchor, right: calendar.rightAnchor, paddingTop: 8, paddingLeft: 0, paddingRight: 0, height: 44 * CGFloat(운동들.count))
 
+        dateFormatterHighlight.dateFormat = "yyyyMMdd"
+        dateFormatterHighlight.locale = Locale(identifier: "ko_KR")
+        
+        workoutDates = defaults.stringArray(forKey: "workoutDate") ?? [String]()
     }
 
     func setUpEvents() {
@@ -117,16 +127,22 @@ extension WorkoutPreviousViewController: FSCalendarDelegate, FSCalendarDataSourc
         
         if date1 == date2 {
             return .white
-        } else if events2.contains(date) {
-            return .진보라
+//        } else if events2.contains(date) {
+//            return .진보라
         } else {
             return .black
         }
     }
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillDefaultColorFor date: Date) -> UIColor? {
+        let selectedDate = dateFormatterHighlight.string(from: date)
+        let today = dateFormatterHighlight.string(from: Date())
         
-        if events2.contains(date) {
-            return .연보라
+        if selectedDate == today {
+            return .진보라
+        } else if workoutDates.contains(dateFormatterHighlight.string(from: date)) {
+//        if events2.contains(date) {
+            return CustomColor.calendarRedColor
+//        }
         }
         return nil
     }
