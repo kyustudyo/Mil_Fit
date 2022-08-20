@@ -86,7 +86,7 @@ class FitnessTestRealm: Object {
     
     @Persisted(primaryKey: true) var _id: ObjectId
     
-    convenience init(date: Date, testType: String, level: String, isPracice: Bool, count: Int? = nil, minutes: Int? = nil, seconds: Int? = nil) {
+    convenience init(date: Date, testType: String, level: String, isPractice: Bool, count: Int? = nil, minutes: Int? = nil, seconds: Int? = nil) {
         self.init()
         self.date = date
         self.testType = testType

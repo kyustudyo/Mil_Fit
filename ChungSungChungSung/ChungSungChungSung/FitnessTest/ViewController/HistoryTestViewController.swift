@@ -22,7 +22,7 @@ class HistoryTestViewController: UIViewController {
         navigationItem.rightBarButtonItem?.tintColor = CustomColor.mainPurple
         localRealm = try! Realm()
         fitnessRealm = localRealm.objects(FitnessTestRealm.self)
-        resultRealm = fitnessRealm.filter("isPractice == false").sorted(byKeyPath: "dataSorting", ascending: false)
+        resultRealm = fitnessRealm.filter("isPractice == false").sorted(byKeyPath: "dateSorting", ascending: false)
         historyTableView.contentInset.top = 10
         historyTableView.dataSource = self
         historyTableView.delegate = self
@@ -75,6 +75,9 @@ extension HistoryTestViewController: UITableViewDelegate, UITableViewDataSource 
         let destructiveAction = UIAlertAction(title: "삭제", style: UIAlertAction.Style.destructive) { _ in
             try! self.localRealm.write({
                 self.localRealm.delete(self.resultRealm[indexPath.row])
+                //                self.localRealm.delete(self.resultRealm[indexPath.row * 3])
+                //                self.localRealm.delete(self.resultRealm[indexPath.row * 3 + 1])
+                //                self.localRealm.delete(self.resultRealm[indexPath.row * 3 + 2])
             })
             self.historyTableView.deleteRows(at: [indexPath], with: .automatic)
         }

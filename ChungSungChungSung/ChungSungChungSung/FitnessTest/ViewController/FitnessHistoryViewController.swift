@@ -95,15 +95,20 @@ class FitnessHistoryViewController: UIViewController {
         lineChartDataSet.lineWidth = 3
         lineChartDataSet.circleHoleRadius = 3.0
         lineChartDataSet.circleRadius = 5.0
-        
+ 
         let data = LineChartData(dataSet: lineChartDataSet)
+        let formatter = NumberFormatter()
+        formatter.minimumFractionDigits = 0
+        data.setValueFormatter(DefaultValueFormatter(formatter:formatter))
+        data.setValueFont(.systemFont(ofSize: 10))
         lineChartView.data = data
         lineChartView.rightAxis.enabled = false
         lineChartView.drawGridBackgroundEnabled = false
-//        lineChartView.leftAxis.enabled = false
-//        lineChartView.xAxis.enabled = false
+        lineChartView.leftAxis.enabled = false
+        lineChartView.xAxis.enabled = false
         lineChartView.legend.enabled = false
         lineChartView.backgroundColor = .white
+
     }
     
     func configureSortedButton() {
@@ -125,11 +130,10 @@ extension FitnessHistoryViewController: UITableViewDataSource, UITableViewDelega
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
         guard let cell = historyTableView.dequeueReusableCell(withIdentifier: FitnessHistoryTableViewCell.identifier, for: indexPath) as? FitnessHistoryTableViewCell else { return UITableViewCell() }
         var realm = resultRealm!
         if sortedButton.currentTitle == "최신순" {
-            realm = realm.sorted(byKeyPath: "dataSorting", ascending: false)
+            realm = realm.sorted(byKeyPath: "dateSorting", ascending: false)
         }else {
             if index == 0 {
                 realm = realm.sorted(byKeyPath: "totalTime", ascending: true)
@@ -154,8 +158,8 @@ extension FitnessHistoryViewController: UITableViewDataSource, UITableViewDelega
             cell.tagLabel.text = "정식"
         }
         cell.tagLabel.textColor = .white
-        cell.layer.cornerRadius = 12
-        cell.clipsToBounds = true
+        cell.tagLabel.layer.cornerRadius = 3
+        cell.tagLabel.clipsToBounds = true
         return cell
     }
     

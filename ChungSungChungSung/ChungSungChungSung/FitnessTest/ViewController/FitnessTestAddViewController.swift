@@ -138,10 +138,19 @@ class FitnessTestAddViewController: UIViewController {
             runningSwitch.isHidden = false
             pushupSwitch.isHidden = false
             situpSwitch.isHidden = false
+            runningSwitch.isOn = false
+            pushupSwitch.isOn = false
+            situpSwitch.isOn = false
             runningSecond.text = ""
             runningMinute.text = ""
             pushupCount.text = ""
             situpCount.text = ""
+            runningMinute.backgroundColor = .systemGray6
+            runningSecond.backgroundColor = .systemGray6
+            pushupCount.backgroundColor = .systemGray6
+            situpCount.backgroundColor = .systemGray6
+
+            
         case 1:
             runningSwitch.isHidden = true
             pushupSwitch.isHidden = true
@@ -187,6 +196,7 @@ class FitnessTestAddViewController: UIViewController {
         formmater.dateFormat = "yyyy년 MM월 dd일"
         formmater.locale = Locale(identifier: "ko_KR")
 //        self.diaryDate = datePicker.date
+        self.datePicker.maximumDate = Date()
         self.dateTextField.text = formmater.string(from: datePicker.date)
     }
 }
