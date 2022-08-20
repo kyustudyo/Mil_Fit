@@ -29,7 +29,10 @@ class Webservice {
 //        print((String(Array(army)[1..<5])))
 //        let armyNumber = (String(Array(army)[1..<5]))
         guard army != "없음" && army != "" else {
-            completion()
+            DispatchQueue.main.async {
+                RealmManager.deleteAllMealsData()
+                completion()
+            }
             return
         }
         let url: URL = URL(string: "https://openapi.mnd.go.kr/\(keyValues.getId())/json/DS_TB_MNDT_DATEBYMLSVC_\(String(Array(army)[1..<5]))/1/10000/")!

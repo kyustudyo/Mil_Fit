@@ -58,6 +58,7 @@
 		79BBF69B289AB50B0003FAD8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79BBF699289AB50B0003FAD8 /* Main.storyboard */; };
 		79BBF69D289AB50D0003FAD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79BBF69C289AB50D0003FAD8 /* Assets.xcassets */; };
 		79BBF6A0289AB50D0003FAD8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79BBF69E289AB50D0003FAD8 /* LaunchScreen.storyboard */; };
+		79CFF6A328B0B15900DA4B74 /* FitnessHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB21160E28A1308B0050E9F8 /* FitnessHistoryViewController.swift */; };
 		79D0F52728ABB4510099E944 /* TodaysWorkoutEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D0F52628ABB4510099E944 /* TodaysWorkoutEditViewController.swift */; };
 		79EB055728ABC4D200CA2A11 /* TodaysWorkoutEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EB055628ABC4D200CA2A11 /* TodaysWorkoutEditViewController.swift */; };
 		79F67694289E52F100850FF0 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F67693289E52F100850FF0 /* TabViewController.swift */; };
@@ -707,6 +708,7 @@
 				79F676A0289EC65C00850FF0 /* Bar.swift in Sources */,
 				794B600B28A527BB00621A27 /* TodaysWorkoutEditCell.swift in Sources */,
 				AB460BAF28A7A32000765A1D /* BasicWorkout.swift in Sources */,
+				79CFF6A328B0B15900DA4B74 /* FitnessHistoryViewController.swift in Sources */,
 				DD639DDE28A9C1A600219504 /* OnboardingSecondViewController.swift in Sources */,
 				79F67696289E53AF00850FF0 /* MainViewController.swift in Sources */,
 				79F676C828A00A4B00850FF0 /* ColorExtension.swift in Sources */,

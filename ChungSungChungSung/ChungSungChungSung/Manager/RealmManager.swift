@@ -137,6 +137,17 @@ extension RealmManager {
 //            .map { $0.date }
             
     }
+    
+    static func searchWorkoutDataByDateK(date: String) -> Results<WorkoutRealm>? {
+        let realm = localRealm.objects(WorkoutRealm.self)
+        let target = realm.filter("dateSearching == '\(date)'")
+        if target.count == 0 {
+            return nil
+        } else {
+            return target
+        }
+    }
+    
     static func deleteAllWorkoutData() {
         
         let localRealm = try! Realm()
@@ -211,16 +222,6 @@ extension RealmManager {
        
     }
     
-    static func searchWorkoutDataByDateK(date: String) -> Results<WorkoutRealm>? {
-        let realm = localRealm.objects(WorkoutRealm.self)
-        let target = realm.filter("dateSearching == '\(date)'")
-        if target.count == 0 {
-            return nil
-        } else {
-            return target
-        }
-    }
-    
     static func searchMealDataByDate(date: String) -> Results<MealRealm>? {
         let localRealm = try! Realm()
         let realm = localRealm.objects(MealRealm.self)
@@ -232,6 +233,14 @@ extension RealmManager {
             return target
         }
     }
+    
+//    static func searchMealDataByDate(dates: [String]) -> Results<MealRealm>? {
+//        let localRealm = try! Realm()
+//        let realm = localRealm.objects(MealRealm.self)
+////        print(date)
+//        var results: Results<MealRealm>?
+//        
+//    }
     
     //몸무게
     

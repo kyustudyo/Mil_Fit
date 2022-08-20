@@ -31,6 +31,7 @@ extension String {
         return formatter.date(from: self)?.addingTimeInterval(60*60*9)
     }
     
+    
 //func toDateTime() -> Date {
 //    let dateFormatter = DateFormatter()
 //    dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -41,4 +42,11 @@ extension String {
 //    }
 //    return date
 //}
+}
+func getDayOfWeek(date: Date) -> String {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "EEEEEE"
+    formatter.locale = Locale(identifier:"ko_KR")
+    let convertStr = formatter.string(from: date)
+    return convertStr
 }

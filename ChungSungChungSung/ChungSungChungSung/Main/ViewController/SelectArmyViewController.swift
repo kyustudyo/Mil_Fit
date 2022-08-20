@@ -59,7 +59,7 @@ class SelectArmyViewController: UIViewController {
 extension SelectArmyViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        totalArmy.count
+        return totalArmy.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
