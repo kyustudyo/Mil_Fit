@@ -113,7 +113,8 @@ extension ProfileViewController: GoalsDetailViewDelegate, BadgeDetailViewDelegat
         guard let goalsDetailView = UIStoryboard(name: "GoalsDetail", bundle: .main).instantiateViewController(withIdentifier: "GoalsDetailViewController") as? GoalsDetailViewController else { return }
         
         print("qwer", RealmManager.doneTodoData2()?.count, RealmManager.notDoneTodoData2()?.count)
-        
+        goalsDetailView.delegate = self
+        goalsDetailView.deleteDelegate = self
 //        goalsDetailView.doneTodos = RealmManager.doneTodoData2()
 //        
 //        goalsDetailView.notDoneTodos = RealmManager.notDoneTodoData2()
@@ -387,5 +388,20 @@ extension RealmManager {
         try! localRealm.write {
             localRealm.delete(alls)
         }
+    }
+}
+extension ProfileViewController: TodoAdd {
+    func addTodo() {
+        todo = RealmManager.searchCurrentTodo()
+        print(todo?.content)
+        profileTableView.reloadData()
+    }
+}
+
+extension ProfileViewController: DeleteTodo {
+    func didDelete() {
+        todo = RealmManager.searchCurrentTodo()
+        print(todo?.content)
+        profileTableView.reloadData()
     }
 }

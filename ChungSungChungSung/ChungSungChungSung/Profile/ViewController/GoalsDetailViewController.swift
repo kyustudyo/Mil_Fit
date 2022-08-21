@@ -10,21 +10,31 @@ import RealmSwift
 class GoalsDetailViewController: UIViewController {
     @IBOutlet weak var segCon: UISegmentedControl!
     
+//    guard let workoutAddView = UIStoryboard(name: "WorkoutAdd", bundle: .main).instantiateViewController(withIdentifier: "WorkoutAddViewController") as? WorkoutAddViewController else { return }
     var lists: [ToDoListRealm] = []
+    weak var delegate: TodoAdd?
+    
+    weak var deleteDelegate: DeleteTodo?
+    
     var doneTodos: Results<ToDoListRealm>? = RealmManager.doneTodoData2()
     var notDoneTodos:  Results<ToDoListRealm>? = RealmManager.notDoneTodoData2()
     
     @IBAction func segconChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            
-            if let notDoneTodos = notDoneTodos {
+            if let notDoneTodos = RealmManager.notDoneTodoData2() {
                 lists = Array(notDoneTodos)
+                print(lists)
+            } else {
+                lists = []
             }
             goalsDetailTableView.reloadData()
         case 1:
-            if let doneTodos = doneTodos {
+            if let doneTodos = RealmManager.doneTodoData2() {
                 lists = Array(doneTodos)
+                print(lists)
+            } else {
+                lists = []
             }
             goalsDetailTableView.reloadData()
         default: break
@@ -35,6 +45,7 @@ class GoalsDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         if let notDoneTodos = notDoneTodos {
              lists = Array(notDoneTodos)
         }
@@ -56,7 +67,7 @@ class GoalsDetailViewController: UIViewController {
         let plusButton = UIButton()
         let plusImage = UIImage(systemName: "plus")
         plusButton.setImage(plusImage, for: .normal)
-        plusButton.addTarget(self, action: #selector(goAddGoalViewController), for: .touchUpInside)
+        plusButton.addTarget(self, action: #selector(goAddTodoVC), for: .touchUpInside)
         
         let editBarButton = UIBarButtonItem(customView: editButton)
         let plusBarButton = UIBarButtonItem(customView: plusButton)
@@ -67,15 +78,16 @@ class GoalsDetailViewController: UIViewController {
         
         goalsDetailTableView.setEditing(goalsDetailTableView.isEditing ? false : true, animated: true)
     }
-    @objc private func goAddGoalViewController() {
-        let sb = UIStoryboard(name: "TodoListAdd", bundle: nil)
-        guard let vc = sb.instantiateViewController(withIdentifier: "TodoListAddProfileViewController") as? TodoListAddProfileViewController else {return}
+    @objc private func goAddTodoVC() {
+        guard let vc = UIStoryboard(name: "TodoListAdd", bundle: .main).instantiateViewController(withIdentifier: "TodoListAddProfileViewController") as? TodoListAddProfileViewController else { return }
+        vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
     }
 }
 
 extension GoalsDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("qqqq", lists.count)
             return lists.count
     }
     
@@ -113,6 +125,7 @@ extension GoalsDetailViewController: UITableViewDelegate, UITableViewDataSource 
             RealmManager.deleteTodo(id: lists[indexPath.row].dateSorting)
             lists.remove(at: indexPath.row)
             goalsDetailTableView.deleteRows(at: [indexPath], with: .automatic)
+            deleteDelegate?.didDelete()
         }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -131,18 +144,38 @@ extension GoalsDetailViewController: TodoDone {
         
         doneTodos = RealmManager.doneTodoData2()
         notDoneTodos = RealmManager.notDoneTodoData2()
-        
-        if segCon.selectedSegmentIndex == 0 {
-            if let notDoneTodos = notDoneTodos {
+        updateTableview()
+//        if segCon.selectedSegmentIndex == 0 {
+//            if let notDoneTodos = notDoneTodos {
+////                goalList = notDoneTodos
+//                lists = Array(notDoneTodos)
+//            }
+//        } else {
+//            if let doneTodos = doneTodos {
+////                goalList = notDoneTodos
+//                lists = Array(doneTodos)
+//            }
+//        }
+//        goalsDetailTableView.reloadData()
+    }
+}
+
+extension GoalsDetailViewController {
+    private func updateTableview() {
+        segCon.selectedSegmentIndex = 0
+//        if segCon.selectedSegmentIndex == 0 {
+            if let notDoneTodos = RealmManager.notDoneTodoData2() {
 //                goalList = notDoneTodos
                 lists = Array(notDoneTodos)
+                
             }
-        } else {
-            if let doneTodos = doneTodos {
-//                goalList = notDoneTodos
-                lists = Array(doneTodos)
-            }
-        }
+//        }
+//        else {
+//            if let doneTodos = RealmManager.doneTodoData2() {
+////                goalList = notDoneTodos
+//                lists = Array(doneTodos)
+//            }
+//        }
         goalsDetailTableView.reloadData()
     }
 }
@@ -170,4 +203,16 @@ extension RealmManager {
                    }
                }
     }
+}
+
+extension GoalsDetailViewController: TodoAdd {
+    func addTodo() {
+        updateTableview()
+        delegate?.addTodo()
+    }
+}
+
+
+protocol DeleteTodo: AnyObject {
+    func didDelete()
 }

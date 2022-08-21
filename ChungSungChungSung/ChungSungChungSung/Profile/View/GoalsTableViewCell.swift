@@ -15,6 +15,7 @@ class GoalsTableViewCell: UITableViewCell {
     @IBOutlet weak var goalLabel: UILabel!
     @IBOutlet weak var goalSavedDateLabel: UILabel!
     @IBOutlet weak var isDone: UIButton!
+
     @IBAction func didTapGoalsMoreAction(_ sender: UIButton) {
         goalsDetailViewDelegate?.didTapGoalsMoreButton()
     }
