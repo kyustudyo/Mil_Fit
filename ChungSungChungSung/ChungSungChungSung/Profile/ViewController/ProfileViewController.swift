@@ -26,33 +26,33 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         RealmManager.deleteAllWeightData2()
-        UserDefaultManager.saveUnit(unit: "제 1234부대")
+//        UserDefaultManager.saveUnit(unit: "제 1234부대")
 //        print(UserDefaultManager.loadUnit())
         unit = UserDefaultManager.loadUnit()
         
-        UserDefaultManager.saveDischargeDate(date: Date().addingTimeInterval(60*60*9))
+//        UserDefaultManager.saveDischargeDate(date: Date().addingTimeInterval(60*60*9))
 //        print(UserDefaultManager.loadDischargeDate2())
         dischargeDate = UserDefaultManager.loadDischargeDate2()
         
-        UserDefaultManager.saveAge(age: 22)
+//        UserDefaultManager.saveAge(age: 22)
 //        print(UserDefaultManager.loadAge())
         age = UserDefaultManager.loadAge()
         
-        RealmManager.saveWeightData(date: Date().addingTimeInterval(60*60*9), weight: 23)
+//        RealmManager.saveWeightData(date: Date().addingTimeInterval(60*60*9), weight: 23)
 //        RealmManager.saveWeightData(date: Date().addingTimeInterval(60*60*25), weight: 33)
 //        print(RealmManager.searchCurrentWeight2())
         weight = RealmManager.searchCurrentWeight2()
         
-        UserDefaultManager.saveHeight(height: 33)
+//        UserDefaultManager.saveHeight(height: 33)
 //        print(UserDefaultManager.loadHegiht2())
         height = UserDefaultManager.loadHegiht2()
         
-        RealmManager.saveTodoListData(date: Date().addingTimeInterval(60*60*1), content: "1", isDone: true)
-        RealmManager.saveTodoListData(date: Date().addingTimeInterval(60*60*2), content: "2", isDone: false)
-        RealmManager.saveTodoListData(date: Date().addingTimeInterval(60*60*3), content: "2", isDone: false)
-        RealmManager.saveTodoListData(date: Date().addingTimeInterval(60*60*4), content: "2", isDone: false)
-        RealmManager.saveTodoListData(date: Date().addingTimeInterval(60*60*5), content: "2", isDone: false)
-        RealmManager.saveTodoListData(date: Date().addingTimeInterval(60*60*6), content: "52", isDone: false)
+//        RealmManager.saveTodoListData(date: Date().addingTimeInterval(60*60*1), content: "1", isDone: true)
+//        RealmManager.saveTodoListData(date: Date().addingTimeInterval(60*60*2), content: "2", isDone: false)
+//        RealmManager.saveTodoListData(date: Date().addingTimeInterval(60*60*3), content: "2", isDone: false)
+//        RealmManager.saveTodoListData(date: Date().addingTimeInterval(60*60*4), content: "2", isDone: false)
+//        RealmManager.saveTodoListData(date: Date().addingTimeInterval(60*60*5), content: "2", isDone: false)
+//        RealmManager.saveTodoListData(date: Date().addingTimeInterval(60*60*6), content: "52", isDone: false)
         
 //        print(RealmManager.searchTodo())//둘다하자
 //        print(RealmManager.searchCurrentTodo()?.content)
