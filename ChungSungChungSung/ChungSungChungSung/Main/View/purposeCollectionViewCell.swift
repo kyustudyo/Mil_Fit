@@ -6,12 +6,15 @@
 //
 
 import UIKit
+import RealmSwift
 
 class PurposeCollectionViewCell: UICollectionViewCell {
     
     static let cellID = "purposeCollectionViewCellID"
     
     weak var delegate: didPurpose?
+    
+    var todoID: Int = 0
     
     let purposeLabel: UILabel = {
         let label = UILabel()
@@ -27,7 +30,7 @@ class PurposeCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    private lazy var thumbButton: UIButton = {
+    lazy var thumbButton: UIButton = {
         let button = UIButton()
         let boldConfig = UIImage.SymbolConfiguration(pointSize: 38)
         let largeBoldDoc = UIImage(systemName: "hand.thumbsup.circle.fill", withConfiguration: boldConfig)
@@ -35,7 +38,6 @@ class PurposeCollectionViewCell: UICollectionViewCell {
         button.addTarget(self, action: #selector(getThumbUp), for: .touchUpInside)
         return button
     }()
-    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupUI()
@@ -52,7 +54,13 @@ class PurposeCollectionViewCell: UICollectionViewCell {
         let vstack = UIStackView(arrangedSubviews: [purposeLabel, dateLabel])
         vstack.axis = .vertical
         vstack.spacing = 24.0
-        
+//        purposeLabel.text = todo?.content
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+//        print("qweqwe", todo)
+//        dateLabel.text = dateFormatter.string(from: todo?.date ?? Date().addingTimeInterval(60*60*9))
+//        thumbButton.tintColor = todo?.isDone == false ? .gray : .none
         let hstack = UIStackView(arrangedSubviews: [vstack, thumbButton])
         thumbButton.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         contentView.addSubview(hstack)
@@ -60,11 +68,16 @@ class PurposeCollectionViewCell: UICollectionViewCell {
     }
     
     @objc fileprivate func getThumbUp() {
-        thumbButton.tintColor = thumbButton.tintColor == .gray ? .none : .gray
-        delegate?.getThumbUp()
+        if thumbButton.tintColor == .gray {
+            thumbButton.tintColor = .none
+        } else {
+            thumbButton.tintColor = .gray
+        }
+//        thumbButton.tintColor = thumbButton.tintColor == .gray ? .none : .gray
+        delegate?.getThumbUp(todoID: todoID)
     }
 }
 
 protocol didPurpose: AnyObject {
-    func getThumbUp()
+    func getThumbUp(todoID: Int)
 }

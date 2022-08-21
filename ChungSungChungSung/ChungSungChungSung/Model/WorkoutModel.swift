@@ -32,3 +32,16 @@ struct WorkoutData {
         WorkoutModel(title: "트라이셉스 익스텐션", firstInputType: "KG", secondInputType: "회", isToday: false, isFavorite: false)
     ]
 }
+
+struct WorkoutTemp {
+    var set: Int
+    var count: Int?
+    var minutes: Int?
+    var seconds: Int?
+    var weight: Int?
+    var calories: Int?
+}
+
+//struct WorkoutTempData {
+//
+//}

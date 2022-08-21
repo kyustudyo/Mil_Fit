@@ -14,6 +14,10 @@ class TabViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setTabItems()
+        
+        let tabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.configureWithOpaqueBackground()
+        UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
     }
     
     fileprivate func setTabItems() {
@@ -32,10 +36,10 @@ class TabViewController: UITabBarController {
         
         self.viewControllers = [mainViewController, workoutViewController, fitnessViewController, profileViewController]
         
-        let myBoardTabBarItem = UITabBarItem(title: "My Board", image: UIImage(systemName: "keyboard"), tag: 0)
-        let workoutTabBarItem = UITabBarItem(title: "My Board", image: UIImage(systemName: "keyboard"), tag: 1)
-        let fitnessTabBarItem = UITabBarItem(title: "My Board", image: UIImage(systemName: "keyboard"), tag: 2)
-        let profileTabBarItem = UITabBarItem(title: "My Board", image: UIImage(systemName: "keyboard"), tag: 3)
+        let myBoardTabBarItem = UITabBarItem(title: "요약", image: UIImage(systemName: "doc.text.image"), tag: 0)
+        let workoutTabBarItem = UITabBarItem(title: "운동", image: UIImage(systemName: "figure.walk"), tag: 1)
+        let fitnessTabBarItem = UITabBarItem(title: "체력검정", image: UIImage(systemName: "flag.filled.and.flag.crossed"), tag: 2)
+        let profileTabBarItem = UITabBarItem(title: "프로필", image: UIImage(systemName: "person.fill"), tag: 3)
         
         mainViewController.tabBarItem = myBoardTabBarItem
         workoutViewController.tabBarItem = workoutTabBarItem

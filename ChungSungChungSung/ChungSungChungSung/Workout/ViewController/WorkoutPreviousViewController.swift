@@ -7,13 +7,44 @@
 
 import UIKit
 import FSCalendar
+import RealmSwift
 
 class WorkoutPreviousViewController: UIViewController {
+    private let defaults = UserDefaults.standard
 
-    var events2: [Date] = []
+    var workoutRealm: Results<WorkoutRealm>!
+    
+    
+//    var workoutDates = [String]()
+    let dateFormatterHighlight = DateFormatter()
+    let 운동안했습니다 = "운동을 하지 않았습니다."
+    var events2: [String] = [] {
+        willSet {
+            calendar.reloadData()
+        }
+    }
+    var ticketTop : NSLayoutConstraint?
+     func setup() {
+//         ticketTop = tableView.topAnchor.constraintEqualToAnchor(self.topAnchor, constant:100)
+         ticketTop = tableView.heightAnchor.constraint(equalToConstant: CGFloat(44*운동들.count))
+         ticketTop?.isActive = true
+     }
+     func update() {
+         ticketTop?.constant = CGFloat(44*운동들.count)
+     }
+    
+//    var events2: [Date] = []
+    let dateFormatterForWorkout: DateFormatter = {
+        let df = DateFormatter()
+        df.locale = Locale(identifier: "ko_KR")
+        df.dateFormat = "yyyyMMdd"
+        return df
+    }()
+    
+    
     fileprivate let calendar = FSCalendar()
     fileprivate let tableView = UITableView()
-    var 운동들 = ["푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝"]
+    var 운동들:[String] = ["푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝"]
     
     private var workoutList = WorkoutData().list
     
@@ -21,11 +52,43 @@ class WorkoutPreviousViewController: UIViewController {
         navigationController?.isNavigationBarHidden = false
     }
     
+    private func fetchWorkouts(date: Date) {
+        if let mealDate = RealmManager.searchWorkoutDataByDateK2(date: dateFormatterForWorkout.string(from: date)) {
+            print("cc",mealDate.count)
+            if mealDate.count != 0 {
+                운동들 = mealDate.map{$0.name}
+                print(운동들.count)
+                tableView.reloadData()
+                update()
+            } else {
+                운동들 = [운동안했습니다]
+                tableView.reloadData()
+                update()
+            }
+        } else {
+            운동들 = [운동안했습니다]
+            tableView.reloadData()
+            update()
+        }
+    }
+    
     override func viewDidLoad() {
         navigationItem.title = "지난 기록"
+        navigationItem.largeTitleDisplayMode = .never
         navigationController?.navigationBar.topItem?.backButtonTitle = "운동"
+        navigationController?.navigationBar.tintColor = CustomColor.mainPurple
         view.backgroundColor = .systemGray6
         
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.locale = Locale(identifier: "ko_KR")
+        
+        events2 = (RealmManager.fetchSearchDidWorkoutDates2() ?? []).map {
+            dateFormatterForWorkout.string(from: $0)
+        }
+        
+        fetchWorkouts(date: Date())
+
         calendar.delegate = self
         calendar.dataSource = self
         tableView.delegate = self
@@ -67,7 +130,7 @@ class WorkoutPreviousViewController: UIViewController {
         let workoutRecord = UILabel()
         workoutRecord.text = "운동 기록"
         workoutRecord.font = UIFont.systemFont(ofSize: Constants.bigText, weight: .bold)
-        setUpEvents()
+//        setUpEvents()
         
         let tempView = UIView()
         tempView.addSubview(workoutRecord)
@@ -83,25 +146,30 @@ class WorkoutPreviousViewController: UIViewController {
         vstack.spacing = 16
         
         vstack.anchor(top: tempView.bottomAnchor, left: calendar.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: calendar.rightAnchor, paddingTop: 8, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
-        tableView.anchor(top: vstack.topAnchor, left: calendar.leftAnchor, right: calendar.rightAnchor, paddingTop: 8, paddingLeft: 0, paddingRight: 0, height: 44 * CGFloat(운동들.count))
+        tableView.anchor(top: vstack.topAnchor, left: calendar.leftAnchor, right: calendar.rightAnchor, paddingTop: 8, paddingLeft: 0, paddingRight: 0)
+        setup()
 
-    }
-
-    func setUpEvents() {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        let sampledate5 = formatter.date(from: "2022-08-1")
-        let sampledate6 = formatter.date(from: "2022-08-5")
-        let sampledate7 = formatter.date(from: "2022-08-6")
-        events2 = [sampledate5!, sampledate6!, sampledate7!]
+        dateFormatterHighlight.dateFormat = "yyyyMMdd"
+        dateFormatterHighlight.locale = Locale(identifier: "ko_KR")
         
+//        workoutDates = defaults.stringArray(forKey: "workoutDate") ?? [String]()
     }
+
+//    func setUpEvents() {
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyyy-MM-dd"
+//        let sampledate5 = formatter.date(from: "2022-08-1")
+//        let sampledate6 = formatter.date(from: "2022-08-5")
+//        let sampledate7 = formatter.date(from: "2022-08-6")
+//        events2 = [sampledate5!, sampledate6!, sampledate7!]
+//
+//    }
     
-    fileprivate lazy var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter
-    }()
+//    fileprivate lazy var dateFormatter: DateFormatter = {
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyyy-MM-dd"
+//        return formatter
+//    }()
     
 }
 
@@ -110,28 +178,51 @@ extension WorkoutPreviousViewController: FSCalendarDelegate, FSCalendarDataSourc
         
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
+        formatter.locale = Locale(identifier: "ko_KR")
         let date1 = formatter.string(from: date)
         let date2 = formatter.string(from: Date())
-        
         if date1 == date2 {
             return .white
-        } else if events2.contains(date) {
-            return .진보라
+//        } else if events2.contains(date) {
+//            return .진보라
         } else {
             return .black
         }
     }
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillDefaultColorFor date: Date) -> UIColor? {
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyyyMMdd"
+//        formatter.locale = Locale(identifier: "ko_KR")
         
-        if events2.contains(date) {
-            return .연보라
+        let selectedDate = dateFormatterForWorkout.string(from: date)
+//        print("123",selectedDate)
+        let today = dateFormatterForWorkout.string(from: Date())
+//        print("1234",today)
+        print("qwer", events2, dateFormatterForWorkout.string(from: date))
+        if selectedDate == today {
+            return CustomColor.mainPurple
+        } else if events2.contains(dateFormatterForWorkout.string(from: date)) {
+            return CustomColor.calendarRedColor
         }
+//        else if workoutDates.contains(dateFormatterHighlight.string(from: date)) {
+////        if events2.contains(date) {
+//            return CustomColor.calendarRedColor
+////        }
+//        }
         return nil
     }
         
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        print(dateFormatter.string(from: date))
+
+//        if dateFormatterForWorkout.string(from: date) != dateFormatterForWorkout.string(from: Date()) {
+//            tableView.isUserInteractionEnabled = false
+//        } else {
+//            tableView.isUserInteractionEnabled = true
+//        }
         self.dismiss(animated: true, completion: nil)
+        
+       fetchWorkouts(date: date)
+        
     }
     
     @objc func nextTapped(_ sender:UIButton) {
@@ -154,24 +245,100 @@ extension WorkoutPreviousViewController: FSCalendarDelegate, FSCalendarDataSourc
 extension WorkoutPreviousViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 운동들.count
-        return workoutList.count
+        print(운동들.count, "???")
+        return 운동들.count
+//        return workoutList.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: WorkoutPreviousTableViewCell.cellID, for: indexPath) as? WorkoutPreviousTableViewCell else { return UITableViewCell() }
-//        cell.workoutNameLabel.text = 운동들[indexPath.row]
-        cell.workoutNameLabel.text = workoutList[indexPath.row].title
-        cell.separatorInset = (indexPath.row == 운동들.count - 1) ? UIEdgeInsets(top: 0, left: 0, bottom: 0, right: tableView.bounds.width) : UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        cell.workoutNameLabel.text = 운동들[indexPath.row]
+//        cell.workoutNameLabel.text = workoutList[indexPath.row].title
+//        cell.separatorInset = (indexPath.row == 운동들.count - 1) ? UIEdgeInsets(top: 0, left: 0, bottom: 0, right: tableView.bounds.width) : UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 
         
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let vc = UIStoryboard(name: "WorkoutAdd", bundle: .main).instantiateViewController(withIdentifier: "WorkoutAddViewController") as? WorkoutAddViewController else { return }
-        let workout = workoutList[indexPath.row]
-        vc.workoutAddTitleText = workout.title
-        vc.workout = workout
+        let workout = 운동들[indexPath.row]
+        vc.workoutAddTitleText = workout
+        
+        guard workout != "운동을 하지 않았습니다." else {
+            showToast()
+            return
+        }
+//        vc.workout = workout
+        
         navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension RealmManager {
+    static func fetchSearchDidWorkoutDates2() -> [Date]? {
+        let localRealm = try! Realm()
+        let dates = Array(localRealm.objects(WorkoutRealm.self)
+            .map { workoutRealm in
+                workoutRealm.date
+            })
+        if dates.count == 0 {
+            return nil
+        } else {
+            return dates
+        }
+//            .map { $0.date }
+            
+    }
+    
+    static func searchWorkoutDataByDateK2(date: String) -> Results<WorkoutRealm>? {
+        let realm = localRealm.objects(WorkoutRealm.self)
+        let target = realm.filter("dateSearching == '\(date)'")
+        if target.count == 0 {
+            return nil
+        } else {
+            return target
+        }
+    }
+    static func deleteAllWorkoutData2() {
+        
+        let localRealm = try! Realm()
+        let alls = localRealm.objects(WorkoutRealm.self)
+        try! localRealm.write {
+            localRealm.delete(alls)
+        }
+    }
+    
+}
+
+extension String {
+    func String2DateTypeForWorkout2() -> Date?{
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMdd"
+        return formatter.date(from: self)?.addingTimeInterval(60*60*9)
+    }
+}
+
+extension WorkoutPreviousViewController {
+    func showToast() {
+        let toastLabel = UILabel()
+        view.addSubview(toastLabel)
+        toastLabel.anchor(top: view.bottomAnchor, paddingTop: -200, width: 200, height: 60)
+        toastLabel.centerX(inView: view)
+        toastLabel.backgroundColor = UIColor.white.withAlphaComponent(1.0)
+        toastLabel.layer.borderColor = UIColor.systemGray5.cgColor
+        toastLabel.layer.borderWidth = 1
+        toastLabel.textColor = UIColor.black
+        toastLabel.font = UIFont.systemFont(ofSize: 15)
+        toastLabel.text = "먼저 운동을 추가해주세요!"
+        toastLabel.textAlignment = .center
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 25
+        toastLabel.clipsToBounds = true
+//        self.view.addSubview(toastLabel)
+        UIView.animate(withDuration: 3.0, delay: 0.1, options: .curveEaseOut, animations: {
+            toastLabel.alpha = 0.0
+        }, completion: {(isCompleted) in
+            toastLabel.removeFromSuperview()
+        })
     }
 }

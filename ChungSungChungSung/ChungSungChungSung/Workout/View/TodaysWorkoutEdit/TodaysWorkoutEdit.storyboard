@@ -20,11 +20,6 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <items>
                                     <navigationItem title="오늘 한 운동 편집" id="XfS-Sq-Wv2">
-                                        <barButtonItem key="leftBarButtonItem" title="취소" id="fC4-gP-dSN">
-                                            <connections>
-                                                <action selector="cancel:" destination="Y6W-OH-hqX" id="fGY-jN-ALe"/>
-                                            </connections>
-                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="완료" id="bt4-Uu-6I5">
                                             <connections>
                                                 <action selector="doneEditing:" destination="Y6W-OH-hqX" id="MYi-1o-kfR"/>
@@ -80,7 +75,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="cancelButton" destination="fC4-gP-dSN" id="4vh-Pj-ANH"/>
                         <outlet property="doneButton" destination="bt4-Uu-6I5" id="l9h-q9-wAv"/>
                         <outlet property="todaysWorkoutEditTable" destination="qi9-uD-uVx" id="y4x-U1-Nxs"/>
                     </connections>
