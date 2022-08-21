@@ -184,7 +184,10 @@ class TestMainViewController: UIViewController {
     func configureRunningGraphView() {
         let runningRealm = fitnessTestRealm.filter("testType == 'running'").filter("isPractice == false").first
         let maxStandard = getMaxStandard(testType: .running, level: "특급")
-        let rate = Double(maxStandard - (runningRealm?.totalTime ?? 0)) / Double(maxStandard)
+        var rate = Double(maxStandard - (runningRealm?.totalTime ?? 0)) / Double(maxStandard)
+        if maxStandard == (runningRealm?.totalTime ?? 0) {
+            rate = 1
+        }
         runningData = GraphData(level: runningRealm?.level ?? "불합격", rate: rate)
         let controller = UIHostingController(rootView: RunningGraphSwiftUIView(graphData: runningData))
         controller.view.translatesAutoresizingMaskIntoConstraints = false
@@ -203,7 +206,7 @@ class TestMainViewController: UIViewController {
     let pushupRealm = fitnessTestRealm.filter("testType == 'pushup'").filter("isPractice == false").first
     let maxStandard = getMaxStandard(testType: .pushup, level: "특급")
     var rate = Double(maxStandard - (pushupRealm?.count ?? 0)) / Double(maxStandard)
-    if maxStandard < (pushupRealm?.count ?? 0) {
+    if maxStandard <= (pushupRealm?.count ?? 0) {
         rate = 1
     }
     pushupData = GraphData(level: pushupRealm?.level ?? "불합격", rate: rate)
@@ -224,7 +227,7 @@ class TestMainViewController: UIViewController {
     let situpRealm = fitnessTestRealm.filter("testType == 'situp'").filter("isPractice == false").first
     let maxStandard = getMaxStandard(testType: .situp, level: "특급")
     var rate = Double(maxStandard - (situpRealm?.count ?? 0)) / Double(maxStandard)
-    if maxStandard < (situpRealm?.count ?? 0) {
+    if maxStandard <= (situpRealm?.count ?? 0) {
         rate = 1
     }
     situpData = GraphData(level: situpRealm?.level ?? "불합격", rate: rate)
