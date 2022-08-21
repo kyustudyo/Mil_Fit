@@ -12,4 +12,6 @@ class GoalsDetailCell: UITableViewCell {
     @IBOutlet weak var goalLabel: UILabel!
     @IBOutlet weak var goalSavedDateLabel: UILabel!
     @IBOutlet weak var achievedButton: UIButton!
+    
+    
 }

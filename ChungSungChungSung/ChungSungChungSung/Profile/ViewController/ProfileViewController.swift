@@ -125,6 +125,7 @@ extension ProfileViewController: GoalsDetailViewDelegate, BadgeDetailViewDelegat
         self.navigationController?.pushViewController(badgeDetailView, animated: true)
         if let badgeNames = badgeNames {
             badgeDetailView.badgeNames = badgeNames
+            
         }
     }
 }
