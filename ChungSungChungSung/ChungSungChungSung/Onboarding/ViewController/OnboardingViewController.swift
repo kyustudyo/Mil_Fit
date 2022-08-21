@@ -10,8 +10,27 @@ import UIKit
 import SwiftUI
 
 class OnboardingViewController: UIViewController {
+    private let defaults = UserDefaults.standard
+    
     @IBOutlet weak var inputAge: UITextField!
     @IBOutlet weak var nextButton: UIBarButtonItem!
+    
+    @IBAction private func didTapNextButton(_ sender: UIBarButtonItem) {
+        guard let onboardingSecondView = self.storyboard?.instantiateViewController(withIdentifier: "OnboardingSecondViewController") as? OnboardingSecondViewController else { return }
+        
+        if inputAge.text?.isEmpty == true {
+            showToast()
+        } else {
+            if let inputAge = inputAge.text {
+                if let ageInt = Int(inputAge) {
+                    UserDefaultManager.saveAge(age: ageInt)
+                    print(ageInt)
+                }
+            }
+            self.navigationController?.pushViewController(onboardingSecondView, animated: true)
+        }
+    }
+    
     private var age = ["19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32"]
     private let picker = UIPickerView()
     
@@ -22,6 +41,18 @@ class OnboardingViewController: UIViewController {
         nextButton.tintColor = CustomColor.mainPurple
         configPickerView()
         configToolbar()
+    }
+    
+    func isValidNumber(_ text: String?) -> Int {
+
+        guard let text = text else {
+            return ErrorString.EmptyString.rawValue
+        }
+        
+        if text.isEmpty { return ErrorString.EmptyString.rawValue}
+        if Int(text) == nil { return ErrorString.NotNumber.rawValue}
+        else if Int(text) == 0 { return ErrorString.Zero.rawValue}
+        return 0
     }
 }
 
@@ -75,6 +106,26 @@ extension OnboardingViewController: UIPickerViewDelegate, UIPickerViewDataSource
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.inputAge.text = self.age[row]
+    }
+    
+    func showToast() {
+        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 100, y: 60, width: 200, height: 50))
+        toastLabel.backgroundColor = UIColor.white.withAlphaComponent(1.0)
+        toastLabel.layer.borderColor = UIColor.systemGray5.cgColor
+        toastLabel.layer.borderWidth = 1
+        toastLabel.textColor = UIColor.black
+        toastLabel.font = UIFont.systemFont(ofSize: 15)
+        toastLabel.text = "나이를 입력해주세요."
+        toastLabel.textAlignment = .center
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 25
+        toastLabel.clipsToBounds = true
+        self.view.addSubview(toastLabel)
+        UIView.animate(withDuration: 3.0, delay: 0.1, options: .curveEaseOut, animations: {
+            toastLabel.alpha = 0.0
+        }, completion: {(isCompleted) in
+            toastLabel.removeFromSuperview()
+        })
     }
 }
 

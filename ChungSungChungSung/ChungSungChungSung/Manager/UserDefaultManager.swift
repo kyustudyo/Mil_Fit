@@ -67,19 +67,12 @@ extension UserDefaultManager {
     }
     
     static func isFirstTimeComleted() -> Bool {
-        if let _ = UserDefaults.standard.object(forKey: "firstComplete") as? Bool {
-            return true
-        } else {
-            UserDefaults.standard.set(true, forKey: "firstComplete")
-            let dateFormatter = DateFormatter()
-            dateFormatter.locale = Locale(identifier: "ko_KR")
-            dateFormatter.dateFormat = "yyyy-MM-dd"
-            print(Date().addingTimeInterval(60*60*9))
-            UserDefaults.standard.set(Date().addingTimeInterval(60*60*9), forKey: "firstDayOfTheApp")
+        if UserDefaults.standard.object(forKey: "dischargeDate") == nil {
             return false
+        } else {
+            return true
         }
     }
-    
     
     static func loadBMR() -> Int? {
         guard let bmr = UserDefaults.standard.object(forKey: "BMR") as? Int else {
