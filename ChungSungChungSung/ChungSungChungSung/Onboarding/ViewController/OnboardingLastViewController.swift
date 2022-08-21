@@ -26,9 +26,10 @@ class OnboardingLastViewController: UIViewController {
                     UserDefaultManager.saveDischargeDate(date: date)
                     UserDefaultManager.saveStartDate(date: Date())
                     let vc = TabViewController()
-//                    self.navigationController?.pushViewController(vc, animated: true)
-                    vc.modalPresentationStyle = .fullScreen
-                    present(vc, animated: true, completion: nil)
+                    self.navigationController?.isNavigationBarHidden = true
+                    self.navigationController?.pushViewController(vc, animated: true)
+//                    vc.modalPresentationStyle = .fullScreen
+//                    present(vc, animated: true, completion: nil)
                 }
             }
         }

@@ -82,7 +82,8 @@ class MainCalorieViewController: UIViewController {
         
         
         
-        view.backgroundColor = .systemGray6
+//        view.backgroundColor = .systemGray6
+        view.backgroundColor = CustomColor.bgGray
         let mealContainerView = UIView()
         view.addSubview(mealContainerView)
         mealContainerView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 16, paddingRight: 16, height: (view.frame.width - 32)/2 + 25 )
@@ -101,7 +102,7 @@ class MainCalorieViewController: UIViewController {
     }
     
     func decorateContainerView(view: UIView, 종류: 섭취운동사진, 칼로리들: [CGFloat]) {
-        view.backgroundColor = .white
+//        view.backgroundColor = .white
         view.layer.cornerRadius = 12
         let imageView = systemImageView(종류: 종류)
         let label = UILabel()

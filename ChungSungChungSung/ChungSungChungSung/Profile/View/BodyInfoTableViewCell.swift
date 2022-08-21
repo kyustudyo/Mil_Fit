@@ -8,8 +8,8 @@
 import UIKit
 
 class BodyInfoTableViewCell: UITableViewCell {
-    var age = "23"
-    var heightAndWeight = "180cm / 80kg"
+//    var age = "23"
+//    var heightAndWeight = "180cm / 80kg"
     
     @IBOutlet weak var cellRectangle: UIView!
     @IBOutlet weak var editBodyInfoButton: UIButton!
@@ -28,8 +28,8 @@ class BodyInfoTableViewCell: UITableViewCell {
         cellRectangle.layer.shadowOpacity = 1
         editBodyInfoButton.tintColor = CustomColor.editGray
         
-        ageLabel.text = age
-        heightAndWeightLabel.text = heightAndWeight
+//        ageLabel.text = age
+//        heightAndWeightLabel.text = heightAndWeight
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
