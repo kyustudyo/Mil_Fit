@@ -14,6 +14,7 @@ class WorkoutAddOneTableViewCell: UITableViewCell {
     @IBOutlet weak var setNumberView: UILabel!
     @IBOutlet weak var inputType: UILabel!
 
+    @IBOutlet weak var countTextField: UITextField!
     override func awakeFromNib() {
         super.awakeFromNib()
         

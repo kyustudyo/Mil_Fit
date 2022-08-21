@@ -402,7 +402,7 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
         print("\(indexPath.row) \(workout.title) selected.")
         
         if tableView == todaysWorkoutView {
-            guard let workoutAddView = UIStoryboard(name: "WorkoutAdd", bundle: .main).instantiateViewController(withIdentifier: "WorkoutAddViewController") as? WorkoutAddViewController else { return }
+            guard let workoutAddView = UIStoryboard(name: "WorkoutTempAdd", bundle: .main).instantiateViewController(withIdentifier: "WorkoutTempAddViewController") as? WorkoutTempAddViewController else { return }
             
             if let selectedDateString = selectedDateString {
                 let todaysWorkout = workoutRealm.where {

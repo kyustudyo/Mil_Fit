@@ -77,7 +77,7 @@ class WorkoutPreviousViewController: UIViewController {
         navigationItem.largeTitleDisplayMode = .never
         navigationController?.navigationBar.topItem?.backButtonTitle = "운동"
         navigationController?.navigationBar.tintColor = CustomColor.mainPurple
-        view.backgroundColor = .systemGray6
+        view.backgroundColor = CustomColor.bgGray
         
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"

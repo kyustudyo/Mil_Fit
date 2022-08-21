@@ -12,12 +12,13 @@ class WorkoutAddViewController: UIViewController {
     private var numberOfSets: Int = 1
     private var estimatedCalorie: Double = 0
     
+    var localRealm: Realm!
     var workoutRealm: Results<WorkoutRealm>!
-    var workoutTemp: [WorkoutTemp] = []
-    var workoutTempModel = WorkoutTemp(set: 1)
+    var workoutTemp: [WorkoutRealm] = []
+//    var workoutTempModel = WorkoutTemp(set: 1)
     var firstInput = [String](repeating: "0", count: 50)
     var secondInput = [String](repeating: "0", count: 50)
-    
+    var workoutInfo: (WorkOutType, Double)!
     var minutes: [Int] = []
     var times: [Int] = []
     var weight: [Int] = []
@@ -53,7 +54,15 @@ class WorkoutAddViewController: UIViewController {
         workoutAddTable.backgroundColor = CustomColor.bgGray
         workoutAddTable.contentInset.top = 24
         
-        workoutTemp.append(workoutTempModel)
+        localRealm = try! Realm()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyyMMdd"
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        
+        workoutRealm = localRealm.objects(WorkoutRealm.self).filter("dateSearching == '\(dateFormatter.string(from: selectedDate))'").filter("name == '\(workoutAddTitleText)'").sorted(byKeyPath: "dateSorting", ascending: true)
+        
+        workoutInfo = basicWorkoutData[workoutAddTitleText]!
+//        workoutTemp.append(workoutTempModel)
     }
     
     private func editDoneButtonConfig() {
@@ -129,10 +138,11 @@ class WorkoutAddViewController: UIViewController {
 
 extension WorkoutAddViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return numberOfSets + 2
+        return workoutRealm.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         if indexPath.row == numberOfSets + 1 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "workoutAddCalorieTableViewCell", for: indexPath) as? WorkoutAddCalorieTableViewCell else {
                 return UITableViewCell()
@@ -152,61 +162,30 @@ extension WorkoutAddViewController: UITableViewDelegate, UITableViewDataSource {
             
             return cell
         } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "workoutAddTwoTableViewCell", for: indexPath) as? WorkoutAddTwoTableViewCell else {
-                return UITableViewCell()
-            }
             let setNumber = indexPath.row + 1
-            cell.setNumberView.text = "\(setNumber)세트"
-            
-            if basicWorkoutData[workoutAddTitleText]?.0 == .시간운동 {
-                cell.firstInputType.text = nil
-                cell.firstInputField.isHidden = true
-                cell.secondInputType.text = "분"
-                
-                workoutTemp[indexPath.row].minutes = Int(secondInput[indexPath.row])
-//                if let minuteString = cell.secondInputText {
-//                    if let minuteInt = Int(minuteString) {
-//                        minutes[indexPath.row] = minuteInt
-//                        workoutTemp[indexPath.row].minutes = minuteInt
-//                    }
-//                }
-                
-            } else if basicWorkoutData[workoutAddTitleText]?.0 == .무게운동 {
-                cell.firstInputType.text = "kg"
-                cell.secondInputType.text = "회"
-                
-                workoutTemp[indexPath.row].weight = Int(firstInput[indexPath.row])
-                workoutTemp[indexPath.row].count = Int(secondInput[indexPath.row])
-//                if let weightString = cell.firstInputText {
-//                    if let weightInt = Int(weightString) {
-//                        weight[indexPath.row] = weightInt
-//                        workoutTemp[indexPath.row].weight = weightInt
-//                    }
-//                }
-//                if let timeString = cell.secondInputText {
-//                    if let timeInt = Int(timeString) {
-//                        times[indexPath.row] = timeInt
-//                        workoutTemp[indexPath.row].count = timeInt
-//                    }
-//                }
-                
-            } else {    // 횟수운동
-                cell.firstInputType.text = nil
-                cell.firstInputField.isHidden = true
-                cell.secondInputType.text = "회"
-                
-                workoutTemp[indexPath.row].count = Int(secondInput[indexPath.row])
-//                if let timeString = cell.secondInputText {
-//                    if let timeInt = Int(timeString) {
-//                        times[indexPath.row] = timeInt
-//                        workoutTemp[indexPath.row].count = timeInt
-//                    }
-//                }
+            if workoutInfo.0 == .횟수운동 {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: "workoutAddOneTableViewCell", for: indexPath) as? WorkoutAddOneTableViewCell else {
+                    return UITableViewCell()
+                }
+                cell.inputType.text = "회"
+                cell.setNumberView.text = "\(setNumber)세트"
+                cell.backgroundColor = CustomColor.bgGray
+                return cell
+            }else {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: "workoutAddTwoTableViewCell", for: indexPath) as? WorkoutAddTwoTableViewCell else {
+                    return UITableViewCell()
+                }
+                cell.setNumberView.text = "\(setNumber)세트"
+                cell.backgroundColor = CustomColor.bgGray
+                if workoutInfo.0 == .무게운동 {
+                    cell.firstInputType.text = "분"
+                    cell.secondInputType.text = "초"
+                }else {
+                    cell.firstInputType.text = "kg"
+                    cell.secondInputType.text = "회"
+                }
+                return cell
             }
-            
-            cell.backgroundColor = CustomColor.bgGray
-            
-            return cell
         }
     }
     
@@ -225,7 +204,7 @@ extension WorkoutAddViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == numberOfSets {
-            workoutTemp.append(workoutTempModel)
+//            workoutTemp.append(workoutTempModel)
             
             workoutTemp[numberOfSets].set = numberOfSets + 1
             numberOfSets = numberOfSets + 1
