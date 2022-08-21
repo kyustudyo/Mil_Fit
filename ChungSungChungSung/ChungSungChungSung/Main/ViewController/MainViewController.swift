@@ -897,6 +897,7 @@ extension MainViewController {
         
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
+        formatter.locale = Locale(identifier: "ko_KR")
         let date1 = formatter.string(from: date)
         let date2 = formatter.string(from: Date())
         
@@ -927,10 +928,17 @@ extension MainViewController {
     }
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillDefaultColorFor date: Date) -> UIColor? {
         
-        if events2.contains(date.addingTimeInterval(60*60*9)) {
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "yyyy-MM-dd"
+        dateformatter.locale = Locale(identifier: "ko_KR")
+        
+//        print("q1", dateformatter.string(from: date))
+//        print("q12", events2.map{dateformatter.string(from: $0)})
+
+        if events2.map{dateformatter.string(from: $0)}.contains(dateformatter.string(from: date)) {
             return CustomColor.calendarRedColor
         } else {
-            print("not")
+            
         }
         return nil
     }
