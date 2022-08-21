@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TOj-co-qgF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
@@ -250,6 +250,7 @@
                             <constraint firstItem="Ki0-dK-Iap" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.34" id="zTY-sL-MW2"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="cpW-2y-r89"/>
                     <connections>
                         <outlet property="fitnessGraphButton" destination="iZC-ja-Pv3" id="VM1-fX-wUO"/>
                         <outlet property="fitnessMainTableView" destination="Ki0-dK-Iap" id="bPK-oV-Dqe"/>
@@ -310,6 +311,21 @@
             </objects>
             <point key="canvasLocation" x="-375.36231884057975" y="105.80357142857143"/>
         </scene>
+        <!--History Test View Controller-->
+        <scene sceneID="qQo-OY-CT1">
+            <objects>
+                <viewController storyboardIdentifier="HistoryTestViewController" id="k6m-zu-V7J" customClass="HistoryTestViewController" customModule="ChungSungChungSung" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BHl-k9-vqb">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="aM9-8k-qdC"/>
+                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9on-7w-z2X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-355" y="807"/>
+        </scene>
         <!--Fitness History View Controller-->
         <scene sceneID="8Sg-iU-Ipi">
             <objects>
@@ -340,7 +356,7 @@
                                 <rect key="frame" x="0.0" y="382" width="414" height="480"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="108" id="PRW-Rg-1zx" customClass="FitnessHistoryTableViewCell" customModule="ChungSungChungSung" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FitnessHistoryTableViewCell" rowHeight="108" id="PRW-Rg-1zx" customClass="FitnessHistoryTableViewCell" customModule="ChungSungChungSung" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="108"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PRW-Rg-1zx" id="I7G-xe-vDd">
@@ -375,6 +391,11 @@
                                                 <constraint firstItem="JWW-OU-EAz" firstAttribute="leading" secondItem="I7G-xe-vDd" secondAttribute="leadingMargin" constant="5" id="uAK-6X-WfO"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="dateLabel" destination="JWW-OU-EAz" id="JCt-zg-9su"/>
+                                            <outlet property="recordLabel" destination="tQf-u8-ppJ" id="zmA-O3-xDc"/>
+                                            <outlet property="tagLabel" destination="ZWH-ue-hDg" id="Ho6-KB-jvu"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -395,7 +416,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="historyTableView" destination="9zn-Nd-Cdq" id="FHf-kC-X5C"/>
                         <outlet property="lineChartView" destination="euy-jN-prP" id="1me-Ev-Whj"/>
+                        <outlet property="sortedButton" destination="dDo-h3-zKQ" id="rsP-50-wUL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OXg-m0-ygk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -424,6 +447,9 @@
         </systemColor>
         <systemColor name="systemPurpleColor">
             <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemTealColor">
             <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

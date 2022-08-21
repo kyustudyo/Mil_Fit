@@ -18,9 +18,10 @@ class WorkoutAddViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.backgroundColor = .systemGray6
         self.navigationController?.navigationBar.tintColor = CustomColor.mainPurple
         self.navigationItem.title = workoutAddTitleText
+        navigationController?.navigationBar.topItem?.backButtonTitle = "운동"
         
         let workoutAddTwoTableViewCellNib = UINib(nibName: "WorkoutAddTwoTableViewCell", bundle: nil)
         let workoutAddOneTableViewCellNib = UINib(nibName: "WorkoutAddOneTableViewCell", bundle: nil)

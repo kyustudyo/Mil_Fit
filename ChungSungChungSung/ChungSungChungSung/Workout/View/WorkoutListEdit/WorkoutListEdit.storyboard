@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Workout List Edit View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="WorkoutListEditViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="WorkoutListEditViewController" customModule="ChungSungChungSung" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hVK-Ag-zS9">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <items>
+                                    <navigationItem title="운동 목록 편집" id="hsa-EM-Pzk">
+                                        <barButtonItem key="leftBarButtonItem" title="취소" id="GNr-4g-fRb">
+                                            <connections>
+                                                <action selector="cancelEditing:" destination="Y6W-OH-hqX" id="xgi-Jc-DMB"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="완료" id="jvb-3f-odO">
+                                            <connections>
+                                                <action selector="doneEditing:" destination="Y6W-OH-hqX" id="gDW-b4-DUf"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="52" estimatedSectionHeaderHeight="-1" sectionFooterHeight="1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="H8O-WU-XeG">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="workoutListEditCell" id="wfe-3b-rUU" customClass="WorkoutListEditCell" customModule="ChungSungChungSung" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="49.5" width="374" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wfe-3b-rUU" id="wgR-Td-xyK">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aSa-ZA-sRU">
+                                                    <rect key="frame" x="20" y="11.5" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="aSa-ZA-sRU" firstAttribute="leading" secondItem="wgR-Td-xyK" secondAttribute="leadingMargin" id="6yD-bO-Ldt"/>
+                                                <constraint firstItem="aSa-ZA-sRU" firstAttribute="centerY" secondItem="wgR-Td-xyK" secondAttribute="centerY" id="a4L-ly-kSR"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="workoutInEditListTitle" destination="aSa-ZA-sRU" id="8xZ-6g-oeg"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Y6W-OH-hqX" id="OZ7-3g-NnB"/>
+                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="7EX-tv-Knk"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="H8O-WU-XeG" secondAttribute="bottom" id="WzU-Jq-KKh"/>
+                            <constraint firstItem="hVK-Ag-zS9" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="YgD-o0-L4B"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="H8O-WU-XeG" secondAttribute="trailing" id="ZMH-US-LWd"/>
+                            <constraint firstItem="hVK-Ag-zS9" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="ZS7-xm-6Fm"/>
+                            <constraint firstItem="hVK-Ag-zS9" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="b33-2B-KoF"/>
+                            <constraint firstItem="H8O-WU-XeG" firstAttribute="top" secondItem="hVK-Ag-zS9" secondAttribute="bottom" id="dw6-Zx-wBF"/>
+                            <constraint firstItem="H8O-WU-XeG" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="eQc-FZ-eDa"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cancelEditingButton" destination="GNr-4g-fRb" id="m4h-TL-T0d"/>
+                        <outlet property="doneEditingButton" destination="jvb-3f-odO" id="qrI-eD-Ua9"/>
+                        <outlet property="workoutListEditTable" destination="H8O-WU-XeG" id="BQ7-SE-QyX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-16" y="74"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
