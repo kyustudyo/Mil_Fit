@@ -84,15 +84,15 @@
 		7ED2F7BA289EDE0E00DAEEC9 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED2F7B9289EDE0E00DAEEC9 /* UIColor.swift */; };
 		AB21161228A4C5F20050E9F8 /* FitnessHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB21161128A4C5F20050E9F8 /* FitnessHistoryTableViewCell.swift */; };
 		AB460BAF28A7A32000765A1D /* BasicWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB460BAE28A7A32000765A1D /* BasicWorkout.swift */; };
+		AB460BB128A7D96F00765A1D /* ProfileBodyInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB460BB028A7D96F00765A1D /* ProfileBodyInfo.storyboard */; };
+		AB460BB328A7D9DD00765A1D /* BodyInfoProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB460BB228A7D9DD00765A1D /* BodyInfoProfileViewController.swift */; };
+		AB460BB528A7E68800765A1D /* TodoListAdd.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB460BB428A7E68800765A1D /* TodoListAdd.storyboard */; };
+		AB460BB728A7E69C00765A1D /* TodoListAddProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB460BB628A7E69C00765A1D /* TodoListAddProfileViewController.swift */; };
 		AB7E9D0C28B0B10E00EA1EBB /* FitnessHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB21160E28A1308B0050E9F8 /* FitnessHistoryViewController.swift */; };
 		AB7E9D0E28B0C43100EA1EBB /* HistoryTestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7E9D0D28B0C43100EA1EBB /* HistoryTestTableViewCell.swift */; };
 		AB80ECAC28AE898E00D6A5A5 /* FitnessTestStandard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB80ECAB28AE898E00D6A5A5 /* FitnessTestStandard.swift */; };
 		AB80ECAE28AF9A7500D6A5A5 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB80ECAD28AF9A7500D6A5A5 /* UILabel.swift */; };
 		AB80ECB028AFEC0700D6A5A5 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB80ECAF28AFEC0600D6A5A5 /* ErrorHandler.swift */; };
-		AB460BB128A7D96F00765A1D /* ProfileBodyInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB460BB028A7D96F00765A1D /* ProfileBodyInfo.storyboard */; };
-		AB460BB328A7D9DD00765A1D /* BodyInfoProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB460BB228A7D9DD00765A1D /* BodyInfoProfileViewController.swift */; };
-		AB460BB528A7E68800765A1D /* TodoListAdd.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB460BB428A7E68800765A1D /* TodoListAdd.storyboard */; };
-		AB460BB728A7E69C00765A1D /* TodoListAddProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB460BB628A7E69C00765A1D /* TodoListAddProfileViewController.swift */; };
 		AB8623BE289E5B4200F71283 /* TestMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8623BD289E5B4200F71283 /* TestMainViewController.swift */; };
 		AB8623C0289E5B4A00F71283 /* TestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB8623BF289E5B4A00F71283 /* TestStoryboard.storyboard */; };
 		AB8623C2289ECD8900F71283 /* TestMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8623C1289ECD8900F71283 /* TestMainTableViewCell.swift */; };
@@ -198,14 +198,14 @@
 		AB21160E28A1308B0050E9F8 /* FitnessHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessHistoryViewController.swift; sourceTree = "<group>"; };
 		AB21161128A4C5F20050E9F8 /* FitnessHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		AB460BAE28A7A32000765A1D /* BasicWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicWorkout.swift; sourceTree = "<group>"; };
-		AB7E9D0D28B0C43100EA1EBB /* HistoryTestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTestTableViewCell.swift; sourceTree = "<group>"; };
-		AB80ECAB28AE898E00D6A5A5 /* FitnessTestStandard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessTestStandard.swift; sourceTree = "<group>"; };
-		AB80ECAD28AF9A7500D6A5A5 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
-		AB80ECAF28AFEC0600D6A5A5 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		AB460BB028A7D96F00765A1D /* ProfileBodyInfo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProfileBodyInfo.storyboard; sourceTree = "<group>"; };
 		AB460BB228A7D9DD00765A1D /* BodyInfoProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyInfoProfileViewController.swift; sourceTree = "<group>"; };
 		AB460BB428A7E68800765A1D /* TodoListAdd.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TodoListAdd.storyboard; sourceTree = "<group>"; };
 		AB460BB628A7E69C00765A1D /* TodoListAddProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListAddProfileViewController.swift; sourceTree = "<group>"; };
+		AB7E9D0D28B0C43100EA1EBB /* HistoryTestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTestTableViewCell.swift; sourceTree = "<group>"; };
+		AB80ECAB28AE898E00D6A5A5 /* FitnessTestStandard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessTestStandard.swift; sourceTree = "<group>"; };
+		AB80ECAD28AF9A7500D6A5A5 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
+		AB80ECAF28AFEC0600D6A5A5 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		AB8623BD289E5B4200F71283 /* TestMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMainViewController.swift; sourceTree = "<group>"; };
 		AB8623BF289E5B4A00F71283 /* TestStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TestStoryboard.storyboard; sourceTree = "<group>"; };
 		AB8623C1289ECD8900F71283 /* TestMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMainTableViewCell.swift; sourceTree = "<group>"; };
@@ -229,7 +229,6 @@
 		DD639DDF28A9C1B300219504 /* OnboardingLastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingLastViewController.swift; sourceTree = "<group>"; };
 		DD639DE728ABFB4300219504 /* DischargeDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DischargeDetail.storyboard; sourceTree = "<group>"; };
 		DD639DE928ABFB5800219504 /* DischargeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DischargeDetailViewController.swift; sourceTree = "<group>"; };
-		E04FA59EA467D82C0CE448CA /* Pods-ChungSungChungSung.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChungSungChungSung.release.xcconfig"; path = "Target Support Files/Pods-ChungSungChungSung/Pods-ChungSungChungSung.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -750,7 +749,6 @@
 				AB80ECAC28AE898E00D6A5A5 /* FitnessTestStandard.swift in Sources */,
 				328AB9B728A64D5A00000A85 /* GoalsTableViewCell.swift in Sources */,
 				794B601728A62A7400621A27 /* WorkoutPreviousTableViewCell.swift in Sources */,
-				7E5BF64228A23A5400B6DD26 /* WorkoutModel.swift in Sources */,
 				DD639DEA28ABFB5800219504 /* DischargeDetailViewController.swift in Sources */,
 				7ED2F7BA289EDE0E00DAEEC9 /* UIColor.swift in Sources */,
 				AB7E9D0C28B0B10E00EA1EBB /* FitnessHistoryViewController.swift in Sources */,
@@ -961,7 +959,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = H5PD3P95F5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChungSungChungSung/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -974,7 +972,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = kyuWorld.ChungSungChungSung;
+				PRODUCT_BUNDLE_IDENTIFIER = chungsungchungsung.chungsung123;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -990,7 +988,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = H5PD3P95F5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChungSungChungSung/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1003,7 +1001,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = kyuWorld.ChungSungChungSung;
+				PRODUCT_BUNDLE_IDENTIFIER = chungsungchungsung.chungsung123;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

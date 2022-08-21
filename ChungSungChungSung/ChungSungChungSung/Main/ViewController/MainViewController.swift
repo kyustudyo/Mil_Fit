@@ -311,6 +311,11 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         dateFormatter.dateFormat = "yyyy년M월dd일"
         
         dateLabel.text = dateFormatter.string(from: Date())
+        
+        
+        
+        
+        
         print("ㄷㄱ",UserDefaultManager.loadDischargeDate(), UserDefaultManager.loadStartDate())
         if let finishDay = UserDefaultManager.loadDischargeDate(),
            let startDay = UserDefaultManager.loadStartDate() {
@@ -318,7 +323,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
             if let 시작부터전역일까지 = Calendar.current.dateComponents([.day], from: startDay, to: finishDay).day {
                 if let 시작부터오늘까지 = Calendar.current.dateComponents([.day], from: startDay, to: Date().addingTimeInterval(60*60*9)).day {
 //                    print("ㄷㄱ",시작부터전역일까지, 시작부터오늘까지)
-//                    print(Double(시작부터오늘까지)/Double(시작부터전역일까지))
+                    print(Double(시작부터오늘까지)/Double(시작부터전역일까지))
                     전역가까움 = Double(시작부터오늘까지)/Double(시작부터전역일까지)
 //                    print("ㄷㄱ",시작부터오늘까지, 시작부터전역일까지)
                     let col1 = UIColor(red: 170/255.0, green: 144/255.0, blue: 239/255.0, alpha: 1)

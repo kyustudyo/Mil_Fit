@@ -56,7 +56,7 @@ extension UserDefaultManager {
     }
     
     static func saveStartDate(date: Date) {
-        UserDefaults.standard.set(date, forKey: "firstDayOfTheApp")
+        UserDefaults.standard.set(date.addingTimeInterval(60*60*9), forKey: "firstDayOfTheApp")
     }
     
     static func loadStartDate() -> Date? {
@@ -90,5 +90,6 @@ extension UserDefaultManager {
     
     static func removeFirstTimeExperience()  {
         UserDefaults.standard.removeObject(forKey: "firstComplete")
+        UserDefaults.standard.removeObject(forKey: "dischargeDate")
     }
 }
