@@ -29,9 +29,7 @@ public class UserDefaultManager {
         UserDefaults.standard.set(height, forKey: "height")
     }
     
-    
     static func saveIsWorkoutDate(date: Date) {
-        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyyMMdd"
         dateFormatter.locale = Locale(identifier: "ko_KR")
@@ -40,7 +38,7 @@ public class UserDefaultManager {
         let defaults = UserDefaults.standard
         if defaults.stringArray(forKey: "workoutDate") == nil {
             defaults.set([converString], forKey: "workoutDate")
-        }else {
+        } else {
             guard var dates = defaults.stringArray(forKey: "workoutDate") else { return () }
             dates.append(converString)
             defaults.set(dates, forKey: "workoutDate")

@@ -28,9 +28,11 @@ public class RealmManager {
     }
     
     //오늘 한 운동 삭제시
-    static func deleteWorkoutData(name: String) {
+    static func deleteWorkoutData(name: String, selectedDate: String) {
         let realm = localRealm.objects(WorkoutRealm.self)
-        let deleteTarget = realm.filter("name == '\(name)")
+        let deleteTarget = realm.where {
+            $0.name == name && $0.dateSearching == selectedDate
+        }
         try! localRealm.write({
             localRealm.delete(deleteTarget)
         })
