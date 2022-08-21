@@ -49,3 +49,14 @@ func isToday(_ date: Date) -> Bool {
     }
 }
 
+func isValidNumber(_ text: String?) -> Int {
+
+    guard let text = text else {
+        return ErrorString.EmptyString.rawValue
+    }
+    
+    if text.isEmpty { return ErrorString.EmptyString.rawValue}
+    if Int(text) == nil { return ErrorString.NotNumber.rawValue}
+    else if Int(text) == 0 { return ErrorString.Zero.rawValue}
+    return 0
+}

@@ -81,6 +81,7 @@ class FitnessTestRealm: Object {
     @Persisted var level: String
     @Persisted var isPractice: Bool
     @Persisted var dateSorting: Int
+    @Persisted var totalTime: Int?
 
     
     @Persisted(primaryKey: true) var _id: ObjectId
@@ -103,7 +104,9 @@ class FitnessTestRealm: Object {
         }else {
             self.dateSorting = -1
         }
-
+        if (minutes != nil) && (seconds != nil) {
+            self.totalTime = minutes! * 60 + seconds!
+        }
         
     }
     

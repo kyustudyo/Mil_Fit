@@ -30,7 +30,7 @@ public class RealmManager {
     //오늘 한 운동 삭제시
     static func deleteWorkoutData(name: String) {
         let realm = localRealm.objects(WorkoutRealm.self)
-        let deleteTarget = realm.filter("name == \(name)")
+        let deleteTarget = realm.filter("name == '\(name)")
         try! localRealm.write({
             localRealm.delete(deleteTarget)
         })
@@ -39,7 +39,7 @@ public class RealmManager {
     //오늘 한 운동 추가/편집시
     static func editWorkoutData(name: String, set: Int?, count: Int?, minutes: Int?, seconds: Int?, weight: Int?, calories: Int? ) {
         let realm = localRealm.objects(WorkoutRealm.self)
-        let updateTarget = realm.filter("name == \(name)").first!
+        let updateTarget = realm.filter("name == '\(name)'").first!
         try! localRealm.write({
             updateTarget.set = set ?? 1
             updateTarget.count = count
@@ -53,7 +53,7 @@ public class RealmManager {
     //날짜별 운동데이터 가져올때
     static func searchWorkoutDataByDate(date: String) -> Results<WorkoutRealm> {
         let realm = localRealm.objects(WorkoutRealm.self)
-        let target = realm.filter("dateSearching == \(date)")
+        let target = realm.filter("dateSearching == '\(date)'")
         return target
     }
 
