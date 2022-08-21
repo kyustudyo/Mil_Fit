@@ -355,7 +355,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         
         updateMealRoundedView()
         
-        UserDefaultManager.saveBMR(BMR: 1400)
+//        UserDefaultManager.saveBMR(BMR: 1400)
         let bmr = UserDefaultManager.loadBMR() ?? 0
         basicPercent = Double(bmr) / 5000.0 * 100.0
         todayBasicCaloryLabel.text = "\(Double(bmr))kcal"
