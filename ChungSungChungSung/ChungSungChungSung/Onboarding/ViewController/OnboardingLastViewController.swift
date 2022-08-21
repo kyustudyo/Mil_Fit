@@ -8,9 +8,27 @@
 import UIKit
 
 class OnboardingLastViewController: UIViewController {
+    private let defaults = UserDefaults.standard
+    
     @IBOutlet weak var dateTF: UITextField!
     @IBOutlet weak var backButton: UINavigationItem!
     private let datePicker = UIDatePicker()
+    
+    @IBAction private func didTapDoneButton(_ sender: UIBarButtonItem) {
+        
+        if dateTF.text?.isEmpty == true {
+            showToast()
+        } else {
+            if let dateString = dateTF.text {
+                let date = formatStringToDate(dateString: dateString)
+                
+                if let date = date {
+                    UserDefaultManager.saveDischargeDate(date: date)
+                    print(date)
+                }
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +68,26 @@ class OnboardingLastViewController: UIViewController {
         //            self.date = datePicker.date
         self.dateTF.text = formatter.string(from: datePicker.date)
     }
+    
+    func showToast() {
+        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 100, y: 60, width: 200, height: 50))
+        toastLabel.backgroundColor = UIColor.white.withAlphaComponent(1.0)
+        toastLabel.layer.borderColor = UIColor.systemGray5.cgColor
+        toastLabel.layer.borderWidth = 1
+        toastLabel.textColor = UIColor.black
+        toastLabel.font = UIFont.systemFont(ofSize: 15)
+        toastLabel.text = "전역일을 입력해주세요."
+        toastLabel.textAlignment = .center
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 25
+        toastLabel.clipsToBounds = true
+        self.view.addSubview(toastLabel)
+        UIView.animate(withDuration: 3.0, delay: 0.1, options: .curveEaseOut, animations: {
+            toastLabel.alpha = 0.0
+        }, completion: {(isCompleted) in
+            toastLabel.removeFromSuperview()
+        })
+    }
 }
 
 extension OnboardingLastViewController: UITextFieldDelegate {
@@ -82,6 +120,19 @@ extension OnboardingLastViewController: UIPickerViewDelegate {
         formatter.locale = Locale(identifier: "ko")
         formatter.dateFormat = "yyyy년 M월 dd일"
         return formatter.string(from: date)
+    }
+    
+    func formatStringToDate(dateString: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.dateFormat = "yyyy년 M월 dd일"
+        let convertStr = dateFormatter.date(from: dateString)
+        
+        if let date = dateFormatter.date(from: dateString) {
+            return date
+        } else {
+            return nil
+        }
     }
     
     @objc func cancelPicker() {

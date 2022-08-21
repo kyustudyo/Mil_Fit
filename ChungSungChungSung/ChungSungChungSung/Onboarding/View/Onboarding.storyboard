@@ -77,7 +77,7 @@
                     <navigationItem key="navigationItem" id="XXh-CF-5wy">
                         <barButtonItem key="rightBarButtonItem" title="다음" id="Ig0-QH-Qce">
                             <connections>
-                                <segue destination="YC7-ri-Isn" kind="show" id="Bdo-aP-4hq"/>
+                                <action selector="didTapNextButton:" destination="Y6W-OH-hqX" id="TcO-7Z-zm1"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -94,13 +94,13 @@
         <!--Onboarding Second View Controller-->
         <scene sceneID="WpJ-Z0-6Q8">
             <objects>
-                <viewController storyboardIdentifier="OnboardingSecondViewController" id="YC7-ri-Isn" customClass="OnboardingSecondViewController" customModule="ChungSungChungSung" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OnboardingSecondViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YC7-ri-Isn" customClass="OnboardingSecondViewController" customModule="ChungSungChungSung" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7vw-f1-0Fp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jiW-VJ-TiR">
-                                <rect key="frame" x="24" y="112" width="200" height="67"/>
+                                <rect key="frame" x="24" y="68" width="200" height="67"/>
                                 <string key="text">현재 키와
 체중을 알려주세요</string>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
@@ -108,19 +108,19 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="칼로리와 기초대사량 계산에 쓰여요 :)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OuD-BR-nyQ">
-                                <rect key="frame" x="24" y="187" width="220.5" height="18"/>
+                                <rect key="frame" x="24" y="143" width="220.5" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="키" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gba-bZ-q2j">
-                                <rect key="frame" x="24" y="253" width="15" height="21"/>
+                                <rect key="frame" x="24" y="209" width="15" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="키를 입력해주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2WM-Ee-UsV">
-                                <rect key="frame" x="24" y="290" width="150" height="18.5"/>
+                                <rect key="frame" x="24" y="246" width="150" height="18.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="5DP-Tp-Ysm"/>
                                 </constraints>
@@ -128,19 +128,19 @@
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uqW-0Q-waD">
-                                <rect key="frame" x="190" y="291" width="20" height="17"/>
+                                <rect key="frame" x="190" y="247" width="20" height="17"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="체중" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zs4-J6-iw8">
-                                <rect key="frame" x="24" y="348.5" width="29.5" height="21"/>
+                                <rect key="frame" x="24" y="304.5" width="29.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="체중을 입력해주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tRz-jF-FxC">
-                                <rect key="frame" x="24" y="385.5" width="150" height="18.5"/>
+                                <rect key="frame" x="24" y="341.5" width="150" height="18.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="60b-ty-ov9"/>
                                 </constraints>
@@ -148,7 +148,7 @@
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="kg" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sqC-4G-jm3">
-                                <rect key="frame" x="190" y="386.5" width="15.5" height="17"/>
+                                <rect key="frame" x="190" y="342.5" width="15.5" height="17"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -179,7 +179,7 @@
                     <navigationItem key="navigationItem" id="KVT-mX-Qfh">
                         <barButtonItem key="rightBarButtonItem" title="다음" id="vyI-jA-uvq">
                             <connections>
-                                <segue destination="lHB-Mb-sXQ" kind="show" id="3f5-ZK-G8M"/>
+                                <action selector="didTapNextButton:" destination="YC7-ri-Isn" id="ML1-Qd-bzE"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -202,7 +202,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zQw-sm-wtI">
-                                <rect key="frame" x="24" y="112" width="121.5" height="67"/>
+                                <rect key="frame" x="24" y="68" width="121.5" height="67"/>
                                 <string key="text">전역일을
 알려주세요</string>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
@@ -210,7 +210,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="전역일을 입력해주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gbW-lc-Pvq">
-                                <rect key="frame" x="24" y="219" width="366" height="18.5"/>
+                                <rect key="frame" x="24" y="175" width="366" height="18.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -226,7 +226,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="BxD-wG-8w8">
-                        <barButtonItem key="rightBarButtonItem" title="완료" id="Kok-ei-irQ"/>
+                        <barButtonItem key="rightBarButtonItem" title="완료" id="Kok-ei-irQ">
+                            <connections>
+                                <action selector="didTapDoneButton:" destination="lHB-Mb-sXQ" id="P55-Yq-HWf"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="backButton" destination="BxD-wG-8w8" id="xmz-m9-pwZ"/>
