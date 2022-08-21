@@ -82,11 +82,12 @@ class FitnessTestRealm: Object {
     @Persisted var level: String
     @Persisted var isPractice: Bool
     @Persisted var dateSorting: Int
+    @Persisted var totalTime: Int?
 
     
     @Persisted(primaryKey: true) var _id: ObjectId
     
-    convenience init(date: Date, testType: String, level: String, isPracice: Bool, count: Int? = nil, minutes: Int? = nil, seconds: Int? = nil) {
+    convenience init(date: Date, testType: String, level: String, isPractice: Bool, count: Int? = nil, minutes: Int? = nil, seconds: Int? = nil) {
         self.init()
         self.date = date
         self.testType = testType
@@ -104,17 +105,19 @@ class FitnessTestRealm: Object {
         }else {
             self.dateSorting = -1
         }
-
+        if (minutes != nil) && (seconds != nil) {
+            self.totalTime = minutes! * 60 + seconds!
+        }
         
     }
     
 }
 
 class MealRealm: Object {
-    @Persisted var date: Date
+    @Persisted var date: String
     @Persisted var mealTime: String
     @Persisted var calories: Int
-    let mealList: List<String> = List<String>()
+    @Persisted var mealList: List<String> = List<String>()
     var mealArray: [String] {
         get {
             return mealList.map{$0}
@@ -126,7 +129,7 @@ class MealRealm: Object {
     }
     
     @Persisted(primaryKey: true) var _id: ObjectId
-    convenience init(date: Date, mealTime: String, calories: Int) {
+    convenience init(date: String, mealTime: String, calories: Int) {
         self.init()
         self.date = date
         self.mealTime = mealTime
@@ -166,7 +169,9 @@ class WeightRealm: Object {
     
     convenience init(date: Date, weight: Int) {
         self.init()
+        self.date = date
         self.weight = weight
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyyMMddHHmmss"
         dateFormatter.locale = Locale(identifier: "ko_KR")
@@ -176,7 +181,7 @@ class WeightRealm: Object {
         }else {
             self.dateSorting = -1
         }
-        print("chchch", self.dateSorting)
+        
     }
 }
 
