@@ -60,7 +60,6 @@ class ProfileViewController: UIViewController {
         
         RealmManager.saveBadgeData(date: Date().addingTimeInterval(60*60*9), title: "우리의 시작")
         RealmManager.saveBadgeData(date: Date().addingTimeInterval(60*60*9), title: "첫 기록의 기쁨")
-        RealmManager.saveBadgeData(date: Date().addingTimeInterval(60*60*9), title: "특급전사")
         print(Realm.Configuration.defaultConfiguration.fileURL!)
 //        print(RealmManager.searchBadges())
 //        badges = RealmManager.searchBadges()
