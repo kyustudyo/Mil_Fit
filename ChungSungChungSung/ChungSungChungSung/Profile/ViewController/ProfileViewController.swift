@@ -89,13 +89,13 @@ class ProfileViewController: UIViewController {
     }
     
     private func configNavigationTitle() {
-        let viewWidth = self.view.bounds.width - 80
-        let profileViewTitleLabel = UILabel(frame: CGRect(x: 25, y: 0, width: viewWidth, height: 20))
-        profileViewTitleLabel.textAlignment = .left
-        profileViewTitleLabel.font = UIFont.boldSystemFont(ofSize: 28)
-        profileViewTitleLabel.text = profileViewTitle
-        
-        self.navigationItem.titleView = profileViewTitleLabel
+//        let viewWidth = self.view.bounds.width - 80
+//        let profileViewTitleLabel = UILabel(frame: CGRect(x: 25, y: 0, width: viewWidth, height: 20))
+//        profileViewTitleLabel.textAlignment = .left
+//        profileViewTitleLabel.font = UIFont.boldSystemFont(ofSize: 28)
+
+        navigationItem.title = profileViewTitle
+        self.navigationController?.navigationBar.prefersLargeTitles = true
     }
 }
 

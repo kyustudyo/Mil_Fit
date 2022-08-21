@@ -73,8 +73,8 @@ class GoalsDetailViewController: UIViewController {
         goalsDetailTableView.setEditing(goalsDetailTableView.isEditing ? false : true, animated: true)
     }
     @objc private func goAddGoalViewController() {
-        let sb = UIStoryboard(name: "GoalsDetail", bundle: nil)
-        guard let vc = sb.instantiateViewController(withIdentifier: "AddGoalViewController") as? AddGoalViewController else {return}
+        let sb = UIStoryboard(name: "TodoListAdd", bundle: nil)
+        guard let vc = sb.instantiateViewController(withIdentifier: "TodoListAddProfileViewController") as? TodoListAddProfileViewController else {return}
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -96,13 +96,10 @@ extension GoalsDetailViewController: UITableViewDelegate, UITableViewDataSource 
             
         cell.backgroundColor = .clear
         
-        
-        
         cell.cellRectangle.layer.cornerRadius = 20
         cell.cellRectangle.layer.shadowColor = UIColor.systemGray6.cgColor
         cell.cellRectangle.layer.shadowRadius = 20
         cell.cellRectangle.layer.shadowOpacity = 1
-        
         
         cell.goalLabel.text = goalList[indexPath.row].content
         
@@ -120,10 +117,6 @@ extension GoalsDetailViewController: UITableViewDelegate, UITableViewDataSource 
         
         return cell
     }
-        
-        
-        
-    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 121

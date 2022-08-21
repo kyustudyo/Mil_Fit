@@ -11,23 +11,23 @@
         <!--Todo List Add Profile View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController id="Y6W-OH-hqX" customClass="TodoListAddProfileViewController" customModule="ChungSungChungSung" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TodoListAddProfileViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="TodoListAddProfileViewController" customModule="ChungSungChungSung" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ul-9b-Qni">
-                                <rect key="frame" x="24" y="89" width="158" height="60"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ul-9b-Qni">
+                                <rect key="frame" x="24" y="69" width="300" height="70"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="158" id="3p3-VY-4VQ"/>
-                                    <constraint firstAttribute="height" constant="60" id="5FK-bd-uqs"/>
+                                    <constraint firstAttribute="width" constant="300" id="3p3-VY-4VQ"/>
+                                    <constraint firstAttribute="height" constant="70" id="5FK-bd-uqs"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="igl-UZ-jfJ">
-                                <rect key="frame" x="24" y="169" width="366" height="34"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="igl-UZ-jfJ">
+                                <rect key="frame" x="24" y="159" width="366" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -36,7 +36,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="igl-UZ-jfJ" firstAttribute="top" secondItem="0Ul-9b-Qni" secondAttribute="bottom" constant="20" id="FF3-en-7uM"/>
-                            <constraint firstItem="0Ul-9b-Qni" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="45" id="R32-SB-osO"/>
+                            <constraint firstItem="0Ul-9b-Qni" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="25" id="R32-SB-osO"/>
                             <constraint firstItem="0Ul-9b-Qni" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="24" id="hq9-0X-Ar6"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="igl-UZ-jfJ" secondAttribute="trailing" constant="24" id="kcY-eQ-YMO"/>
                             <constraint firstItem="igl-UZ-jfJ" firstAttribute="leading" secondItem="0Ul-9b-Qni" secondAttribute="leading" id="toj-4U-C7X"/>
