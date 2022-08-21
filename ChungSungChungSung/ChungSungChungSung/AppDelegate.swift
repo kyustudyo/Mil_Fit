@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
 
         UITabBar.appearance().tintColor = CustomColor.mainPurple
+        sleep(1)
         
         return true
     }

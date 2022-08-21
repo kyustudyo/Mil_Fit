@@ -99,6 +99,7 @@
 		DD3E9F4728AD2A21004EC88B /* FitnessTestStandard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD3E9F4628AD2A21004EC88B /* FitnessTestStandard.storyboard */; };
 		DD3E9F4928AD2A2B004EC88B /* FitnessTestStandardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3E9F4828AD2A2B004EC88B /* FitnessTestStandardTableViewCell.swift */; };
 		DD3E9F4B28AD2A33004EC88B /* FitnessTestStandardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3E9F4A28AD2A33004EC88B /* FitnessTestStandardViewController.swift */; };
+		DD3E9F5128AE95C3004EC88B /* launchScreenImage.png in Resources */ = {isa = PBXBuildFile; fileRef = DD3E9F5028AE95C3004EC88B /* launchScreenImage.png */; };
 		DD639DD828A9628200219504 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD639DD728A9628200219504 /* OnboardingViewController.swift */; };
 		DD639DDA28A9629100219504 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD639DD928A9629100219504 /* Onboarding.storyboard */; };
 		DD639DDE28A9C1A600219504 /* OnboardingSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD639DDD28A9C1A600219504 /* OnboardingSecondViewController.swift */; };
@@ -202,6 +203,7 @@
 		DD3E9F4628AD2A21004EC88B /* FitnessTestStandard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FitnessTestStandard.storyboard; sourceTree = "<group>"; };
 		DD3E9F4828AD2A2B004EC88B /* FitnessTestStandardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessTestStandardTableViewCell.swift; sourceTree = "<group>"; };
 		DD3E9F4A28AD2A33004EC88B /* FitnessTestStandardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessTestStandardViewController.swift; sourceTree = "<group>"; };
+		DD3E9F5028AE95C3004EC88B /* launchScreenImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launchScreenImage.png; sourceTree = "<group>"; };
 		DD639DD728A9628200219504 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		DD639DD928A9629100219504 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		DD639DDD28A9C1A600219504 /* OnboardingSecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSecondViewController.swift; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 		79BBF692289AB50B0003FAD8 /* ChungSungChungSung */ = {
 			isa = PBXGroup;
 			children = (
+				DD3E9F5028AE95C3004EC88B /* launchScreenImage.png */,
 				ABE43C3428ACB0CD005C272C /* Manager */,
 				DD639DD428A9625200219504 /* Onboarding */,
 				79F67693289E52F100850FF0 /* TabViewController.swift */,
@@ -616,6 +619,7 @@
 				328AB9B428A64A9700000A85 /* BodyInfoTableViewCell.xib in Resources */,
 				328AB9C028A6AFB000000A85 /* BadgeCollectionViewCell.xib in Resources */,
 				794B601228A527BB00621A27 /* WorkoutAddTwoTableViewCell.xib in Resources */,
+				DD3E9F5128AE95C3004EC88B /* launchScreenImage.png in Resources */,
 				328AB9B828A64D5A00000A85 /* GoalsTableViewCell.xib in Resources */,
 				79BBF6A0289AB50D0003FAD8 /* LaunchScreen.storyboard in Resources */,
 				7E37333928A4CBD1008F7EFA /* TodaysWorkoutEdit.storyboard in Resources */,
