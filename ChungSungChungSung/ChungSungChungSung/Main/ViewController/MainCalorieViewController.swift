@@ -13,7 +13,7 @@ import UIKit
 class MainCalorieViewController: UIViewController {
     
     var mealCalories:[CGFloat] = [2022, 2405, 2800, 3300, 2700, 2100, 2300]
-    var workoutCalories:[CGFloat] = [0, 0, 0, 0, 0, 0, 0]
+    var workoutCalories:[CGFloat] = [1, 1, 1, 1, 1, 1, 1]
     let 요일들 = ["월", "화", "수", "목", "금", "토", "일"]
     
     override func viewDidLoad() {

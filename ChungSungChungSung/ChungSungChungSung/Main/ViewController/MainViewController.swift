@@ -190,9 +190,8 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     }
     
     @objc fileprivate func goMoreCalorie() {
-        mealOrNothing.backgroundColor = .red
-        mealStack.backgroundColor = .blue
-        
+//        mealOrNothing.backgroundColor = .red
+//        mealStack.backgroundColor = .blue
         let vc = MainCalorieViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
