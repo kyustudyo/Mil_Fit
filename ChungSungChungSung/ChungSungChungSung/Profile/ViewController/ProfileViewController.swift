@@ -25,7 +25,7 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        RealmManager.deleteAllWeightData2()
         UserDefaultManager.saveUnit(unit: "제 1234부대")
 //        print(UserDefaultManager.loadUnit())
         unit = UserDefaultManager.loadUnit()
@@ -39,7 +39,7 @@ class ProfileViewController: UIViewController {
         age = UserDefaultManager.loadAge()
         
         RealmManager.saveWeightData(date: Date().addingTimeInterval(60*60*9), weight: 23)
-        RealmManager.saveWeightData(date: Date().addingTimeInterval(60*60*25), weight: 33)
+//        RealmManager.saveWeightData(date: Date().addingTimeInterval(60*60*25), weight: 33)
 //        print(RealmManager.searchCurrentWeight2())
         weight = RealmManager.searchCurrentWeight2()
         
@@ -154,7 +154,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             } else {
                 cell.heightAndWeightLabel.text = "- cm / - kg"
             }
-            
+            cell.delegate = self
             return cell
         } else if indexPath.row == 2 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "goalsTableViewCell", for: indexPath) as? GoalsTableViewCell else { return UITableViewCell() }
@@ -296,9 +296,10 @@ extension RealmManager {
 }
 
 extension ProfileViewController: EditDischargeViewRelated {
-    func goDischargeDetailVC() {
+    func goDischargeDetailVC(date: String) {
         guard let dischargeDetail = UIStoryboard(name: "DischargeDetail", bundle: .main).instantiateViewController(withIdentifier: "DischargeDetailViewController") as? DischargeDetailViewController else { return }
         dischargeDetail.delegate = self
+        dischargeDetail.date = date
         navigationController?.pushViewController(dischargeDetail, animated: true)
     }
 }
@@ -308,5 +309,55 @@ extension ProfileViewController: DischargeEdit {
         dischargeDate = UserDefaultManager.loadDischargeDate2()
         print(UserDefaultManager.loadDischargeDate2())
         profileTableView.reloadData()
+    }
+}
+
+extension ProfileViewController: EditBodyViewRelated {
+    func goBodyInfoProfileVC() {
+        guard let bodyDetail = UIStoryboard(name: "ProfileBodyInfo", bundle: .main).instantiateViewController(withIdentifier: "BodyInfoProfileViewController") as? BodyInfoProfileViewController else { return }
+        bodyDetail.delegate = self
+        if let age = age,
+           let height = height,
+           let weight = weight {
+            bodyDetail.info = [age, height, weight]
+        } 
+        
+        navigationController?.pushViewController(bodyDetail, animated: true)
+    }
+
+}
+
+extension ProfileViewController: EditBodyViewRelatedForBodyVC {
+    func completeEdit() {
+        age = UserDefaultManager.loadAge()
+        weight = RealmManager.searchCurrentWeight2()
+        height = UserDefaultManager.loadHegiht2()
+        
+        profileTableView.reloadData()
+//        66 + (13.8 x 몸무게(kg)) + (5 x 키(cm)) - (6.8 x 나이)
+        guard let weight = weight,
+              let height = height,
+              let age = age else {
+            UserDefaultManager.saveBMR(BMR: 1600)
+            return
+        }
+        
+        let a = 13.8 * Double(weight)
+        let b = 5 * Double(height)
+        let c = 6.8 * Double(age)
+        let cal = 66 + a + b - c
+        print("cc", Int(cal))
+        UserDefaultManager.saveBMR(BMR: Int(cal))
+    }
+}
+
+extension RealmManager {
+    static func deleteAllWeightData2() {
+        
+        let localRealm = try! Realm()
+        let alls = localRealm.objects(WeightRealm.self)
+        try! localRealm.write {
+            localRealm.delete(alls)
+        }
     }
 }

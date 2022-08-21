@@ -30,6 +30,7 @@ class ToDoListRealm: Object {
         }else {
             self.dateSorting = -1
         }
+        print("chchch2", convertInt)
     }
 }
 
@@ -175,6 +176,7 @@ class WeightRealm: Object {
         }else {
             self.dateSorting = -1
         }
+        print("chchch", self.dateSorting)
     }
 }
 

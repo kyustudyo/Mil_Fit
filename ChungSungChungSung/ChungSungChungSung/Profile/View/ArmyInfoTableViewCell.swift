@@ -26,7 +26,17 @@ class ArmyInfoTableViewCell: UITableViewCell {
     }
     
     @IBAction func editTexts(_ sender: Any) {
-        delegate?.goDischargeDetailVC()
+        if let date = dischargeDateLabel.text {
+            let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale(identifier: "ko_KR")
+            dateFormatter.dateFormat = "yyyy년 MM월 dd일"
+            delegate?.goDischargeDetailVC(date: date)
+            
+        } else {
+            delegate?.goDischargeDetailVC(date: "")
+        }
+        
+        
         
     }
     
@@ -38,5 +48,5 @@ class ArmyInfoTableViewCell: UITableViewCell {
     
 }
 protocol EditDischargeViewRelated: AnyObject {
-    func goDischargeDetailVC()
+    func goDischargeDetailVC(date: String)
 }

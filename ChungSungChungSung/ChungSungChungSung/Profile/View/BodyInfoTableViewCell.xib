@@ -69,6 +69,9 @@
                         <buttonConfiguration key="configuration" style="plain" title="수정">
                             <fontDescription key="titleFontDescription" type="system" pointSize="13"/>
                         </buttonConfiguration>
+                        <connections>
+                            <action selector="editBody:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="KKc-LH-Pdh"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>
@@ -87,7 +90,7 @@
             <connections>
                 <outlet property="ageLabel" destination="8xS-e9-0U4" id="Di0-g4-r3B"/>
                 <outlet property="cellRectangle" destination="ZXn-GE-x3a" id="trk-Kh-sDb"/>
-                <outlet property="editBodyInfoButton" destination="EIW-wG-PQe" id="brE-DP-FDk"/>
+                <outlet property="editBodyInfoButton" destination="EIW-wG-PQe" id="mQQ-Bf-ZTV"/>
                 <outlet property="heightAndWeightLabel" destination="XKx-Lk-Gcg" id="DiX-0q-Y0W"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="71.651785714285708"/>

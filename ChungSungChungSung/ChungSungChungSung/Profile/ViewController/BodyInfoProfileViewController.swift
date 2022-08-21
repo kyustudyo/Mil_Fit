@@ -19,13 +19,43 @@ class BodyInfoProfileViewController: UIViewController {
     @IBOutlet weak var heightLabel: UILabel!
     @IBOutlet weak var ageTextField: UITextField!
     @IBOutlet weak var ageLabel: UILabel!
-    
+    var info: [Int] = []
+    weak var delegate: EditBodyViewRelatedForBodyVC?
     var weightRecord = [56.0, 60.0, 76.0, 52.0, 60.0, 76.0, 52.0]
     override func viewDidLoad() {
         super.viewDidLoad()
         drawUI()
         setChart(lineValues: weightRecord)
+        ageTextField.text = "\(info[0])"
+        heightTextField.text = "\(info[1])"
+        weightTextField.text = "\(info[2])"
+        
+        let completeBarButton = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(completeEdit))
+        self.navigationItem.rightBarButtonItems = [completeBarButton]
     }
+    
+    @objc fileprivate func completeEdit() {
+        if let age = self.ageTextField.text, age.count != 0 {
+            if let iAge = Int(age) {
+                UserDefaultManager.saveAge(age: iAge)
+            }
+        }
+        if let weight = self.weightTextField.text, weight.count != 0 {
+            if let iWeight = Int(weight) {
+                RealmManager.saveWeightData(date: Date().addingTimeInterval(60*60*9), weight: iWeight)
+                print("chch", Date().addingTimeInterval(60*60*9))
+            }
+        }
+        if let height = self.heightTextField.text, height.count != 0 {
+            if let iHeight = Int(height) {
+                UserDefaultManager.saveHeight(height: iHeight)
+            }
+        }
+
+        delegate?.completeEdit()
+        navigationController?.popViewController(animated: true)
+    }
+    
     private func drawUI(){
         view.backgroundColor = CustomColor.bgGray
         ageLabel.text = "나이"
@@ -62,3 +92,9 @@ class BodyInfoProfileViewController: UIViewController {
         weightGraphView.backgroundColor = .white
     }
 }
+
+protocol EditBodyViewRelatedForBodyVC: AnyObject {
+    func completeEdit()
+}
+
+

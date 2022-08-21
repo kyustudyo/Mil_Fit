@@ -10,18 +10,22 @@ import UIKit
 class DischargeDetailViewController: UIViewController {
     @IBOutlet weak var dischargeDateTextField: UITextField!
     private let datePicker = UIDatePicker()
-    
+    var date: String = ""
     weak var delegate: DischargeEdit?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = CustomColor.bgGray
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
-        
+        dischargeDateTextField.text = date
         setDatePicker()
         configToolbar()
+        
+        let completeBarButton = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(completeEdit))
+        self.navigationItem.rightBarButtonItems = [completeBarButton]
+        navigationItem.title = "전역 정보"
     }
 
     @IBAction func completeEdit(_ sender: Any) {

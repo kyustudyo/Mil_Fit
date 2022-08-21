@@ -15,7 +15,10 @@ class BodyInfoTableViewCell: UITableViewCell {
     @IBOutlet weak var editBodyInfoButton: UIButton!
     @IBOutlet weak var ageLabel: UILabel!
     @IBOutlet weak var heightAndWeightLabel: UILabel!
-
+    @IBAction func editBody(_ sender: UIButton) {
+        delegate?.goBodyInfoProfileVC()
+    }
+    weak var delegate: EditBodyViewRelated?
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -35,4 +38,8 @@ class BodyInfoTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+}
+
+protocol EditBodyViewRelated: AnyObject {
+    func goBodyInfoProfileVC()
 }

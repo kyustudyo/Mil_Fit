@@ -16,26 +16,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cRh-N6-R77">
-                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                                <items>
-                                    <navigationItem title="전역 정보" id="i2B-RH-Dpv">
-                                        <barButtonItem key="rightBarButtonItem" title="완료" id="Yw2-Pu-VMz">
-                                            <connections>
-                                                <action selector="completeEdit:" destination="Y6W-OH-hqX" id="UBE-t8-Tuh"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="전역일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aHm-dv-c0s">
-                                <rect key="frame" x="24" y="112" width="36.5" height="17"/>
+                                <rect key="frame" x="24" y="66" width="36.5" height="17"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="전역일을 수정해주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nyu-bL-E0R">
-                                <rect key="frame" x="16" y="137" width="382" height="34"/>
+                                <rect key="frame" x="16" y="91" width="382" height="34"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -44,11 +32,8 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Nyu-bL-E0R" firstAttribute="top" secondItem="aHm-dv-c0s" secondAttribute="bottom" constant="8" id="9ba-vQ-xwl"/>
-                            <constraint firstItem="aHm-dv-c0s" firstAttribute="top" secondItem="cRh-N6-R77" secondAttribute="bottom" constant="24" id="EWv-vO-rnJ"/>
-                            <constraint firstItem="cRh-N6-R77" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="LNb-Ry-U4P"/>
+                            <constraint firstItem="aHm-dv-c0s" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="22" id="P0E-sa-8wK"/>
                             <constraint firstItem="aHm-dv-c0s" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="24" id="Ths-3d-RB4"/>
-                            <constraint firstItem="cRh-N6-R77" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="W7Y-dz-WA1"/>
-                            <constraint firstItem="cRh-N6-R77" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="Wck-iJ-QKS"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Nyu-bL-E0R" secondAttribute="trailing" constant="16" id="XFU-Pe-dwI"/>
                             <constraint firstItem="Nyu-bL-E0R" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="ZdM-4D-UdC"/>
                         </constraints>
