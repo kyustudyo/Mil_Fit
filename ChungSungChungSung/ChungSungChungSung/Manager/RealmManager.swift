@@ -59,7 +59,7 @@ public class RealmManager {
 
     static func saveFitnessTestData(date: Date, testType: String, count: Int?, minutes:Int?, seconds: Int?, level: String, isPractice: Bool) {
             
-            let fitnessTest = FitnessTestRealm(date: date, testType: testType, level: level, isPracice: isPractice, count: count, minutes: minutes, seconds: seconds)
+            let fitnessTest = FitnessTestRealm(date: date, testType: testType, level: level, isPractice: isPractice, count: count, minutes: minutes, seconds: seconds)
             try! localRealm.write({
                 localRealm.add(fitnessTest)
             })

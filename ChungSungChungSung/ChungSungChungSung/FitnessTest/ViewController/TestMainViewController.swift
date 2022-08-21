@@ -44,6 +44,7 @@ class TestMainViewController: UIViewController {
     @IBOutlet weak var situpGraphRecordLabel: UILabel!
     
     
+    
     @IBOutlet weak var recordTableViewTitleLabel: UILabel!
 
     @IBOutlet weak var fitnessMainTableView: UITableView!
@@ -53,6 +54,8 @@ class TestMainViewController: UIViewController {
     var situpData: GraphData!
     let localRealm = try! Realm()
     var fitnessTestRealm: Results<FitnessTestRealm>!
+    let emptyView = UIView()
+    let emptyLabel = UILabel()
     
     override func viewWillAppear(_ animated: Bool) {
         navigationItem.title = "체력검정"
@@ -63,6 +66,9 @@ class TestMainViewController: UIViewController {
         if fitnessTestRealm.filter("isPractice == false").count == 0 {
             drawEmptyView()
         }else {
+            emptyView.isHidden = true
+            emptyLabel.isHidden = true
+            fitnessGraphButton.isHidden = false
             drawGraphViewRectangleUI()
             configureRunningGraphView()
             configurePushupGraphView()
@@ -108,8 +114,8 @@ class TestMainViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     func drawEmptyView() {
-        let emptyView = UIView()
-        let emptyLabel = UILabel()
+        emptyView.isHidden = false
+        emptyLabel.isHidden = false
         emptyView.translatesAutoresizingMaskIntoConstraints = false
         graphRoundedRectangleView.addSubview(emptyView)
         emptyView.addSubview(emptyLabel)
@@ -137,8 +143,8 @@ class TestMainViewController: UIViewController {
         let pushupRealm = fitnessTestRealm.filter("testType == 'pushup'").filter("isPractice == false").first!
         let situpRealm = fitnessTestRealm.filter("testType == 'situp'").filter("isPractice == false").first!
         let runningMaxStandard = getMaxStandard(testType: .running, level: "특급")
-        let pushupMaxStandard = getMaxStandard(testType: .pushup, level: "특급")
-        let situpMaxStandard = getMaxStandard(testType: .situp, level: "특급")
+        let pushupMaxStandard = getMinStandard(testType: .pushup, level: "특급")
+        let situpMaxStandard = getMinStandard(testType: .situp, level: "특급")
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy.MM.dd"
         dateFormatter.locale = Locale(identifier: "ko_KR")
@@ -239,7 +245,7 @@ extension TestMainViewController: UITableViewDelegate, UITableViewDataSource {
 
         let runningRealm: Results<FitnessTestRealm>? = fitnessTestRealm.filter("testType == 'running'")
 //        print("러닝\(runningRealm?.sorted(byKeyPath: "totalTime", ascending: false))")
-        let runningBest = runningRealm?.sorted(byKeyPath: "totalTime", ascending: false).first ?? nil
+        let runningBest = runningRealm?.sorted(byKeyPath: "totalTime", ascending: true).first ?? nil
         let pushupRealm: Results<FitnessTestRealm>? = fitnessTestRealm.filter("testType == 'pushup'")
 //        print("푸시\(pushupRealm?.sorted(byKeyPath: "count", ascending: false))")
         let pushupBest = pushupRealm?.sorted(byKeyPath: "count", ascending: false).first ?? nil
@@ -253,7 +259,7 @@ extension TestMainViewController: UITableViewDelegate, UITableViewDataSource {
             cell.fitnessTitleLabel.text = "3km 달리기"
             cell.fitnessTitleLabel.textColor = CustomColor.red
             if runningRealm?.count == 0 {
-                cell.fitnessRecordDateLabel.isHidden = true
+//                cell.fitnessRecordDateLabel.isHidden = true
                 cell.fitnessRecordLabel.text = "기록을 추가해주세요."
             }else {
                 cell.fitnessRecordDateLabel.text = "\(dateFormatter.string(from: runningBest?.date ?? Date()))"
@@ -265,7 +271,7 @@ extension TestMainViewController: UITableViewDelegate, UITableViewDataSource {
             cell.fitnessTitleLabel.text = "팔굽혀펴기"
             cell.fitnessTitleLabel.textColor = CustomColor.strongPurple
             if pushupRealm?.count == 0 {
-                cell.fitnessRecordDateLabel.isHidden = true
+//                cell.fitnessRecordDateLabel.isHidden = true
                 cell.fitnessRecordLabel.text = "기록을 추가해주세요."
             }else {
                 cell.fitnessRecordDateLabel.text = "\(dateFormatter.string(from: pushupBest?.date ?? Date()))"
@@ -277,11 +283,11 @@ extension TestMainViewController: UITableViewDelegate, UITableViewDataSource {
             cell.fitnessTitleLabel.text = "윗몸일으키기"
             cell.fitnessTitleLabel.textColor = CustomColor.blue
             if situpRealm?.count == 0 {
-                cell.fitnessRecordDateLabel.isHidden = true
+//                cell.fitnessRecordDateLabel.isHidden = true
                 cell.fitnessRecordLabel.text = "기록을 추가해주세요."
             }else {
                 cell.fitnessRecordDateLabel.text = "\(dateFormatter.string(from: situpBest?.date ?? Date()))"
-                cell.fitnessRecordLabel.text = "\(situpBest?.count ?? 0)회(\(situpBest?.level ?? "영급")"
+                cell.fitnessRecordLabel.text = "\(situpBest?.count ?? 0)회(\(situpBest?.level ?? "영급"))"
             }
             cell.fitnessImage.image = UIImage(named: "situp")
             cell.fitnessImageView.backgroundColor = CustomColor.blue

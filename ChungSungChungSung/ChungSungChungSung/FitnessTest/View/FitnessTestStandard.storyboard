@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="50" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="MGY-Yp-Fgk">
-                                <rect key="frame" x="0.0" y="95" width="414" height="777"/>
+                                <rect key="frame" x="0.0" y="85" width="414" height="787"/>
                                 <color key="backgroundColor" name="mainGray"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FitnessTestStandardTableViewCell" textLabel="feZ-5e-rof" detailTextLabel="b9b-gq-HFe" style="IBUITableViewCellStyleValue1" id="6up-D9-F7M" customClass="FitnessTestStandardTableViewCell" customModule="ChungSungChungSung" customModuleProvider="target">
@@ -56,7 +56,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RDh-IL-8eg">
-                                <rect key="frame" x="352" y="64" width="42" height="21"/>
+                                <rect key="frame" x="352" y="54" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -66,7 +66,7 @@
                         <color key="backgroundColor" name="mainGray"/>
                         <constraints>
                             <constraint firstItem="MGY-Yp-Fgk" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="8jT-sx-xja"/>
-                            <constraint firstItem="RDh-IL-8eg" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="Ekm-kZ-i1Z"/>
+                            <constraint firstItem="RDh-IL-8eg" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="Ekm-kZ-i1Z"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="RDh-IL-8eg" secondAttribute="trailing" constant="20" id="Mld-Us-RmX"/>
                             <constraint firstItem="MGY-Yp-Fgk" firstAttribute="top" secondItem="RDh-IL-8eg" secondAttribute="bottom" constant="10" id="V8o-9l-sTp"/>
                             <constraint firstItem="MGY-Yp-Fgk" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" constant="10" id="eEa-Nd-u9V"/>
