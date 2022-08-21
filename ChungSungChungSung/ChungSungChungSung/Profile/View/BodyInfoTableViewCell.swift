@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class BodyInfoTableViewCell: UITableViewCell {
 //    var age = "23"
@@ -28,8 +29,10 @@ class BodyInfoTableViewCell: UITableViewCell {
         cellRectangle.layer.shadowOpacity = 1
         editBodyInfoButton.tintColor = CustomColor.editGray
         
-//        ageLabel.text = age
-//        heightAndWeightLabel.text = heightAndWeight
+//        ageLabel.text = "\(UserDefaultManager.loadAge())"
+//        let localRealm = try! Realm()
+//        let weight = localRealm.objects(WeightRealm.self).sorted(byKeyPath: "dateSorting", ascending: false).first?.weight
+//        heightAndWeightLabel.text = "\(UserDefaultManager.loadHeight())/\(weight)"
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -25,7 +25,7 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        RealmManager.deleteAllWeightData2()
+//        RealmManager.deleteAllWeightData2()
 //        UserDefaultManager.saveUnit(unit: "제 1234부대")
 //        print(UserDefaultManager.loadUnit())
         unit = UserDefaultManager.loadUnit()
@@ -42,10 +42,11 @@ class ProfileViewController: UIViewController {
 //        RealmManager.saveWeightData(date: Date().addingTimeInterval(60*60*25), weight: 33)
 //        print(RealmManager.searchCurrentWeight2())
         weight = RealmManager.searchCurrentWeight2()
-        
+
 //        UserDefaultManager.saveHeight(height: 33)
 //        print(UserDefaultManager.loadHegiht2())
         height = UserDefaultManager.loadHegiht2()
+
         
 //        RealmManager.saveTodoListData(date: Date().addingTimeInterval(60*60*1), content: "1", isDone: true)
 //        RealmManager.saveTodoListData(date: Date().addingTimeInterval(60*60*2), content: "2", isDone: false)
@@ -258,6 +259,7 @@ extension RealmManager {
     static func searchCurrentWeight2() -> Int? {
         let localRealm = try! Realm()
         let realm = localRealm.objects(WeightRealm.self)
+        print("렘\(realm)")
         let target = realm.sorted(byKeyPath: "dateSorting", ascending: false)
         if target.count == 0 {
             return nil
