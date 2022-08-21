@@ -58,6 +58,9 @@
                                                             <buttonConfiguration key="configuration" style="plain" image="hand.thumbsup.circle.fill" catalog="system">
                                                                 <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="28" scale="large" weight="regular"/>
                                                             </buttonConfiguration>
+                                                            <connections>
+                                                                <action selector="doneTodo:" destination="hWm-wG-iwH" eventType="touchUpInside" id="JXr-6N-Xmz"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>

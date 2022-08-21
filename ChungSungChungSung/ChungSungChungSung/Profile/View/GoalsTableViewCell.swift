@@ -27,7 +27,6 @@ class GoalsTableViewCell: UITableViewCell {
         cellRectangle.layer.shadowRadius = 20
         cellRectangle.layer.shadowOpacity = 1
         moreButton.tintColor = CustomColor.editGray
-        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

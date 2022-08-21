@@ -47,12 +47,13 @@ class ProfileViewController: UIViewController {
 //        print(UserDefaultManager.loadHegiht2())
         height = UserDefaultManager.loadHegiht2()
         
-        RealmManager.saveTodoListData(date: Date().addingTimeInterval(60*60*9), content: "1", isDone: true)
+        RealmManager.saveTodoListData(date: Date().addingTimeInterval(60*60*1), content: "1", isDone: true)
         RealmManager.saveTodoListData(date: Date().addingTimeInterval(60*60*2), content: "2", isDone: false)
-        RealmManager.saveTodoListData(date: Date().addingTimeInterval(60*60*2), content: "2", isDone: false)
-        RealmManager.saveTodoListData(date: Date().addingTimeInterval(60*60*2), content: "2", isDone: false)
-        RealmManager.saveTodoListData(date: Date().addingTimeInterval(60*60*2), content: "2", isDone: false)
-        RealmManager.saveTodoListData(date: Date().addingTimeInterval(60*60*15), content: "52", isDone: false)
+        RealmManager.saveTodoListData(date: Date().addingTimeInterval(60*60*3), content: "2", isDone: false)
+        RealmManager.saveTodoListData(date: Date().addingTimeInterval(60*60*4), content: "2", isDone: false)
+        RealmManager.saveTodoListData(date: Date().addingTimeInterval(60*60*5), content: "2", isDone: false)
+        RealmManager.saveTodoListData(date: Date().addingTimeInterval(60*60*6), content: "52", isDone: false)
+        
 //        print(RealmManager.searchTodo())//둘다하자
 //        print(RealmManager.searchCurrentTodo()?.content)
         todo = RealmManager.searchCurrentTodo()
@@ -374,6 +375,15 @@ extension RealmManager {
         
         let localRealm = try! Realm()
         let alls = localRealm.objects(WeightRealm.self)
+        try! localRealm.write {
+            localRealm.delete(alls)
+        }
+    }
+    
+    static func deleteAllTodo2() {
+        
+        let localRealm = try! Realm()
+        let alls = localRealm.objects(ToDoListRealm.self)
         try! localRealm.write {
             localRealm.delete(alls)
         }
