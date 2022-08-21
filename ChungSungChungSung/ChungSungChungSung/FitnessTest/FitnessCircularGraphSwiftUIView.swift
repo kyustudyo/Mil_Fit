@@ -16,12 +16,12 @@ struct RunningGraphSwiftUIView: View {
                 .background(Color.clear)
                 
             Circle()
-                .trim(from: 0, to: 0.8)
+                .trim(from: 0, to: graphData.rate)
                 .stroke(.red, style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
                 .rotationEffect(.init(degrees: -90))
                 .background(Color.clear)
             
-            Text("특급")
+            Text("\(graphData.level)")
                 .background(Color.clear)
                 .foregroundColor(Color(CustomColor.red!))
         }.background(Color.clear)
@@ -37,12 +37,12 @@ struct PushupGraphSwiftUIView: View {
                 .background(Color.clear)
                 
             Circle()
-                .trim(from: 0, to: 0.5)
+                .trim(from: 0, to: graphData.rate)
                 .stroke(.purple, style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
                 .rotationEffect(.init(degrees: -90))
                 .background(Color.clear)
             
-            Text("1급")
+            Text("\(graphData.level)")
                 .background(Color.clear)
                 .foregroundColor(Color(CustomColor.strongPurple!))
         }.background(Color.clear)
@@ -58,12 +58,12 @@ struct SitupGraphSwiftUIView: View {
                 .background(Color.clear)
                 
             Circle()
-                .trim(from: 0, to: 0.3)
+                .trim(from: 0, to: graphData.rate)
                 .stroke(.blue, style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
                 .rotationEffect(.init(degrees: -90))
                 .background(Color.clear)
             
-            Text("2급")
+            Text("\(graphData.level)")
                 .background(Color.clear)
                 .foregroundColor(Color(CustomColor.blue!))
         }.background(Color.clear)

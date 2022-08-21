@@ -81,12 +81,13 @@ class TestMainViewController: UIViewController {
         fitnessTestRealm = localRealm.objects(FitnessTestRealm.self).sorted(byKeyPath: "dateSorting", ascending: false)
         fitnessMainTableView.dataSource = self
         fitnessMainTableView.delegate = self
+        fitnessMainTableView.alwaysBounceVertical = false
         let standardButton = UIBarButtonItem(image: UIImage(systemName: "info.circle"), style: .plain, target: self, action: #selector(didTapStandardButton))
         standardButton.tintColor = CustomColor.mainPurple
         let addButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(didTapAddButton))
         addButton.tintColor = CustomColor.mainPurple
         navigationItem.rightBarButtonItems = [standardButton, addButton]
-        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationController?.navigationBar.tintColor = CustomColor.mainPurple
         view.backgroundColor = CustomColor.bgGray
         fitnessGraphButton.tintColor = UIColor.clear
         fitnessGraphButton.titleLabel?.text = ""
@@ -201,7 +202,10 @@ class TestMainViewController: UIViewController {
     func configurePushupGraphView() {
     let pushupRealm = fitnessTestRealm.filter("testType == 'pushup'").filter("isPractice == false").first
     let maxStandard = getMaxStandard(testType: .pushup, level: "특급")
-    let rate = Double(maxStandard - (pushupRealm?.count ?? 0)) / Double(maxStandard)
+    var rate = Double(maxStandard - (pushupRealm?.count ?? 0)) / Double(maxStandard)
+    if maxStandard < (pushupRealm?.count ?? 0) {
+        rate = 1
+    }
     pushupData = GraphData(level: pushupRealm?.level ?? "불합격", rate: rate)
     let controller = UIHostingController(rootView: PushupGraphSwiftUIView(graphData: pushupData))
     controller.view.translatesAutoresizingMaskIntoConstraints = false
@@ -219,7 +223,10 @@ class TestMainViewController: UIViewController {
     func configureSitupGraphView() {
     let situpRealm = fitnessTestRealm.filter("testType == 'situp'").filter("isPractice == false").first
     let maxStandard = getMaxStandard(testType: .situp, level: "특급")
-    let rate = Double(maxStandard - (situpRealm?.count ?? 0)) / Double(maxStandard)
+    var rate = Double(maxStandard - (situpRealm?.count ?? 0)) / Double(maxStandard)
+    if maxStandard < (situpRealm?.count ?? 0) {
+        rate = 1
+    }
     situpData = GraphData(level: situpRealm?.level ?? "불합격", rate: rate)
     let controller = UIHostingController(rootView: SitupGraphSwiftUIView(graphData: situpData))
     controller.view.translatesAutoresizingMaskIntoConstraints = false
