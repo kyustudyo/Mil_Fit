@@ -80,6 +80,7 @@ class WorkoutTempAddViewController: UIViewController {
     }
     func setUI() {
         rectangleView.backgroundColor = .systemGray6
+        rectangleView.layer.cornerRadius = 20
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy.MM.dd"
         dateFormatter.locale = Locale(identifier: "ko_KR")
