@@ -30,10 +30,11 @@ class SelectArmyViewController: UIViewController {
         tableView.tableHeaderView = UIView()
         
         
-        self.view.backgroundColor = .blue
+//        self.view.backgroundColor = .blue
+        view.backgroundColor = CustomColor.bgGray
         navigationItem.title = "부대 선택"
         navigationController?.navigationBar.topItem?.backButtonTitle = pastViewName
-        view.backgroundColor = .systemGray6
+//        view.backgroundColor = .systemGray6
         let confirmArmyChangeButton = UIBarButtonItem(title: "확인", style: .plain, target: self, action: #selector(confirmArmyChange))
         self.navigationItem.rightBarButtonItems = [confirmArmyChangeButton]
         
