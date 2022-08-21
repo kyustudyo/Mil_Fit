@@ -22,7 +22,7 @@ class BodyInfoProfileViewController: UIViewController {
     @IBOutlet weak var ageLabel: UILabel!
     var info: [Int] = []
     weak var delegate: EditBodyViewRelatedForBodyVC?
-    var weightRecord: [Double]
+    var weightRecord: [Double]!
     override func viewDidLoad() {
         super.viewDidLoad()
         let localRealm = try! Realm()
@@ -44,6 +44,7 @@ class BodyInfoProfileViewController: UIViewController {
         for i in data {
             dataSet.append(Double(i.weight))
         }
+        return dataSet
     }
     
     @objc fileprivate func completeEdit() {
@@ -93,15 +94,21 @@ class BodyInfoProfileViewController: UIViewController {
         lineChartDataSet.lineWidth = 3
         lineChartDataSet.circleHoleRadius = 3.0
         lineChartDataSet.circleRadius = 5.0
-        
+        lineChartDataSet.highlightEnabled = false
         let data = LineChartData(dataSet: lineChartDataSet)
         weightGraphView.data = data
         weightGraphView.rightAxis.enabled = false
         weightGraphView.drawGridBackgroundEnabled = false
-//        lineChartView.leftAxis.enabled = false
+        weightGraphView.leftAxis.enabled = false
         weightGraphView.xAxis.enabled = false
         weightGraphView.legend.enabled = false
         weightGraphView.backgroundColor = .white
+        weightGraphView.layer.cornerRadius = 12
+        weightGraphView.clipsToBounds = true
+        weightGraphView.extraTopOffset = 10
+        weightGraphView.extraLeftOffset = 20
+        weightGraphView.extraRightOffset = 20
+        weightGraphView.doubleTapToZoomEnabled = false
     }
 }
 
