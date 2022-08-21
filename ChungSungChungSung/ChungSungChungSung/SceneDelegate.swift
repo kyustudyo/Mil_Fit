@@ -53,6 +53,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //Onboarding Page 구현
 extension SceneDelegate {
     private func setRootViewController(_ scene: UIScene){
+        
+//        UserDefaultManager.removeFirstTimeExperience()
         if UserDefaultManager.isFirstTimeComleted() {
             setRootView(scene, name: nil, identifier: "TabViewController")
         } else {
