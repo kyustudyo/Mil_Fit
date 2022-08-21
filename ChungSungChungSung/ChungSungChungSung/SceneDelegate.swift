@@ -17,10 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let scene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(windowScene: scene)
-        window?.rootViewController = TabViewController()
-//        window?.rootViewController = MainCalorieViewController()
-        window?.makeKeyAndVisible()
+        setRootViewController(scene)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -53,4 +50,32 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
 }
+//Onboarding Page 구현
+extension SceneDelegate {
+    private func setRootViewController(_ scene: UIScene){
+        if UserDefaultManager.isFirstTimeComleted() {
+            setRootView(scene, name: nil, identifier: "TabViewController")
+        } else {
+            setRootView(scene, name: "Onboarding", identifier:  "OnboardingViewController")
+        }
+    }
+    
+    private func setRootView(_ scene: UIScene, name: String?, identifier: String) {
+        if let windowScene = scene as? UIWindowScene {
+            let window = UIWindow(windowScene: windowScene)
+            if name == nil {
+                window.rootViewController = TabViewController()
+                self.window = window
+                window.makeKeyAndVisible()
+            }else {
+                let storyBoard = UIStoryboard(name: name!, bundle: nil)
+                let viewController = storyBoard.instantiateViewController(withIdentifier: identifier)
+                let navigationController = UINavigationController(rootViewController: viewController)
+                window.rootViewController = navigationController
+                self.window = window
+                window.makeKeyAndVisible()
+            }
 
+        }
+    }
+}

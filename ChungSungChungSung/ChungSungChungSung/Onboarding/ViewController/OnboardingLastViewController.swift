@@ -24,7 +24,9 @@ class OnboardingLastViewController: UIViewController {
                 
                 if let date = date {
                     UserDefaultManager.saveDischargeDate(date: date)
-                    print(date)
+                    UserDefaultManager.saveStartDate(date: Date())
+                    let vc = TabViewController()
+                    self.navigationController?.pushViewController(vc, animated: true)
                 }
             }
         }
@@ -35,7 +37,8 @@ class OnboardingLastViewController: UIViewController {
         
         view.backgroundColor = CustomColor.bgGray
         self.navigationController?.navigationBar.tintColor = CustomColor.mainPurple
-        self.navigationController?.navigationBar.topItem?.title = ""
+//        self.navigationController?.navigationBar.topItem?.title = ""
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         setDatePicker()
         textFieldDidEndEditing(dateTF)
         configToolbar()
@@ -128,7 +131,7 @@ extension OnboardingLastViewController: UIPickerViewDelegate {
         dateFormatter.dateFormat = "yyyy년 M월 dd일"
         let convertStr = dateFormatter.date(from: dateString)
         
-        if let date = dateFormatter.date(from: dateString) {
+        if let date = convertStr {
             return date
         } else {
             return nil
