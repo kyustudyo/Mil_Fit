@@ -7,6 +7,7 @@
 
 import UIKit
 import Charts
+import RealmSwift
 
 class BodyInfoProfileViewController: UIViewController {
 
@@ -21,17 +22,28 @@ class BodyInfoProfileViewController: UIViewController {
     @IBOutlet weak var ageLabel: UILabel!
     var info: [Int] = []
     weak var delegate: EditBodyViewRelatedForBodyVC?
-    var weightRecord = [56.0, 60.0, 76.0, 52.0, 60.0, 76.0, 52.0]
+    var weightRecord: [Double]
     override func viewDidLoad() {
         super.viewDidLoad()
+        let localRealm = try! Realm()
+        let weightRealm = localRealm.objects(WeightRealm.self).sorted(byKeyPath: "dateSorting", ascending: true)
         drawUI()
+        weightRecord = setChartData(data: weightRealm)
         setChart(lineValues: weightRecord)
         ageTextField.text = "\(info[0])"
         heightTextField.text = "\(info[1])"
         weightTextField.text = "\(info[2])"
+
         
         let completeBarButton = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(completeEdit))
         self.navigationItem.rightBarButtonItems = [completeBarButton]
+    }
+    
+    func setChartData(data: Results<WeightRealm>) -> [Double] {
+        var dataSet = [Double]()
+        for i in data {
+            dataSet.append(Double(i.weight))
+        }
     }
     
     @objc fileprivate func completeEdit() {
