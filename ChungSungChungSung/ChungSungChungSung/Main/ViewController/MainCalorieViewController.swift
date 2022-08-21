@@ -12,12 +12,75 @@ import UIKit
 
 class MainCalorieViewController: UIViewController {
     
-    let mealCalories:[CGFloat] = [10.0, 12.0, 14.0, 13.0, 8.0, 5.0, 9.0]
-    let workoutCalories:[CGFloat] = [100.0, 122.0, 12, 5, 98.0, 51.0, 98.0]
+    var mealCalories:[CGFloat] = [2022, 2405, 2800, 3300, 2700, 2100, 2300]
+    var workoutCalories:[CGFloat] = [0, 0, 0, 0, 0, 0, 0]
+    let 요일들 = ["월", "화", "수", "목", "금", "토", "일"]
     
     override func viewDidLoad() {
         navigationItem.title = "칼로리"
         navigationController?.navigationBar.topItem?.backButtonTitle = "메인"
+        
+        let 오늘요일 = getDayOfWeek(date: Date().addingTimeInterval(60*60*9))
+        print(오늘요일)
+        let 몇번째요일 = Int(요일들.firstIndex(of: 오늘요일) ?? 0)
+        let 뒤에몇요일이있나 = 6 - 몇번째요일
+        print(오늘요일, 몇번째요일, 뒤에몇요일이있나)
+        
+        let 앞에날짜들개수 = 몇번째요일
+        let 뒤에날짜들개수 = 뒤에몇요일이있나 // 1
+        
+        var 앞에날짜들모음: [Date] = []
+        var 뒤에날짜들모음: [Date] = []
+        var 전체날짜들모음: [Date] = []
+        let 오늘날짜 = Date().addingTimeInterval(60*60*9) ?? Date()
+        if 앞에날짜들개수 != 0 {
+            for i in 1...앞에날짜들개수 {
+                앞에날짜들모음.append(Calendar.current.date(byAdding: .day, value: -i, to: Date().addingTimeInterval(60*60*9)) ?? Date())
+            }
+        }
+        
+        if 뒤에날짜들개수 != 0 {
+            for j in 1...뒤에날짜들개수 {
+                뒤에날짜들모음.append(Calendar.current.date(byAdding: .day, value: j, to: Date().addingTimeInterval(60*60*9)) ?? Date())
+            }
+        }
+        
+//        print(앞에날짜들모음, "!!!",뒤에날짜들모음)
+        전체날짜들모음 = [오늘날짜] + 앞에날짜들모음 + 뒤에날짜들모음
+//        let a = 전체날짜들모음.map{ getDayOfWeek(date:$0)}
+//        print(a)
+        
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "yyyy-MM-dd"
+        dateformatter.locale = Locale(identifier: "ko_KR")
+        
+        for (i,date) in 전체날짜들모음.enumerated() {
+            if let mealDate = RealmManager.searchMealDataByDate(date: dateformatter.string(from: date)) {
+                if mealDate.count != 0 {
+                    print(getDayOfWeek(date: date))
+                    mealCalories[i] = CGFloat(mealDate[0].calories)
+                }
+            }
+        }
+        
+        let dateFormatterForWorkout = DateFormatter()
+        dateFormatterForWorkout.locale = Locale(identifier: "ko_KR")
+        dateFormatterForWorkout.dateFormat = "yyyyMMdd"
+
+        print("--")
+        for (i,date) in 전체날짜들모음.enumerated() {
+            if let workoutDate = RealmManager.searchWorkoutDataByDateK(date: dateFormatterForWorkout.string(from: date)) {
+                if workoutDate.count != 0 {
+//                    print(getDayOfWeek(date: date))
+//                    print("운동칼로리", workoutDate[0].calories)
+                    let workoutCal = Double(Array(workoutDate.map { $0.calories ?? 0}).reduce(0, +))
+//                    print("총cal:", workoutCal)
+                    workoutCalories[i] = workoutCal
+                }
+            }
+        }
+        
+        
         
         view.backgroundColor = .systemGray6
         let mealContainerView = UIView()

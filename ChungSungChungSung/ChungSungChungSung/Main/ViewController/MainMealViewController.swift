@@ -13,6 +13,19 @@ class MainMealViewController: UIViewController, UICollectionViewDelegate, UIColl
 //       let label = UILabel()
 //        return label
 //    }()
+    lazy var activityIndicator: UIActivityIndicatorView = {
+          let activityIndicator = UIActivityIndicatorView()
+          activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+//          activityIndicator.center = self.view.center
+          activityIndicator.hidesWhenStopped = true
+          activityIndicator.style = UIActivityIndicatorView.Style.white
+          activityIndicator.color = .black
+//          activityIndicator.startAnimating()
+          return activityIndicator
+    }()
+    
+    var mealData = RealmManager.searchMealDataByDate(date: Date().formatterAppliedString())
+    
     private let mainMealTableViewCellID = "mainMealTableViewCellID"
     let headerLabel: UILabel = {
         let label = UILabel()
@@ -24,7 +37,6 @@ class MainMealViewController: UIViewController, UICollectionViewDelegate, UIColl
     fileprivate var tableView: UITableView = UITableView()
     var isMealCollectionView: String = ""
     weak var delegate: ArmySelection?
-    
     fileprivate let previousButton: UIButton = {
         let previousButton = UIButton()
         previousButton.addTarget(MainMealViewController.self, action: #selector(previousTapped), for: .touchUpInside)
@@ -58,6 +70,8 @@ class MainMealViewController: UIViewController, UICollectionViewDelegate, UIColl
         setWeekView()
     }
     var selectedDate = Date()
+    
+    
     var totalSquares = [Date]()
     
     private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
@@ -89,7 +103,12 @@ class MainMealViewController: UIViewController, UICollectionViewDelegate, UIColl
         
         headerLabel.text = CalendarHelper().monthString(date: selectedDate)
             + " " + CalendarHelper().yearString(date: selectedDate)
-        collectionView.reloadData()
+        
+        
+        self.collectionView.reloadData()
+        self.tableView.reloadData()
+        
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = false
@@ -100,7 +119,6 @@ class MainMealViewController: UIViewController, UICollectionViewDelegate, UIColl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//
 //        let changeArmyButton = UIButton()
 //        changeArmyButton.setTitle("변경", for: .normal)
 //        changeArmyButton.addTarget(self, action: #selector(changeArmy), for: .touchUpInside)
@@ -121,7 +139,7 @@ class MainMealViewController: UIViewController, UICollectionViewDelegate, UIColl
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        tableView.rowHeight = 110
+        tableView.rowHeight = 140
         tableView.backgroundColor = .systemGray6
         tableView.sectionHeaderTopPadding = 12
         
@@ -155,6 +173,13 @@ class MainMealViewController: UIViewController, UICollectionViewDelegate, UIColl
         
         view.addSubview(tableView)
         tableView.anchor(top: collectionView.bottomAnchor, left: containerView.leftAnchor, bottom: containerView.bottomAnchor, right: containerView.rightAnchor, paddingTop: 16, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
+        tableView.addSubview(activityIndicator)
+        activityIndicator.centerX(inView: tableView)
+        activityIndicator.centerY(inView: tableView)
+        
+//        tableView.addSubview(activityIndicator)
+//        activityIndicator.centerX(inView: tableView)
+//        activityIndicator.centerY(inView: tableView)
         
         view.backgroundColor = .systemGray6
     }
@@ -188,26 +213,37 @@ class MainMealViewController: UIViewController, UICollectionViewDelegate, UIColl
             cell.dayLabel.textColor = .black
             cell.weekdayLabel.textColor = .black
         }
-        
+       
         return cell
     }
     
     @objc fileprivate func changeArmy() {
         let selectArmyViewController = SelectArmyViewController()
         selectArmyViewController.delegate = delegate
+//        selectArmyViewController.delegateInMealView = self
         selectArmyViewController.pastViewName = "식단"
         selectArmyViewController.isMealCollectionView = isMealCollectionView
         navigationController?.pushViewController(selectArmyViewController, animated: true)
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if selectedDate == totalSquares[indexPath.item] { return }
         selectedDate = totalSquares[indexPath.item]
+//        DispatchQueue(label: "realm").async {
+//        let mealData = RealmManager.searchMealDataByDate(date: self.selectedDate.formatterAppliedString())
+//        }
+        mealData = RealmManager.searchMealDataByDate(date: self.selectedDate.formatterAppliedString())
+        
+        print(self.selectedDate.formatterAppliedString())
+        print(mealData)
+        
         collectionView.reloadData()
+        tableView.reloadData()
     }
 }
 extension MainMealViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return mealData?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -217,9 +253,41 @@ extension MainMealViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: mainMealTableViewCellID, for: indexPath) as? MainMealTableViewCell
         else { return UITableViewCell() }
+        print(indexPath.section)
         cell.whenMealLabel.text = ["조식", "중식", "석식"][indexPath.section]
-        cell.calorieLabel.text = "1500"
-        cell.mealStrings = ["두부된장국", "가자미데리야", "끼구이시금","무침","우유"]
+//        cell.calorieLabel.text = "\(mealData[indexPath.section].calories)kcal"
+        
+        print("qwer", indexPath.section)
+//        print("qwer",cell.mealStrings.isEmpty)
+//        print("qwer",cell.mealStrings)
+//        print("qwer")
+//        cell.mealStrings = cell.mealStrings.isEmpty ? mealData[indexPath.section].mealArray : []
+//        cell.label1.text = mealData[indexPath.section].mealArray[0]
+        guard let mealData = mealData else { return cell }
+        print(mealData[indexPath.section].mealArray)
+        let array = mealData[indexPath.section].mealArray
+        if array.count > 0 {
+            cell.label1.text = array[0]
+        }
+        if array.count > 1 {
+            cell.label2.text = array[1]
+        }
+        if array.count > 2 {
+            cell.label3.text = array[2]
+        }
+        if array.count > 3 {
+            cell.label4.text = array[3]
+        }
+        if array.count > 4 {
+            cell.label5.text = array[4]
+        }
+        if array.count > 5 {
+            cell.label6.text = array[5]
+        } else
+        if array.count > 6 {
+            cell.label7.text = array[6]
+        }
+//        cell.render(mealData[indexPath.section].mealArray)
         return cell
     }
     
@@ -385,3 +453,35 @@ class CalendarCell: UICollectionViewCell {
         vstack.centerY(inView: contentView)
     }
 }
+
+//extension MainMealViewController: ArmySelectionInMealView {
+//    func selectArmy(selectedArmy: String) {
+////        let dateformatter = DateFormatter()
+////        dateformatter.dateFormat = "yyyy-MM-dd"
+////        dateformatter.locale = Locale(identifier: "ko_KR")
+//
+//        activityIndicator.startAnimating()
+//        collectionView.isUserInteractionEnabled = false
+//        Webservice.shared.fetchMeals300(army: selectedArmy) {
+//            DispatchQueue.main.async {
+//                let dateformatter = DateFormatter()
+//                dateformatter.dateFormat = "yyyy-MM-dd"
+//                dateformatter.locale = Locale(identifier: "ko_KR")
+//
+//                self.mealData = RealmManager.searchMealDataByDate(date: dateformatter.string(from: Date()))
+//                self.collectionView.isUserInteractionEnabled = true
+////                self.selectArmyLabel.isHidden = false
+////                self.selectArmyButton.isUserInteractionEnabled = true
+////                self.moreButton.isHidden = false
+////                self.moreButton.isUserInteractionEnabled = true
+////                self.isMealCollectionView = selectedArmy
+////                self.isMealData = self.isMealCollectionView == "없음" ? false : true
+//                self.activityIndicator.stopAnimating()
+//                self.tableView.reloadData()
+////                self.mealCollectionView.reloadData()
+////                self.setupUI()
+//            }
+//        }
+//
+//    }
+//}

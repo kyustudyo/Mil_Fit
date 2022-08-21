@@ -15,6 +15,8 @@ class SelectArmyViewController: UIViewController {
     var isMealCollectionView = ""
     
     weak var delegate: ArmySelection?
+//    weak var delegateInMealView: ArmySelectionInMealView?
+    
     var pastViewName: String = "메인"
     
     let totalArmy = ["제5322부대", "제6282부대", "제8623부대", "제7369부대", "제8902부대", "제9030부대", "제5021부대", "제3389부대", "제1691부대", "제2171부대", "제6335부대", "제1575부대", "제2291부대", "제3182부대", "제2621부대", "제5397부대", "제7162부대", "제3296부대", "제6176부대", "제1862부대", "없음"]
@@ -32,12 +34,23 @@ class SelectArmyViewController: UIViewController {
         navigationItem.title = "부대 선택"
         navigationController?.navigationBar.topItem?.backButtonTitle = pastViewName
         view.backgroundColor = .systemGray6
+        let confirmArmyChangeButton = UIBarButtonItem(title: "확인", style: .plain, target: self, action: #selector(confirmArmyChange))
+        self.navigationItem.rightBarButtonItems = [confirmArmyChangeButton]
         
         view.addSubview(tableView)
         tableView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 16, paddingLeft: 16, paddingBottom: 0, paddingRight: 16)
         // Do any additional setup after loading the view.
     }
     
+    @objc fileprivate func confirmArmyChange() {
+//        guard let indexPath = tableView.indexPathForSelectedRow else { return }
+        
+//        isMealCollectionView = totalArmy[indexPath.row]
+//        tableView.deselectRow(at: indexPath, animated: true)
+//        tableView.reloadData()
+        delegate?.selectArmy(selectedArmy: isMealCollectionView)
+//        delegateInMealView?.selectArmy(selectedArmy: isMealCollectionView)
+    }
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = false
     }
@@ -46,7 +59,7 @@ class SelectArmyViewController: UIViewController {
 extension SelectArmyViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        totalArmy.count
+        return totalArmy.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -59,11 +72,11 @@ extension SelectArmyViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-//        selectedArmyIndex = indexPath.row
+//        selectedArmyIndex = indexPath
         isMealCollectionView = totalArmy[indexPath.row]
         tableView.deselectRow(at: indexPath, animated: true)
         tableView.reloadData()
-        delegate?.selectArmy(selectedArmy: isMealCollectionView)
+//        delegate?.selectArmy(selectedArmy: isMealCollectionView)
     }
     
 }
@@ -71,3 +84,7 @@ extension SelectArmyViewController: UITableViewDelegate, UITableViewDataSource {
 protocol ArmySelection: AnyObject {
     func selectArmy(selectedArmy: String)
 }
+
+//protocol ArmySelectionInMealView: AnyObject {
+//    func selectArmy(selectedArmy: String)
+//}

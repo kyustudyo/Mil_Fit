@@ -113,10 +113,10 @@ class FitnessTestRealm: Object {
 }
 
 class MealRealm: Object {
-    @Persisted var date: Date
+    @Persisted var date: String
     @Persisted var mealTime: String
     @Persisted var calories: Int
-    let mealList: List<String> = List<String>()
+    @Persisted var mealList: List<String> = List<String>()
     var mealArray: [String] {
         get {
             return mealList.map{$0}
@@ -128,7 +128,7 @@ class MealRealm: Object {
     }
     
     @Persisted(primaryKey: true) var _id: ObjectId
-    convenience init(date: Date, mealTime: String, calories: Int) {
+    convenience init(date: String, mealTime: String, calories: Int) {
         self.init()
         self.date = date
         self.mealTime = mealTime
@@ -163,11 +163,25 @@ class TotalOutputCaloriesRealm: Object {
 class WeightRealm: Object {
     @Persisted var date: Date
     @Persisted var weight: Int
+    @Persisted var dateSorting: Int
     @Persisted(primaryKey: true) var _id: ObjectId
     
     convenience init(date: Date, weight: Int) {
         self.init()
+        self.date = date
         self.weight = weight
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyyMMddHHmmss"
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        let convertInt = Int(dateFormatter.string(from: date))
+        print("convertInt", convertInt)
+        if let convertInt = convertInt {
+            self.dateSorting = convertInt
+        }else {
+            self.dateSorting = -1
+        }
+        
     }
 }
 

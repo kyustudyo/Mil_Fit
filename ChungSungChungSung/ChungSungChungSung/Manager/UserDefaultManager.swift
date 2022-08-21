@@ -45,3 +45,57 @@ public class UserDefaultManager {
         }
     }
 }
+
+
+extension UserDefaultManager {
+    static func loadDischargeDate() -> Date? {
+        guard let date = UserDefaults.standard.object(forKey: "dischargeDate") as? Date else {
+            return nil
+        }
+        return date
+    }
+    
+    static func saveStartDate(date: Date) {
+        UserDefaults.standard.set(date, forKey: "firstDayOfTheApp")
+    }
+    
+    static func loadStartDate() -> Date? {
+        guard let date = UserDefaults.standard.object(forKey: "firstDayOfTheApp") as? Date else {
+            return nil
+        }
+        return date
+    }
+    
+    static func isFirstTimeComleted() -> Bool {
+        if let _ = UserDefaults.standard.object(forKey: "firstComplete") as? Bool {
+            return true
+        } else {
+            UserDefaults.standard.set(true, forKey: "firstComplete")
+            let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale(identifier: "ko_KR")
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            print(Date().addingTimeInterval(60*60*9))
+            UserDefaults.standard.set(Date().addingTimeInterval(60*60*9), forKey: "firstDayOfTheApp")
+            return false
+        }
+    }
+    
+    
+    static func loadBMR() -> Int? {
+        guard let bmr = UserDefaults.standard.object(forKey: "BMR") as? Int else {
+            return nil
+        }
+        return bmr
+    }
+    
+    static func loadHeight() -> Int? {
+        guard let bmr = UserDefaults.standard.object(forKey: "height") as? Int else {
+            return nil
+        }
+        return bmr
+    }
+    
+    static func removeFirstTimeExperience()  {
+        UserDefaults.standard.removeObject(forKey: "firstComplete")
+    }
+}

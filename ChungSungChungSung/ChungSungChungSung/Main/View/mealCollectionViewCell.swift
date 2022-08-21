@@ -19,9 +19,51 @@ class mealCollectionViewCell: UICollectionViewCell {
     
     var 반찬들: [String] = ["두부된장국", "가자미야끼구이", "시금치프라", "콩나물무침", "우유"]
     
+    var label1: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: Constants.smallText , weight: .light)
+        return label
+    }()
+    var label2: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 1
+        label.font = UIFont.systemFont(ofSize: Constants.smallText , weight: .light)
+        return label
+    }()
+    var label3: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 1
+        label.font = UIFont.systemFont(ofSize: Constants.smallText , weight: .light)
+        return label
+    }()
+    var label4: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 1
+        label.font = UIFont.systemFont(ofSize: Constants.smallText , weight: .light)
+        return label
+    }()
+    var label5: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 1
+        label.font = UIFont.systemFont(ofSize: Constants.smallText , weight: .light)
+        return label
+    }()
+    var label6: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 1
+        label.font = UIFont.systemFont(ofSize: Constants.smallText , weight: .light)
+        return label
+    }()
+    var label7: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 1
+        label.font = UIFont.systemFont(ofSize: Constants.smallText , weight: .light)
+        return label
+    }()
+    
     let calLabel: UILabel = {
         let label = UILabel()
-        label.text = "1500kcal"
         label.font = UIFont.systemFont(ofSize: Constants.smallText - 1)
         label.textColor = .systemGray2
         return label
@@ -41,33 +83,48 @@ class mealCollectionViewCell: UICollectionViewCell {
     fileprivate func setupUI() {
         self.layer.cornerRadius = 16
 
-        var labels: [UILabel] = []
+//        var labels: [UILabel] = []
         
-        for 반찬 in 반찬들 {
-            let label = UILabel()
-            label.font = UIFont.systemFont(ofSize: Constants.middleText)
-            label.text = 반찬
-            labels.append(label)
-        }
+//        for 반찬 in 반찬들 {
+//            let label = UILabel()
+//            label.font = UIFont.systemFont(ofSize: Constants.middleText)
+//            label.text = 반찬
+//            labels.append(label)
+//        }
         
-        let 반찬들 = UIStackView(arrangedSubviews: labels)
-        반찬들.alignment = .center
-        반찬들.axis = .vertical
-        반찬들.spacing = 1
+//        let 반찬들 = UIStackView(arrangedSubviews: labels)
+//        반찬들.alignment = .center
+//        반찬들.axis = .vertical
+//        반찬들.spacing = 1
         
-        let vstack = UIStackView(arrangedSubviews: [mealLabel, 반찬들, calLabel])
+        let mealVstack = UIStackView(arrangedSubviews: [label1, label2, label3,label4,label5, label6,label7])
+//        [label1, label2, label3,label4,label5, label6,label7].forEach { label in
+//            label.anchor(left: mealVstack.leftAnchor, right: mealVstack.rightAnchor, paddingLeft: 4, paddingRight: 4)
+//        }
+        mealVstack.axis = .vertical
+//        mealVstack.spacing = 3
+        contentView.addSubview(mealVstack)
+        mealVstack.alignment = .center
+        let vstack = UIStackView(arrangedSubviews: [mealLabel, mealVstack])
+        
         vstack.axis = .vertical
         vstack.spacing = 12
         vstack.alignment = .center
         addSubview(vstack)
         
+//        mealVstack.anchor(left: vstack.leftAnchor, right: vstack.rightAnchor, paddingLeft: 4, paddingRight: 4)
 //        vstack.centerX(inView: contentView)
 //        vstack.centerY(inView: contentView)
 //        contentView.backgroundColor = .gray
 //        vstack.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, bottom: contentView.bottomAnchor, right: contentView.rightAnchor, paddingTop: 0, paddingLeft: 20, paddingBottom: 0, paddingRight: 0)
 //        vstack.centerY(inView: contentView)
-        vstack.anchor(top: self.topAnchor, bottom: self.bottomAnchor, paddingTop: 15, paddingBottom: 19)
-        vstack.centerX(inView: contentView)
+        vstack.anchor(top: contentView.topAnchor, paddingTop: 0)
+        mealLabel.anchor(top: vstack.topAnchor, paddingTop: 18)
+//        mealVstack.anchor(top: mealLabel.bottomAnchor, paddingTop: 12)
+//        vstack.backgroundColor = .red
+//        vstack.centerX(inView: contentView)
+//        mealLabel.anchor(top: vstack.topAnchor, paddingTop: 2)
+        vstack.anchor(left: self.leftAnchor, right: self.rightAnchor, paddingLeft: 12, paddingRight: 12)
 //        contentView.backgroundColor = .brown
     }
 }
