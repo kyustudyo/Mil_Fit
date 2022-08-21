@@ -3,7 +3,6 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
-        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -27,21 +26,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HPg-Ea-wbR">
-                                <rect key="frame" x="230" y="6.5" width="40" height="31"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
-                                    <imageReference key="image" image="trash" catalog="system" symbolScale="default"/>
-                                    <color key="baseForegroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </buttonConfiguration>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="회" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DSQ-wr-7yA">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="회" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DSQ-wr-7yA">
                                 <rect key="frame" x="217.5" y="13.5" width="12.5" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="p6o-jt-SyZ">
+                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="p6o-jt-SyZ">
                                 <rect key="frame" x="165.5" y="5" width="46" height="34"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <constraints>
@@ -53,13 +44,10 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="HPg-Ea-wbR" secondAttribute="trailing" id="HUA-Cr-MqD"/>
-                            <constraint firstItem="HPg-Ea-wbR" firstAttribute="leading" secondItem="DSQ-wr-7yA" secondAttribute="trailing" id="LBD-Iw-KUN"/>
                             <constraint firstItem="ZRW-6n-SRS" firstAttribute="centerY" secondItem="vbn-dQ-uHi" secondAttribute="centerY" id="Ulg-D5-Ckl"/>
                             <constraint firstItem="ZRW-6n-SRS" firstAttribute="leading" secondItem="vbn-dQ-uHi" secondAttribute="leading" constant="24" id="YKm-qY-mmN"/>
                             <constraint firstItem="DSQ-wr-7yA" firstAttribute="leading" secondItem="p6o-jt-SyZ" secondAttribute="trailing" constant="6" id="c3z-0I-knr"/>
                             <constraint firstItem="DSQ-wr-7yA" firstAttribute="centerY" secondItem="vbn-dQ-uHi" secondAttribute="centerY" id="ive-NO-07f"/>
-                            <constraint firstItem="HPg-Ea-wbR" firstAttribute="centerY" secondItem="vbn-dQ-uHi" secondAttribute="centerY" id="rrF-2m-U3i"/>
                             <constraint firstItem="p6o-jt-SyZ" firstAttribute="centerY" secondItem="vbn-dQ-uHi" secondAttribute="centerY" id="zG1-dm-FRr"/>
                         </constraints>
                     </view>
@@ -75,6 +63,7 @@
             <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
             <connections>
                 <outlet property="cellRectangle" destination="vbn-dQ-uHi" id="9sL-WU-jAd"/>
+                <outlet property="countTextField" destination="p6o-jt-SyZ" id="dNb-uS-mlO"/>
                 <outlet property="inputType" destination="DSQ-wr-7yA" id="2Rc-Z2-Ql1"/>
                 <outlet property="setNumberView" destination="ZRW-6n-SRS" id="I4V-3w-0mw"/>
             </connections>
@@ -82,7 +71,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="trash" catalog="system" width="121" height="128"/>
         <systemColor name="secondarySystemBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
