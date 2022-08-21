@@ -1,3 +1,4 @@
+
 //
 //  MainViewController.swift
 //  ChungSungChungSung
@@ -192,7 +193,6 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     @objc fileprivate func goMoreCalorie() {
 //        mealOrNothing.backgroundColor = .red
 //        mealStack.backgroundColor = .blue
-        
         let vc = MainCalorieViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -297,8 +297,8 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         //다른 뷰컨에서 navi를 보이므로
         
         navigationController?.isNavigationBarHidden = true
-        UserDefaultManager.saveDischargeDate(date: "2022-08-21".String2DateType()!)
-        UserDefaultManager.saveStartDate(date: "2022-08-07".String2DateType()!)
+//        UserDefaultManager.saveDischargeDate(date: "2022-08-21".String2DateType()!)
+//        UserDefaultManager.saveStartDate(date: "2022-08-07".String2DateType()!)
         
 //        RealmManager.deleteAlTodosData()
 //        RealmManager.saveTodoListData(date: "2022-08-20".String2DateType()!, content: "1", isDone: false)
@@ -311,18 +311,20 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         dateFormatter.dateFormat = "yyyy년M월dd일"
         
         dateLabel.text = dateFormatter.string(from: Date())
-        
+        print("ㄷㄱ",UserDefaultManager.loadDischargeDate(), UserDefaultManager.loadStartDate())
         if let finishDay = UserDefaultManager.loadDischargeDate(),
            let startDay = UserDefaultManager.loadStartDate() {
-            print(Calendar.current.dateComponents([.day], from: startDay, to: finishDay))
+//            print(Calendar.current.dateComponents([.day], from: startDay, to: finishDay))
             if let 시작부터전역일까지 = Calendar.current.dateComponents([.day], from: startDay, to: finishDay).day {
                 if let 시작부터오늘까지 = Calendar.current.dateComponents([.day], from: startDay, to: Date().addingTimeInterval(60*60*9)).day {
-                    print(시작부터전역일까지, 시작부터오늘까지)
-                    print(Double(시작부터오늘까지)/Double(시작부터전역일까지))
+//                    print("ㄷㄱ",시작부터전역일까지, 시작부터오늘까지)
+//                    print(Double(시작부터오늘까지)/Double(시작부터전역일까지))
                     전역가까움 = Double(시작부터오늘까지)/Double(시작부터전역일까지)
+//                    print("ㄷㄱ",시작부터오늘까지, 시작부터전역일까지)
                     let col1 = UIColor(red: 170/255.0, green: 144/255.0, blue: 239/255.0, alpha: 1)
                     let col2 = UIColor(red: 113/255.0, green: 87/255.0, blue: 219/255.0, alpha: 1)
                     endDayBar.setGradient(color1: col2, color2: col1, width: (UIScreen.main.bounds.width - Constants.sideSpacing*4) * 전역가까움)
+                    
                     dDay.anchor(right:전역일들ContainerView.leftAnchor, paddingRight: 전역가까움 > 0.1 ? -(UIScreen.main.bounds.width - Constants.sideSpacing*3) * 전역가까움 : -(전역일.intrinsicContentSize.width + 60))
                     dDay.text = "D-\(시작부터전역일까지 - 시작부터오늘까지)"
                     dDay.layoutIfNeeded()
@@ -447,7 +449,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = CustomColor.bgGray
+        view.backgroundColor = .systemGray6
 //        print("2022-09-22".toDate()!)
 //        UserDefaultManager.removeFirstTimeExperience()
 //        RealmManager.deleteAllMealsData()
@@ -455,7 +457,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         dateFormatter.locale = Locale(identifier: "ko_KR")
         dateFormatter.dateFormat = "yyyy-MM-dd"
         
-        UserDefaultManager.saveDischargeDate(date: "2022-08-18".String2DateType()!)
+//        UserDefaultManager.saveDischargeDate(date: "2022-08-18".String2DateType()!)
 
         calendar.delegate = self
         calendar.dataSource = self
@@ -898,6 +900,7 @@ extension MainViewController {
         
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
+        formatter.locale = Locale(identifier: "ko_KR")
         let date1 = formatter.string(from: date)
         let date2 = formatter.string(from: Date())
         
@@ -928,10 +931,17 @@ extension MainViewController {
     }
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillDefaultColorFor date: Date) -> UIColor? {
         
-        if events2.contains(date.addingTimeInterval(60*60*9)) {
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "yyyy-MM-dd"
+        dateformatter.locale = Locale(identifier: "ko_KR")
+        
+//        print("q1", dateformatter.string(from: date))
+//        print("q12", events2.map{dateformatter.string(from: $0)})
+
+        if events2.map{dateformatter.string(from: $0)}.contains(dateformatter.string(from: date)) {
             return CustomColor.calendarRedColor
         } else {
-            print("not")
+            
         }
         return nil
     }
@@ -1059,4 +1069,10 @@ extension MainViewController: ArmySelection {
             }
         }
     }
-}
+    }//
+//  MainViewController.swift
+//  ChungSungChungSung
+//
+//  Created by Hankyu Lee on 2022/08/06.
+//
+
