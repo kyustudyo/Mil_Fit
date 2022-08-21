@@ -119,15 +119,15 @@ class WorkoutTempAddViewController: UIViewController {
     func caloriesCalculator() -> Int {
         var time:Double = 0
         var calories = 0
-        let weight = localRealm.objects(WeightRealm.self).sorted(byKeyPath: "dateSorting", ascending: false).first!.weight
+        let weight = localRealm.objects(WeightRealm.self).sorted(byKeyPath: "dateSorting", ascending: false).first?.weight
         if workoutInfo.0 == .시간운동 {
             time = Double(workoutRealm.minutes!)
         }else {
-            time = Double(workoutRealm.count! / 60)
+            time = 30
         }
         let met: Double = workoutInfo.1
-        let weightDouble: Double = Double(weight)
-        calories = Int((met * (3.5 * weightDouble * time)) / 5)
+        let weightDouble: Double = Double(weight ?? 0)
+        calories = Int((met * (3.5 * weightDouble * time)) / 1000) * 5
         return calories
     }
 }
