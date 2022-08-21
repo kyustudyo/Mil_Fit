@@ -93,8 +93,6 @@ class TestMainViewController: UIViewController {
         fitnessGraphButton.titleLabel?.text = ""
         drawTableViewUI()
         
-        //test 코드
-        UserDefaultManager.saveAge(age: 23)
         print("Realm저장위치=\n\(Realm.Configuration.defaultConfiguration.fileURL!)\n")
         
     }
