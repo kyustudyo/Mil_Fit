@@ -107,6 +107,7 @@
                     </view>
                     <connections>
                         <outlet property="goalsDetailTableView" destination="N0W-B4-egN" id="6eU-6u-4sY"/>
+                        <outlet property="segCon" destination="qbN-RD-LTX" id="Kz2-2i-YkP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

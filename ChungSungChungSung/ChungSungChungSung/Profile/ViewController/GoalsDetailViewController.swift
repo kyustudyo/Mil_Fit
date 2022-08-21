@@ -8,16 +8,23 @@
 import UIKit
 import RealmSwift
 class GoalsDetailViewController: UIViewController {
+    @IBOutlet weak var segCon: UISegmentedControl!
     private var goalList: Results<ToDoListRealm>?
     
-    var doneTodos: Results<ToDoListRealm>?
-    var notDoneTodos:  Results<ToDoListRealm>?
-
+    var doneTodos: Results<ToDoListRealm>? = RealmManager.doneTodoData2()
+    var notDoneTodos:  Results<ToDoListRealm>? = RealmManager.notDoneTodoData2()
+    
+//    func fetchTodos(completion: @escaping () -> ()) {
+//        doneTodos = RealmManager.doneTodoData2()
+//        notDoneTodos = RealmManager.notDoneTodoData2()
+//        completion()
+//    }
     @IBAction func segconChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
 //            if let notDoneTodos = notDoneTodos {
                 goalList = notDoneTodos
+            print(goalList?.count)
 //            } else {
 //                goalList = Results
 //            }
@@ -25,9 +32,7 @@ class GoalsDetailViewController: UIViewController {
         case 1:
 //            if let doneTodos = doneTodos {
                 goalList = doneTodos
-//            } else {
-//                goalList = nil
-//            }
+            print(goalList?.count)
             goalsDetailTableView.reloadData()
         default: break
         }
@@ -37,7 +42,7 @@ class GoalsDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        goalList = notDoneTodos
         navigationConfig()
         self.view.backgroundColor = CustomColor.bgGray
         goalsDetailTableView.backgroundColor = CustomColor.bgGray
@@ -77,6 +82,7 @@ class GoalsDetailViewController: UIViewController {
 extension GoalsDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let goalList = goalList {
+            print("qwe", goalList.count)
             return goalList.count
         } else {
             return 0
