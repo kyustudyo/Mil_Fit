@@ -140,7 +140,8 @@ class MainMealViewController: UIViewController, UICollectionViewDelegate, UIColl
         collectionView.delegate = self
         
         tableView.rowHeight = 140
-        tableView.backgroundColor = .systemGray6
+//        tableView.backgroundColor = .systemGray6
+        tableView.backgroundColor = CustomColor.bgGray
         tableView.sectionHeaderTopPadding = 12
         
         let containerView = UIView()
@@ -168,7 +169,7 @@ class MainMealViewController: UIViewController, UICollectionViewDelegate, UIColl
         
         containerView.addSubview(collectionView)
         collectionView.anchor(top: calenderHeaderStack.bottomAnchor, left: containerView.leftAnchor, right: containerView.rightAnchor, paddingTop: 19, paddingLeft: 0, paddingRight: 0, height: 74)
-        collectionView.backgroundColor = .systemGray6
+        collectionView.backgroundColor = CustomColor.bgGray
         setWeekView()
         
         view.addSubview(tableView)
@@ -181,7 +182,8 @@ class MainMealViewController: UIViewController, UICollectionViewDelegate, UIColl
 //        activityIndicator.centerX(inView: tableView)
 //        activityIndicator.centerY(inView: tableView)
         
-        view.backgroundColor = .systemGray6
+//        view.backgroundColor = .systemGray6
+        view.backgroundColor = CustomColor.bgGray
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

@@ -192,6 +192,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     @objc fileprivate func goMoreCalorie() {
 //        mealOrNothing.backgroundColor = .red
 //        mealStack.backgroundColor = .blue
+        
         let vc = MainCalorieViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -446,7 +447,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemGray6
+        view.backgroundColor = CustomColor.bgGray
 //        print("2022-09-22".toDate()!)
 //        UserDefaultManager.removeFirstTimeExperience()
 //        RealmManager.deleteAllMealsData()
