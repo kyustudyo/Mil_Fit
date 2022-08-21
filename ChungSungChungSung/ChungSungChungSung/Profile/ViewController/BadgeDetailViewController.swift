@@ -10,14 +10,22 @@ import UIKit
 class BadgeDetailViewController: UIViewController/*, UIViewControllerTransitioningDelegate*/ {
     private var badgeList = BadgeData().list
     private var numberOfBadgeEarned: Int = 0
-    
+    private var lightImageIndexes: [Int] {
+        var indexes: [Int] = []
+        for (i,badge) in badgeList.enumerated() {
+            if badgeNames.contains(badge.title) {
+                indexes.append(i)
+            }
+        }
+        return indexes
+    }
     @IBOutlet weak var numberOfBadgeLabel: UILabel!
     @IBOutlet weak var badgeDetailCollectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setNumberOfBadgeEarned()
+//        setNumberOfBadgeEarned()
         
         self.view.backgroundColor = CustomColor.bgGray
         self.navigationController?.navigationBar.tintColor = CustomColor.mainPurple
@@ -26,18 +34,37 @@ class BadgeDetailViewController: UIViewController/*, UIViewControllerTransitioni
         
         let badgeCollectionViewCellNib = UINib(nibName: "BadgeCollectionViewCell", bundle: nil)
         badgeDetailCollectionView.register(badgeCollectionViewCellNib, forCellWithReuseIdentifier: "badgeCollectionViewCell")
+        setNumberOfBadgeEarned()
     }
     
+    
+//    var earnedBadges: [BadgeModel] = []
+    var badgeNames: [String] = []
+//    {
+//        get {
+//            []
+//        }
+//        set {
+//            earnedBadges = badgeList.filter {
+//                newValue.contains($0.title)
+//            }
+//            setNumberOfBadgeEarned()
+//            badgeDetailCollectionView.reloadData()
+//        }
+//    }
+    
+    
+    
     private func setNumberOfBadgeEarned() {
-        var earnedBadges: [BadgeModel] = []
-        earnedBadges = badgeList.filter {
-            if $0.date?.isEmpty == false {
-                return true
-            } else {
-                return false
-            }
-        }
-        numberOfBadgeEarned = earnedBadges.count
+//        var earnedBadges: [BadgeModel] = []
+//        earnedBadges = badgeList.filter {
+//            if $0.date?.isEmpty == false {
+//                return true
+//            } else {
+//                return false
+//            }
+//        }
+        numberOfBadgeEarned = badgeNames.count
         numberOfBadgeLabel.text = "\(numberOfBadgeEarned) / 15"
     }
     
@@ -73,6 +100,8 @@ extension BadgeDetailViewController: UICollectionViewDelegateFlowLayout {
         
         return CGSize(width: width, height: height)
     }
+    
+    
 }
 
 extension BadgeDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -83,9 +112,11 @@ extension BadgeDetailViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "badgeCollectionViewCell", for: indexPath) as? BadgeCollectionViewCell else { return UICollectionViewCell() }
         
-        if badgeList[indexPath.row].date?.isEmpty == false {
+        //earnedBadges = 2
+        if lightImageIndexes.contains(indexPath.row) {
             cell.badgeImageView.image = UIImage(named: badgeList[indexPath.row].image)
         } else {
+            
             cell.badgeImageView.image = UIImage(named: badgeList[indexPath.row].image)?.tonal
         }
         

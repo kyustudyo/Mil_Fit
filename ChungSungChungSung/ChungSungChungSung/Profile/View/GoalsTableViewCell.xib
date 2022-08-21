@@ -87,6 +87,7 @@
                 <outlet property="cellRectangle" destination="ZXn-GE-x3a" id="B0t-Iw-tJU"/>
                 <outlet property="goalLabel" destination="GBl-pP-qEk" id="Itq-1M-aDL"/>
                 <outlet property="goalSavedDateLabel" destination="bCl-HW-cWo" id="cX0-Xz-ihM"/>
+                <outlet property="isDone" destination="Blx-0i-FRS" id="8ge-5n-R69"/>
                 <outlet property="moreButton" destination="EIW-wG-PQe" id="CXD-gc-RgR"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="57.589285714285708"/>

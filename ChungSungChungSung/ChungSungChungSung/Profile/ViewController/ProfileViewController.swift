@@ -47,7 +47,7 @@ class ProfileViewController: UIViewController {
 //        print(UserDefaultManager.loadHegiht2())
         height = UserDefaultManager.loadHegiht2()
         
-        RealmManager.saveTodoListData(date: Date().addingTimeInterval(60*60*9), content: "qwqwqw", isDone: false)
+        RealmManager.saveTodoListData(date: Date().addingTimeInterval(60*60*9), content: "qwqwqwqq", isDone: true)
         RealmManager.saveTodoListData(date: Date().addingTimeInterval(60*60*2), content: "rrrrrr", isDone: true)
 //        print(RealmManager.searchTodo())//둘다하자
 //        print(RealmManager.searchCurrentTodo()?.content)
@@ -55,6 +55,8 @@ class ProfileViewController: UIViewController {
         
         RealmManager.saveBadgeData(date: Date().addingTimeInterval(60*60*9), title: "우리의 시작")
         RealmManager.saveBadgeData(date: Date().addingTimeInterval(60*60*9), title: "첫 기록의 기쁨")
+        RealmManager.saveBadgeData(date: Date().addingTimeInterval(60*60*9), title: "특급전사")
+        
 //        print(RealmManager.searchBadges())
 //        badges = RealmManager.searchBadges()
         if let badges = RealmManager.searchBadges() {
@@ -104,12 +106,19 @@ protocol BadgeDetailViewDelegate {
 extension ProfileViewController: GoalsDetailViewDelegate, BadgeDetailViewDelegate {
     func didTapGoalsMoreButton() {
         guard let goalsDetailView = UIStoryboard(name: "GoalsDetail", bundle: .main).instantiateViewController(withIdentifier: "GoalsDetailViewController") as? GoalsDetailViewController else { return }
+        
+        goalsDetailView.doneTodos = RealmManager.doneTodoData2()
+        goalsDetailView.notDoneTodos = RealmManager.notDoneTodoData2()
         self.navigationController?.pushViewController(goalsDetailView, animated: true)
     }
     
     func didTapBadgeMoreButton() {
         guard let badgeDetailView = UIStoryboard(name: "BadgeDetail", bundle: .main).instantiateViewController(withIdentifier: "BadgeDetailViewController") as? BadgeDetailViewController else { return }
+        
         self.navigationController?.pushViewController(badgeDetailView, animated: true)
+        if let badgeNames = badgeNames {
+            badgeDetailView.badgeNames = badgeNames
+        }
     }
 }
 
@@ -167,6 +176,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.goalLabel.text = todo.content
                 print("qwer", dateFormatter.string(from: todo.date))
                 cell.goalSavedDateLabel.text = dateFormatter.string(from: todo.date)
+                
             } else {
                 cell.goalLabel.text = "목표를 설정하세요."
                 cell.goalSavedDateLabel.text = dateFormatter.string(from: Date())
@@ -247,29 +257,29 @@ extension RealmManager {
         }
     }
     
-//    static func notDoneTodoData2() -> Results<ToDoListRealm>? {
-//        let localRealm = try! Realm()
-//        let realm = localRealm.objects(ToDoListRealm.self)
-//                            .filter("isDone = false")
-//                            .sorted(byKeyPath: "dateSorting", ascending: false)
-//        if realm.count == 0 {
-//            return nil
-//        } else {
-//            return realm
-//        }
-//    }
-//
-//    static func doneTodoData2() -> Results<ToDoListRealm>? {
-//        let localRealm = try! Realm()
-//        let realm = localRealm.objects(ToDoListRealm.self)
-//                            .filter("isDone = true")
-//                            .sorted(byKeyPath: "dateSorting", ascending: false)
-//        if realm.count == 0 {
-//            return nil
-//        } else {
-//            return realm
-//        }
-//    }
+    static func notDoneTodoData2() -> Results<ToDoListRealm>? {
+        let localRealm = try! Realm()
+        let realm = localRealm.objects(ToDoListRealm.self)
+                            .filter("isDone = false")
+                            .sorted(byKeyPath: "dateSorting", ascending: false)
+        if realm.count == 0 {
+            return nil
+        } else {
+            return realm
+        }
+    }
+
+    static func doneTodoData2() -> Results<ToDoListRealm>? {
+        let localRealm = try! Realm()
+        let realm = localRealm.objects(ToDoListRealm.self)
+                            .filter("isDone = true")
+                            .sorted(byKeyPath: "dateSorting", ascending: false)
+        if realm.count == 0 {
+            return nil
+        } else {
+            return realm
+        }
+    }
     
     static func searchCurrentTodo() -> ToDoListRealm? {
         let localRealm = try! Realm()

@@ -14,7 +14,7 @@ class GoalsTableViewCell: UITableViewCell {
     @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var goalLabel: UILabel!
     @IBOutlet weak var goalSavedDateLabel: UILabel!
-
+    @IBOutlet weak var isDone: UIButton!
     @IBAction func didTapGoalsMoreAction(_ sender: UIButton) {
         goalsDetailViewDelegate?.didTapGoalsMoreButton()
     }
@@ -27,6 +27,7 @@ class GoalsTableViewCell: UITableViewCell {
         cellRectangle.layer.shadowRadius = 20
         cellRectangle.layer.shadowOpacity = 1
         moreButton.tintColor = CustomColor.editGray
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
