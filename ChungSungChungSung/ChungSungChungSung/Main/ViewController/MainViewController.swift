@@ -314,29 +314,49 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         dateLabel.text = dateFormatter.string(from: Date())
         
         
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(secondsFromGMT: 0)!
+        let startOfDate = calendar.startOfDay(for: Date().addingTimeInterval(60*60*9))
         
-        
-        
-        print("ㄷㄱ",UserDefaultManager.loadDischargeDate(), UserDefaultManager.loadStartDate())
-        if let finishDay = UserDefaultManager.loadDischargeDate(),
-           let startDay = UserDefaultManager.loadStartDate() {
-//            print(Calendar.current.dateComponents([.day], from: startDay, to: finishDay))
-            if let 시작부터전역일까지 = Calendar.current.dateComponents([.day], from: startDay, to: finishDay).day {
-                if let 시작부터오늘까지 = Calendar.current.dateComponents([.day], from: startDay, to: Date().addingTimeInterval(60*60*9)).day {
-//                    print("ㄷㄱ",시작부터전역일까지, 시작부터오늘까지)
-                    print(Double(시작부터오늘까지)/Double(시작부터전역일까지))
-                    전역가까움 = Double(시작부터오늘까지)/Double(시작부터전역일까지)
-//                    print("ㄷㄱ",시작부터오늘까지, 시작부터전역일까지)
-                    let col1 = UIColor(red: 170/255.0, green: 144/255.0, blue: 239/255.0, alpha: 1)
-                    let col2 = UIColor(red: 113/255.0, green: 87/255.0, blue: 219/255.0, alpha: 1)
-                    endDayBar.setGradient(color1: col2, color2: col1, width: (UIScreen.main.bounds.width - Constants.sideSpacing*4) * 0.5)
-                    
-                    dDay.anchor(right:전역일들ContainerView.leftAnchor, paddingRight: 전역가까움 > 0.1 ? -(UIScreen.main.bounds.width - Constants.sideSpacing*3) * 전역가까움 : -(전역일.intrinsicContentSize.width + 60))
-                    dDay.text = "D-\(시작부터전역일까지 - 시작부터오늘까지)"
-                    dDay.layoutIfNeeded()
-                }
+        if let dischargeDate = UserDefaultManager.loadDischargeDate() {
+            let today = Date().addingTimeInterval(60*60*9)
+            
+            if let leftDay = Calendar.current.dateComponents([.day], from: startOfDate, to: dischargeDate).day {
+                
+                전역가까움 = Double(800 - (leftDay <= 800 ? leftDay : 800)) / Double(800)
+                let col1 = UIColor(red: 170/255.0, green: 144/255.0, blue: 239/255.0, alpha: 1)
+                
+                let col2 = UIColor(red: 113/255.0, green: 87/255.0, blue: 219/255.0, alpha: 1)
+                endDayBar.setGradient(color1: col2, color2: col1, width: (UIScreen.main.bounds.width - Constants.sideSpacing*4) * 전역가까움)
+                
+                dDay.anchor(right:전역일들ContainerView.leftAnchor, paddingRight: 전역가까움 > 0.1 ? -(UIScreen.main.bounds.width - Constants.sideSpacing*3) * 전역가까움 : -(전역일.intrinsicContentSize.width + 80))
+                dDay.text = "D-\(leftDay)"
+                dDay.layoutIfNeeded()
             }
         }
+        
+//        if let finishDay = UserDefaultManager.loadDischargeDate(),
+//           let startDay = UserDefaultManager.loadStartDate() {
+////            print(Calendar.current.dateComponents([.day], from: startDay, to: finishDay))
+//            if let 시작부터전역일까지 = Calendar.current.dateComponents([.day], from: startDay, to: finishDay).day {
+//                if let 시작부터오늘까지 = Calendar.current.dateComponents([.day], from: startDay, to: Date().addingTimeInterval(60*60*9)).day {
+////                    print("ㄷㄱ",시작부터전역일까지, 시작부터오늘까지)
+//                    let 남은날 =
+//                    print(Double(시작부터오늘까지)/Double(시작부터전역일까지))
+//                    전역가까움 = Double(시작부터오늘까지)/Double(시작부터전역일까지)
+//                    전역가까움 = Double(800 - 시작부터전역일까지) / Double(800)
+//
+////                    print("ㄷㄱ",시작부터오늘까지, 시작부터전역일까지)
+//                    let col1 = UIColor(red: 170/255.0, green: 144/255.0, blue: 239/255.0, alpha: 1)
+//                    let col2 = UIColor(red: 113/255.0, green: 87/255.0, blue: 219/255.0, alpha: 1)
+//                    endDayBar.setGradient(color1: col2, color2: col1, width: (UIScreen.main.bounds.width - Constants.sideSpacing*4) * 전역가까움)
+//
+//                    dDay.anchor(right:전역일들ContainerView.leftAnchor, paddingRight: 전역가까움 > 0.1 ? -(UIScreen.main.bounds.width - Constants.sideSpacing*3) * 전역가까움 : -(전역일.intrinsicContentSize.width + 60))
+//                    dDay.text = "D-\(시작부터전역일까지 - 시작부터오늘까지)"
+//                    dDay.layoutIfNeeded()
+//                }
+//            }
+//        }
         
         todoData = RealmManager.notDoneTodoData()
         

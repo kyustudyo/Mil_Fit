@@ -11,7 +11,7 @@ import RealmSwift
 class ProfileViewController: UIViewController {
     private let profileViewTitle = "프로필"
     
-    private var goalList = GoalData().list
+//    private var goalList = GoalData().list
     
     @IBOutlet weak var settingsButton: UIBarButtonItem!
     @IBOutlet weak var profileTableView: UITableView!
@@ -58,8 +58,8 @@ class ProfileViewController: UIViewController {
 //        print(RealmManager.searchTodo())//둘다하자
 //        print(RealmManager.searchCurrentTodo()?.content)
         todo = RealmManager.searchCurrentTodo()
-        RealmManager.saveBadgeData(date: Date().addingTimeInterval(60*60*9), title: "우리의 시작")
-        RealmManager.saveBadgeData(date: Date().addingTimeInterval(60*60*9), title: "첫 기록의 기쁨")
+//        RealmManager.saveBadgeData(date: Date().addingTimeInterval(60*60*9), title: "우리의 시작")
+//        RealmManager.saveBadgeData(date: Date().addingTimeInterval(60*60*9), title: "첫 기록의 기쁨")
         print(Realm.Configuration.defaultConfiguration.fileURL!)
 //        print(RealmManager.searchBadges())
 //        badges = RealmManager.searchBadges()

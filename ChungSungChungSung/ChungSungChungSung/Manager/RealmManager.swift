@@ -221,7 +221,6 @@ extension RealmManager {
         } else {
             return realm
         }
-       
     }
     
     static func searchMealDataByDate(date: String) -> Results<MealRealm>? {
@@ -265,6 +264,20 @@ extension RealmManager {
         }
     }
     
+    static func deleteAllBadgesData() {
+        
+        let localRealm = try! Realm()
+        let alls = localRealm.objects(BadgeRealm.self)
+        try! localRealm.write {
+            localRealm.delete(alls)
+        }
+    }
     
+    static func deleteAllData() {
+        deleteAllMealsData()
+        deleteAllTodo2()
+        deleteAllWorkoutData()
+        deleteAllBadgesData()
+    }
 }
 

@@ -95,21 +95,25 @@ extension GoalsDetailViewController: UITableViewDelegate, UITableViewDataSource 
             
         cell.backgroundColor = .clear
         
+//        print(cell.cellRectangle.layer)
+//        cell.goalID = goalList[indexPath.row].dateSorting
+        
+        cell.goalID = lists[indexPath.row].dateSorting
+        cell.goalLabel.text = lists[indexPath.row].content
+        
         cell.cellRectangle.layer.cornerRadius = 20
         cell.cellRectangle.layer.shadowColor = UIColor.systemGray6.cgColor
         cell.cellRectangle.layer.shadowRadius = 20
         cell.cellRectangle.layer.shadowOpacity = 1
-//        cell.goalID = goalList[indexPath.row].dateSorting
-        cell.goalID = lists[indexPath.row].dateSorting
-        cell.goalLabel.text = lists[indexPath.row].content
+        
         cell.delegate = self
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ko_KR")
         dateFormatter.dateFormat = "yyyy.MM.dd"
         
         cell.goalSavedDateLabel.text = dateFormatter.string(from: lists[indexPath.row].date)
-
-        if lists[indexPath.row].isDone == true {
+        
+        if lists[indexPath.row].isDone {
             cell.achievedButton.tintColor = CustomColor.mainPurple
         } else {
             cell.achievedButton.tintColor = .systemGray

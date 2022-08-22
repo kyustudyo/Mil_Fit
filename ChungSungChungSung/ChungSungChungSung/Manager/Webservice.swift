@@ -26,8 +26,6 @@ class Webservice {
     private init() { }
     
     func fetchMeals300(army: String, completion: @escaping () -> () ) {
-//        print((String(Array(army)[1..<5])))
-//        let armyNumber = (String(Array(army)[1..<5]))
         guard army != "없음" && army != "" else {
             DispatchQueue.main.async {
                 RealmManager.deleteAllMealsData()
@@ -35,7 +33,8 @@ class Webservice {
             }
             return
         }
-        let url: URL = URL(string: "https://openapi.mnd.go.kr/\(keyValues.getId())/json/DS_TB_MNDT_DATEBYMLSVC_\(String(Array(army)[1..<5]))/1/10000/")!
+        let key = keyValues.getId()
+        let url: URL = URL(string: "https://openapi.mnd.go.kr/\(key)/json/DS_TB_MNDT_DATEBYMLSVC_\(String(Array(army)[1..<5]))/1/10000/")!
         URLSession.shared.dataTask(with: url) { data, _, error in
             RealmManager.deleteAllMealsData()
             if let data = data {
