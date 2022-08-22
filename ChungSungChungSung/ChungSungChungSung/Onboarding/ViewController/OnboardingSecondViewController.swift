@@ -44,6 +44,14 @@ class OnboardingSecondViewController: UIViewController {
                         print("몸무게 \(weightInt)")
                     }
                     
+
+                    let a = 13.8 * Double(Int(weightText) ?? 0)
+                    let b = 5 * Double(Int(heightText) ?? 0)
+                    let c = 6.8 * Double(UserDefaultManager.loadAge() ?? 0)
+                    let cal = 66 + a + b - c
+                    
+                    UserDefaultManager.saveBMR(BMR: Int(cal))
+                    
                     self.navigationController?.pushViewController(onboardingLastView, animated: true)
                 }
                             

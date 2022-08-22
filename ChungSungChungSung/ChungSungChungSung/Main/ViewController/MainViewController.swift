@@ -281,6 +281,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     
     var mealData:Results<MealRealm>? = RealmManager.searchMealDataByDate(date: Date().formatterAppliedString())
     var todoData:Results<ToDoListRealm>? = RealmManager.notDoneTodoData()
+
 //    {
 //        willSet {
 //            todoCollectionView.reloadData()
@@ -363,6 +364,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
 //        UserDefaultManager.saveBMR(BMR: 1400)
         let bmr = UserDefaultManager.loadBMR() ?? 0
         basicPercent = Double(bmr) / 5000.0 * 100.0
+        print("bmr", bmr, basicPercent)
         todayBasicCaloryLabel.text = "\(Double(bmr))kcal"
         basicRoundedView.progressValue = basicPercent
         print("check",basicPercent)
@@ -378,7 +380,8 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
             workoutRoundedView.progressValue =  basicPercent + workoutPercent
         }
         
-        
+        todoCollectionView.reloadData()
+        mealCollectionView.reloadData()
         
 //        RealmManager.deleteAllWeightData()
         

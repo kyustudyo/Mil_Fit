@@ -30,6 +30,7 @@ class BodyInfoProfileViewController: UIViewController {
         drawUI()
         weightRecord = setChartData(data: weightRealm)
         setChart(lineValues: weightRecord)
+        
         ageTextField.text = "\(info[0])"
         heightTextField.text = "\(info[1])"
         weightTextField.text = "\(info[2])"

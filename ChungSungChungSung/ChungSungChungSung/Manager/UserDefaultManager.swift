@@ -92,4 +92,14 @@ extension UserDefaultManager {
         UserDefaults.standard.removeObject(forKey: "firstComplete")
         UserDefaults.standard.removeObject(forKey: "dischargeDate")
     }
+    
+    static func removeAllData() {
+        
+        UserDefaults.standard.removeObject(forKey: "firstComplete")
+        UserDefaults.standard.removeObject(forKey: "dischargeDate")
+        UserDefaults.standard.removeObject(forKey: "age")
+        UserDefaults.standard.removeObject(forKey: "BMR")
+        UserDefaults.standard.removeObject(forKey: "height")
+        
+    }
 }

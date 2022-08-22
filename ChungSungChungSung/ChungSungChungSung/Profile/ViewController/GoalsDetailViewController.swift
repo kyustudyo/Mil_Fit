@@ -24,7 +24,6 @@ class GoalsDetailViewController: UIViewController {
         case 0:
             if let notDoneTodos = RealmManager.notDoneTodoData2() {
                 lists = Array(notDoneTodos)
-                print(lists)
             } else {
                 lists = []
             }
@@ -32,7 +31,6 @@ class GoalsDetailViewController: UIViewController {
         case 1:
             if let doneTodos = RealmManager.doneTodoData2() {
                 lists = Array(doneTodos)
-                print(lists)
             } else {
                 lists = []
             }
@@ -144,7 +142,10 @@ extension GoalsDetailViewController: TodoDone {
         
         doneTodos = RealmManager.doneTodoData2()
         notDoneTodos = RealmManager.notDoneTodoData2()
+        
         updateTableview()
+        
+        
 //        if segCon.selectedSegmentIndex == 0 {
 //            if let notDoneTodos = notDoneTodos {
 ////                goalList = notDoneTodos
@@ -162,51 +163,53 @@ extension GoalsDetailViewController: TodoDone {
 
 extension GoalsDetailViewController {
     private func updateTableview() {
-        segCon.selectedSegmentIndex = 0
-//        if segCon.selectedSegmentIndex == 0 {
+        if segCon.selectedSegmentIndex == 0 {
             if let notDoneTodos = RealmManager.notDoneTodoData2() {
-//                goalList = notDoneTodos
                 lists = Array(notDoneTodos)
-                
+            } else {
+                lists = []
             }
-//        }
-//        else {
-//            if let doneTodos = RealmManager.doneTodoData2() {
-////                goalList = notDoneTodos
-//                lists = Array(doneTodos)
-//            }
-//        }
+        }
+        else {
+            if let doneTodos = RealmManager.doneTodoData2() {
+                lists = Array(doneTodos)
+            } else {
+                lists = []
+            }
+        }
         goalsDetailTableView.reloadData()
     }
 }
 extension RealmManager {
+    
     static func deleteTodo(id: Int){
     let realm = try! Realm()
     let predicate = NSPredicate(format: "dateSorting == %@", NSNumber(value: id))
     if let firstItem = realm.objects(ToDoListRealm.self)
-        .filter(predicate)
-                .first {
-                try! realm.write {
-                    realm.delete(firstItem)
-                }
-            }
+                            .filter(predicate)
+                            .first {
+                            try! realm.write {
+                                realm.delete(firstItem)
+                            }
+                        }
     }
     
     static func changeTodoDone(id: Int) {
         let localRealm = try! Realm()
         let predicate = NSPredicate(format: "dateSorting == %@", NSNumber(value: id))
         let realms = localRealm.objects(ToDoListRealm.self)
-                           .filter(predicate)
-               for tiger in realms {
-                   try! localRealm.write {
-                       tiger.isDone.toggle()
-                   }
-               }
+                               .filter(predicate)
+       for tiger in realms {
+           try! localRealm.write {
+               tiger.isDone.toggle()
+           }
+       }
     }
 }
 
 extension GoalsDetailViewController: TodoAdd {
     func addTodo() {
+        segCon.selectedSegmentIndex = 0
         updateTableview()
         delegate?.addTodo()
     }

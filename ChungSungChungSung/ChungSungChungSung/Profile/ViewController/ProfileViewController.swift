@@ -25,7 +25,7 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        RealmManager.deleteAllWeightData2()
+//        RealmManager.deleteAllWeightData2()
 //        UserDefaultManager.saveUnit(unit: "제 1234부대")
 //        print(UserDefaultManager.loadUnit())
         unit = UserDefaultManager.loadUnit()
@@ -57,7 +57,6 @@ class ProfileViewController: UIViewController {
 //        print(RealmManager.searchTodo())//둘다하자
 //        print(RealmManager.searchCurrentTodo()?.content)
         todo = RealmManager.searchCurrentTodo()
-        
         RealmManager.saveBadgeData(date: Date().addingTimeInterval(60*60*9), title: "우리의 시작")
         RealmManager.saveBadgeData(date: Date().addingTimeInterval(60*60*9), title: "첫 기록의 기쁨")
         print(Realm.Configuration.defaultConfiguration.fileURL!)
@@ -365,7 +364,7 @@ extension ProfileViewController: EditBodyViewRelatedForBodyVC {
         let b = 5 * Double(height)
         let c = 6.8 * Double(age)
         let cal = 66 + a + b - c
-        print("cc", Int(cal))
+        
         UserDefaultManager.saveBMR(BMR: Int(cal))
     }
 }
