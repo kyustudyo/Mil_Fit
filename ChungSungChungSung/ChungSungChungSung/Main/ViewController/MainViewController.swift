@@ -297,27 +297,14 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     
     override func viewWillAppear(_ animated: Bool) {
         print("viewWillAppear")
-//        basicRoundedView.progressValue = 0.0
-//        eatRoundedView.progressValue = 0.0
-//        workoutRoundedView.progressValue = 0.0
-        //다른 뷰컨에서 navi를 보이므로
-        
+
         navigationController?.isNavigationBarHidden = true
-//        UserDefaultManager.saveDischargeDate(date: "2022-08-21".String2DateType()!)
-//        UserDefaultManager.saveStartDate(date: "2022-08-07".String2DateType()!)
-        
-//        RealmManager.deleteAlTodosData()
-//        RealmManager.saveTodoListData(date: "2022-08-20".String2DateType()!, content: "1", isDone: false)
-//        RealmManager.saveTodoListData(date: "2022-08-21".String2DateType()!, content: "2", isDone: false)
-//        RealmManager.saveTodoListData(date: "2022-08-19".String2DateType()!, content: "0", isDone: false)
-//        RealmManager.saveTodoListData(date: "2022-08-22".String2DateType()!, content: "3", isDone: false)
 
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ko_KR")
-        dateFormatter.dateFormat = "yyyy년M월dd일"
+        dateFormatter.dateFormat = "yyyy년 M월 dd일"
         
         dateLabel.text = dateFormatter.string(from: Date())
-        
         
         var calendar = Calendar(identifier: .gregorian)
         calendar.timeZone = TimeZone(secondsFromGMT: 0)!
@@ -352,29 +339,25 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         
         events2 = RealmManager.fetchSearchDidWorkoutDates() ?? []
         //viewwillappear
-//        updateMealAndCalView()
-//        updateValues()
+
         updateMealRoundedView()
-//        UserDefaultManager.saveBMR(BMR: 1400)
+
         let bmr = UserDefaultManager.loadBMR() ?? 0
         basicPercent = Double(bmr) / 5000.0 * 100.0
         print("bmr", bmr, basicPercent)
         todayBasicCaloryLabel.text = "\(Double(bmr))kcal"
         basicRoundedView.progressValue = basicPercent
         basicRoundedView.update()
-//        print("check",basicPercent)
-//        print("percent", eatPercent, basicPercent, workoutPercent)
-        
+
         if let workOut = RealmManager.searchWorkoutDataByDateK(date: dateFormatterForWorkout.string(from: Date())) {
             let cals = workOut.map{$0.calories}[0]
-            print("cals,", cals)
-            print("cal,cal", Array(workOut.map{$0.calories}))
+
             guard workOut.count != 0 else { return }
-//            print("qwqw운동칼로리", workOut[0].calories)
+
             let workoutCal = Double(Array(workOut.map { $0.calories ?? 0}).reduce(0, +))
             workoutPercent = workoutCal / 5000 * 100.0
             todayWorkoutCaloryLabel.text = "\(workoutCal)kcal"
-//            print("check",workoutPercent)
+
             workoutRoundedView.progressValue =  basicPercent + workoutPercent
             workoutRoundedView.update()
         }
@@ -405,12 +388,9 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
                 todayMealCaloryLabel.text = "\(eatCal)kcal"
                 print("eatcheck", eatPercent)
             }
-//            eatRoundedView.progressValue = eatPercent == 50.0 ? 12.0 : 40.0
+
             self.eatRoundedView.progressValue = eatPercent
             eatRoundedView.update()
-            
-//            self.eatRoundedView.draw(CGRect())
-//            self.eatRoundedView.setNeedsDisplay()
             
         } else {
             eatPercent = 1.0
@@ -426,20 +406,15 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         mealData = RealmManager.searchMealDataByDate(date: Date().formatterAppliedString())
         todoData = RealmManager.notDoneTodoData()
         
-//        print("2022-09-22".toDate()!)
-//        UserDefaultManager.removeFirstTimeExperience()
-//        RealmManager.deleteAllMealsData()
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ko_KR")
         dateFormatter.dateFormat = "yyyy-MM-dd"
         
-//        UserDefaultManager.saveDischargeDate(date: "2022-08-18".String2DateType()!)
-
         calendar.delegate = self
         calendar.dataSource = self
         
         print(Realm.Configuration.defaultConfiguration.fileURL!)
-//        Webservice.shared.fetchMeals300(army: "제5322부대")
+
         setupUI()
        
     }

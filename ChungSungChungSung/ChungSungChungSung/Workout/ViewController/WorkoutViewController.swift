@@ -43,7 +43,7 @@ class WorkoutViewController: UIViewController {
     let dateFormatterForFilter = DateFormatter()
     var selectedDateString: String?
     
-    let 시작일 = CalendarHelper().addDays(date: Date(), days: -300)
+    let 시작일 = CalendarHelper().addDays(date: Date().addingTimeInterval(60*60*9), days: -300)
     var selectedDate = Date()
     var totalSquares = [Date]()
     
@@ -181,7 +181,7 @@ class WorkoutViewController: UIViewController {
         
         var current = 시작일
         //TODO: 끝일
-        let nextSunday = CalendarHelper().addDays(date: Date(), days: 300)
+        let nextSunday = CalendarHelper().addDays(date: Date().addingTimeInterval(60*60*9), days: 300)
         while (current < nextSunday)
         {
             totalSquares.append(current)
@@ -265,8 +265,10 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
         }
  
         let date = totalSquares[indexPath.item]
-        cell.dayNameView.text = CalendarHelper().weekDataAt(indexPath.row % 7)
+        
+        cell.dayNameView.text = getDayOfWeek(date: date)
         cell.dateNumberView.text = String(CalendarHelper().dayOfMonth(date: date))
+//        print("date", date, String(CalendarHelper().dayOfMonth(date: date)))
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"

@@ -15,13 +15,13 @@ class MainCalorieViewController: UIViewController {
     var mealCalories:[CGFloat] = [2022, 2405, 2800, 3300, 2700, 2100, 2300]
     var workoutCalories:[CGFloat] = [1, 1, 1, 1, 1, 1, 1]
     let 요일들 = ["월", "화", "수", "목", "금", "토", "일"]
-    
+    var countOfDays: Int = 0
     override func viewDidLoad() {
         navigationItem.title = "칼로리"
         navigationController?.navigationBar.topItem?.backButtonTitle = "메인"
         
         let 오늘요일 = getDayOfWeek(date: Date().addingTimeInterval(60*60*9))
-        print(오늘요일)
+        print("오늘요일", 오늘요일)
         let 몇번째요일 = Int(요일들.firstIndex(of: 오늘요일) ?? 0)
         let 뒤에몇요일이있나 = 6 - 몇번째요일
         print(오늘요일, 몇번째요일, 뒤에몇요일이있나)
@@ -59,7 +59,9 @@ class MainCalorieViewController: UIViewController {
                 if mealDate.count != 0 {
                     print(getDayOfWeek(date: date))
                     mealCalories[i] = CGFloat(mealDate[0].calories)
+                    print("cal", CGFloat(mealDate[0].calories))
                 }
+                countOfDays = mealDate.count
             }
         }
         
@@ -108,7 +110,8 @@ class MainCalorieViewController: UIViewController {
         let label = UILabel()
         label.text = 종류 == .섭취 ? "섭취" : "운동"
         label.font = .systemFont(ofSize: Constants.middleText, weight: .bold)
-        let calorieView = getCalorieLabel(calorie: Int(칼로리들.reduce(0, +)) / 7)
+        let countOfdays = self.countOfDays != 0 ? self.countOfDays : 1
+        let calorieView = getCalorieLabel(calorie: Int(칼로리들.reduce(0, +)) / countOfdays)
         
         let hstackView = UIStackView(arrangedSubviews: [imageView, label, calorieView])
 //        hstackView.distribution = .equalSpacing
