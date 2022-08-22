@@ -367,57 +367,26 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         print("bmr", bmr, basicPercent)
         todayBasicCaloryLabel.text = "\(Double(bmr))kcal"
         basicRoundedView.progressValue = basicPercent
+        basicRoundedView.update()
         print("check",basicPercent)
         print("percent", eatPercent, basicPercent, workoutPercent)
         
         if let workOut = RealmManager.searchWorkoutDataByDateK(date: dateFormatterForWorkout.string(from: Date())) {
+            let cals = workOut.map{$0.calories}[0]
+            print("cals,", cals)
+            print("cal,cal", Array(workOut.map{$0.calories}))
             guard workOut.count != 0 else { return }
-            print("qwqw운동칼로리", workOut[0].calories)
+//            print("qwqw운동칼로리", workOut[0].calories)
             let workoutCal = Double(Array(workOut.map { $0.calories ?? 0}).reduce(0, +))
             workoutPercent = workoutCal / 5000 * 100.0
             todayWorkoutCaloryLabel.text = "\(workoutCal)kcal"
-            print("check",workoutPercent)
+//            print("check",workoutPercent)
             workoutRoundedView.progressValue =  basicPercent + workoutPercent
+            workoutRoundedView.update()
         }
-        
         
         todoCollectionView.reloadData()
         mealCollectionView.reloadData()
-        
-//        RealmManager.deleteAllWeightData()
-        
-        //몸무게
-//        RealmManager.saveWeightData(date: Date().addingTimeInterval(60*60*9), weight: 40)
-        
-        //키
-//        UserDefaultManager.saveHeight(height: 191)
-//        print(UserDefaultManager.loadHeight())
-        
-        //bmr
-//        UserDefaultManager.saveBMR(BMR: 1400)
-//        let bmr = UserDefaultManager.loadBMR() ?? 0
-//        basicPercent = Double(bmr) / 5000.0 * 100.0
-//        todayBasicCaloryLabel.text = "\(Double(bmr))kcal"
-//        basicRoundedView.progressValue = basicPercent
-//        print("check",basicPercent)
-//        print("percent", eatPercent, basicPercent, workoutPercent)
-//        updateMealAndCalView()
-//        view.layoutIfNeeded()
-        
-//        RealmManager.saveWeightData(date: "2022-08-22".String2DateType()!, weight: 33)
-//        RealmManager.saveWeightData(date: "2022-08-11".String2DateType()!, weight: 45)
-//        RealmManager.saveWeightData(date: "2022-08-24".String2DateType()!, weight: 50)
-//        RealmManager.saveWeightData(date: "2022-08-19".String2DateType()!, weight: 56)
-//        RealmManager.saveWeightData(date: "2022-08-27".String2DateType()!, weight: 55)
-//        RealmManager.saveWeightData(date: "2022-08-27".String2DateType()!, weight: 59)
-//        print("wewe",RealmManager.searchCurrentWeight())
-        
-//        print("qwerr",RealmManager.searchMealDataByDate(date: "2022-08-15")?.count)
-//        print("qwerr",RealmManager.searchMealDataByDate(date: "2022-08-15"))
-//        print(RealmManager.searchWorkoutDataByDateK(date: "20220815")?.count)
-//        print(RealmManager.searchWorkoutDataByDateK(date: "20220819"))
-        
-//        let k = mealData.map{ $0.calories }
         
     }
     

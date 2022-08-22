@@ -56,7 +56,13 @@ class WorkoutTempAddViewController: UIViewController {
                 }
             })
             view.makeToast("저장되었습니다.", duration: 3.0, position: .bottom)
+            
+            try! localRealm.write({
+                workoutRealm.calories = caloriesCalculator()
+            })
+
             setUI()
+            
         }else {
             view.makeToast("빈칸없이 입력해주세요", duration: 3.0, position: .bottom)
         }
@@ -122,7 +128,7 @@ class WorkoutTempAddViewController: UIViewController {
         var calories = 0
         let weight = localRealm.objects(WeightRealm.self).sorted(byKeyPath: "dateSorting", ascending: false).first?.weight
         if workoutInfo.0 == .시간운동 {
-            time = Double(workoutRealm.minutes!)
+            time = Double(workoutRealm.minutes ?? 0)
         }else {
             time = 30
         }
@@ -132,3 +138,4 @@ class WorkoutTempAddViewController: UIViewController {
         return calories
     }
 }
+
