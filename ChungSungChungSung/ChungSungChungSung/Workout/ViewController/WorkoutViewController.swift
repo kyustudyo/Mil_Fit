@@ -13,6 +13,7 @@ class WorkoutViewController: UIViewController {
     private var favoriteWorkouts: [String]?
     
     var workoutRealm: Results<WorkoutRealm>!
+    var numberOfTodaysWorkoutForScroll: Int = 0
     
     var workoutDates: [String] = [] {
         didSet {
@@ -360,6 +361,7 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
                     returnNumber = 1
                 } else {
                     returnNumber = todaysWorkout.count
+                    numberOfTodaysWorkoutForScroll = todaysWorkout.count
                 }
             }
             
@@ -440,6 +442,8 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
                         
                         todaysWorkoutView.reloadData()
                         dailyCalendarView.reloadData()
+                        print("toc", todaysWorkout.count - 1)
+                        todaysWorkoutView.scrollToRow(at: IndexPath(row: numberOfTodaysWorkoutForScroll - 1, section: 0), at: .none, animated: true)
                     } else {
                         showToast()
                     }
