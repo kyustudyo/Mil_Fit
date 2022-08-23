@@ -247,18 +247,21 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         let view = UICollectionViewFlowLayout()
         view.minimumLineSpacing = Constants.lineSpacing
         view.scrollDirection = .horizontal
+       
         return view
       }()
     
     private let mealCollectionViewFlowLayout: UICollectionViewFlowLayout = {
         let view = UICollectionViewFlowLayout()
         view.minimumLineSpacing = Constants.lineSpacing
+        
         view.scrollDirection = .horizontal
         return view
       }()
     
      private lazy var todoCollectionView: UICollectionView = {
          let view = UICollectionView(frame: .zero, collectionViewLayout: todoCollectionViewFlowLayout)
+         view.showsHorizontalScrollIndicator = false
          view.register(PurposeCollectionViewCell.self, forCellWithReuseIdentifier: PurposeCollectionViewCell.cellID)
          view.dataSource = self
          view.delegate = self
@@ -267,6 +270,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     
     private lazy var mealCollectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: mealCollectionViewFlowLayout)
+        view.showsHorizontalScrollIndicator = false
         view.register(mealCollectionViewCell.self, forCellWithReuseIdentifier: mealCollectionViewCell.cellID)
         view.layer.cornerRadius = 16
         view.dataSource = self
@@ -679,6 +683,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         
         mealVStack = UIStackView(arrangedSubviews: [mealHStack, mealCollectionView])
         mealVStack.axis = .vertical
+        
         mealCollectionView.backgroundColor = .clear
         mealEmptyView.addSubview(mealVStack)
         mealVStack.anchor(top: mealEmptyView.topAnchor, left: mealEmptyView.leftAnchor, bottom: mealEmptyView.bottomAnchor, right: mealEmptyView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)

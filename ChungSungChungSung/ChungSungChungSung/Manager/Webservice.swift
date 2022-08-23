@@ -38,7 +38,7 @@ class Webservice {
         URLSession.shared.dataTask(with: url) { data, _, error in
             RealmManager.deleteAllMealsData()
             if let data = data {
-                print("dddd", String(data: data, encoding: .utf8))
+//                print("dddd", String(data: data, encoding: .utf8))
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .custom { keys in
                     if keys.count == 1 {
