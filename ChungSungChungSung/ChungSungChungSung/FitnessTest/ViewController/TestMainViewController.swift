@@ -98,7 +98,7 @@ class TestMainViewController: UIViewController {
         configureRunningGraphView()
         configurePushupGraphView()
         configureSitupGraphView()
-        print("Realm저장위치=\n\(Realm.Configuration.defaultConfiguration.fileURL!)\n")
+//        print("Realm저장위치=\n\(Realm.Configuration.defaultConfiguration.fileURL!)\n")
         
         
     }

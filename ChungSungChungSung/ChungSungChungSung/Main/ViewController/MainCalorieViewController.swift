@@ -22,10 +22,10 @@ class MainCalorieViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = CustomColor.mainPurple
         
         let 오늘요일 = getDayOfWeek(date: Date().addingTimeInterval(60*60*9))
-        print("오늘요일", 오늘요일)
+//        print("오늘요일", 오늘요일)
         let 몇번째요일 = Int(요일들.firstIndex(of: 오늘요일) ?? 0)
         let 뒤에몇요일이있나 = 6 - 몇번째요일
-        print(오늘요일, 몇번째요일, 뒤에몇요일이있나)
+//        print(오늘요일, 몇번째요일, 뒤에몇요일이있나)
         
         let 앞에날짜들개수 = 몇번째요일
         let 뒤에날짜들개수 = 뒤에몇요일이있나 // 1
@@ -63,9 +63,9 @@ class MainCalorieViewController: UIViewController {
         for (i,date) in 전체날짜들모음.enumerated() {
             if let mealDate = RealmManager.searchMealDataByDate(date: dateformatter.string(from: date)) {
                 if mealDate.count != 0 {
-                    print("음식", getDayOfWeek(date: date))
+//                    print("음식", getDayOfWeek(date: date))
                     mealCalories[i] = CGFloat(mealDate[0].calories)
-                    print("calcal", CGFloat(mealDate[0].calories))
+//                    print("calcal", CGFloat(mealDate[0].calories))
                 }
 //                countOfDays = mealDate.count
             }
@@ -75,7 +75,7 @@ class MainCalorieViewController: UIViewController {
         dateFormatterForWorkout.locale = Locale(identifier: "ko_KR")
         dateFormatterForWorkout.dateFormat = "yyyyMMdd"
         var lastDayOfWorkout: Int = 1
-        print("--")
+//        print("--")
         for (i,date) in 전체날짜들모음.enumerated() {
             if let workoutDate = RealmManager.searchWorkoutDataByDateK(date: dateFormatterForWorkout.string(from: date)) {
                 if workoutDate.count != 0 {

@@ -60,7 +60,7 @@ class BodyInfoProfileViewController: UIViewController {
         if let weight = self.weightTextField.text, weight.count != 0 {
             if let iWeight = Int(weight) {
                 RealmManager.saveWeightData(date: Date().addingTimeInterval(60*60*9), weight: iWeight)
-                print("chch", Date().addingTimeInterval(60*60*9))
+//                print("chch", Date().addingTimeInterval(60*60*9))
             }
         }
         if let height = self.heightTextField.text, height.count != 0 {

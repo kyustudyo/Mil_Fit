@@ -16,7 +16,7 @@ class WorkoutViewController: UIViewController {
     
     var workoutDates: [String] = [] {
         didSet {
-            print("qwe",workoutDates)
+//            print("qwe",workoutDates)
             dailyCalendarView.reloadData()
             todaysWorkoutView.reloadData()
         }
@@ -84,7 +84,7 @@ class WorkoutViewController: UIViewController {
 //    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("viewWillAppear")
+//        print("viewWillAppear")
         
         configNavigationTitle()
         setWeekView()
@@ -92,7 +92,7 @@ class WorkoutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("qweqwe",Date().addingTimeInterval(60*60*9))
+//        print("qweqwe",Date().addingTimeInterval(60*60*9))
         workoutDates = (RealmManager.fetchSearchDidWorkoutDates2() ?? []).map {
             dateFormatterForWorkout.string(from: $0)
         }
@@ -105,7 +105,7 @@ class WorkoutViewController: UIViewController {
         
         let localWorkoutRealm = try! Realm()
         workoutRealm = localWorkoutRealm.objects(WorkoutRealm.self)
-        print("Realm저장위치=\n\(Realm.Configuration.defaultConfiguration.fileURL!)\n")
+//        print("Realm저장위치=\n\(Realm.Configuration.defaultConfiguration.fileURL!)\n")
         
         dateFormatterForFilter.dateFormat = "yyyyMMdd"
         dateFormatterForFilter.locale = Locale(identifier: "ko_KR")
@@ -183,7 +183,7 @@ class WorkoutViewController: UIViewController {
     {
         totalSquares.removeAll()
         시작일 = CalendarHelper().addDays(date: Date().addingTimeInterval(60*60*9), days: -300)
-        print("오늘", Date().addingTimeInterval(60*60*9))
+//        print("오늘", Date().addingTimeInterval(60*60*9))
         var current = 시작일
         //TODO: 끝일
         let nextSunday = CalendarHelper().addDays(date: Date().addingTimeInterval(60*60*9), days: 0)
@@ -214,10 +214,10 @@ class WorkoutViewController: UIViewController {
     }
     func updateHeaderLabel() {
         selectedDateView.text = "\(CalendarHelper().monthString(date: selectedDate))" + " " +  "\(CalendarHelper().dayOfMonth(date: selectedDate))일"
-        print("sel_", selectedDateView.text)
+//        print("sel_", selectedDateView.text)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = " yyyy-MM-dd"
-        print("sel", selectedDate, dateFormatter.string(from: selectedDate), dateFormatter.string(from: Date()))
+//        print("sel", selectedDate, dateFormatter.string(from: selectedDate), dateFormatter.string(from: Date()))
         if dateFormatter.string(from: Date()) == dateFormatter.string(from: selectedDate) {
             selectedDateView.text? += ", 오늘"
         }
@@ -277,7 +277,7 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
         
         cell.dayNameView.text = getDayOfWeek(date: date)
         cell.dateNumberView.text = String(CalendarHelper().dayOfMonth(date: date))
-        print("date", date, String(CalendarHelper().dayOfMonth(date: date)))
+//        print("date", date, String(CalendarHelper().dayOfMonth(date: date)))
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -323,7 +323,7 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
         dateFormatterForFilter.dateFormat = "yyyyMMdd"
         dateFormatterForFilter.locale = Locale(identifier: "ko_KR")
         selectedDateString = dateFormatterForFilter.string(from: selectedDate)
-        print(selectedDate)
+//        print(selectedDate)
         updateHeaderLabel()
         dailyCalendarView.reloadData()
         todaysWorkoutView.reloadData()
@@ -433,7 +433,7 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
                     }
                     if todaysWorkout.count == 0 {
                         RealmManager.saveWorkoutData(date: selectedDate, name: workoutName, count: nil, minutes: nil, seconds: nil, weight: nil, calories: nil)
-                        print("qwe",dateFormatterForWorkout.string(from: selectedDate))
+//                        print("qwe",dateFormatterForWorkout.string(from: selectedDate))
                         workoutDates.append(dateFormatterForWorkout.string(from: selectedDate))
 //                        UserDefaultManager.saveIsWorkoutDate(date: selectedDate)
 //                        workoutDates = defaults.stringArray(forKey: "workoutDate") ?? [String]()

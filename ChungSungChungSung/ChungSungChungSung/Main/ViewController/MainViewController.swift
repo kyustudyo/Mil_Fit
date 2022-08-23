@@ -182,7 +182,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     }()
     
     @objc fileprivate func goMoreMeal() {
-        print("more meal")
+//        print("more meal")
         let vc = MainMealViewController()
 
         vc.isMealCollectionView = 무슨부대인지
@@ -320,7 +320,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     
     
     override func viewWillAppear(_ animated: Bool) {
-        print("viewWillAppear")
+//        print("viewWillAppear")
 //        navigationItem.title = ""
 //        navigationController?.isNavigationBarHidden = true
 
@@ -368,7 +368,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
 
         let bmr = UserDefaultManager.loadBMR() ?? 0
         basicPercent = Double(bmr) / 5000.0 * 100.0
-        print("bmr", bmr, basicPercent)
+//        print("bmr", bmr, basicPercent)
         todayBasicCaloryLabel.text = "\(Double(bmr))kcal"
         basicRoundedView.progressValue = basicPercent
         basicRoundedView.update()
@@ -397,25 +397,25 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     }
     
     private func updateMealRoundedView() {
-        print("viewWillAppear말고 update")
+//        print("viewWillAppear말고 update")
         let dateFormatterForMeal = DateFormatter()
         dateFormatterForMeal.locale = Locale(identifier: "ko_KR")
         dateFormatterForMeal.dateFormat = "yyyy-MM-dd"
-        print("data!!!", RealmManager.searchMealDataByDate(date: dateFormatterForMeal.string(from: Date())))
+//        print("data!!!", RealmManager.searchMealDataByDate(date: dateFormatterForMeal.string(from: Date())))
         
-        print(RealmManager.allMealData()?.count)
-        print(RealmManager.searchMealDataByDate(date: dateFormatterForMeal.string(from: Date().addingTimeInterval(60*60*9)))?.count)
+//        print(RealmManager.allMealData()?.count)
+//        print(RealmManager.searchMealDataByDate(date: dateFormatterForMeal.string(from: Date().addingTimeInterval(60*60*9)))?.count)
         if let meal = RealmManager.searchMealDataByDate(date: dateFormatterForMeal.string(from: Date())) {
             if meal.count == 0 {
-                print("eatcheck no")
+//                print("eatcheck no")
                 eatPercent = 50.0
                 todayMealCaloryLabel.text = "2000kcal"
             } else {
-                print("cal", Double(meal[0].calories))
+//                print("cal", Double(meal[0].calories))
                 let eatCal = Double(meal[0].calories)
                 eatPercent = eatCal / 5000.0 * 100.0
                 todayMealCaloryLabel.text = "\(eatCal)kcal"
-                print("eatcheck", eatPercent)
+//                print("eatcheck", eatPercent)
             }
 
             self.eatRoundedView.progressValue = eatPercent
@@ -444,7 +444,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         calendar.delegate = self
         calendar.dataSource = self
         
-        print(Realm.Configuration.defaultConfiguration.fileURL!)
+//        print(Realm.Configuration.defaultConfiguration.fileURL!)
 
         setupUI()
        
@@ -495,7 +495,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         dDay.anchor(left: 전역일들.rightAnchor, paddingLeft: 8)
 //        dDay.anchor(left: 전역일들ContainerView.leftAnchor, paddingLeft: 16)
 //        nsConstraintFordDayLabel = dDay.rightAnchor.constraint(equalTo: 전역일들ContainerView.leftAnchor, constant: 전역가까움 > 0.1 ? (UIScreen.main.bounds.width - Constants.sideSpacing*3) * 전역가까움 : (전역일.intrinsicContentSize.width + 80) )
-        print("전각",전역가까움)
+//        print("전각",전역가까움)
         
         
 //        nsConstraintFordDayLabel = dDay.leftAnchor.constraint(equalTo: endDayBar.leftAnchor, constant: (UIScreen.main.bounds.width - Constants.sideSpacing*4) * (전역가까움 < 0.2 ? 0.2 : 전역가까움))
@@ -763,7 +763,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         switch collectionView {
         case todoCollectionView:
-            print("cell purposeCollectionView")
+//            print("cell purposeCollectionView")
             guard let cell = todoCollectionView.dequeueReusableCell(withReuseIdentifier: PurposeCollectionViewCell.cellID, for: indexPath) as? PurposeCollectionViewCell else { return UICollectionViewCell() }
 //            let cell = PurposeCollectionViewCell(todo:  todoData[indexPath.row])
             
@@ -781,7 +781,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.thumbButton.tintColor = todoData[indexPath.row].isDone == false ? .gray : .none
             return cell
         case mealCollectionView:
-            print("cell mealCollectionView")
+//            print("cell mealCollectionView")
             guard let cell = mealCollectionView.dequeueReusableCell(withReuseIdentifier: mealCollectionViewCell.cellID, for: indexPath) as? mealCollectionViewCell else { return UICollectionViewCell() }
             cell.mealLabel.text = ["조식", "중식", "석식"][indexPath.row]
 //            cell.반찬들 = mealData[indexPath.row].mealArray
@@ -900,7 +900,7 @@ extension MainViewController {
     }
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        print(dateFormatter.string(from: date))
+//        print(dateFormatter.string(from: date))
         self.dismiss(animated: true, completion: nil)
     }
 

@@ -89,18 +89,18 @@ class WorkoutTempAddViewController: UIViewController {
         }else if workoutInfo.0 == .시간운동 {
             if firstTextField.text == nil {
                 if Int(secondTextField.text!) == nil {
-                    print("여기")
+//                    print("여기")
                     return 2
                 }
             }else if secondTextField.text == nil {
                 if Int(firstTextField.text!) == nil {
-                    print("저기")
+//                    print("저기")
                     return 2
                 }
             }else {
                 if Int(firstTextField.text!) == nil &&
                     Int(secondTextField.text!) == nil {
-                print("거기")
+//                print("거기")
                   return 2
                 }
             }

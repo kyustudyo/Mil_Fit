@@ -30,7 +30,7 @@ class ToDoListRealm: Object {
         }else {
             self.dateSorting = -1
         }
-        print("chchch2", convertInt)
+//        print("chchch2", convertInt)
     }
 }
 

@@ -77,7 +77,7 @@ class GoalsDetailViewController: UIViewController {
 
 extension GoalsDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("qqqq", lists.count)
+//        print("qqqq", lists.count)
             return lists.count
     }
     

@@ -184,7 +184,7 @@ extension RealmManager {
     }
     
     static func todoDoneAt(_ id: Int) {
-        print(id)
+//        print(id)
         let localRealm = try! Realm()
         let todoDone = localRealm.objects(ToDoListRealm.self)
                             .filter("dateSorting == %@", id)

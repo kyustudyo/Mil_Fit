@@ -111,7 +111,7 @@ extension ProfileViewController: GoalsDetailViewDelegate, BadgeDetailViewDelegat
     func didTapGoalsMoreButton() {
         guard let goalsDetailView = UIStoryboard(name: "GoalsDetail", bundle: .main).instantiateViewController(withIdentifier: "GoalsDetailViewController") as? GoalsDetailViewController else { return }
         
-        print("qwer", RealmManager.doneTodoData2()?.count, RealmManager.notDoneTodoData2()?.count)
+//        print("qwer", RealmManager.doneTodoData2()?.count, RealmManager.notDoneTodoData2()?.count)
         goalsDetailView.delegate = self
         goalsDetailView.deleteDelegate = self
 //        goalsDetailView.doneTodos = RealmManager.doneTodoData2()
@@ -183,7 +183,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             
             if let todo = todo {
                 cell.goalLabel.text = todo.content
-                print("qwer", dateFormatter.string(from: todo.date))
+//                print("qwer", dateFormatter.string(from: todo.date))
                 cell.goalSavedDateLabel.text = dateFormatter.string(from: todo.date)
                 
             } else {
@@ -258,7 +258,7 @@ extension RealmManager {
     static func searchCurrentWeight2() -> Int? {
         let localRealm = try! Realm()
         let realm = localRealm.objects(WeightRealm.self)
-        print("렘\(realm)")
+//        print("렘\(realm)")
         let target = realm.sorted(byKeyPath: "dateSorting", ascending: false)
         if target.count == 0 {
             return nil
@@ -327,7 +327,7 @@ extension ProfileViewController: EditDischargeViewRelated {
 extension ProfileViewController: DischargeEdit {
     func changeDischarge() {
         dischargeDate = UserDefaultManager.loadDischargeDate2()
-        print(UserDefaultManager.loadDischargeDate2())
+//        print(UserDefaultManager.loadDischargeDate2())
         profileTableView.reloadData()
     }
 }
@@ -393,7 +393,7 @@ extension RealmManager {
 extension ProfileViewController: TodoAdd {
     func addTodo() {
         todo = RealmManager.searchCurrentTodo()
-        print(todo?.content)
+//        print(todo?.content)
         profileTableView.reloadData()
     }
 }
@@ -401,7 +401,7 @@ extension ProfileViewController: TodoAdd {
 extension ProfileViewController: DeleteTodo {
     func didDelete() {
         todo = RealmManager.searchCurrentTodo()
-        print(todo?.content)
+//        print(todo?.content)
         profileTableView.reloadData()
     }
 }

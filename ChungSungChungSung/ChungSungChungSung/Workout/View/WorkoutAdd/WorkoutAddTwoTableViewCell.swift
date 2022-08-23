@@ -50,7 +50,7 @@ class WorkoutAddTwoTableViewCell: UITableViewCell, UITextFieldDelegate {
 //        secondInputText = secondInputField.text
         
         let textFieldIndexPath = self.tag
-        print("textField 저장됨")
+//        print("textField 저장됨")
         WorkoutAddViewController().endTextEdit(firstInputField.text ?? "", secondInputField.text ?? "", textFieldIndexPath)
     }
 }

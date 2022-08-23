@@ -54,10 +54,10 @@ class WorkoutPreviousViewController: UIViewController {
     
     private func fetchWorkouts(date: Date) {
         if let mealDate = RealmManager.searchWorkoutDataByDateK2(date: dateFormatterForWorkout.string(from: date)) {
-            print("cc",mealDate.count)
+//            print("cc",mealDate.count)
             if mealDate.count != 0 {
                 운동들 = mealDate.map{$0.name}
-                print(운동들.count)
+//                print(운동들.count)
                 tableView.reloadData()
                 update()
             } else {
@@ -199,7 +199,7 @@ extension WorkoutPreviousViewController: FSCalendarDelegate, FSCalendarDataSourc
 //        print("123",selectedDate)
         let today = dateFormatterForWorkout.string(from: Date())
 //        print("1234",today)
-        print("qwer", events2, dateFormatterForWorkout.string(from: date))
+//        print("qwer", events2, dateFormatterForWorkout.string(from: date))
         if selectedDate == today {
             return CustomColor.mainPurple
         } else if events2.contains(dateFormatterForWorkout.string(from: date)) {
@@ -246,7 +246,7 @@ extension WorkoutPreviousViewController: FSCalendarDelegate, FSCalendarDataSourc
 extension WorkoutPreviousViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(운동들.count, "???")
+//        print(운동들.count, "???")
         return 운동들.count
 //        return workoutList.count
     }

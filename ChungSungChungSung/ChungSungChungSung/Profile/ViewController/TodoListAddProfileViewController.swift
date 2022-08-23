@@ -33,7 +33,7 @@ class TodoListAddProfileViewController: UIViewController {
             RealmManager.saveTodoListData(date: Date(), content: tf, isDone: false)
             if let notDoneTodos = RealmManager.notDoneTodoData2() {
 //                goalList = notDoneTodos
-                print(notDoneTodos.count)
+//                print(notDoneTodos.count)
             }
             
             delegate?.addTodo()

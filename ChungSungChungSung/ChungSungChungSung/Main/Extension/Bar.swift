@@ -54,12 +54,12 @@ class Bar: UIView {
         self.layer.borderColor = UIColor.clear.cgColor
         self.layer.borderWidth = 1.0
         let total =  Double(self.frame.width)
-        print("eat",progressValue)
-        print("eat2,", total)
+//        print("eat",progressValue)
+//        print("eat2,", total)
         let width =  ((total * progressValue) / 100.0).rounded()
         let height = Double(self.frame.height)
         progressView = UIView(frame: CGRect(x: 0, y: 0, width:  width, height: height))
-        print("count", self.subviews.count)
+//        print("count", self.subviews.count)
         self.subviews.forEach({ $0.removeFromSuperview()})
 //        if self.subviews.count == 1 {
             self.addSubview(progressView)

@@ -100,13 +100,13 @@ class WorkoutAddViewController: UIViewController {
             
             self.workoutAddTable.setEditing(false, animated: true)
             
-            print(workoutTemp.count)
+//            print(workoutTemp.count)
             
             for index in workoutTemp {
                 RealmManager.saveWorkoutData(date: selectedDate, name: workoutAddTitleText, set: index.set, count: index.count, minutes: index.minutes, seconds: index.seconds, weight: index.weight, calories: index.calories)
             }
         } else {
-            print(workoutTemp.count)
+//            print(workoutTemp.count)
             
             for i in 0...workoutTemp.count {
                 if basicWorkoutData[workoutAddTitleText]?.0 == .시간운동 {
@@ -131,7 +131,7 @@ class WorkoutAddViewController: UIViewController {
         }
         if secondText != "" {
             secondInput[tag] = secondText
-            print("text 가져옴")
+//            print("text 가져옴")
         }
     }
 }
@@ -209,8 +209,8 @@ extension WorkoutAddViewController: UITableViewDelegate, UITableViewDataSource {
             workoutTemp[numberOfSets].set = numberOfSets + 1
             numberOfSets = numberOfSets + 1
             
-            print(indexPath.row)
-            print(numberOfSets)
+//            print(indexPath.row)
+//            print(numberOfSets)
             workoutAddTable.reloadData()
         }
     }

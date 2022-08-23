@@ -112,7 +112,7 @@ class MainMealViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = false
-        print(isMealCollectionView)
+//        print(isMealCollectionView)
         
     }
     
@@ -188,7 +188,7 @@ class MainMealViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(totalSquares)
+//        print(totalSquares)
         return totalSquares.count
     }
     
@@ -236,8 +236,8 @@ class MainMealViewController: UIViewController, UICollectionViewDelegate, UIColl
 //        }
         mealData = RealmManager.searchMealDataByDate(date: self.selectedDate.formatterAppliedString())
         
-        print(self.selectedDate.formatterAppliedString())
-        print(mealData)
+//        print(self.selectedDate.formatterAppliedString())
+//        print(mealData)
         
         collectionView.reloadData()
         tableView.reloadData()
@@ -256,18 +256,18 @@ extension MainMealViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: mainMealTableViewCellID, for: indexPath) as? MainMealTableViewCell
         else { return UITableViewCell() }
-        print(indexPath.section)
+//        print(indexPath.section)
         cell.whenMealLabel.text = ["조식", "중식", "석식"][indexPath.section]
 //        cell.calorieLabel.text = "\(mealData[indexPath.section].calories)kcal"
         
-        print("qwer", indexPath.section)
+//        print("qwer", indexPath.section)
 //        print("qwer",cell.mealStrings.isEmpty)
 //        print("qwer",cell.mealStrings)
 //        print("qwer")
 //        cell.mealStrings = cell.mealStrings.isEmpty ? mealData[indexPath.section].mealArray : []
 //        cell.label1.text = mealData[indexPath.section].mealArray[0]
         guard let mealData = mealData else { return cell }
-        print(mealData[indexPath.section].mealArray)
+//        print(mealData[indexPath.section].mealArray)
         let array = mealData[indexPath.section].mealArray
         if array.count > 0 {
             cell.label1.text = array[0]
