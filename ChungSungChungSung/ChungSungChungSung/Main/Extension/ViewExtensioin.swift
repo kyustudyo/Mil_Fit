@@ -106,6 +106,7 @@ extension UIView{
             gradient.cornerRadius = 25
         }
 //        gradient.fillMode = .both
+        layer.sublayers?.forEach{ $0.removeFromSuperlayer() }
         layer.addSublayer(gradient)
     }
 }
