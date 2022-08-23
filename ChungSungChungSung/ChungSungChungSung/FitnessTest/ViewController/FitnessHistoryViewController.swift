@@ -155,7 +155,7 @@ extension FitnessHistoryViewController: UITableViewDataSource, UITableViewDelega
         guard let cell = historyTableView.dequeueReusableCell(withIdentifier: FitnessHistoryTableViewCell.identifier, for: indexPath) as? FitnessHistoryTableViewCell else { return UITableViewCell() }
         var realm = resultRealm!
         if sortedButton.currentTitle == "최신순" {
-            realm = realm.sorted(byKeyPath: "dateSorting", ascending: false)
+            realm = realm.sorted(byKeyPath: "dateSorting", ascending: true)
         }else {
             if index == 0 {
                 realm = realm.sorted(byKeyPath: "totalTime", ascending: true)
