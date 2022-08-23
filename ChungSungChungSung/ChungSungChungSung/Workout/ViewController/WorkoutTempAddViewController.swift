@@ -107,8 +107,8 @@ class WorkoutTempAddViewController: UIViewController {
                 caloriesLabel.text = "추정 칼로리 : \(caloriesCalculator())Kcal"
             }
         }else {
-            firstLabel.text = "분"
-            secondLabel.text = "초"
+            firstLabel.text = "시간"
+            secondLabel.text = "분"
             if workoutRealm.minutes != nil {
                 firstTextField.text = "\(workoutRealm.minutes!)"
             }
@@ -125,7 +125,7 @@ class WorkoutTempAddViewController: UIViewController {
         var calories = 0
         let weight = localRealm.objects(WeightRealm.self).sorted(byKeyPath: "dateSorting", ascending: false).first?.weight
         if workoutInfo.0 == .시간운동 {
-            time = Double(workoutRealm.minutes ?? 0) + (Double(workoutRealm.seconds ?? 0) / 60)
+            time = Double((workoutRealm.minutes ?? 0) * 60) + (Double(workoutRealm.seconds ?? 0))
         }else {
             time = Double(workoutRealm.count ?? 0) * 0.8
         }
