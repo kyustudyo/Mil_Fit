@@ -70,9 +70,9 @@ class TestMainViewController: UIViewController {
             emptyLabel.isHidden = true
             fitnessGraphButton.isHidden = false
             drawGraphViewRectangleUI()
-            configureRunningGraphView()
-            configurePushupGraphView()
-            configureSitupGraphView()
+            setRunningGraphView()
+            setPushupGraphView()
+            setSitupGraphView()
         }
     }
     override func viewDidLoad() {
@@ -92,8 +92,11 @@ class TestMainViewController: UIViewController {
         fitnessGraphButton.tintColor = UIColor.clear
         fitnessGraphButton.titleLabel?.text = ""
         drawTableViewUI()
-        
+        configureRunningGraphView()
+        configurePushupGraphView()
+        configureSitupGraphView()
         print("Realm저장위치=\n\(Realm.Configuration.defaultConfiguration.fileURL!)\n")
+        
         
     }
     //TODO: 어딨지
@@ -178,6 +181,39 @@ class TestMainViewController: UIViewController {
         }
     func drawTableViewUI() {
         recordTableViewTitleLabel.text = "종목별 최고 기록"
+    }
+    func setRunningGraphView() {
+        print(#function)
+        let runningRealm = fitnessTestRealm.filter("testType == 'running'").filter("isPractice == false").first
+        let maxStandard = getMaxStandard(testType: .running, level: "특급")
+        var rate = Double(maxStandard - (runningRealm?.totalTime ?? 0)) / Double(maxStandard)
+        if maxStandard == (runningRealm?.totalTime ?? 0) {
+            rate = 1
+        }
+        runningData.rate = rate
+        runningData.level = runningRealm?.level ?? "불합격"
+    }
+    func setPushupGraphView() {
+        let pushupRealm = fitnessTestRealm.filter("testType == 'pushup'").filter("isPractice == false").first
+        let maxStandard = getMaxStandard(testType: .pushup, level: "특급")
+        var rate = Double(maxStandard - (pushupRealm?.count ?? 0)) / Double(maxStandard)
+        if maxStandard <= (pushupRealm?.count ?? 0) {
+            rate = 1
+        }
+        pushupData.rate = rate
+        pushupData.level = pushupRealm?.level ?? "불합격"
+//        UIHostingController(rootView: PushupGraphSwiftUIView(graphData: pushupData))
+    }
+    func setSitupGraphView() {
+        let situpRealm = fitnessTestRealm.filter("testType == 'situp'").filter("isPractice == false").first
+        let maxStandard = getMaxStandard(testType: .situp, level: "특급")
+        var rate = Double(maxStandard - (situpRealm?.count ?? 0)) / Double(maxStandard)
+        if maxStandard <= (situpRealm?.count ?? 0) {
+            rate = 1
+        }
+        situpData.rate = rate
+        situpData.level = situpRealm?.level ?? "불합격"
+//        UIHostingController(rootView: SitupGraphSwiftUIView(graphData: situpData))
     }
     func configureRunningGraphView() {
         let runningRealm = fitnessTestRealm.filter("testType == 'running'").filter("isPractice == false").first

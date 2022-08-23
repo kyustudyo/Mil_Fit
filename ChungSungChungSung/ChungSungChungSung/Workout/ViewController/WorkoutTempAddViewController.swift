@@ -130,7 +130,7 @@ class WorkoutTempAddViewController: UIViewController {
         if workoutInfo.0 == .시간운동 {
             time = Double(workoutRealm.minutes ?? 0)
         }else {
-            time = 30
+            time = Double(workoutRealm.count ?? 0) * 0.8
         }
         let met: Double = workoutInfo.1
         let weightDouble: Double = Double(weight ?? 0)
@@ -138,4 +138,3 @@ class WorkoutTempAddViewController: UIViewController {
         return calories
     }
 }
-
