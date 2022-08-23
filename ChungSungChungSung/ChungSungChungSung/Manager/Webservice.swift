@@ -9,7 +9,7 @@ import Foundation
 import FSCalendar
 class keyValues {
     
-    static let ids = ["3932313635323235383532323032313430","3133313635303732333032353832313337","3036313631323236383432323032313039"]
+    static let ids = ["3932313635323235383532323032313430","3133313635303732333032353832313337","3036313631323236383432323032313039", "3839313636363331343832323732303937"]
 
     static func getId() -> String {
         ids.randomElement() ?? ""
@@ -38,6 +38,7 @@ class Webservice {
         URLSession.shared.dataTask(with: url) { data, _, error in
             RealmManager.deleteAllMealsData()
             if let data = data {
+                print("dddd", String(data: data, encoding: .utf8))
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .custom { keys in
                     if keys.count == 1 {

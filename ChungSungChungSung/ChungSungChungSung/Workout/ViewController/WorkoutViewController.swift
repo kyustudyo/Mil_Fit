@@ -43,7 +43,7 @@ class WorkoutViewController: UIViewController {
     let dateFormatterForFilter = DateFormatter()
     var selectedDateString: String?
     
-    let 시작일 = CalendarHelper().addDays(date: Date().addingTimeInterval(60*60*9), days: -300)
+    var 시작일 = Date()
     var selectedDate = Date()
     var totalSquares = [Date]()
     
@@ -87,6 +87,7 @@ class WorkoutViewController: UIViewController {
         print("viewWillAppear")
         
         configNavigationTitle()
+        setWeekView()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,6 +119,7 @@ class WorkoutViewController: UIViewController {
         self.view.backgroundColor = CustomColor.bgGray
         self.navigationController?.navigationBar.prefersLargeTitles = true
         setTableViewShadow()
+        setWeekView()
 //        configNavigationTitle()
 //        self.dailyCalendarView.isPagingEnabled = true
 //        let backBarButtonItem = UIBarButtonItem(title: workoutViewTitle, style: .plain, target: nil, action: nil)
@@ -143,9 +145,9 @@ class WorkoutViewController: UIViewController {
         todaysWorkoutView.dataSource = self
         workoutListView.delegate = self
         workoutListView.dataSource = self
-        setWeekView()
+        
     }
-    
+
     @objc fileprivate func goPreviousViewController() {
         let vc = WorkoutPreviousViewController()
         navigationController?.pushViewController(vc, animated: true)
@@ -180,14 +182,14 @@ class WorkoutViewController: UIViewController {
     func setWeekView()
     {
         totalSquares.removeAll()
-        
+        시작일 = CalendarHelper().addDays(date: Date().addingTimeInterval(60*60*9), days: -300)
         print("오늘", Date().addingTimeInterval(60*60*9))
         var current = 시작일
         //TODO: 끝일
-        let nextSunday = CalendarHelper().addDays(date: Date().addingTimeInterval(60*60*9), days: 300)
-        while (current < nextSunday)
+        let nextSunday = CalendarHelper().addDays(date: Date().addingTimeInterval(60*60*9), days: 0)
+        while (current < nextSunday - 1)
         {
-            print(current)
+//            print(current)
             totalSquares.append(current)
             current = CalendarHelper().addDays(date: current, days: 1)
         }
@@ -200,7 +202,7 @@ class WorkoutViewController: UIViewController {
         }) {
             DispatchQueue.main.async {
 //                self.dailyCalendarView.isPagingEnabled = true
-                self.dailyCalendarView.scrollToItem(at: [0, index], at: .centeredHorizontally, animated: false)
+                self.dailyCalendarView.scrollToItem(at: [0, index], at: .right, animated: false)
                 self.dailyCalendarView.decelerationRate = .fast
                 self.dailyCalendarView.isPagingEnabled = false
                 self.updateHeaderLabel()

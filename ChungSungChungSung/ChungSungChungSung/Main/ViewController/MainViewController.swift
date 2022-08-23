@@ -397,11 +397,11 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         let dateFormatterForMeal = DateFormatter()
         dateFormatterForMeal.locale = Locale(identifier: "ko_KR")
         dateFormatterForMeal.dateFormat = "yyyy-MM-dd"
-        print("data!!!", RealmManager.searchMealDataByDate(date: dateFormatterForMeal.string(from: Date().addingTimeInterval(60*60*9))))
+        print("data!!!", RealmManager.searchMealDataByDate(date: dateFormatterForMeal.string(from: Date())))
         
         print(RealmManager.allMealData()?.count)
         print(RealmManager.searchMealDataByDate(date: dateFormatterForMeal.string(from: Date().addingTimeInterval(60*60*9)))?.count)
-        if let meal = RealmManager.searchMealDataByDate(date: dateFormatterForMeal.string(from: Date().addingTimeInterval(60*60*9))) {
+        if let meal = RealmManager.searchMealDataByDate(date: dateFormatterForMeal.string(from: Date())) {
             if meal.count == 0 {
                 print("eatcheck no")
                 eatPercent = 50.0
@@ -932,7 +932,7 @@ extension MainViewController: ArmySelection {
                 dateformatter.dateFormat = "yyyy-MM-dd"
                 dateformatter.locale = Locale(identifier: "ko_KR")
                 
-                self.mealData = RealmManager.searchMealDataByDate(date: dateformatter.string(from: Date().addingTimeInterval(60*60*9)))
+                self.mealData = RealmManager.searchMealDataByDate(date: dateformatter.string(from: Date()))
                 self.무슨부대인지 = selectedArmy
                 
                 if selectedArmy != "없음" {
