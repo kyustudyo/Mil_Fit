@@ -34,16 +34,13 @@ class FitnessTestAddViewController: UIViewController {
 //        runningSwitch.isOn = false
 //        situpSwitch.isOn = false
 //        pushupSwitch.isOn = false
-        runningMinute.backgroundColor = .systemGray6
-        runningSecond.backgroundColor = .systemGray6
-        pushupCount.backgroundColor = .systemGray6
-        situpCount.backgroundColor = .systemGray6
-        dateTextField.backgroundColor = .white
-        dateTextField.layer.cornerRadius = 12
-        runningMinute.layer.cornerRadius = 12
-        runningSecond.layer.cornerRadius = 12
-        pushupCount.layer.cornerRadius = 12
-        situpCount.layer.cornerRadius = 12
+        
+        [runningMinute, runningSecond, pushupCount, dateTextField,situpCount].forEach { tf in
+            tf?.backgroundColor = UIColor(hex: "#767680")?.withAlphaComponent(0.12)
+            tf?.layer.cornerRadius = 12
+        }
+  
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonClicked))
         navigationItem.rightBarButtonItem?.tintColor = CustomColor.mainPurple
         

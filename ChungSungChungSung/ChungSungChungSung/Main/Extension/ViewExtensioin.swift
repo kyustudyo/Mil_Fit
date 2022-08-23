@@ -117,5 +117,14 @@ extension UIView{
         self.layer.shadowOpacity = 1
 //        self.layer.masksToBounds = false
     }
+    
+    func setShadowGray5() {
+        self.layer.cornerRadius = 12
+        self.layer.shadowColor = UIColor.systemGray5.cgColor
+        self.layer.shadowRadius = 20
+        self.layer.shadowOpacity = 1
+//        self.layer.masksToBounds = false
+    }
+
 }
 
