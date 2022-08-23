@@ -16,7 +16,6 @@ class TodoListAddProfileViewController: UIViewController {
         super.viewDidLoad()
         
 //        let plusButton = UIButton()
-        
 //        let plusImage = UIImage(systemName: "plus")
 //        plusButton.setImage(plusImage, for: .normal)
 //        plusButton.addTarget(self, action: #selector(goAddGoalViewController), for: .touchUpInside)

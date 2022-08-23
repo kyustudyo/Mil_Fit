@@ -272,12 +272,21 @@ extension RealmManager {
             localRealm.delete(alls)
         }
     }
+    static func deleteAllFitnessTestData() {
+        
+        let localRealm = try! Realm()
+        let alls = localRealm.objects(FitnessTestRealm.self)
+        try! localRealm.write {
+            localRealm.delete(alls)
+        }
+    }
     
     static func deleteAllData() {
         deleteAllMealsData()
         deleteAllTodo2()
         deleteAllWorkoutData()
         deleteAllBadgesData()
+        deleteAllFitnessTestData()
     }
 }
 
