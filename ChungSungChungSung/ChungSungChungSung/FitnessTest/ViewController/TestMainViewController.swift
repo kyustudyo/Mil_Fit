@@ -198,7 +198,7 @@ class TestMainViewController: UIViewController {
         situpGraphRecordLabel.text = "\(situpRealm.count!)회"
         situpGraphRecordLabel.textColor = UIColor.systemGray
         let situpGoalLevel = getGoalLevel(level: situpRealm.level)
-        let situpMinStandard = getMinStandard(testType: .pushup, level: situpGoalLevel ?? "특급")
+        let situpMinStandard = getMinStandard(testType: .situp, level: situpGoalLevel ?? "특급")
         if situpGoalLevel == nil {
             situpGoalLabel.isHidden = true
         }else {
