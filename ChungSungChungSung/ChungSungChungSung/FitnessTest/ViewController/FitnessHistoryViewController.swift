@@ -177,7 +177,7 @@ extension FitnessHistoryViewController: UITableViewDataSource, UITableViewDelega
         dateFormatter.locale = Locale(identifier: "ko_KR")
         cell.dateLabel.text = "\(dateFormatter.string(from: realm[indexPath.row].date))"
         if index == 0 {
-            cell.recordLabel.text = "\(realm[indexPath.row].minutes!)분 \(realm[indexPath.row].seconds!)초(\(realm[indexPath.row].level))"
+            cell.recordLabel.text = "\(realm[indexPath.row].minutes ?? 0)분 \(realm[indexPath.row].seconds ?? 0)초(\(realm[indexPath.row].level))"
         }else {
             cell.recordLabel.text = "\(realm[indexPath.row].count!)개(\(realm[indexPath.row].level))"
         }

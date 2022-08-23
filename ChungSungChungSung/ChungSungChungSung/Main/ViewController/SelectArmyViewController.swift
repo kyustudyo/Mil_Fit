@@ -37,6 +37,7 @@ class SelectArmyViewController: UIViewController {
 //        view.backgroundColor = .systemGray6
         let confirmArmyChangeButton = UIBarButtonItem(title: "확인", style: .plain, target: self, action: #selector(confirmArmyChange))
         self.navigationItem.rightBarButtonItems = [confirmArmyChangeButton]
+        self.navigationController?.navigationBar.tintColor = CustomColor.mainPurple
         
         view.addSubview(tableView)
         tableView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 16, paddingLeft: 16, paddingBottom: 0, paddingRight: 16)

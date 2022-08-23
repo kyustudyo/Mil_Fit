@@ -129,8 +129,9 @@ class MainMealViewController: UIViewController, UICollectionViewDelegate, UIColl
         
         navigationItem.title = "식단"
         navigationController?.navigationBar.topItem?.backButtonTitle = "메인"
-        
+        editBarButton.tintColor = CustomColor.mainPurple
         self.navigationItem.rightBarButtonItems = [editBarButton]
+    
         tableView.register(MainMealTableViewCell.self, forCellReuseIdentifier: mainMealTableViewCellID)
         tableView.delegate = self
         tableView.dataSource = self

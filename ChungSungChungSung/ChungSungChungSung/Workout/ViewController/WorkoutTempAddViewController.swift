@@ -54,15 +54,10 @@ class WorkoutTempAddViewController: UIViewController {
                 }else {
                     workoutRealm.count = Int(secondTextField.text ?? "0")
                 }
-            })
-            view.makeToast("저장되었습니다.", duration: 3.0, position: .bottom)
-            
-            try! localRealm.write({
                 workoutRealm.calories = caloriesCalculator()
             })
-
+            view.makeToast("저장되었습니다.", duration: 3.0, position: .bottom)
             setUI()
-            
         }else {
             view.makeToast("빈칸없이 입력해주세요", duration: 3.0, position: .bottom)
         }
@@ -112,14 +107,16 @@ class WorkoutTempAddViewController: UIViewController {
                 caloriesLabel.text = "추정 칼로리 : \(caloriesCalculator())Kcal"
             }
         }else {
-            firstLabel.text = "분"
-            secondLabel.text = "초"
+            firstLabel.text = "시간"
+            secondLabel.text = "분"
             if workoutRealm.minutes != nil {
                 firstTextField.text = "\(workoutRealm.minutes!)"
-                caloriesLabel.text = "추정 칼로리 : \(caloriesCalculator())Kcal"
             }
             if workoutRealm.seconds != nil {
                 secondTextField.text = "\(workoutRealm.seconds!)"
+            }
+            if workoutRealm.minutes != nil || workoutRealm.seconds != nil {
+                caloriesLabel.text = "추정 칼로리 : \(caloriesCalculator())Kcal"
             }
         }
     }
@@ -128,13 +125,13 @@ class WorkoutTempAddViewController: UIViewController {
         var calories = 0
         let weight = localRealm.objects(WeightRealm.self).sorted(byKeyPath: "dateSorting", ascending: false).first?.weight
         if workoutInfo.0 == .시간운동 {
-            time = Double(workoutRealm.minutes ?? 0)
+            time = Double((workoutRealm.minutes ?? 0) * 60) + (Double(workoutRealm.seconds ?? 0))
         }else {
             time = Double(workoutRealm.count ?? 0) * 0.8
         }
         let met: Double = workoutInfo.1
         let weightDouble: Double = Double(weight ?? 0)
-        calories = Int((met * (3.5 * weightDouble * time)) / 1000) * 5
+        calories = Int(((met * (3.5 * weightDouble * time)) / 1000) * 5)
         return calories
     }
 }
