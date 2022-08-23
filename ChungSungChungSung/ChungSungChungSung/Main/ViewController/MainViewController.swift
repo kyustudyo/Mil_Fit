@@ -23,6 +23,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     
     var nsConstraintForNoMealData: NSLayoutConstraint?
     var nsConstraintForNoTodoData: NSLayoutConstraint?
+    var nsConstraintFordDayLabel: NSLayoutConstraint?
     
     var 무슨부대인지: String = ""// 부대
     var 있는부대인지: Bool = false// 있는 부대인지
@@ -331,10 +332,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
                 
                 let col2 = UIColor(red: 113/255.0, green: 87/255.0, blue: 219/255.0, alpha: 1)
                 endDayBar.setGradient(color1: col2, color2: col1, width: (UIScreen.main.bounds.width - Constants.sideSpacing*4) * 전역가까움)
-                
-                dDay.anchor(right:전역일들ContainerView.leftAnchor, paddingRight: 전역가까움 > 0.1 ? -(UIScreen.main.bounds.width - Constants.sideSpacing*3) * 전역가까움 : -(전역일.intrinsicContentSize.width + 80))
                 dDay.text = "D-\(leftDay)"
-                dDay.layoutIfNeeded()
             }
         }
         
@@ -372,6 +370,10 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
             workoutRoundedView.progressValue =  basicPercent + workoutPercent
             workoutRoundedView.update()
         }
+       
+//        dDay.anchor(right:전역일들ContainerView.leftAnchor, paddingRight: 전역가까움 > 0.1 ? -(UIScreen.main.bounds.width - Constants.sideSpacing*3) * 전역가까움 : -(전역일.intrinsicContentSize.width + 80))
+//        nsConstraintFordDayLabel = dDay.rightAnchor.constraint(equalTo: 전역일들ContainerView.leftAnchor, constant: 전역가까움 > 0.1 ? (UIScreen.main.bounds.width - Constants.sideSpacing*3) * 전역가까움 : (전역일.intrinsicContentSize.width + 80))
+//        nsConstraintFordDayLabel?.isActive = true
         
         todoCollectionView.reloadData()
         mealCollectionView.reloadData()
@@ -457,18 +459,31 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
 
         //MARK: 전역일 프로그레스
 //        let 전역일들ContainerView = UIView()
+        
+        
         emptyView.addSubview(전역일들ContainerView)
         전역일들ContainerView.layer.cornerRadius = 16
         전역일들ContainerView.backgroundColor = .white
         전역일들ContainerView.setHeight(height: 100)
         전역일들ContainerView.anchor(top: stack.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 32.0, paddingLeft: 0, paddingRight: 0)
         
-        let 전역일들 = UIStackView(arrangedSubviews: [전역일, dDay])
+        let 전역일들 = UIStackView(arrangedSubviews: [전역일])
         전역일들ContainerView.addSubview(전역일들)
         전역일들.anchor(top: 전역일들ContainerView.topAnchor, left: 전역일들ContainerView.leftAnchor, paddingTop: 26.0, paddingLeft: 16.0)
+//        전역일.back
         전역일들ContainerView.addSubview(endDayBar)
         endDayBar.anchor(top:전역일들.bottomAnchor, left: 전역일들ContainerView.leftAnchor, right: 전역일들ContainerView.rightAnchor,paddingTop: 12, paddingLeft: 16, paddingRight: 16)
 
+        emptyView.addSubview(dDay)
+        dDay.centerY(inView: 전역일들)
+        dDay.anchor(left: 전역일들.rightAnchor, paddingLeft: 8)
+//        dDay.anchor(left: 전역일들ContainerView.leftAnchor, paddingLeft: 16)
+//        nsConstraintFordDayLabel = dDay.rightAnchor.constraint(equalTo: 전역일들ContainerView.leftAnchor, constant: 전역가까움 > 0.1 ? (UIScreen.main.bounds.width - Constants.sideSpacing*3) * 전역가까움 : (전역일.intrinsicContentSize.width + 80) )
+        print("전각",전역가까움)
+        
+        
+//        nsConstraintFordDayLabel = dDay.leftAnchor.constraint(equalTo: endDayBar.leftAnchor, constant: (UIScreen.main.bounds.width - Constants.sideSpacing*4) * (전역가까움 < 0.2 ? 0.2 : 전역가까움))
+//        nsConstraintFordDayLabel?.isActive = true
         //MARK: (목표들)
         
         let purposeStack = UIStackView(arrangedSubviews: [purposeLabel, todoCollectionView])
