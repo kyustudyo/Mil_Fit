@@ -92,6 +92,10 @@ class BodyInfoProfileViewController: UIViewController {
             let lineDataEntry = ChartDataEntry(x: Double(i), y: lineValues[i])
             lineDataEntries.append(lineDataEntry)
         }
+        let format = NumberFormatter()
+        format.numberStyle = .none
+        let formatter = DefaultValueFormatter(formatter: format)
+        
         let lineChartDataSet = LineChartDataSet(entries: lineDataEntries, label: "체중")
         lineChartDataSet.colors = [CustomColor.mainPurple!]
         lineChartDataSet.circleColors = [CustomColor.mainPurple!]
@@ -100,6 +104,8 @@ class BodyInfoProfileViewController: UIViewController {
         lineChartDataSet.circleRadius = 5.0
         lineChartDataSet.highlightEnabled = false
         let data = LineChartData(dataSet: lineChartDataSet)
+        data.setValueFormatter(formatter)
+        data.setValueFont(.systemFont(ofSize: 11, weight: .semibold))
         weightGraphView.data = data
         weightGraphView.rightAxis.enabled = false
         weightGraphView.drawGridBackgroundEnabled = false
