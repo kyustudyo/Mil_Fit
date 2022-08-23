@@ -58,11 +58,11 @@ class FitnessTestAddViewController: UIViewController {
             view.makeToast("날짜를 입력해주세요.", duration: 3.0, position: .bottom)
         }else {
             if exerciseAndTestSegment.selectedSegmentIndex == 0 {
-                if (runningSwitch.isOn && (runningMinute.text == "" || runningSecond.text == "")) || (pushupSwitch.isOn && (pushupCount.text == "")) || (situpSwitch.isOn && situpCount.text == "") {
+                if (runningSwitch.isOn && (runningMinute.text == "" && runningSecond.text == "")) {
                     view.makeToast("빈칸없이 입력해주세요.", duration: 2.0, position: .bottom)
                 }else {
-                    if runningMinute.text != "" && runningSecond.text != "" {
-                        RealmManager.saveFitnessTestData(date: datePicker.date, testType: "running", count: nil, minutes: Int(runningMinute.text!), seconds: Int(runningSecond.text!), level: calculateLevel(testType: .running, minutes: Int(runningMinute.text!), seconds: Int(runningSecond.text!), count: nil), isPractice: true)
+                    if runningMinute.text != "" || runningSecond.text != "" {
+                        RealmManager.saveFitnessTestData(date: datePicker.date, testType: "running", count: nil, minutes: Int(runningMinute.text ?? "0"), seconds: Int(runningSecond.text ?? "0"), level: calculateLevel(testType: .running, minutes: Int(runningMinute.text!), seconds: Int(runningSecond.text!), count: nil), isPractice: true)
                         view.makeToast("저장되었습니다.", duration: 2.0, position: .top)
                     }
                     if pushupCount.text != "" {
