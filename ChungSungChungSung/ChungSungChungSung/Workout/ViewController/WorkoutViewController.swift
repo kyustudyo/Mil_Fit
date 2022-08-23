@@ -409,8 +409,8 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let workout = workoutList[indexPath.row]
-        print("\(indexPath.row) \(workout.title) selected.")
+//        let workout = workoutList[indexPath.row]
+//        print("\(indexPath.row) \(workout.title) selected.")
         
         if tableView == todaysWorkoutView {
             guard let workoutAddView = UIStoryboard(name: "WorkoutTempAdd", bundle: .main).instantiateViewController(withIdentifier: "WorkoutTempAddViewController") as? WorkoutTempAddViewController else { return }
