@@ -37,6 +37,7 @@ class BodyInfoProfileViewController: UIViewController {
 
         
         let completeBarButton = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(completeEdit))
+        self.navigationController?.navigationBar.tintColor = CustomColor.mainPurple
         self.navigationItem.rightBarButtonItems = [completeBarButton]
     }
     

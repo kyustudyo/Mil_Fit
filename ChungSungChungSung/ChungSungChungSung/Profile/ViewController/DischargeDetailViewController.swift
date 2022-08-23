@@ -17,6 +17,7 @@ class DischargeDetailViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = CustomColor.bgGray
+        self.navigationController?.navigationBar.tintColor = CustomColor.mainPurple
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         dischargeDateTextField.text = date
