@@ -39,6 +39,8 @@ class BodyInfoProfileViewController: UIViewController {
         let completeBarButton = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(completeEdit))
         self.navigationController?.navigationBar.tintColor = CustomColor.mainPurple
         self.navigationItem.rightBarButtonItems = [completeBarButton]
+        navigationItem.title = "신체 정보"
+        navigationItem.largeTitleDisplayMode = .never
     }
     
     func setChartData(data: Results<WeightRealm>) -> [Double] {

@@ -27,6 +27,7 @@ class DischargeDetailViewController: UIViewController {
         let completeBarButton = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(completeEdit))
         self.navigationItem.rightBarButtonItems = [completeBarButton]
         navigationItem.title = "전역 정보"
+        navigationItem.largeTitleDisplayMode = .never
     }
 
     @IBAction func completeEdit(_ sender: Any) {

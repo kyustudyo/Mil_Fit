@@ -54,6 +54,7 @@ class GoalsDetailViewController: UIViewController {
         
         self.navigationController?.navigationBar.tintColor = CustomColor.mainPurple
         self.navigationItem.title = "목표"
+        navigationItem.largeTitleDisplayMode = .never
     }
     
     private func navigationConfig() {
