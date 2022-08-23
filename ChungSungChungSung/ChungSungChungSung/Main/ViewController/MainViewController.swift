@@ -22,6 +22,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     var basicPercent = 0.0
     
     var nsConstraintForNoMealData: NSLayoutConstraint?
+    var nsConstraintForNoTodoData: NSLayoutConstraint?
     
     var 무슨부대인지: String = ""// 부대
     var 있는부대인지: Bool = false// 있는 부대인지
@@ -218,6 +219,12 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         let label = UILabel()
         return label
     }()
+    
+    private let selectTodoLabel: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    
     private let selectArmyButton: UIButton = {
         let button = UIButton()
         return button
@@ -278,6 +285,10 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         return UIView()
     }()
     
+    private let selectTodoView: UIView = {
+        return UIView()
+    }()
+    
     private let 전역일들ContainerView: UIView = {
         return UIView()
     }()
@@ -327,7 +338,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
             }
         }
         
-        todoData = RealmManager.notDoneTodoData()
+        todoUpdate()
         
         let dateFormatterForWorkout = DateFormatter()
         dateFormatterForWorkout.locale = Locale(identifier: "ko_KR")
@@ -365,6 +376,11 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         todoCollectionView.reloadData()
         mealCollectionView.reloadData()
         
+    }
+    private func todoUpdate() {
+        todoData = RealmManager.notDoneTodoData()
+        todoEmptyView.isHidden = (todoData == nil) ? false : true
+        selectTodoLabel.text =  (todoData != nil) ? "" : "프로필에서 목표를 설정하세요."
     }
     
     private func updateMealRoundedView() {
@@ -454,11 +470,47 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         endDayBar.anchor(top:전역일들.bottomAnchor, left: 전역일들ContainerView.leftAnchor, right: 전역일들ContainerView.rightAnchor,paddingTop: 12, paddingLeft: 16, paddingRight: 16)
 
         //MARK: (목표들)
+        
         let purposeStack = UIStackView(arrangedSubviews: [purposeLabel, todoCollectionView])
         purposeStack.axis = .vertical
         purposeStack.spacing = 8
         emptyView.addSubview(purposeStack)
         purposeStack.anchor(top: 전역일들ContainerView.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 40, paddingLeft: 0, paddingRight: 0)
+        
+        
+        emptyView.addSubview(todoEmptyView)
+        todoEmptyView.anchor(top: purposeLabel.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 8, paddingLeft: 0, paddingRight: 0, height: Constants.purposeCellHeight)
+//        todoEmptyView.backgroundColor = .red
+        todoEmptyView.addSubview(selectTodoView)
+        
+        selectTodoView.addSubview(selectTodoLabel)
+        selectTodoView.layer.cornerRadius = 16
+        
+        todoData = RealmManager.notDoneTodoData()
+        selectTodoLabel.text =  (todoData != nil) ? "" : "프로필에서 목표를 설정하세요."
+        selectTodoLabel.textColor = .black
+        selectTodoLabel.numberOfLines = 0
+        selectTodoLabel.textAlignment = .center
+        
+        selectTodoLabel.centerX(inView: selectTodoView)
+        selectTodoLabel.centerY(inView: selectTodoView)
+        
+//        todoCollectionView.addSubview(selectTodoView)
+        selectTodoView.backgroundColor = .white
+        selectTodoView.anchor(top: todoEmptyView.topAnchor, left: todoEmptyView.leftAnchor, right: todoEmptyView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0)
+        
+        nsConstraintForNoTodoData = selectTodoView.heightAnchor.constraint(equalToConstant: Constants.purposeCellHeight )
+        nsConstraintForNoTodoData?.isActive = true
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         todoCollectionView.anchor(left: stack.leftAnchor, right: stack.rightAnchor, paddingLeft: 0, paddingRight: 0)
         todoCollectionView.setHeight(height: Constants.purposeCellHeight)
         todoCollectionView.backgroundColor = .systemGray6
@@ -575,6 +627,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     fileprivate var mealHStack = UIStackView()
     
     fileprivate var mealEmptyView = UIView()
+    fileprivate var todoEmptyView = UIView()
     
     private func updateMealAndCalView() {
         
@@ -815,9 +868,11 @@ extension MainViewController: didPurpose {
     func getThumbUp(todoID: Int) {
         RealmManager.todoDoneAt(todoID)
         todoCollectionView.isScrollEnabled = false
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.14) {
             self.todoCollectionView.reloadData()
             self.todoCollectionView.isScrollEnabled = true
+            self.todoUpdate()
         }
     }
 }
