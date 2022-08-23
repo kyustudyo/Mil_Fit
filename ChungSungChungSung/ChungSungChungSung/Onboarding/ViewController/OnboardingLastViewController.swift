@@ -66,6 +66,7 @@ class OnboardingLastViewController: UIViewController {
         formatter.dateFormat = "yyyy년 M월 dd일"
         formatter.locale = Locale(identifier: "ko_KR")
         //            self.date = datePicker.date
+        self.datePicker.minimumDate = Date()
         self.dateTF.text = formatter.string(from: datePicker.date)
     }
     

@@ -56,6 +56,7 @@ class DischargeDetailViewController: UIViewController {
         let formatter = DateFormatter() // Date 타입과 관련된 포맷터
         formatter.dateFormat = "yyyy년 M월 dd일"
         formatter.locale = Locale(identifier: "ko_KR")
+        self.datePicker.minimumDate = Date()
         self.dischargeDateTextField.text = formatter.string(from: datePicker.date)
     }
 }
