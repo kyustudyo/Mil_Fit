@@ -85,6 +85,8 @@ class mealCollectionViewCell: UICollectionViewCell {
     
     fileprivate func setupUI() {
         self.layer.cornerRadius = 16
+        self.setShadow()
+       
 //        contentView.layer.cornerRadius = 16
 //        self.layer.backgroundColor = CustomColor.blue?.cgColor
 //        self.contentView.backgroundColor = .clear

@@ -228,6 +228,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     
     private let selectArmyButton: UIButton = {
         let button = UIButton()
+        button.layer.cornerRadius = 16
         return button
     }()
     
@@ -267,6 +268,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     private lazy var mealCollectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: mealCollectionViewFlowLayout)
         view.register(mealCollectionViewCell.self, forCellWithReuseIdentifier: mealCollectionViewCell.cellID)
+        view.layer.cornerRadius = 16
         view.dataSource = self
         view.delegate = self
       return view
@@ -291,10 +293,16 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     }()
     
     private let 전역일들ContainerView: UIView = {
-        return UIView()
+        let view = UIView()
+        view.setShadow()
+        return view
     }()
     
-    private let calContainerView = UIView()
+    private let calContainerView: UIView = {
+        let view = UIView()
+        view.setShadow()
+        return view
+    }()
     
     var mealData:Results<MealRealm>?
     var todoData:Results<ToDoListRealm>?
@@ -309,16 +317,17 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     
     override func viewWillAppear(_ animated: Bool) {
         print("viewWillAppear")
-
-        navigationController?.isNavigationBarHidden = true
+//        navigationItem.title = ""
+//        navigationController?.isNavigationBarHidden = true
 
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ko_KR")
         dateFormatter.dateFormat = "yyyy년 M월 dd일"
-        
-        dateLabel.text = dateFormatter.string(from: Date())
+        navigationItem.title  = dateFormatter.string(from: Date())
+//        navigationController?.navigationBar.barTintColor = CustomColor.bgGray
         
         var calendar = Calendar(identifier: .gregorian)
+        
         calendar.timeZone = TimeZone(secondsFromGMT: 0)!
         let startOfDate = calendar.startOfDay(for: Date().addingTimeInterval(60*60*9))
         
@@ -328,6 +337,8 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
             if let leftDay = Calendar.current.dateComponents([.day], from: startOfDate, to: dischargeDate).day {
                 
                 전역가까움 = Double(800 - (leftDay <= 800 ? leftDay : 800)) / Double(800)
+                전역가까움 = leftDay < 0 ? 1 : 전역가까움
+                
                 let col1 = UIColor(red: 170/255.0, green: 144/255.0, blue: 239/255.0, alpha: 1)
                 
                 let col2 = UIColor(red: 113/255.0, green: 87/255.0, blue: 219/255.0, alpha: 1)
@@ -370,11 +381,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
             workoutRoundedView.progressValue =  basicPercent + workoutPercent
             workoutRoundedView.update()
         }
-       
-//        dDay.anchor(right:전역일들ContainerView.leftAnchor, paddingRight: 전역가까움 > 0.1 ? -(UIScreen.main.bounds.width - Constants.sideSpacing*3) * 전역가까움 : -(전역일.intrinsicContentSize.width + 80))
-//        nsConstraintFordDayLabel = dDay.rightAnchor.constraint(equalTo: 전역일들ContainerView.leftAnchor, constant: 전역가까움 > 0.1 ? (UIScreen.main.bounds.width - Constants.sideSpacing*3) * 전역가까움 : (전역일.intrinsicContentSize.width + 80))
-//        nsConstraintFordDayLabel?.isActive = true
-        
+
         todoCollectionView.reloadData()
         mealCollectionView.reloadData()
         
@@ -419,7 +426,8 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemGray6
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        view.backgroundColor = CustomColor.bgGray
         
         mealData = RealmManager.searchMealDataByDate(date: Date().formatterAppliedString())
         todoData = RealmManager.notDoneTodoData()
@@ -428,6 +436,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         dateFormatter.locale = Locale(identifier: "ko_KR")
         dateFormatter.dateFormat = "yyyy-MM-dd"
         
+        calendar.setShadow()
         calendar.delegate = self
         calendar.dataSource = self
         
@@ -439,24 +448,27 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
 
     func setupUI() {
         let scrollView = UIScrollView()
+        
         view.addSubview(scrollView)
-        
+//        view.backgroundColor = .green
         scrollView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
-        
-        emptyView.backgroundColor = .white
+        scrollView.backgroundColor = CustomColor.bgGray
+        emptyView.backgroundColor = CustomColor.bgGray
         scrollView.addSubview(emptyView)
         emptyView.anchor(top: scrollView.topAnchor, left: scrollView.leftAnchor,bottom: scrollView.bottomAnchor ,right: scrollView.rightAnchor, paddingTop: 0, paddingLeft: 0,paddingBottom: 0 ,paddingRight: 0)
         emptyView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-        emptyView.backgroundColor = .systemGray6
+        emptyView.backgroundColor = CustomColor.bgGray
     
         //MARK: (날짜 + 멘트)
 //        let stack = UIStackView(arrangedSubviews: [dateLabel])
         stack.addSubview(dateLabel)
         dateLabel.anchor(left: stack.leftAnchor, paddingLeft: 4)
         dateLabel.centerY(inView: stack)
+        dateLabel.isHidden = true
         emptyView.addSubview(stack)
-        stack.anchor(top: emptyView.topAnchor, left: emptyView.leftAnchor, right: emptyView.rightAnchor, paddingTop: 40, paddingLeft: 16, paddingRight: 16)
-
+        stack.anchor(top: emptyView.topAnchor, left: emptyView.leftAnchor, right: emptyView.rightAnchor, paddingTop: 0, paddingLeft: 16, paddingRight: 16)
+//        stack.backgroundColor = .red
+        
         //MARK: 전역일 프로그레스
 //        let 전역일들ContainerView = UIView()
         
@@ -465,7 +477,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         전역일들ContainerView.layer.cornerRadius = 16
         전역일들ContainerView.backgroundColor = .white
         전역일들ContainerView.setHeight(height: 100)
-        전역일들ContainerView.anchor(top: stack.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 32.0, paddingLeft: 0, paddingRight: 0)
+        전역일들ContainerView.anchor(top: stack.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 22.0, paddingLeft: 0, paddingRight: 0)
         
         let 전역일들 = UIStackView(arrangedSubviews: [전역일])
         전역일들ContainerView.addSubview(전역일들)
@@ -495,12 +507,20 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         
         emptyView.addSubview(todoEmptyView)
         todoEmptyView.anchor(top: purposeLabel.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 8, paddingLeft: 0, paddingRight: 0, height: Constants.purposeCellHeight)
+//        todoEmptyView.setShadow()
+            
+//        todoEmptyView.layer.shadowOpacity = 1
+//
+//        todoEmptyView.layer.shadowRadius = 10
+//
+//        todoEmptyView.layer.masksToBounds = false
+        
 //        todoEmptyView.backgroundColor = .red
         todoEmptyView.addSubview(selectTodoView)
         
         selectTodoView.addSubview(selectTodoLabel)
         selectTodoView.layer.cornerRadius = 16
-        
+
         todoData = RealmManager.notDoneTodoData()
         selectTodoLabel.text =  (todoData != nil) ? "" : "프로필에서 목표를 설정하세요."
         selectTodoLabel.textColor = .black
@@ -514,21 +534,14 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         selectTodoView.backgroundColor = .white
         selectTodoView.anchor(top: todoEmptyView.topAnchor, left: todoEmptyView.leftAnchor, right: todoEmptyView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0)
         
+        selectTodoView.setShadow()
+        
         nsConstraintForNoTodoData = selectTodoView.heightAnchor.constraint(equalToConstant: Constants.purposeCellHeight )
         nsConstraintForNoTodoData?.isActive = true
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
         todoCollectionView.anchor(left: stack.leftAnchor, right: stack.rightAnchor, paddingLeft: 0, paddingRight: 0)
         todoCollectionView.setHeight(height: Constants.purposeCellHeight)
-        todoCollectionView.backgroundColor = .systemGray6
+        todoCollectionView.backgroundColor = .clear
         //MARK: 운동 달력
 
         emptyView.addSubview(workoutLabel)
@@ -641,8 +654,16 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     
     fileprivate var mealHStack = UIStackView()
     
-    fileprivate var mealEmptyView = UIView()
-    fileprivate var todoEmptyView = UIView()
+    fileprivate var mealEmptyView: UIView = {
+        let view = UIView()
+        view.setShadow()
+        return view
+    }()
+    fileprivate var todoEmptyView: UIView = {
+        let view = UIView()
+//        view.setShadow()
+        return view
+    }()
     
     private func updateMealAndCalView() {
         
@@ -663,6 +684,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         mealVStack.anchor(top: mealEmptyView.topAnchor, left: mealEmptyView.leftAnchor, bottom: mealEmptyView.bottomAnchor, right: mealEmptyView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
         
         mealEmptyView.anchor(top: calendar.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 40, paddingLeft: 0, paddingRight: 0, height: Constants.mealCellHeight + 40)
+        
         mealCollectionView.anchor(top: mealHStack.bottomAnchor, left: mealEmptyView.leftAnchor, bottom: mealEmptyView.bottomAnchor, right: mealEmptyView.rightAnchor, paddingTop: 8, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, height: Constants.mealCellHeight)
         
         selectArmyView.addSubview(activityIndicator)
@@ -680,12 +702,14 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         selectArmyLabel.centerY(inView: selectArmyView)
         
         mealEmptyView.addSubview(selectArmyView)
+        selectArmyView.layer.cornerRadius = 16
         selectArmyView.backgroundColor = .white
         selectArmyView.anchor(top: mealCollectionView.topAnchor, left: mealEmptyView.leftAnchor, right: mealEmptyView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0)
         
         selectArmyView.addSubview(selectArmyButton)
         
-        nsConstraintForNoMealData = selectArmyView.heightAnchor.constraint(equalToConstant: 210)
+        nsConstraintForNoMealData = selectArmyView.heightAnchor.constraint(equalToConstant: mealData != nil ? 0 : 210)
+        selectArmyLabel.isHidden = mealData != nil ? true : false
         nsConstraintForNoMealData?.isActive = true
         selectArmyButton.addTarget(self, action: #selector(goSelectArmyViewController), for: .touchUpInside)
         selectArmyButton.tag = 77
@@ -912,6 +936,7 @@ extension MainViewController: ArmySelection {
                 self.무슨부대인지 = selectedArmy
                 
                 if selectedArmy != "없음" {
+                    
                     self.nsConstraintForNoMealData?.constant = 0
                     self.selectArmyButton.isUserInteractionEnabled = false
                     self.moreButton.isHidden = false
@@ -949,3 +974,4 @@ enum Constants {
     static let smallText = 15.0
     static let middleText = 17.0
   }
+

@@ -90,6 +90,8 @@ class WorkoutViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("qweqwe",Date().addingTimeInterval(60*60*9))
         workoutDates = (RealmManager.fetchSearchDidWorkoutDates2() ?? []).map {
             dateFormatterForWorkout.string(from: $0)
         }
@@ -179,17 +181,21 @@ class WorkoutViewController: UIViewController {
     {
         totalSquares.removeAll()
         
+        print("오늘", Date().addingTimeInterval(60*60*9))
         var current = 시작일
         //TODO: 끝일
         let nextSunday = CalendarHelper().addDays(date: Date().addingTimeInterval(60*60*9), days: 300)
         while (current < nextSunday)
         {
+            print(current)
             totalSquares.append(current)
             current = CalendarHelper().addDays(date: current, days: 1)
         }
         if let index = totalSquares.firstIndex(where: { date in
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = " yyyy-MM-dd"
+            dateFormatter.locale = Locale(identifier: "ko_KR")
+            
             return dateFormatter.string(from: date) == dateFormatter.string(from: Date())
         }) {
             DispatchQueue.main.async {
@@ -206,9 +212,10 @@ class WorkoutViewController: UIViewController {
     }
     func updateHeaderLabel() {
         selectedDateView.text = "\(CalendarHelper().monthString(date: selectedDate))" + " " +  "\(CalendarHelper().dayOfMonth(date: selectedDate))일"
+        print("sel_", selectedDateView.text)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = " yyyy-MM-dd"
-        
+        print("sel", selectedDate, dateFormatter.string(from: selectedDate), dateFormatter.string(from: Date()))
         if dateFormatter.string(from: Date()) == dateFormatter.string(from: selectedDate) {
             selectedDateView.text? += ", 오늘"
         }
@@ -268,7 +275,7 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
         
         cell.dayNameView.text = getDayOfWeek(date: date)
         cell.dateNumberView.text = String(CalendarHelper().dayOfMonth(date: date))
-//        print("date", date, String(CalendarHelper().dayOfMonth(date: date)))
+        print("date", date, String(CalendarHelper().dayOfMonth(date: date)))
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
