@@ -604,7 +604,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         selectArmyView.addSubview(selectArmyLabel)
         selectArmyView.layer.cornerRadius = 16
         selectArmyLabel.text =  무슨부대인지.isEmpty ? "부대를\n선택하세요" : "해당 부대는 식단 정보를\n제공하지 않습니다"
-        selectArmyLabel.textColor = .systemBlue
+        selectArmyLabel.textColor = CustomColor.mainPurple
         selectArmyLabel.numberOfLines = 0
         selectArmyLabel.textAlignment = .center
         
