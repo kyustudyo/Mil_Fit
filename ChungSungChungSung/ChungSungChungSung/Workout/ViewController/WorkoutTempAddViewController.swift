@@ -8,6 +8,7 @@
 import UIKit
 import RealmSwift
 import Toast_Swift
+import SwiftUI
 
 class WorkoutTempAddViewController: UIViewController {
 
@@ -43,7 +44,9 @@ class WorkoutTempAddViewController: UIViewController {
         setUI()
     }
     @objc func saveButtonClicked() {
-        if isValid() {
+        let validNumber = isValid()
+        switch validNumber {
+        case 0 :
             try! localRealm.write({
                 if workoutInfo.0 == .무게운동 {
                     workoutRealm.weight = Int(firstTextField.text ?? "0")
@@ -56,29 +59,60 @@ class WorkoutTempAddViewController: UIViewController {
                 }
                 workoutRealm.calories = caloriesCalculator()
             })
-            view.makeToast("저장되었습니다.", duration: 3.0, position: .bottom)
+            view.makeToast("저장되었습니다.", duration: 3.0, position: .top)
             setUI()
-        }else {
-            view.makeToast("빈칸없이 입력해주세요", duration: 3.0, position: .bottom)
+        case 1 : view.makeToast("빈칸없이 입력해주세요", duration: 3.0, position: .top)
+        case 2: view.makeToast("숫자만 입력해주세요", duration: 3.0, position: .top)
+        default: break
         }
-        
     }
-    func isValid() -> Bool {
+    
+    func isValid() -> Int {
         if workoutInfo.0 == .무게운동 {
             if firstTextField.text == "" || secondTextField.text == "" {
-                return false
+                return 1
             }
-        }else if workoutInfo.0 == .시간운동{
+        } else if workoutInfo.0 == .시간운동{
             if firstTextField.text == "" && secondTextField.text == "" {
-                return false
+                return 1
             }
-        }else {
+        } else {
             if secondTextField.text == "" {
-                return false
+                return 1
             }
         }
-        return true
+        if workoutInfo.0 == .무게운동 {
+            if Int(firstTextField.text ?? "") == nil ||
+              Int(secondTextField.text ?? "") == nil {
+            return 2
+            }
+        }else if workoutInfo.0 == .시간운동 {
+            if firstTextField.text == nil {
+                if Int(secondTextField.text!) == nil {
+                    print("여기")
+                    return 2
+                }
+            }else if secondTextField.text == nil {
+                if Int(firstTextField.text!) == nil {
+                    print("저기")
+                    return 2
+                }
+            }else {
+                if Int(firstTextField.text!) == nil &&
+                    Int(secondTextField.text!) == nil {
+                print("거기")
+                  return 2
+                }
+            }
+        }else {
+            if Int(secondTextField.text!) == nil {
+                return 2
+            }
+        }
+           
+        return 0
     }
+    
     func setUI() {
         rectangleView.backgroundColor = .systemGray6
         rectangleView.layer.cornerRadius = 20
