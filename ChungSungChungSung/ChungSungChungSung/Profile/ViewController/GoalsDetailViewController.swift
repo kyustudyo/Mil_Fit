@@ -57,20 +57,11 @@ class GoalsDetailViewController: UIViewController {
         navigationItem.largeTitleDisplayMode = .never
     }
     
-    private func navigationConfig() {
-        let editButton = UIButton()
-        let editImage = UIImage(systemName: "text.badge.minus")
-        editButton.setImage(editImage, for: .normal)
-        editButton.addTarget(self, action: #selector(didTapEditButton), for: .touchUpInside)
-    
-        let plusButton = UIButton()
-        let plusImage = UIImage(systemName: "plus")
-        plusButton.setImage(plusImage, for: .normal)
-        plusButton.addTarget(self, action: #selector(goAddTodoVC), for: .touchUpInside)
+    private func navigationConfig() {        
+        let editButton = UIBarButtonItem(image: UIImage(systemName: "text.badge.minus"), style: .plain, target: self, action: #selector(didTapEditButton))
+        let plusButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(goAddTodoVC))
         
-        let editBarButton = UIBarButtonItem(customView: editButton)
-        let plusBarButton = UIBarButtonItem(customView: plusButton)
-        self.navigationItem.rightBarButtonItems = [plusBarButton, editBarButton]
+        self.navigationItem.rightBarButtonItems = [plusButton, editButton]
     }
     
     @objc private func didTapEditButton() {
