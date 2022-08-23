@@ -125,7 +125,7 @@ class WorkoutViewController: UIViewController {
         todaysWorkoutView.register(todaysWorkoutEmptyTableViewCellNib, forCellReuseIdentifier: "todaysWorkoutEmptyTableViewCell")
         
         let editBarButton = UIBarButtonItem(image: UIImage(systemName: "calendar"), style: .plain, target: self, action: #selector(goPreviousViewController))
-        editBarButton.tintColor = .black
+        editBarButton.tintColor = CustomColor.mainPurple
         self.navigationItem.rightBarButtonItems = [editBarButton]
         
         self.dailyCalendarView.backgroundColor = .clear
