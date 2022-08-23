@@ -235,18 +235,18 @@ class WorkoutViewController: UIViewController {
     
     func showToast() {
         let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 100, y: 60, width: 200, height: 50))
-        toastLabel.backgroundColor = UIColor.white.withAlphaComponent(1.0)
-        toastLabel.layer.borderColor = UIColor.systemGray5.cgColor
-        toastLabel.layer.borderWidth = 1
-        toastLabel.textColor = UIColor.black
-        toastLabel.font = UIFont.systemFont(ofSize: 15)
+        toastLabel.backgroundColor = UIColor.systemGray.withAlphaComponent(1.0)
+//        toastLabel.layer.borderColor = UIColor.systemGray2.cgColor
+//        toastLabel.layer.borderWidth = 1
+        toastLabel.textColor = UIColor.white
+        toastLabel.font = UIFont.boldSystemFont(ofSize: 15)
         toastLabel.text = "이미 추가된 운동입니다."
         toastLabel.textAlignment = .center
-        toastLabel.alpha = 1.0
+        toastLabel.alpha = 0.9
         toastLabel.layer.cornerRadius = 25
         toastLabel.clipsToBounds = true
         self.view.addSubview(toastLabel)
-        UIView.animate(withDuration: 3.0, delay: 0.1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 1.0, delay: 1, options: .curveEaseOut, animations: {
             toastLabel.alpha = 0.0
         }, completion: {(isCompleted) in
             toastLabel.removeFromSuperview()

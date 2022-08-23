@@ -19,6 +19,7 @@ class MainCalorieViewController: UIViewController {
     override func viewDidLoad() {
         navigationItem.title = "칼로리"
         navigationController?.navigationBar.topItem?.backButtonTitle = "메인"
+        self.navigationController?.navigationBar.tintColor = CustomColor.mainPurple
         
         let 오늘요일 = getDayOfWeek(date: Date().addingTimeInterval(60*60*9))
         print("오늘요일", 오늘요일)

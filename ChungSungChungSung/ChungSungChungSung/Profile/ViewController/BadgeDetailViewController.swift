@@ -30,6 +30,7 @@ class BadgeDetailViewController: UIViewController/*, UIViewControllerTransitioni
         self.view.backgroundColor = CustomColor.bgGray
         self.navigationController?.navigationBar.tintColor = CustomColor.mainPurple
         self.navigationItem.title = "획득한 뱃지"
+        navigationItem.largeTitleDisplayMode = .never
         badgeDetailCollectionView.backgroundColor = .clear
         
         let badgeCollectionViewCellNib = UINib(nibName: "BadgeCollectionViewCell", bundle: nil)

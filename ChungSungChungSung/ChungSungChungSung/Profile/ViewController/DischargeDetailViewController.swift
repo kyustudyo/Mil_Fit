@@ -17,6 +17,7 @@ class DischargeDetailViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = CustomColor.bgGray
+        self.navigationController?.navigationBar.tintColor = CustomColor.mainPurple
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         dischargeDateTextField.text = date
@@ -26,6 +27,7 @@ class DischargeDetailViewController: UIViewController {
         let completeBarButton = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(completeEdit))
         self.navigationItem.rightBarButtonItems = [completeBarButton]
         navigationItem.title = "전역 정보"
+        navigationItem.largeTitleDisplayMode = .never
     }
 
     @IBAction func completeEdit(_ sender: Any) {
