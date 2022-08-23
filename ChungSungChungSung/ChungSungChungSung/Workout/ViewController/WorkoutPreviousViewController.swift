@@ -46,7 +46,7 @@ class WorkoutPreviousViewController: UIViewController {
     fileprivate let tableView = UITableView()
     var 운동들:[String] = ["푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝"]
     
-    private var workoutList = WorkoutData().list
+//    private var workoutList = WorkoutData().list
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = false
@@ -97,6 +97,7 @@ class WorkoutPreviousViewController: UIViewController {
         
         tableView.layer.cornerRadius = 16
         tableView.rowHeight = 44
+        
         view.addSubview(calendar)
         calendar.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 8, paddingLeft: 16, paddingRight: 16, height: 300)
         calendar.backgroundColor = .white
@@ -255,7 +256,8 @@ extension WorkoutPreviousViewController: UITableViewDelegate, UITableViewDataSou
         cell.workoutNameLabel.text = 운동들[indexPath.row]
 //        cell.workoutNameLabel.text = workoutList[indexPath.row].title
 //        cell.separatorInset = (indexPath.row == 운동들.count - 1) ? UIEdgeInsets(top: 0, left: 0, bottom: 0, right: tableView.bounds.width) : UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-
+        
+        cell.selectionStyle = .none
         
         return cell
     }
