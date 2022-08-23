@@ -75,7 +75,7 @@ class FitnessHistoryViewController: UIViewController {
         if data == nil {
             return valueArray
         }else {
-            let data = data!.sorted(byKeyPath: "dateSorting", ascending: false)
+            let data = data!.sorted(byKeyPath: "dateSorting", ascending: true)
             for i in data {
                 if i.testType == "running" {
                     let length = String(i.seconds ?? 0).count
@@ -104,7 +104,14 @@ class FitnessHistoryViewController: UIViewController {
         format.numberStyle = .none
         let formatter = DefaultValueFormatter(formatter: format)
         
-        let lineChartDataSet = LineChartDataSet(entries: lineDataEntries, label: "분.초")
+        var label = ""
+        if index == 0 {
+            label = "분.초"
+        }else {
+            label = "회"
+        }
+        
+        let lineChartDataSet = LineChartDataSet(entries: lineDataEntries, label: label)
         lineChartDataSet.colors = [CustomColor.mainPurple!]
         lineChartDataSet.circleColors = [CustomColor.mainPurple!]
         lineChartDataSet.lineWidth = 3
@@ -116,18 +123,16 @@ class FitnessHistoryViewController: UIViewController {
         if index != 0 {
             data.setValueFormatter(formatter)
         }
-        data.setValueFont(.systemFont(ofSize: 10))
+//        data.setValueFont(.systemFont(ofSize: 10))
+        data.setValueFont(.systemFont(ofSize: 11, weight: .semibold))
 //        lineChartView.leftAxis.valueFormatter = DefaultAxisValueFormatter(formatter: valFormatter)
         lineChartView.data = data
         lineChartView.rightAxis.enabled = false
         lineChartView.drawGridBackgroundEnabled = false
         lineChartView.leftAxis.enabled = false
         lineChartView.xAxis.enabled = false
-        if (index == 0) {
-            lineChartView.legend.enabled = true
-        }else {
-            lineChartView.legend.enabled = false
-        }
+        lineChartView.legend.enabled = true
+ 
         
         lineChartView.backgroundColor = .white
         lineChartView.doubleTapToZoomEnabled = false

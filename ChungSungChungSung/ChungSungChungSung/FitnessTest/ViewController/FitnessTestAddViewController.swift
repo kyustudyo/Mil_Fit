@@ -188,6 +188,10 @@ class FitnessTestAddViewController: UIViewController {
     }
     
     @objc func donePressed(){
+        let formmater = DateFormatter()
+        formmater.dateFormat = "yyyy년 MM월 dd일"
+        formmater.locale = Locale(identifier: "ko_KR")
+        self.dateTextField.text = formmater.string(from: datePicker.date)
         self.view.endEditing(true)
     }
     
