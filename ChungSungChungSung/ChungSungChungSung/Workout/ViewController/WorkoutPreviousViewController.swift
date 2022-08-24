@@ -14,7 +14,7 @@ class WorkoutPreviousViewController: UIViewController {
 
     var workoutRealm: Results<WorkoutRealm>!
     
-    
+    var selected = Date()
 //    var workoutDates = [String]()
     let dateFormatterHighlight = DateFormatter()
     let 운동안했습니다 = "운동을 하지 않았습니다."
@@ -221,7 +221,7 @@ extension WorkoutPreviousViewController: FSCalendarDelegate, FSCalendarDataSourc
 //            tableView.isUserInteractionEnabled = true
 //        }
         self.dismiss(animated: true, completion: nil)
-        
+        selected = date
        fetchWorkouts(date: date)
         
     }
@@ -265,6 +265,7 @@ extension WorkoutPreviousViewController: UITableViewDelegate, UITableViewDataSou
         guard let vc = UIStoryboard(name: "WorkoutTempAdd", bundle: .main).instantiateViewController(withIdentifier: "WorkoutTempAddViewController") as? WorkoutTempAddViewController else { return }
         let workout = 운동들[indexPath.row]
         vc.workoutAddTitleText = workout
+        vc.selectedDate = selected
         
         guard workout != "운동을 하지 않았습니다." else {
             showToast()
