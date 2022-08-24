@@ -183,12 +183,12 @@ class WorkoutViewController: UIViewController {
     func setWeekView()
     {
         totalSquares.removeAll()
-        시작일 = CalendarHelper().addDays(date: Date().addingTimeInterval(60*60*9), days: -300)
+        시작일 = CalendarHelper().addDays(date: Date().addingTimeInterval(60*60*9), days: -150)
 //        print("오늘", Date().addingTimeInterval(60*60*9))
         var current = 시작일
         //TODO: 끝일
         let nextSunday = CalendarHelper().addDays(date: Date().addingTimeInterval(60*60*9), days: 0)
-        while (current < nextSunday - 1)
+        while (current < nextSunday)
         {
 //            print(current)
             totalSquares.append(current)
