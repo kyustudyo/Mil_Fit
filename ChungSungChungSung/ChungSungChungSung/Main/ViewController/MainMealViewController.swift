@@ -333,6 +333,7 @@ class CalendarHelper {
     {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "LLLL"
+        dateFormatter.locale = Locale(identifier: "ko_KR")
         return dateFormatter.string(from: date)
     }
     

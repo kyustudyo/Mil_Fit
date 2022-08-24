@@ -188,6 +188,7 @@ class WorkoutViewController: UIViewController {
         var current = 시작일
         //TODO: 끝일
         let nextSunday = CalendarHelper().addDays(date: Date().addingTimeInterval(60*60*9), days: 0)
+        print("cn", current, nextSunday)
         while (current < nextSunday)
         {
 //            print(current)
