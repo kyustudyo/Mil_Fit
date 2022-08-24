@@ -333,6 +333,7 @@ class CalendarHelper {
     {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "LLLL"
+        
         return dateFormatter.string(from: date)
     }
     
@@ -340,12 +341,14 @@ class CalendarHelper {
     {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy"
+        dateFormatter.locale = Locale(identifier: "ko_KR")
         return dateFormatter.string(from: date)
     }
     
     func timeString(date: Date) -> String
     {
         let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ko_KR")
         dateFormatter.dateFormat = "HH:mm"
         return dateFormatter.string(from: date)
     }

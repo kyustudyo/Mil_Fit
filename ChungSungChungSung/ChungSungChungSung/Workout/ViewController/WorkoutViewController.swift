@@ -421,10 +421,12 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
                 let todaysWorkout = workoutRealm.where {
                     $0.dateSearching == selectedDateString
                 }
-                workoutAddView.workoutAddTitleText = todaysWorkout[indexPath.row].name
-                workoutAddView.selectedDate = selectedDate
-//                workoutAddView.workout = workout
-                self.navigationController?.pushViewController(workoutAddView, animated: true)
+                if todaysWorkout.count > 0 {
+                    workoutAddView.workoutAddTitleText = todaysWorkout[indexPath.row].name
+                    workoutAddView.selectedDate = selectedDate
+    //                workoutAddView.workout = workout
+                    self.navigationController?.pushViewController(workoutAddView, animated: true)
+                }
             }
             
         } else if tableView == workoutListView {
