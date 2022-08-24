@@ -24,7 +24,7 @@ class OnboardingViewController: UIViewController {
             if let inputAge = inputAge.text {
                 if let ageInt = Int(inputAge) {
                     UserDefaultManager.saveAge(age: ageInt)
-                    print(ageInt)
+//                    print(ageInt)
                 }
             }
             self.navigationController?.pushViewController(onboardingSecondView, animated: true)
@@ -32,7 +32,7 @@ class OnboardingViewController: UIViewController {
     }
     
 //    private var age = ["19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32","33"]
-    private var age = Range(19...60).map{String($0)}
+    private var age = Range(19...98).map{String($0)}
     private let picker = UIPickerView()
     
     override func viewDidLoad() {

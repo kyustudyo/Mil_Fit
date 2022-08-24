@@ -16,7 +16,7 @@ struct BadgeModel {
 
 struct BadgeData {
     var list = [
-        BadgeModel(title: "우리의 시작", image: "firstStep", description: "군피트를 시작한 것을 환영합니다!", date: "2022.3.14"),
+        BadgeModel(title: "우리의 시작", image: "firstStep", description: "군핏을 시작한 것을 환영합니다!", date: "2022.3.14"),
         BadgeModel(title: "첫 기록의 기쁨", image: "firstRecord", description: "첫 운동 기록을 추가했어요.", date: "2022.3.14"),
         BadgeModel(title: "일주일 연속 운동", image: "sevenDays", description: "일주일 동안 매일 운동을 기록했어요.", date: "2022.3.30"),
         BadgeModel(title: "한 달 연속 운동", image: "medal30Days", description: "한 달 동안 매일 운동을 기록했어요.", date: "2022.4.29"),

@@ -12,19 +12,21 @@ import UIKit
 
 class MainCalorieViewController: UIViewController {
     
-    var mealCalories:[CGFloat] = [2022, 2405, 2800, 3300, 2700, 2100, 2300]
-    var workoutCalories:[CGFloat] = [1, 1, 1, 1, 1, 1, 1]
+    var mealCalories:[CGFloat] = [0, 0, 0, 0, 0, 0, 0]
+    var workoutCalories:[CGFloat] = [0, 0, 0, 0, 0, 0, 0]
     let 요일들 = ["월", "화", "수", "목", "금", "토", "일"]
-    
+    var countOfDays: Int = 0
     override func viewDidLoad() {
         navigationItem.title = "칼로리"
+        navigationItem.largeTitleDisplayMode = .never
         navigationController?.navigationBar.topItem?.backButtonTitle = "메인"
+        self.navigationController?.navigationBar.tintColor = CustomColor.mainPurple
         
         let 오늘요일 = getDayOfWeek(date: Date().addingTimeInterval(60*60*9))
-        print(오늘요일)
+//        print("오늘요일", 오늘요일)
         let 몇번째요일 = Int(요일들.firstIndex(of: 오늘요일) ?? 0)
         let 뒤에몇요일이있나 = 6 - 몇번째요일
-        print(오늘요일, 몇번째요일, 뒤에몇요일이있나)
+//        print(오늘요일, 몇번째요일, 뒤에몇요일이있나)
         
         let 앞에날짜들개수 = 몇번째요일
         let 뒤에날짜들개수 = 뒤에몇요일이있나 // 1
@@ -47,6 +49,11 @@ class MainCalorieViewController: UIViewController {
         
 //        print(앞에날짜들모음, "!!!",뒤에날짜들모음)
         전체날짜들모음 = [오늘날짜] + 앞에날짜들모음 + 뒤에날짜들모음
+        전체날짜들모음.sort(by: <)
+        
+        
+//        print("앞1", )
+        
 //        let a = 전체날짜들모음.map{ getDayOfWeek(date:$0)}
 //        print(a)
         
@@ -57,17 +64,19 @@ class MainCalorieViewController: UIViewController {
         for (i,date) in 전체날짜들모음.enumerated() {
             if let mealDate = RealmManager.searchMealDataByDate(date: dateformatter.string(from: date)) {
                 if mealDate.count != 0 {
-                    print(getDayOfWeek(date: date))
+//                    print("음식", getDayOfWeek(date: date))
                     mealCalories[i] = CGFloat(mealDate[0].calories)
+//                    print("calcal", CGFloat(mealDate[0].calories))
                 }
+//                countOfDays = mealDate.count
             }
         }
         
         let dateFormatterForWorkout = DateFormatter()
         dateFormatterForWorkout.locale = Locale(identifier: "ko_KR")
         dateFormatterForWorkout.dateFormat = "yyyyMMdd"
-
-        print("--")
+        var lastDayOfWorkout: Int = 1
+//        print("--")
         for (i,date) in 전체날짜들모음.enumerated() {
             if let workoutDate = RealmManager.searchWorkoutDataByDateK(date: dateFormatterForWorkout.string(from: date)) {
                 if workoutDate.count != 0 {
@@ -76,6 +85,8 @@ class MainCalorieViewController: UIViewController {
                     let workoutCal = Double(Array(workoutDate.map { $0.calories ?? 0}).reduce(0, +))
 //                    print("총cal:", workoutCal)
                     workoutCalories[i] = workoutCal
+                    lastDayOfWorkout = i
+                    
                 }
             }
         }
@@ -87,13 +98,13 @@ class MainCalorieViewController: UIViewController {
         let mealContainerView = UIView()
         view.addSubview(mealContainerView)
         mealContainerView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 16, paddingRight: 16, height: (view.frame.width - 32)/2 + 25 )
-        decorateContainerView(view: mealContainerView, 종류: .섭취, 칼로리들: mealCalories)
+        decorateContainerView(view: mealContainerView, 종류: .섭취, 칼로리들: mealCalories, countOfdays: 앞에날짜들개수)
         
         
         let workoutContainerView = UIView()
         view.addSubview(workoutContainerView)
         workoutContainerView.anchor(top: mealContainerView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 18, paddingLeft: 16, paddingRight: 16, height: (view.frame.width - 32)/2 + 25 )
-        decorateContainerView(view: workoutContainerView, 종류: .운동, 칼로리들: workoutCalories)
+        decorateContainerView(view: workoutContainerView, 종류: .운동, 칼로리들: workoutCalories, countOfdays: lastDayOfWorkout)
         
     }
     
@@ -101,15 +112,18 @@ class MainCalorieViewController: UIViewController {
         navigationController?.isNavigationBarHidden = false
     }
     
-    func decorateContainerView(view: UIView, 종류: 섭취운동사진, 칼로리들: [CGFloat]) {
+    func decorateContainerView(view: UIView, 종류: 섭취운동사진, 칼로리들: [CGFloat], countOfdays: Int) {
 //        view.backgroundColor = .white
         view.layer.cornerRadius = 12
         let imageView = systemImageView(종류: 종류)
         let label = UILabel()
         label.text = 종류 == .섭취 ? "섭취" : "운동"
         label.font = .systemFont(ofSize: Constants.middleText, weight: .bold)
-        let calorieView = getCalorieLabel(calorie: Int(칼로리들.reduce(0, +)) / 7)
+//        let countOfdays = self.countOfDays != 0 ? self.countOfDays : 1
         
+        let calorieView = getCalorieLabel(calorie: Int(칼로리들.reduce(0, +)) / (종류 == .섭취 ? 7 : countOfdays) )
+//        print("qwe", countOfdays)
+//        print("qwe", Int(칼로리들.reduce(0, +)) / countOfdays)
         let hstackView = UIStackView(arrangedSubviews: [imageView, label, calorieView])
 //        hstackView.distribution = .equalSpacing
         hstackView.spacing = 8
@@ -126,15 +140,13 @@ class MainCalorieViewController: UIViewController {
             graph.setWidth(width: 16)
             
             
-            graph.setHeight(height: 칼로리들[i] / maxCal * 100)
+            graph.setHeight(height: 칼로리들[i]  / (maxCal != 0 ? maxCal : 1) * 100)
             graph.layer.cornerRadius = 4
             graph.backgroundColor = 종류 == .섭취 ? CustomColor.subtlePurple : CustomColor.red
             
             let label = UILabel()
             label.text = ["월", "화", "수", "목", "금", "토", "일"][i]
-//            label.text = "\(칼로리들[i])"
             label.font = .systemFont(ofSize: Constants.smallText - 4, weight: .medium)
-            
             let vstack = UIStackView(arrangedSubviews: [graph, label])
             vstack.axis = .vertical
             vstack.spacing = 8

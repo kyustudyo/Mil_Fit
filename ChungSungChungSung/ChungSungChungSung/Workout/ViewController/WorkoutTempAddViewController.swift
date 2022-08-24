@@ -8,6 +8,7 @@
 import UIKit
 import RealmSwift
 import Toast_Swift
+import SwiftUI
 
 class WorkoutTempAddViewController: UIViewController {
 
@@ -43,7 +44,9 @@ class WorkoutTempAddViewController: UIViewController {
         setUI()
     }
     @objc func saveButtonClicked() {
-        if isValid() {
+        let validNumber = isValid()
+        switch validNumber {
+        case 0 :
             try! localRealm.write({
                 if workoutInfo.0 == .무게운동 {
                     workoutRealm.weight = Int(firstTextField.text ?? "0")
@@ -54,30 +57,62 @@ class WorkoutTempAddViewController: UIViewController {
                 }else {
                     workoutRealm.count = Int(secondTextField.text ?? "0")
                 }
+                workoutRealm.calories = caloriesCalculator()
             })
-            view.makeToast("저장되었습니다.", duration: 3.0, position: .bottom)
+            view.makeToast("저장되었습니다.", duration: 3.0, position: .top)
             setUI()
-        }else {
-            view.makeToast("빈칸없이 입력해주세요", duration: 3.0, position: .bottom)
+        case 1 : view.makeToast("빈칸없이 입력해주세요", duration: 3.0, position: .top)
+        case 2: view.makeToast("숫자만 입력해주세요", duration: 3.0, position: .top)
+        default: break
         }
-        
     }
-    func isValid() -> Bool {
+    
+    func isValid() -> Int {
         if workoutInfo.0 == .무게운동 {
             if firstTextField.text == "" || secondTextField.text == "" {
-                return false
+                return 1
             }
-        }else if workoutInfo.0 == .시간운동{
+        } else if workoutInfo.0 == .시간운동{
             if firstTextField.text == "" && secondTextField.text == "" {
-                return false
+                return 1
             }
-        }else {
+        } else {
             if secondTextField.text == "" {
-                return false
+                return 1
             }
         }
-        return true
+        if workoutInfo.0 == .무게운동 {
+            if Int(firstTextField.text ?? "") == nil ||
+              Int(secondTextField.text ?? "") == nil {
+            return 2
+            }
+        }else if workoutInfo.0 == .시간운동 {
+            if firstTextField.text == nil {
+                if Int(secondTextField.text!) == nil {
+//                    print("여기")
+                    return 2
+                }
+            }else if secondTextField.text == nil {
+                if Int(firstTextField.text!) == nil {
+//                    print("저기")
+                    return 2
+                }
+            }else {
+                if Int(firstTextField.text!) == nil &&
+                    Int(secondTextField.text!) == nil {
+//                print("거기")
+                  return 2
+                }
+            }
+        }else {
+            if Int(secondTextField.text!) == nil {
+                return 2
+            }
+        }
+           
+        return 0
     }
+    
     func setUI() {
         rectangleView.backgroundColor = .systemGray6
         rectangleView.layer.cornerRadius = 20
@@ -106,14 +141,16 @@ class WorkoutTempAddViewController: UIViewController {
                 caloriesLabel.text = "추정 칼로리 : \(caloriesCalculator())Kcal"
             }
         }else {
-            firstLabel.text = "분"
-            secondLabel.text = "초"
+            firstLabel.text = "시간"
+            secondLabel.text = "분"
             if workoutRealm.minutes != nil {
                 firstTextField.text = "\(workoutRealm.minutes!)"
-                caloriesLabel.text = "추정 칼로리 : \(caloriesCalculator())Kcal"
             }
             if workoutRealm.seconds != nil {
                 secondTextField.text = "\(workoutRealm.seconds!)"
+            }
+            if workoutRealm.minutes != nil || workoutRealm.seconds != nil {
+                caloriesLabel.text = "추정 칼로리 : \(caloriesCalculator())Kcal"
             }
         }
     }
@@ -122,13 +159,13 @@ class WorkoutTempAddViewController: UIViewController {
         var calories = 0
         let weight = localRealm.objects(WeightRealm.self).sorted(byKeyPath: "dateSorting", ascending: false).first?.weight
         if workoutInfo.0 == .시간운동 {
-            time = Double(workoutRealm.minutes!)
+            time = Double((workoutRealm.minutes ?? 0) * 60) + (Double(workoutRealm.seconds ?? 0))
         }else {
-            time = 30
+            time = Double(workoutRealm.count ?? 0) * 0.8
         }
         let met: Double = workoutInfo.1
         let weightDouble: Double = Double(weight ?? 0)
-        calories = Int((met * (3.5 * weightDouble * time)) / 1000) * 5
+        calories = Int(((met * (3.5 * weightDouble * time)) / 1000) * 5)
         return calories
     }
 }

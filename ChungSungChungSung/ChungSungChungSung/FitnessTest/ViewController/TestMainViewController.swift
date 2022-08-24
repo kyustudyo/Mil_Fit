@@ -26,6 +26,9 @@ class TestMainViewController: UIViewController {
 
     @IBOutlet weak var fitnessGraphButton: UIButton!
     
+    @IBOutlet weak var situpGoalLabel: UILabel!
+    @IBOutlet weak var pushupGoalLabel: UILabel!
+    @IBOutlet weak var runningGoalLabel: UILabel!
     @IBOutlet weak var graphRoundedRectangleView: UIView!
     @IBOutlet weak var historyFitnessTestLabel: UILabel!
     @IBOutlet weak var lastFitnessTestDateLabel: UILabel!
@@ -70,9 +73,9 @@ class TestMainViewController: UIViewController {
             emptyLabel.isHidden = true
             fitnessGraphButton.isHidden = false
             drawGraphViewRectangleUI()
-            configureRunningGraphView()
-            configurePushupGraphView()
-            configureSitupGraphView()
+            setRunningGraphView()
+            setPushupGraphView()
+            setSitupGraphView()
         }
     }
     override func viewDidLoad() {
@@ -92,8 +95,11 @@ class TestMainViewController: UIViewController {
         fitnessGraphButton.tintColor = UIColor.clear
         fitnessGraphButton.titleLabel?.text = ""
         drawTableViewUI()
+        configureRunningGraphView()
+        configurePushupGraphView()
+        configureSitupGraphView()
+//        print("Realm저장위치=\n\(Realm.Configuration.defaultConfiguration.fileURL!)\n")
         
-        print("Realm저장위치=\n\(Realm.Configuration.defaultConfiguration.fileURL!)\n")
         
     }
     //TODO: 어딨지
@@ -141,9 +147,6 @@ class TestMainViewController: UIViewController {
         let runningRealm = fitnessTestRealm.filter("testType == 'running'").filter("isPractice == false").first!
         let pushupRealm = fitnessTestRealm.filter("testType == 'pushup'").filter("isPractice == false").first!
         let situpRealm = fitnessTestRealm.filter("testType == 'situp'").filter("isPractice == false").first!
-        let runningMaxStandard = getMaxStandard(testType: .running, level: "특급")
-        let pushupMaxStandard = getMinStandard(testType: .pushup, level: "특급")
-        let situpMaxStandard = getMinStandard(testType: .situp, level: "특급")
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy.MM.dd"
         dateFormatter.locale = Locale(identifier: "ko_KR")
@@ -160,31 +163,106 @@ class TestMainViewController: UIViewController {
         runningGraphView.backgroundColor = UIColor.clear
         runningGraphTitleLabel.text = "3Km 달리기"
         runningGraphTitleLabel.textColor = UIColor.systemGray
-        runningGraphRecordLabel.text = "\(runningRealm.minutes!):\(runningRealm.seconds!)/\(runningMaxStandard / 60):\(runningMaxStandard % 60)"
+        runningGraphRecordLabel.text = "\(runningRealm.minutes!)'\(runningRealm.seconds!)''"
         runningGraphRecordLabel.textColor = UIColor.systemGray
-        runningGraphRecordLabel.setTargetStringColor(targetString: "\(runningRealm.minutes!):\(runningRealm.seconds!)", color: CustomColor.red!)
+        let runningGoalLevel = getGoalLevel(level: runningRealm.level)
+        let runningMaxStandard = getMaxStandard(testType: .running, level: runningGoalLevel ?? "특급")
+        if runningGoalLevel == nil {
+            runningGoalLabel.isHidden = true
+        }else {
+            runningGoalLabel.isHidden = false
+            let remainTime = runningRealm.totalTime! - runningMaxStandard
+            runningGoalLabel.text = "\(runningGoalLevel!)까지 \(remainTime / 60)'\(remainTime % 60)''!"
+            runningGoalLabel.setTargetStringColor(targetString: "\(remainTime / 60)'\(remainTime % 60)''", color: CustomColor.red!)
+        }
+        
+//        runningGraphRecordLabel.setTargetStringColor(targetString: "\(runningRealm.minutes!):\(runningRealm.seconds!)", color: CustomColor.red!)
         pushupGraphView.backgroundColor = UIColor.clear
         pushupGraphTitleLabel.text = "팔굽혀펴기"
         pushupGraphTitleLabel.textColor = UIColor.systemGray
-        pushupGraphRecordLabel.text = "\(pushupRealm.count!)개/\(pushupMaxStandard)개"
+        pushupGraphRecordLabel.text = "\(pushupRealm.count!)개"
         pushupGraphRecordLabel.textColor = UIColor.systemGray
-        pushupGraphRecordLabel.setTargetStringColor(targetString: "\(pushupRealm.count!)개", color: CustomColor.strongPurple!)
+        let pushupGoalLevel = getGoalLevel(level: pushupRealm.level)
+        let pushupMinStandard = getMinStandard(testType: .pushup, level: pushupGoalLevel ?? "특급")
+        if pushupGoalLevel == nil {
+            pushupGoalLabel.isHidden = true
+        }else {
+            pushupGoalLabel.isHidden = false
+            pushupGoalLabel.text = "\(pushupGoalLevel!)까지 \(pushupMinStandard - pushupRealm.count!)회!"
+            pushupGoalLabel.setTargetStringColor(targetString: "\(pushupMinStandard - pushupRealm.count!)회", color: CustomColor.strongPurple!)
+        }
+        //        pushupGraphRecordLabel.setTargetStringColor(targetString: "\(pushupRealm.count!)개", color: CustomColor.strongPurple!)
         situpGraphView.backgroundColor = UIColor.clear
         situpGraphTitleLabel.text = "윗몸 일으키기"
         situpGraphTitleLabel.textColor = UIColor.systemGray
-        situpGraphRecordLabel.text = "\(situpRealm.count!)회/\(situpMaxStandard)회"
+        situpGraphRecordLabel.text = "\(situpRealm.count!)회"
         situpGraphRecordLabel.textColor = UIColor.systemGray
-        situpGraphRecordLabel.setTargetStringColor(targetString: "\(situpRealm.count!)회", color: CustomColor.blue!)
+        let situpGoalLevel = getGoalLevel(level: situpRealm.level)
+        let situpMinStandard = getMinStandard(testType: .situp, level: situpGoalLevel ?? "특급")
+        if situpGoalLevel == nil {
+            situpGoalLabel.isHidden = true
+        }else {
+            situpGoalLabel.isHidden = false
+            situpGoalLabel.text = "\(situpGoalLevel!)까지 \(situpMinStandard - situpRealm.count!)회!"
+            situpGoalLabel.setTargetStringColor(targetString: "\(situpMinStandard - situpRealm.count!)회", color: CustomColor.blue!)
+        }
+        
+        
+//        situpGraphRecordLabel.setTargetStringColor(targetString: "\(situpRealm.count!)회", color: CustomColor.blue!)
         }
     func drawTableViewUI() {
         recordTableViewTitleLabel.text = "종목별 최고 기록"
     }
+    func setRunningGraphView() {
+        let runningRealm = fitnessTestRealm.filter("testType == 'running'").filter("isPractice == false").first
+        let runningGoalLevel = getGoalLevel(level: runningRealm?.level ?? "특급")
+        let maxStandard = getMaxStandard(testType: .running, level: (runningGoalLevel ?? "특급"))
+        var rate: Double = 0
+        if runningRealm?.level == "특급" {
+            rate = 1
+        }else {
+            rate = Double(maxStandard) / Double(runningRealm?.totalTime ?? 0)
+        }
+        runningData.rate = rate
+        runningData.level = runningRealm?.level ?? "특급"
+    }
+    func setPushupGraphView() {
+        let pushupRealm = fitnessTestRealm.filter("testType == 'pushup'").filter("isPractice == false").first
+        let pushupGoalLevel = getGoalLevel(level: pushupRealm?.level ?? "특급")
+        let pushupMinStandard = getMinStandard(testType: .pushup, level: pushupGoalLevel ?? "특급")
+        var rate: Double = 0
+        if pushupRealm?.level == "특급" {
+            rate = 1
+        }else {
+            rate = Double(pushupRealm?.count ?? 0) / Double(pushupMinStandard)
+        }
+        pushupData.rate = rate
+        pushupData.level = pushupRealm?.level ?? "불합격"
+//        UIHostingController(rootView: PushupGraphSwiftUIView(graphData: pushupData))
+    }
+    func setSitupGraphView() {
+        let situpRealm = fitnessTestRealm.filter("testType == 'situp'").filter("isPractice == false").first
+        let situpGoalLevel = getGoalLevel(level: situpRealm?.level ?? "특급")
+        let situpMinStandard = getMinStandard(testType: .situp, level: situpGoalLevel ?? "특급")
+        var rate: Double = 0
+        if situpRealm?.level == "특급" {
+            rate = 1
+        }else {
+            rate = Double(situpRealm?.count ?? 0) / Double(situpMinStandard)
+        }
+        situpData.rate = rate
+        situpData.level = situpRealm?.level ?? "불합격"
+//        UIHostingController(rootView: SitupGraphSwiftUIView(graphData: situpData))
+    }
     func configureRunningGraphView() {
         let runningRealm = fitnessTestRealm.filter("testType == 'running'").filter("isPractice == false").first
-        let maxStandard = getMaxStandard(testType: .running, level: "특급")
-        var rate = Double(maxStandard - (runningRealm?.totalTime ?? 0)) / Double(maxStandard)
-        if maxStandard == (runningRealm?.totalTime ?? 0) {
+        let runningGoalLevel = getGoalLevel(level: runningRealm?.level ?? "특급")
+        let maxStandard = getMaxStandard(testType: .running, level: (runningGoalLevel ?? "특급"))
+        var rate: Double = 0
+        if runningRealm?.level == "특급" {
             rate = 1
+        }else {
+            rate = Double(maxStandard) / Double(runningRealm?.totalTime ?? 0)
         }
         runningData = GraphData(level: runningRealm?.level ?? "불합격", rate: rate)
         let controller = UIHostingController(rootView: RunningGraphSwiftUIView(graphData: runningData))
@@ -201,45 +279,65 @@ class TestMainViewController: UIViewController {
     }
     
     func configurePushupGraphView() {
-    let pushupRealm = fitnessTestRealm.filter("testType == 'pushup'").filter("isPractice == false").first
-    let maxStandard = getMaxStandard(testType: .pushup, level: "특급")
-    var rate = Double(maxStandard - (pushupRealm?.count ?? 0)) / Double(maxStandard)
-    if maxStandard <= (pushupRealm?.count ?? 0) {
-        rate = 1
-    }
-    pushupData = GraphData(level: pushupRealm?.level ?? "불합격", rate: rate)
-    let controller = UIHostingController(rootView: PushupGraphSwiftUIView(graphData: pushupData))
-    controller.view.translatesAutoresizingMaskIntoConstraints = false
-    controller.view.backgroundColor = .clear
-    addChild(controller)
-    pushupGraphView.addSubview(controller.view)
-    NSLayoutConstraint.activate([
-        controller.view.widthAnchor.constraint(equalTo: pushupGraphView.widthAnchor, multiplier: 0.7),
-        controller.view.heightAnchor.constraint(equalTo: pushupGraphView.heightAnchor, multiplier: 0.7),
-        controller.view.centerXAnchor.constraint(equalTo:pushupGraphView.centerXAnchor),
-        controller.view.centerYAnchor.constraint(equalTo: pushupGraphView.centerYAnchor)
-    ])
+        let pushupRealm = fitnessTestRealm.filter("testType == 'pushup'").filter("isPractice == false").first
+        let pushupGoalLevel = getGoalLevel(level: pushupRealm?.level ?? "특급")
+        let pushupMinStandard = getMinStandard(testType: .pushup, level: pushupGoalLevel ?? "특급")
+        var rate: Double = 0
+        if pushupRealm?.level == "특급" {
+            rate = 1
+        }else {
+            rate = Double(pushupRealm?.count ?? 0) / Double(pushupMinStandard)
+        }
+        pushupData = GraphData(level: pushupRealm?.level ?? "불합격", rate: rate)
+        let controller = UIHostingController(rootView: PushupGraphSwiftUIView(graphData: pushupData))
+        controller.view.translatesAutoresizingMaskIntoConstraints = false
+        controller.view.backgroundColor = .clear
+        addChild(controller)
+        pushupGraphView.addSubview(controller.view)
+        NSLayoutConstraint.activate([
+            controller.view.widthAnchor.constraint(equalTo: pushupGraphView.widthAnchor, multiplier: 0.7),
+            controller.view.heightAnchor.constraint(equalTo: pushupGraphView.heightAnchor, multiplier: 0.7),
+            controller.view.centerXAnchor.constraint(equalTo:pushupGraphView.centerXAnchor),
+            controller.view.centerYAnchor.constraint(equalTo: pushupGraphView.centerYAnchor)
+        ])
     }
     
     func configureSitupGraphView() {
-    let situpRealm = fitnessTestRealm.filter("testType == 'situp'").filter("isPractice == false").first
-    let maxStandard = getMaxStandard(testType: .situp, level: "특급")
-    var rate = Double(maxStandard - (situpRealm?.count ?? 0)) / Double(maxStandard)
-    if maxStandard <= (situpRealm?.count ?? 0) {
-        rate = 1
+        let situpRealm = fitnessTestRealm.filter("testType == 'situp'").filter("isPractice == false").first
+        let situpGoalLevel = getGoalLevel(level: situpRealm?.level ?? "특급")
+        let situpMinStandard = getMinStandard(testType: .situp, level: situpGoalLevel ?? "특급")
+        var rate: Double = 0
+        if situpRealm?.level == "특급" {
+            rate = 1
+        }else {
+            rate = Double(situpRealm?.count ?? 0) / Double(situpMinStandard)
+        }
+        situpData = GraphData(level: situpRealm?.level ?? "불합격", rate: rate)
+        let controller = UIHostingController(rootView: SitupGraphSwiftUIView(graphData: situpData))
+        controller.view.translatesAutoresizingMaskIntoConstraints = false
+        controller.view.backgroundColor = .clear
+        addChild(controller)
+        situpGraphView.addSubview(controller.view)
+        NSLayoutConstraint.activate([
+            controller.view.widthAnchor.constraint(equalTo: situpGraphView.widthAnchor, multiplier: 0.7),
+            controller.view.heightAnchor.constraint(equalTo: situpGraphView.heightAnchor, multiplier: 0.7),
+            controller.view.centerXAnchor.constraint(equalTo: situpGraphView.centerXAnchor),
+            controller.view.centerYAnchor.constraint(equalTo: situpGraphView.centerYAnchor)
+        ])
     }
-    situpData = GraphData(level: situpRealm?.level ?? "불합격", rate: rate)
-    let controller = UIHostingController(rootView: SitupGraphSwiftUIView(graphData: situpData))
-    controller.view.translatesAutoresizingMaskIntoConstraints = false
-    controller.view.backgroundColor = .clear
-    addChild(controller)
-    situpGraphView.addSubview(controller.view)
-    NSLayoutConstraint.activate([
-        controller.view.widthAnchor.constraint(equalTo: situpGraphView.widthAnchor, multiplier: 0.7),
-        controller.view.heightAnchor.constraint(equalTo: situpGraphView.heightAnchor, multiplier: 0.7),
-        controller.view.centerXAnchor.constraint(equalTo: situpGraphView.centerXAnchor),
-        controller.view.centerYAnchor.constraint(equalTo: situpGraphView.centerYAnchor)
-    ])
+    
+    func getGoalLevel(level: String) -> String? {
+        if level == "특급" {
+            return nil
+        }else if level == "1급" {
+            return "특급"
+        }else if level == "2급" {
+            return "1급"
+        }else if level == "3급" {
+            return "2급"
+        }else {
+            return "3급"
+        }
     }
 }
 

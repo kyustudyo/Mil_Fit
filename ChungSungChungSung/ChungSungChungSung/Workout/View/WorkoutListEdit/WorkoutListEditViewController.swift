@@ -46,8 +46,8 @@ class WorkoutListEditViewController: UIViewController {
     
         favoriteWorkouts = defaults.stringArray(forKey: "WorkoutList")
         otherWorkouts = defaults.stringArray(forKey: "OtherWorkoutList")
-        print("즐겨찾기 \(favoriteWorkouts?.count)")
-        print("그 외 목록 \(otherWorkouts?.count)")
+//        print("즐겨찾기 \(favoriteWorkouts?.count)")
+//        print("그 외 목록 \(otherWorkouts?.count)")
     }
     
 }

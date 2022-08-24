@@ -37,12 +37,20 @@ class OnboardingSecondViewController: UIViewController {
                 } else {
                     if let heightInt = Int(heightText) {
                         UserDefaultManager.saveHeight(height: heightInt)
-                        print("키 \(heightInt)")
+//                        print("키 \(heightInt)")
                     }
                     if let weightInt = Int(weightText) {
                         RealmManager.saveWeightData(date: date, weight: weightInt)
-                        print("몸무게 \(weightInt)")
+//                        print("몸무게 \(weightInt)")
                     }
+                    
+
+                    let a = 13.8 * Double(Int(weightText) ?? 0)
+                    let b = 5 * Double(Int(heightText) ?? 0)
+                    let c = 6.8 * Double(UserDefaultManager.loadAge() ?? 0)
+                    let cal = 66 + a + b - c
+                    
+                    UserDefaultManager.saveBMR(BMR: Int(cal))
                     
                     self.navigationController?.pushViewController(onboardingLastView, animated: true)
                 }

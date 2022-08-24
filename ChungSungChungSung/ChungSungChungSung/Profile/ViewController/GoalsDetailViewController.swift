@@ -24,7 +24,6 @@ class GoalsDetailViewController: UIViewController {
         case 0:
             if let notDoneTodos = RealmManager.notDoneTodoData2() {
                 lists = Array(notDoneTodos)
-                print(lists)
             } else {
                 lists = []
             }
@@ -32,7 +31,6 @@ class GoalsDetailViewController: UIViewController {
         case 1:
             if let doneTodos = RealmManager.doneTodoData2() {
                 lists = Array(doneTodos)
-                print(lists)
             } else {
                 lists = []
             }
@@ -56,22 +54,14 @@ class GoalsDetailViewController: UIViewController {
         
         self.navigationController?.navigationBar.tintColor = CustomColor.mainPurple
         self.navigationItem.title = "목표"
+        navigationItem.largeTitleDisplayMode = .never
     }
     
-    private func navigationConfig() {
-        let editButton = UIButton()
-        let editImage = UIImage(systemName: "text.badge.minus")
-        editButton.setImage(editImage, for: .normal)
-        editButton.addTarget(self, action: #selector(didTapEditButton), for: .touchUpInside)
-    
-        let plusButton = UIButton()
-        let plusImage = UIImage(systemName: "plus")
-        plusButton.setImage(plusImage, for: .normal)
-        plusButton.addTarget(self, action: #selector(goAddTodoVC), for: .touchUpInside)
+    private func navigationConfig() {        
+        let editButton = UIBarButtonItem(image: UIImage(systemName: "text.badge.minus"), style: .plain, target: self, action: #selector(didTapEditButton))
+        let plusButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(goAddTodoVC))
         
-        let editBarButton = UIBarButtonItem(customView: editButton)
-        let plusBarButton = UIBarButtonItem(customView: plusButton)
-        self.navigationItem.rightBarButtonItems = [plusBarButton, editBarButton]
+        self.navigationItem.rightBarButtonItems = [plusButton, editButton]
     }
     
     @objc private func didTapEditButton() {
@@ -87,7 +77,7 @@ class GoalsDetailViewController: UIViewController {
 
 extension GoalsDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("qqqq", lists.count)
+//        print("qqqq", lists.count)
             return lists.count
     }
     
@@ -97,21 +87,25 @@ extension GoalsDetailViewController: UITableViewDelegate, UITableViewDataSource 
             
         cell.backgroundColor = .clear
         
+//        print(cell.cellRectangle.layer)
+//        cell.goalID = goalList[indexPath.row].dateSorting
+        
+        cell.goalID = lists[indexPath.row].dateSorting
+        cell.goalLabel.text = lists[indexPath.row].content
+        
         cell.cellRectangle.layer.cornerRadius = 20
         cell.cellRectangle.layer.shadowColor = UIColor.systemGray6.cgColor
         cell.cellRectangle.layer.shadowRadius = 20
         cell.cellRectangle.layer.shadowOpacity = 1
-//        cell.goalID = goalList[indexPath.row].dateSorting
-        cell.goalID = lists[indexPath.row].dateSorting
-        cell.goalLabel.text = lists[indexPath.row].content
+        
         cell.delegate = self
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ko_KR")
         dateFormatter.dateFormat = "yyyy.MM.dd"
         
         cell.goalSavedDateLabel.text = dateFormatter.string(from: lists[indexPath.row].date)
-
-        if lists[indexPath.row].isDone == true {
+        
+        if lists[indexPath.row].isDone {
             cell.achievedButton.tintColor = CustomColor.mainPurple
         } else {
             cell.achievedButton.tintColor = .systemGray
@@ -144,7 +138,10 @@ extension GoalsDetailViewController: TodoDone {
         
         doneTodos = RealmManager.doneTodoData2()
         notDoneTodos = RealmManager.notDoneTodoData2()
+        
         updateTableview()
+        
+        
 //        if segCon.selectedSegmentIndex == 0 {
 //            if let notDoneTodos = notDoneTodos {
 ////                goalList = notDoneTodos
@@ -162,51 +159,53 @@ extension GoalsDetailViewController: TodoDone {
 
 extension GoalsDetailViewController {
     private func updateTableview() {
-        segCon.selectedSegmentIndex = 0
-//        if segCon.selectedSegmentIndex == 0 {
+        if segCon.selectedSegmentIndex == 0 {
             if let notDoneTodos = RealmManager.notDoneTodoData2() {
-//                goalList = notDoneTodos
                 lists = Array(notDoneTodos)
-                
+            } else {
+                lists = []
             }
-//        }
-//        else {
-//            if let doneTodos = RealmManager.doneTodoData2() {
-////                goalList = notDoneTodos
-//                lists = Array(doneTodos)
-//            }
-//        }
+        }
+        else {
+            if let doneTodos = RealmManager.doneTodoData2() {
+                lists = Array(doneTodos)
+            } else {
+                lists = []
+            }
+        }
         goalsDetailTableView.reloadData()
     }
 }
 extension RealmManager {
+    
     static func deleteTodo(id: Int){
     let realm = try! Realm()
     let predicate = NSPredicate(format: "dateSorting == %@", NSNumber(value: id))
     if let firstItem = realm.objects(ToDoListRealm.self)
-        .filter(predicate)
-                .first {
-                try! realm.write {
-                    realm.delete(firstItem)
-                }
-            }
+                            .filter(predicate)
+                            .first {
+                            try! realm.write {
+                                realm.delete(firstItem)
+                            }
+                        }
     }
     
     static func changeTodoDone(id: Int) {
         let localRealm = try! Realm()
         let predicate = NSPredicate(format: "dateSorting == %@", NSNumber(value: id))
         let realms = localRealm.objects(ToDoListRealm.self)
-                           .filter(predicate)
-               for tiger in realms {
-                   try! localRealm.write {
-                       tiger.isDone.toggle()
-                   }
-               }
+                               .filter(predicate)
+       for tiger in realms {
+           try! localRealm.write {
+               tiger.isDone.toggle()
+           }
+       }
     }
 }
 
 extension GoalsDetailViewController: TodoAdd {
     func addTodo() {
+        segCon.selectedSegmentIndex = 0
         updateTableview()
         delegate?.addTodo()
     }

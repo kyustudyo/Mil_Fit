@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -53,10 +54,11 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XML-bv-ClU">
-                                                            <rect key="frame" x="316" y="29.5" width="66" height="48"/>
+                                                            <rect key="frame" x="312" y="29.5" width="70" height="48"/>
                                                             <state key="normal" title="Button"/>
-                                                            <buttonConfiguration key="configuration" style="plain" image="hand.thumbsup.circle.fill" catalog="system">
+                                                            <buttonConfiguration key="configuration" style="plain" image="hand.thumbsup.circle.fill" catalog="system" title=" ">
                                                                 <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="28" scale="large" weight="regular"/>
+                                                                <attributedString key="attributedSubtitle"/>
                                                             </buttonConfiguration>
                                                             <connections>
                                                                 <action selector="doneTodo:" destination="hWm-wG-iwH" eventType="touchUpInside" id="JXr-6N-Xmz"/>

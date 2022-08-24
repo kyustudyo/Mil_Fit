@@ -29,6 +29,7 @@ class FitnessTestStandardViewController: UIViewController {
 //        fitnessTestRunningTableView.layer.shadowOffset = CGSize(width: 4, height: 4)
         age = UserDefaults.standard.integer(forKey: "age")
         view.backgroundColor = CustomColor.bgGray
+        fitnessTestRunningTableView.alwaysBounceVertical = false
         setStandardData()
     }
     

@@ -75,10 +75,11 @@ class FitnessHistoryViewController: UIViewController {
         if data == nil {
             return valueArray
         }else {
-            let data = data!.sorted(byKeyPath: "dateSorting", ascending: false)
+            let data = data!.sorted(byKeyPath: "dateSorting", ascending: true)
             for i in data {
                 if i.testType == "running" {
-                    valueArray.append(Double(i.minutes! * 60 + i.seconds!))
+                    let length = String(i.seconds ?? 0).count
+                    valueArray.append(Double(i.minutes ?? 0) + (pow(0.1, Double(length))  * Double(i.seconds ?? 0)))
                 }else {
                     valueArray.append(Double(i.count!))
                 }
@@ -98,16 +99,19 @@ class FitnessHistoryViewController: UIViewController {
             let lineDataEntry = ChartDataEntry(x: Double(i), y: lineValues[i])
             lineDataEntries.append(lineDataEntry)
         }
-        let valFormatter = NumberFormatter()
-        valFormatter.numberStyle = .currency
-        valFormatter.maximumFractionDigits = 2
-        valFormatter.currencySymbol = "$"
         
         let format = NumberFormatter()
         format.numberStyle = .none
         let formatter = DefaultValueFormatter(formatter: format)
         
-        let lineChartDataSet = LineChartDataSet(entries: lineDataEntries, label: "기록")
+        var label = ""
+        if index == 0 {
+            label = "분.초"
+        }else {
+            label = "회"
+        }
+        
+        let lineChartDataSet = LineChartDataSet(entries: lineDataEntries, label: label)
         lineChartDataSet.colors = [CustomColor.mainPurple!]
         lineChartDataSet.circleColors = [CustomColor.mainPurple!]
         lineChartDataSet.lineWidth = 3
@@ -116,15 +120,20 @@ class FitnessHistoryViewController: UIViewController {
         lineChartDataSet.highlightEnabled = false
  
         let data = LineChartData(dataSet: lineChartDataSet)
-        data.setValueFormatter(formatter)
-        data.setValueFont(.systemFont(ofSize: 10))
-        lineChartView.leftAxis.valueFormatter = DefaultAxisValueFormatter(formatter: valFormatter)
+        if index != 0 {
+            data.setValueFormatter(formatter)
+        }
+//        data.setValueFont(.systemFont(ofSize: 10))
+        data.setValueFont(.systemFont(ofSize: 11, weight: .semibold))
+//        lineChartView.leftAxis.valueFormatter = DefaultAxisValueFormatter(formatter: valFormatter)
         lineChartView.data = data
         lineChartView.rightAxis.enabled = false
         lineChartView.drawGridBackgroundEnabled = false
         lineChartView.leftAxis.enabled = false
         lineChartView.xAxis.enabled = false
-        lineChartView.legend.enabled = false
+        lineChartView.legend.enabled = true
+ 
+        
         lineChartView.backgroundColor = .white
         lineChartView.doubleTapToZoomEnabled = false
 
@@ -160,7 +169,7 @@ extension FitnessHistoryViewController: UITableViewDataSource, UITableViewDelega
             if index == 0 {
                 realm = realm.sorted(byKeyPath: "totalTime", ascending: true)
             }else {
-                realm = realm.sorted(byKeyPath: "count", ascending: false)
+                realm = realm.sorted(byKeyPath: "count", ascending: true)
             }
         }
         let dateFormatter = DateFormatter()
@@ -168,7 +177,7 @@ extension FitnessHistoryViewController: UITableViewDataSource, UITableViewDelega
         dateFormatter.locale = Locale(identifier: "ko_KR")
         cell.dateLabel.text = "\(dateFormatter.string(from: realm[indexPath.row].date))"
         if index == 0 {
-            cell.recordLabel.text = "\(realm[indexPath.row].minutes!)분 \(realm[indexPath.row].seconds!)초(\(realm[indexPath.row].level))"
+            cell.recordLabel.text = "\(realm[indexPath.row].minutes ?? 0)분 \(realm[indexPath.row].seconds ?? 0)초(\(realm[indexPath.row].level))"
         }else {
             cell.recordLabel.text = "\(realm[indexPath.row].count!)개(\(realm[indexPath.row].level))"
         }

@@ -106,6 +106,25 @@ extension UIView{
             gradient.cornerRadius = 25
         }
 //        gradient.fillMode = .both
+        layer.sublayers?.forEach{ $0.removeFromSuperlayer() }
         layer.addSublayer(gradient)
     }
+    
+    func setShadow() {
+        self.layer.cornerRadius = 12
+        self.layer.shadowColor = UIColor.systemGray6.cgColor
+        self.layer.shadowRadius = 20
+        self.layer.shadowOpacity = 1
+//        self.layer.masksToBounds = false
+    }
+    
+    func setShadowGray5() {
+        self.layer.cornerRadius = 12
+        self.layer.shadowColor = UIColor.systemGray5.cgColor
+        self.layer.shadowRadius = 20
+        self.layer.shadowOpacity = 1
+//        self.layer.masksToBounds = false
+    }
+
 }
+

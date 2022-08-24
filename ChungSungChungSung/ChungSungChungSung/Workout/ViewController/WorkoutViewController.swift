@@ -13,10 +13,11 @@ class WorkoutViewController: UIViewController {
     private var favoriteWorkouts: [String]?
     
     var workoutRealm: Results<WorkoutRealm>!
+    var numberOfTodaysWorkoutForScroll: Int = 0
     
     var workoutDates: [String] = [] {
         didSet {
-            print("qwe",workoutDates)
+//            print("qwe",workoutDates)
             dailyCalendarView.reloadData()
             todaysWorkoutView.reloadData()
         }
@@ -43,7 +44,7 @@ class WorkoutViewController: UIViewController {
     let dateFormatterForFilter = DateFormatter()
     var selectedDateString: String?
     
-    let 시작일 = CalendarHelper().addDays(date: Date(), days: -300)
+    var 시작일 = Date()
     var selectedDate = Date()
     var totalSquares = [Date]()
     
@@ -84,12 +85,15 @@ class WorkoutViewController: UIViewController {
 //    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("viewWillAppear")
+//        print("viewWillAppear")
         
         configNavigationTitle()
+        setWeekView()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        print("qweqwe",Date().addingTimeInterval(60*60*9))
         workoutDates = (RealmManager.fetchSearchDidWorkoutDates2() ?? []).map {
             dateFormatterForWorkout.string(from: $0)
         }
@@ -102,7 +106,7 @@ class WorkoutViewController: UIViewController {
         
         let localWorkoutRealm = try! Realm()
         workoutRealm = localWorkoutRealm.objects(WorkoutRealm.self)
-        print("Realm저장위치=\n\(Realm.Configuration.defaultConfiguration.fileURL!)\n")
+//        print("Realm저장위치=\n\(Realm.Configuration.defaultConfiguration.fileURL!)\n")
         
         dateFormatterForFilter.dateFormat = "yyyyMMdd"
         dateFormatterForFilter.locale = Locale(identifier: "ko_KR")
@@ -116,6 +120,7 @@ class WorkoutViewController: UIViewController {
         self.view.backgroundColor = CustomColor.bgGray
         self.navigationController?.navigationBar.prefersLargeTitles = true
         setTableViewShadow()
+        setWeekView()
 //        configNavigationTitle()
 //        self.dailyCalendarView.isPagingEnabled = true
 //        let backBarButtonItem = UIBarButtonItem(title: workoutViewTitle, style: .plain, target: nil, action: nil)
@@ -125,7 +130,7 @@ class WorkoutViewController: UIViewController {
         todaysWorkoutView.register(todaysWorkoutEmptyTableViewCellNib, forCellReuseIdentifier: "todaysWorkoutEmptyTableViewCell")
         
         let editBarButton = UIBarButtonItem(image: UIImage(systemName: "calendar"), style: .plain, target: self, action: #selector(goPreviousViewController))
-        editBarButton.tintColor = .black
+        editBarButton.tintColor = CustomColor.mainPurple
         self.navigationItem.rightBarButtonItems = [editBarButton]
         
         self.dailyCalendarView.backgroundColor = .clear
@@ -141,9 +146,9 @@ class WorkoutViewController: UIViewController {
         todaysWorkoutView.dataSource = self
         workoutListView.delegate = self
         workoutListView.dataSource = self
-        setWeekView()
+        
     }
-    
+
     @objc fileprivate func goPreviousViewController() {
         let vc = WorkoutPreviousViewController()
         navigationController?.pushViewController(vc, animated: true)
@@ -178,23 +183,27 @@ class WorkoutViewController: UIViewController {
     func setWeekView()
     {
         totalSquares.removeAll()
-        
+        시작일 = CalendarHelper().addDays(date: Date().addingTimeInterval(60*60*9), days: -150)
+//        print("오늘", Date().addingTimeInterval(60*60*9))
         var current = 시작일
         //TODO: 끝일
-        let nextSunday = CalendarHelper().addDays(date: Date(), days: 300)
+        let nextSunday = CalendarHelper().addDays(date: Date().addingTimeInterval(60*60*9), days: 0)
         while (current < nextSunday)
         {
+//            print(current)
             totalSquares.append(current)
             current = CalendarHelper().addDays(date: current, days: 1)
         }
         if let index = totalSquares.firstIndex(where: { date in
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = " yyyy-MM-dd"
+            dateFormatter.locale = Locale(identifier: "ko_KR")
+            
             return dateFormatter.string(from: date) == dateFormatter.string(from: Date())
         }) {
             DispatchQueue.main.async {
 //                self.dailyCalendarView.isPagingEnabled = true
-                self.dailyCalendarView.scrollToItem(at: [0, index], at: .centeredHorizontally, animated: false)
+                self.dailyCalendarView.scrollToItem(at: [0, index], at: .right, animated: false)
                 self.dailyCalendarView.decelerationRate = .fast
                 self.dailyCalendarView.isPagingEnabled = false
                 self.updateHeaderLabel()
@@ -206,9 +215,10 @@ class WorkoutViewController: UIViewController {
     }
     func updateHeaderLabel() {
         selectedDateView.text = "\(CalendarHelper().monthString(date: selectedDate))" + " " +  "\(CalendarHelper().dayOfMonth(date: selectedDate))일"
+//        print("sel_", selectedDateView.text)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = " yyyy-MM-dd"
-        
+//        print("sel", selectedDate, dateFormatter.string(from: selectedDate), dateFormatter.string(from: Date()))
         if dateFormatter.string(from: Date()) == dateFormatter.string(from: selectedDate) {
             selectedDateView.text? += ", 오늘"
         }
@@ -235,18 +245,18 @@ class WorkoutViewController: UIViewController {
     
     func showToast() {
         let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 100, y: 60, width: 200, height: 50))
-        toastLabel.backgroundColor = UIColor.white.withAlphaComponent(1.0)
-        toastLabel.layer.borderColor = UIColor.systemGray5.cgColor
-        toastLabel.layer.borderWidth = 1
-        toastLabel.textColor = UIColor.black
-        toastLabel.font = UIFont.systemFont(ofSize: 15)
+        toastLabel.backgroundColor = UIColor.systemGray.withAlphaComponent(1.0)
+//        toastLabel.layer.borderColor = UIColor.systemGray2.cgColor
+//        toastLabel.layer.borderWidth = 1
+        toastLabel.textColor = UIColor.white
+        toastLabel.font = UIFont.boldSystemFont(ofSize: 15)
         toastLabel.text = "이미 추가된 운동입니다."
         toastLabel.textAlignment = .center
-        toastLabel.alpha = 1.0
+        toastLabel.alpha = 0.9
         toastLabel.layer.cornerRadius = 25
         toastLabel.clipsToBounds = true
         self.view.addSubview(toastLabel)
-        UIView.animate(withDuration: 3.0, delay: 0.1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 1.0, delay: 1, options: .curveEaseOut, animations: {
             toastLabel.alpha = 0.0
         }, completion: {(isCompleted) in
             toastLabel.removeFromSuperview()
@@ -265,8 +275,10 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
         }
  
         let date = totalSquares[indexPath.item]
-        cell.dayNameView.text = CalendarHelper().weekDataAt(indexPath.row % 7)
+        
+        cell.dayNameView.text = getDayOfWeek(date: date)
         cell.dateNumberView.text = String(CalendarHelper().dayOfMonth(date: date))
+//        print("date", date, String(CalendarHelper().dayOfMonth(date: date)))
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -312,7 +324,7 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
         dateFormatterForFilter.dateFormat = "yyyyMMdd"
         dateFormatterForFilter.locale = Locale(identifier: "ko_KR")
         selectedDateString = dateFormatterForFilter.string(from: selectedDate)
-        print(selectedDate)
+//        print(selectedDate)
         updateHeaderLabel()
         dailyCalendarView.reloadData()
         todaysWorkoutView.reloadData()
@@ -349,6 +361,7 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
                     returnNumber = 1
                 } else {
                     returnNumber = todaysWorkout.count
+                    numberOfTodaysWorkoutForScroll = todaysWorkout.count
                 }
             }
             
@@ -398,8 +411,8 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let workout = workoutList[indexPath.row]
-        print("\(indexPath.row) \(workout.title) selected.")
+//        let workout = workoutList[indexPath.row]
+//        print("\(indexPath.row) \(workout.title) selected.")
         
         if tableView == todaysWorkoutView {
             guard let workoutAddView = UIStoryboard(name: "WorkoutTempAdd", bundle: .main).instantiateViewController(withIdentifier: "WorkoutTempAddViewController") as? WorkoutTempAddViewController else { return }
@@ -422,13 +435,15 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
                     }
                     if todaysWorkout.count == 0 {
                         RealmManager.saveWorkoutData(date: selectedDate, name: workoutName, count: nil, minutes: nil, seconds: nil, weight: nil, calories: nil)
-                        print("qwe",dateFormatterForWorkout.string(from: selectedDate))
+//                        print("qwe",dateFormatterForWorkout.string(from: selectedDate))
                         workoutDates.append(dateFormatterForWorkout.string(from: selectedDate))
 //                        UserDefaultManager.saveIsWorkoutDate(date: selectedDate)
 //                        workoutDates = defaults.stringArray(forKey: "workoutDate") ?? [String]()
                         
                         todaysWorkoutView.reloadData()
                         dailyCalendarView.reloadData()
+                        print("toc", todaysWorkout.count - 1)
+                        todaysWorkoutView.scrollToRow(at: IndexPath(row: numberOfTodaysWorkoutForScroll - 1, section: 0), at: .none, animated: true)
                     } else {
                         showToast()
                     }

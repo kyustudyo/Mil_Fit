@@ -9,7 +9,7 @@ import Foundation
 import FSCalendar
 class keyValues {
     
-    static let ids = ["3932313635323235383532323032313430","3133313635303732333032353832313337","3036313631323236383432323032313039"]
+    static let ids = ["3932313635323235383532323032313430","3133313635303732333032353832313337","3036313631323236383432323032313039", "3839313636363331343832323732303937"]
 
     static func getId() -> String {
         ids.randomElement() ?? ""
@@ -26,8 +26,6 @@ class Webservice {
     private init() { }
     
     func fetchMeals300(army: String, completion: @escaping () -> () ) {
-//        print((String(Array(army)[1..<5])))
-//        let armyNumber = (String(Array(army)[1..<5]))
         guard army != "없음" && army != "" else {
             DispatchQueue.main.async {
                 RealmManager.deleteAllMealsData()
@@ -35,10 +33,12 @@ class Webservice {
             }
             return
         }
-        let url: URL = URL(string: "https://openapi.mnd.go.kr/\(keyValues.getId())/json/DS_TB_MNDT_DATEBYMLSVC_\(String(Array(army)[1..<5]))/1/10000/")!
+        let key = keyValues.getId()
+        let url: URL = URL(string: "https://openapi.mnd.go.kr/\(key)/json/DS_TB_MNDT_DATEBYMLSVC_\(String(Array(army)[1..<5]))/1/10000/")!
         URLSession.shared.dataTask(with: url) { data, _, error in
             RealmManager.deleteAllMealsData()
             if let data = data {
+//                print("dddd", String(data: data, encoding: .utf8))
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .custom { keys in
                     if keys.count == 1 {

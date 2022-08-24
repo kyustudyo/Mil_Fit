@@ -14,7 +14,7 @@ class WorkoutPreviousViewController: UIViewController {
 
     var workoutRealm: Results<WorkoutRealm>!
     
-    
+    var selected = Date()
 //    var workoutDates = [String]()
     let dateFormatterHighlight = DateFormatter()
     let 운동안했습니다 = "운동을 하지 않았습니다."
@@ -46,7 +46,7 @@ class WorkoutPreviousViewController: UIViewController {
     fileprivate let tableView = UITableView()
     var 운동들:[String] = ["푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝","푸쉬업", "러닝"]
     
-    private var workoutList = WorkoutData().list
+//    private var workoutList = WorkoutData().list
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = false
@@ -54,10 +54,10 @@ class WorkoutPreviousViewController: UIViewController {
     
     private func fetchWorkouts(date: Date) {
         if let mealDate = RealmManager.searchWorkoutDataByDateK2(date: dateFormatterForWorkout.string(from: date)) {
-            print("cc",mealDate.count)
+//            print("cc",mealDate.count)
             if mealDate.count != 0 {
                 운동들 = mealDate.map{$0.name}
-                print(운동들.count)
+//                print(운동들.count)
                 tableView.reloadData()
                 update()
             } else {
@@ -97,6 +97,7 @@ class WorkoutPreviousViewController: UIViewController {
         
         tableView.layer.cornerRadius = 16
         tableView.rowHeight = 44
+        
         view.addSubview(calendar)
         calendar.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 8, paddingLeft: 16, paddingRight: 16, height: 300)
         calendar.backgroundColor = .white
@@ -198,7 +199,7 @@ extension WorkoutPreviousViewController: FSCalendarDelegate, FSCalendarDataSourc
 //        print("123",selectedDate)
         let today = dateFormatterForWorkout.string(from: Date())
 //        print("1234",today)
-        print("qwer", events2, dateFormatterForWorkout.string(from: date))
+//        print("qwer", events2, dateFormatterForWorkout.string(from: date))
         if selectedDate == today {
             return CustomColor.mainPurple
         } else if events2.contains(dateFormatterForWorkout.string(from: date)) {
@@ -220,7 +221,7 @@ extension WorkoutPreviousViewController: FSCalendarDelegate, FSCalendarDataSourc
 //            tableView.isUserInteractionEnabled = true
 //        }
         self.dismiss(animated: true, completion: nil)
-        
+        selected = date
        fetchWorkouts(date: date)
         
     }
@@ -245,7 +246,7 @@ extension WorkoutPreviousViewController: FSCalendarDelegate, FSCalendarDataSourc
 extension WorkoutPreviousViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(운동들.count, "???")
+//        print(운동들.count, "???")
         return 운동들.count
 //        return workoutList.count
     }
@@ -255,14 +256,16 @@ extension WorkoutPreviousViewController: UITableViewDelegate, UITableViewDataSou
         cell.workoutNameLabel.text = 운동들[indexPath.row]
 //        cell.workoutNameLabel.text = workoutList[indexPath.row].title
 //        cell.separatorInset = (indexPath.row == 운동들.count - 1) ? UIEdgeInsets(top: 0, left: 0, bottom: 0, right: tableView.bounds.width) : UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-
+        
+        cell.selectionStyle = .none
         
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let vc = UIStoryboard(name: "WorkoutAdd", bundle: .main).instantiateViewController(withIdentifier: "WorkoutAddViewController") as? WorkoutAddViewController else { return }
+        guard let vc = UIStoryboard(name: "WorkoutTempAdd", bundle: .main).instantiateViewController(withIdentifier: "WorkoutTempAddViewController") as? WorkoutTempAddViewController else { return }
         let workout = 운동들[indexPath.row]
         vc.workoutAddTitleText = workout
+        vc.selectedDate = selected
         
         guard workout != "운동을 하지 않았습니다." else {
             showToast()

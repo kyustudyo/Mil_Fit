@@ -30,13 +30,17 @@ class BodyInfoProfileViewController: UIViewController {
         drawUI()
         weightRecord = setChartData(data: weightRealm)
         setChart(lineValues: weightRecord)
+        
         ageTextField.text = "\(info[0])"
         heightTextField.text = "\(info[1])"
         weightTextField.text = "\(info[2])"
 
         
         let completeBarButton = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(completeEdit))
+        self.navigationController?.navigationBar.tintColor = CustomColor.mainPurple
         self.navigationItem.rightBarButtonItems = [completeBarButton]
+        navigationItem.title = "신체 정보"
+        navigationItem.largeTitleDisplayMode = .never
     }
     
     func setChartData(data: Results<WeightRealm>) -> [Double] {
@@ -56,7 +60,7 @@ class BodyInfoProfileViewController: UIViewController {
         if let weight = self.weightTextField.text, weight.count != 0 {
             if let iWeight = Int(weight) {
                 RealmManager.saveWeightData(date: Date().addingTimeInterval(60*60*9), weight: iWeight)
-                print("chch", Date().addingTimeInterval(60*60*9))
+//                print("chch", Date().addingTimeInterval(60*60*9))
             }
         }
         if let height = self.heightTextField.text, height.count != 0 {
@@ -88,6 +92,10 @@ class BodyInfoProfileViewController: UIViewController {
             let lineDataEntry = ChartDataEntry(x: Double(i), y: lineValues[i])
             lineDataEntries.append(lineDataEntry)
         }
+        let format = NumberFormatter()
+        format.numberStyle = .none
+        let formatter = DefaultValueFormatter(formatter: format)
+        
         let lineChartDataSet = LineChartDataSet(entries: lineDataEntries, label: "체중")
         lineChartDataSet.colors = [CustomColor.mainPurple!]
         lineChartDataSet.circleColors = [CustomColor.mainPurple!]
@@ -96,6 +104,8 @@ class BodyInfoProfileViewController: UIViewController {
         lineChartDataSet.circleRadius = 5.0
         lineChartDataSet.highlightEnabled = false
         let data = LineChartData(dataSet: lineChartDataSet)
+        data.setValueFormatter(formatter)
+        data.setValueFont(.systemFont(ofSize: 11, weight: .semibold))
         weightGraphView.data = data
         weightGraphView.rightAxis.enabled = false
         weightGraphView.drawGridBackgroundEnabled = false

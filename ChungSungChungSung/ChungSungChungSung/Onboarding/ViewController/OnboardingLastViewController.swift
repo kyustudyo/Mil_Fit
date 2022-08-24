@@ -23,9 +23,13 @@ class OnboardingLastViewController: UIViewController {
                 let date = formatStringToDate(dateString: dateString)
                 
                 if let date = date {
-                    UserDefaultManager.saveDischargeDate(date: date)
+                    UserDefaultManager.saveDischargeDate(date: date.addingTimeInterval(60*60*9))
                     UserDefaultManager.saveStartDate(date: Date())
                     let vc = TabViewController()
+                    
+                    RealmManager.saveBadgeData(date: Date().addingTimeInterval(60*60*9), title: "우리의 시작")
+                    RealmManager.saveBadgeData(date: Date().addingTimeInterval(60*60*9), title: "첫 기록의 기쁨")
+                    
                     self.navigationController?.isNavigationBarHidden = true
                     self.navigationController?.pushViewController(vc, animated: true)
 //                    vc.modalPresentationStyle = .fullScreen
@@ -62,6 +66,7 @@ class OnboardingLastViewController: UIViewController {
         formatter.dateFormat = "yyyy년 M월 dd일"
         formatter.locale = Locale(identifier: "ko_KR")
         //            self.date = datePicker.date
+        self.datePicker.minimumDate = Date()
         self.dateTF.text = formatter.string(from: datePicker.date)
     }
     

@@ -16,7 +16,6 @@ class TodoListAddProfileViewController: UIViewController {
         super.viewDidLoad()
         
 //        let plusButton = UIButton()
-        
 //        let plusImage = UIImage(systemName: "plus")
 //        plusButton.setImage(plusImage, for: .normal)
 //        plusButton.addTarget(self, action: #selector(goAddGoalViewController), for: .touchUpInside)
@@ -34,7 +33,7 @@ class TodoListAddProfileViewController: UIViewController {
             RealmManager.saveTodoListData(date: Date(), content: tf, isDone: false)
             if let notDoneTodos = RealmManager.notDoneTodoData2() {
 //                goalList = notDoneTodos
-                print(notDoneTodos.count)
+//                print(notDoneTodos.count)
             }
             
             delegate?.addTodo()

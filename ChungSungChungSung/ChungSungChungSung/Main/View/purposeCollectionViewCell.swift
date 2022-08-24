@@ -50,7 +50,11 @@ class PurposeCollectionViewCell: UICollectionViewCell {
     
     fileprivate func setupUI() {
         self.layer.cornerRadius = 16
-
+        self.layer.shadowColor = UIColor.systemGray6.cgColor
+        self.layer.shadowRadius = 20
+        self.layer.shadowOpacity = 1
+//        self.layer.masksToBounds = false
+//        self.setShadow()
         let vstack = UIStackView(arrangedSubviews: [purposeLabel, dateLabel])
         vstack.axis = .vertical
         vstack.spacing = 24.0

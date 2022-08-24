@@ -21,8 +21,12 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     var workoutPercent = 0.0
     var basicPercent = 0.0
     
-    var isMealCollectionView: String = ""// 부대
-    var isMealData: Bool = false// 있는 부대인지
+    var nsConstraintForNoMealData: NSLayoutConstraint?
+    var nsConstraintForNoTodoData: NSLayoutConstraint?
+    var nsConstraintFordDayLabel: NSLayoutConstraint?
+    
+    var 무슨부대인지: String = ""// 부대
+    var 있는부대인지: Bool = false// 있는 부대인지
     
     var events2: [Date] = [] {
         willSet {
@@ -178,10 +182,10 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     }()
     
     @objc fileprivate func goMoreMeal() {
-        print("more meal")
+//        print("more meal")
         let vc = MainMealViewController()
 
-        vc.isMealCollectionView = isMealCollectionView
+        vc.isMealCollectionView = 무슨부대인지
         vc.delegate = self
         
         let nav = UINavigationController.init(rootViewController: vc)
@@ -193,6 +197,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     @objc fileprivate func goMoreCalorie() {
 //        mealOrNothing.backgroundColor = .red
 //        mealStack.backgroundColor = .blue
+        
         let vc = MainCalorieViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -206,17 +211,24 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         return roundedView
     }()
     
-    private var moreButtons: UIView = {
-        let view = UIView()
-        return view
-    }()
+//    private var moreButtons: UIView = {
+//        let view = UIView()
+//        return view
+//    }()
     
     private let selectArmyLabel: UILabel = {
         let label = UILabel()
         return label
     }()
+    
+    private let selectTodoLabel: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    
     private let selectArmyButton: UIButton = {
         let button = UIButton()
+        button.layer.cornerRadius = 16
         return button
     }()
     
@@ -228,25 +240,28 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         return roundedView
     }()
     
-    private var mealStack: UIStackView = {
+    private var mealVStack: UIStackView = {
         return UIStackView()
     }()
     private let todoCollectionViewFlowLayout: UICollectionViewFlowLayout = {
         let view = UICollectionViewFlowLayout()
         view.minimumLineSpacing = Constants.lineSpacing
         view.scrollDirection = .horizontal
+       
         return view
       }()
     
     private let mealCollectionViewFlowLayout: UICollectionViewFlowLayout = {
         let view = UICollectionViewFlowLayout()
         view.minimumLineSpacing = Constants.lineSpacing
+        
         view.scrollDirection = .horizontal
         return view
       }()
     
      private lazy var todoCollectionView: UICollectionView = {
          let view = UICollectionView(frame: .zero, collectionViewLayout: todoCollectionViewFlowLayout)
+         view.showsHorizontalScrollIndicator = false
          view.register(PurposeCollectionViewCell.self, forCellWithReuseIdentifier: PurposeCollectionViewCell.cellID)
          view.dataSource = self
          view.delegate = self
@@ -255,7 +270,9 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     
     private lazy var mealCollectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: mealCollectionViewFlowLayout)
+        view.showsHorizontalScrollIndicator = false
         view.register(mealCollectionViewCell.self, forCellWithReuseIdentifier: mealCollectionViewCell.cellID)
+        view.layer.cornerRadius = 16
         view.dataSource = self
         view.delegate = self
       return view
@@ -265,22 +282,35 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         view.backgroundColor = .clear
        return view
     }()
-    private var mealOrNothing: UIView = {
-        return UIView()
-        
-    }()
+    
+//    private var mealOrNothing: UIView = {
+//        return UIView()
+//
+//    }()
+    
     private let selectArmyView: UIView = {
         return UIView()
     }()
     
-    private let 전역일들ContainerView: UIView = {
+    private let selectTodoView: UIView = {
         return UIView()
     }()
     
-    private let calContainerView = UIView()
+    private let 전역일들ContainerView: UIView = {
+        let view = UIView()
+        view.setShadow()
+        return view
+    }()
     
-    var mealData:Results<MealRealm>? = RealmManager.searchMealDataByDate(date: Date().formatterAppliedString())
-    var todoData:Results<ToDoListRealm>? = RealmManager.notDoneTodoData()
+    private let calContainerView: UIView = {
+        let view = UIView()
+        view.setShadow()
+        return view
+    }()
+    
+    var mealData:Results<MealRealm>?
+    var todoData:Results<ToDoListRealm>?
+
 //    {
 //        willSet {
 //            todoCollectionView.reloadData()
@@ -290,60 +320,38 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     
     
     override func viewWillAppear(_ animated: Bool) {
-        print("viewWillAppear")
-//        basicRoundedView.progressValue = 0.0
-//        eatRoundedView.progressValue = 0.0
-//        workoutRoundedView.progressValue = 0.0
-        //다른 뷰컨에서 navi를 보이므로
-        
-        navigationController?.isNavigationBarHidden = true
-//        UserDefaultManager.saveDischargeDate(date: "2022-08-21".String2DateType()!)
-//        UserDefaultManager.saveStartDate(date: "2022-08-07".String2DateType()!)
-        
-//        RealmManager.deleteAlTodosData()
-//        RealmManager.saveTodoListData(date: "2022-08-20".String2DateType()!, content: "1", isDone: false)
-//        RealmManager.saveTodoListData(date: "2022-08-21".String2DateType()!, content: "2", isDone: false)
-//        RealmManager.saveTodoListData(date: "2022-08-19".String2DateType()!, content: "0", isDone: false)
-//        RealmManager.saveTodoListData(date: "2022-08-22".String2DateType()!, content: "3", isDone: false)
+//        print("viewWillAppear")
+//        navigationItem.title = ""
+//        navigationController?.isNavigationBarHidden = true
 
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ko_KR")
-        dateFormatter.dateFormat = "yyyy년M월dd일"
+        dateFormatter.dateFormat = "yyyy년 M월 dd일"
+        navigationItem.title  = dateFormatter.string(from: Date())
+//        navigationController?.navigationBar.barTintColor = CustomColor.bgGray
         
-        dateLabel.text = dateFormatter.string(from: Date())
+        var calendar = Calendar(identifier: .gregorian)
         
+        calendar.timeZone = TimeZone(secondsFromGMT: 0)!
+        let startOfDate = calendar.startOfDay(for: Date().addingTimeInterval(60*60*9))
         
-        
-        
-        
-        print("ㄷㄱ",UserDefaultManager.loadDischargeDate(), UserDefaultManager.loadStartDate())
-        if let finishDay = UserDefaultManager.loadDischargeDate(),
-           let startDay = UserDefaultManager.loadStartDate() {
-//            print(Calendar.current.dateComponents([.day], from: startDay, to: finishDay))
-            if let 시작부터전역일까지 = Calendar.current.dateComponents([.day], from: startDay, to: finishDay).day {
-                if let 시작부터오늘까지 = Calendar.current.dateComponents([.day], from: startDay, to: Date().addingTimeInterval(60*60*9)).day {
-//                    print("ㄷㄱ",시작부터전역일까지, 시작부터오늘까지)
-                    print(Double(시작부터오늘까지)/Double(시작부터전역일까지))
-                    전역가까움 = Double(시작부터오늘까지)/Double(시작부터전역일까지)
-//                    print("ㄷㄱ",시작부터오늘까지, 시작부터전역일까지)
-                    let col1 = UIColor(red: 170/255.0, green: 144/255.0, blue: 239/255.0, alpha: 1)
-                    let col2 = UIColor(red: 113/255.0, green: 87/255.0, blue: 219/255.0, alpha: 1)
-                    endDayBar.setGradient(color1: col2, color2: col1, width: (UIScreen.main.bounds.width - Constants.sideSpacing*4) * 0.5)
-                    
-                    dDay.anchor(right:전역일들ContainerView.leftAnchor, paddingRight: 전역가까움 > 0.1 ? -(UIScreen.main.bounds.width - Constants.sideSpacing*3) * 전역가까움 : -(전역일.intrinsicContentSize.width + 60))
-                    dDay.text = "D-\(시작부터전역일까지 - 시작부터오늘까지)"
-                    dDay.layoutIfNeeded()
-                }
+        if let dischargeDate = UserDefaultManager.loadDischargeDate() {
+            let today = Date().addingTimeInterval(60*60*9)
+            
+            if let leftDay = Calendar.current.dateComponents([.day], from: startOfDate, to: dischargeDate).day {
+                
+                전역가까움 = Double(800 - (leftDay <= 800 ? leftDay : 800)) / Double(800)
+                전역가까움 = leftDay < 0 ? 1 : 전역가까움
+                
+                let col1 = UIColor(red: 170/255.0, green: 144/255.0, blue: 239/255.0, alpha: 1)
+                
+                let col2 = UIColor(red: 113/255.0, green: 87/255.0, blue: 219/255.0, alpha: 1)
+                endDayBar.setGradient(color1: col2, color2: col1, width: (UIScreen.main.bounds.width - Constants.sideSpacing*4) * 전역가까움)
+                dDay.text = "D-\(leftDay)"
             }
         }
         
-        todoData = RealmManager.notDoneTodoData()
-        
-//        RealmManager.deleteAllWorkoutData()
-//        RealmManager.saveWorkoutData(date: "20220815".String2DateTypeForWorkout()!, name: "팔굽", set: 3, count: 2, minutes: 3, seconds: 3, weight: 4, calories: 300)
-//        RealmManager.saveWorkoutData(date: "20220816".String2DateTypeForWorkout()!, name: "팔굽2", set: 3, count: 2, minutes: 3, seconds: 3, weight: 4, calories: 200)
-//        RealmManager.saveWorkoutData(date: "20220820".String2DateTypeForWorkout()!, name: "팔굽3", set: 3, count: 2, minutes: 3, seconds: 3, weight: 4, calories: 1000)
-        
+        todoUpdate()
         
         let dateFormatterForWorkout = DateFormatter()
         dateFormatterForWorkout.locale = Locale(identifier: "ko_KR")
@@ -355,96 +363,63 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         
         events2 = RealmManager.fetchSearchDidWorkoutDates() ?? []
         //viewwillappear
-        updateMealAndCalView()
-//        updateValues()
-        
+
         updateMealRoundedView()
-        
-//        UserDefaultManager.saveBMR(BMR: 1400)
+
         let bmr = UserDefaultManager.loadBMR() ?? 0
         basicPercent = Double(bmr) / 5000.0 * 100.0
+//        print("bmr", bmr, basicPercent)
         todayBasicCaloryLabel.text = "\(Double(bmr))kcal"
         basicRoundedView.progressValue = basicPercent
-        print("check",basicPercent)
-        print("percent", eatPercent, basicPercent, workoutPercent)
-        
+        basicRoundedView.update()
+
         if let workOut = RealmManager.searchWorkoutDataByDateK(date: dateFormatterForWorkout.string(from: Date())) {
+            let cals = workOut.map{$0.calories}[0]
+
             guard workOut.count != 0 else { return }
-            print("qwqw운동칼로리", workOut[0].calories)
+
             let workoutCal = Double(Array(workOut.map { $0.calories ?? 0}).reduce(0, +))
             workoutPercent = workoutCal / 5000 * 100.0
             todayWorkoutCaloryLabel.text = "\(workoutCal)kcal"
-            print("check",workoutPercent)
+
             workoutRoundedView.progressValue =  basicPercent + workoutPercent
+            workoutRoundedView.update()
         }
-        
-        
+
         todoCollectionView.reloadData()
         mealCollectionView.reloadData()
-//        RealmManager.deleteAllWeightData()
         
-        //몸무게
-//        RealmManager.saveWeightData(date: Date().addingTimeInterval(60*60*9), weight: 40)
-        
-        //키
-//        UserDefaultManager.saveHeight(height: 191)
-//        print(UserDefaultManager.loadHeight())
-        
-        //bmr
-//        UserDefaultManager.saveBMR(BMR: 1400)
-//        let bmr = UserDefaultManager.loadBMR() ?? 0
-//        basicPercent = Double(bmr) / 5000.0 * 100.0
-//        todayBasicCaloryLabel.text = "\(Double(bmr))kcal"
-//        basicRoundedView.progressValue = basicPercent
-//        print("check",basicPercent)
-//        print("percent", eatPercent, basicPercent, workoutPercent)
-//        updateMealAndCalView()
-//        view.layoutIfNeeded()
-        
-//        RealmManager.saveWeightData(date: "2022-08-22".String2DateType()!, weight: 33)
-//        RealmManager.saveWeightData(date: "2022-08-11".String2DateType()!, weight: 45)
-//        RealmManager.saveWeightData(date: "2022-08-24".String2DateType()!, weight: 50)
-//        RealmManager.saveWeightData(date: "2022-08-19".String2DateType()!, weight: 56)
-//        RealmManager.saveWeightData(date: "2022-08-27".String2DateType()!, weight: 55)
-//        RealmManager.saveWeightData(date: "2022-08-27".String2DateType()!, weight: 59)
-//        print("wewe",RealmManager.searchCurrentWeight())
-        
-//        print("qwerr",RealmManager.searchMealDataByDate(date: "2022-08-15")?.count)
-//        print("qwerr",RealmManager.searchMealDataByDate(date: "2022-08-15"))
-//        print(RealmManager.searchWorkoutDataByDateK(date: "20220815")?.count)
-//        print(RealmManager.searchWorkoutDataByDateK(date: "20220819"))
-        
-//        let k = mealData.map{ $0.calories }
-        
+    }
+    private func todoUpdate() {
+        todoData = RealmManager.notDoneTodoData()
+        todoEmptyView.isHidden = (todoData == nil) ? false : true
+        selectTodoLabel.text =  (todoData != nil) ? "" : "프로필에서 목표를 설정하세요."
     }
     
     private func updateMealRoundedView() {
-        print("viewWillAppear말고 update")
+//        print("viewWillAppear말고 update")
         let dateFormatterForMeal = DateFormatter()
         dateFormatterForMeal.locale = Locale(identifier: "ko_KR")
         dateFormatterForMeal.dateFormat = "yyyy-MM-dd"
-        print("data!!!", RealmManager.searchMealDataByDate(date: dateFormatterForMeal.string(from: Date().addingTimeInterval(60*60*9))))
+//        print("data!!!", RealmManager.searchMealDataByDate(date: dateFormatterForMeal.string(from: Date())))
         
-        print(RealmManager.allMealData()?.count)
-        print(RealmManager.searchMealDataByDate(date: dateFormatterForMeal.string(from: Date().addingTimeInterval(60*60*9)))?.count)
-        if let meal = RealmManager.searchMealDataByDate(date: dateFormatterForMeal.string(from: Date().addingTimeInterval(60*60*9))) {
+//        print(RealmManager.allMealData()?.count)
+//        print(RealmManager.searchMealDataByDate(date: dateFormatterForMeal.string(from: Date().addingTimeInterval(60*60*9)))?.count)
+        if let meal = RealmManager.searchMealDataByDate(date: dateFormatterForMeal.string(from: Date())) {
             if meal.count == 0 {
-                print("eatcheck no")
+//                print("eatcheck no")
                 eatPercent = 50.0
                 todayMealCaloryLabel.text = "2000kcal"
             } else {
-                print("cal", Double(meal[0].calories))
+//                print("cal", Double(meal[0].calories))
                 let eatCal = Double(meal[0].calories)
                 eatPercent = eatCal / 5000.0 * 100.0
                 todayMealCaloryLabel.text = "\(eatCal)kcal"
-                print("eatcheck", eatPercent)
+//                print("eatcheck", eatPercent)
             }
-//            eatRoundedView.progressValue = eatPercent == 50.0 ? 12.0 : 40.0
+
             self.eatRoundedView.progressValue = eatPercent
             eatRoundedView.update()
-            
-//            self.eatRoundedView.draw(CGRect())
-//            self.eatRoundedView.setNeedsDisplay()
             
         } else {
             eatPercent = 1.0
@@ -455,73 +430,122 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemGray6
-//        print("2022-09-22".toDate()!)
-//        UserDefaultManager.removeFirstTimeExperience()
-//        RealmManager.deleteAllMealsData()
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        view.backgroundColor = CustomColor.bgGray
+        
+        mealData = RealmManager.searchMealDataByDate(date: Date().formatterAppliedString())
+        todoData = RealmManager.notDoneTodoData()
+        
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ko_KR")
         dateFormatter.dateFormat = "yyyy-MM-dd"
         
-//        UserDefaultManager.saveDischargeDate(date: "2022-08-18".String2DateType()!)
-
+        calendar.setShadow()
         calendar.delegate = self
         calendar.dataSource = self
         
-        print(Realm.Configuration.defaultConfiguration.fileURL!)
-//        Webservice.shared.fetchMeals300(army: "제5322부대")
+//        print(Realm.Configuration.defaultConfiguration.fileURL!)
+
         setupUI()
        
     }
 
     func setupUI() {
         let scrollView = UIScrollView()
+        
         view.addSubview(scrollView)
-        
+//        view.backgroundColor = .green
         scrollView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
-        
-        emptyView.backgroundColor = .white
+        scrollView.backgroundColor = CustomColor.bgGray
+        emptyView.backgroundColor = CustomColor.bgGray
         scrollView.addSubview(emptyView)
         emptyView.anchor(top: scrollView.topAnchor, left: scrollView.leftAnchor,bottom: scrollView.bottomAnchor ,right: scrollView.rightAnchor, paddingTop: 0, paddingLeft: 0,paddingBottom: 0 ,paddingRight: 0)
         emptyView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-        emptyView.backgroundColor = .systemGray6
+        emptyView.backgroundColor = CustomColor.bgGray
     
         //MARK: (날짜 + 멘트)
 //        let stack = UIStackView(arrangedSubviews: [dateLabel])
         stack.addSubview(dateLabel)
         dateLabel.anchor(left: stack.leftAnchor, paddingLeft: 4)
         dateLabel.centerY(inView: stack)
+        dateLabel.isHidden = true
         emptyView.addSubview(stack)
-        stack.anchor(top: emptyView.topAnchor, left: emptyView.leftAnchor, right: emptyView.rightAnchor, paddingTop: 40, paddingLeft: 16, paddingRight: 16)
-
+        stack.anchor(top: emptyView.topAnchor, left: emptyView.leftAnchor, right: emptyView.rightAnchor, paddingTop: 0, paddingLeft: 16, paddingRight: 16)
+//        stack.backgroundColor = .red
+        
         //MARK: 전역일 프로그레스
 //        let 전역일들ContainerView = UIView()
+        
+        
         emptyView.addSubview(전역일들ContainerView)
         전역일들ContainerView.layer.cornerRadius = 16
         전역일들ContainerView.backgroundColor = .white
         전역일들ContainerView.setHeight(height: 100)
-        전역일들ContainerView.anchor(top: stack.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 32.0, paddingLeft: 0, paddingRight: 0)
+        전역일들ContainerView.anchor(top: stack.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 22.0, paddingLeft: 0, paddingRight: 0)
         
-        let 전역일들 = UIStackView(arrangedSubviews: [전역일, dDay])
+        let 전역일들 = UIStackView(arrangedSubviews: [전역일])
         전역일들ContainerView.addSubview(전역일들)
         전역일들.anchor(top: 전역일들ContainerView.topAnchor, left: 전역일들ContainerView.leftAnchor, paddingTop: 26.0, paddingLeft: 16.0)
+//        전역일.back
         전역일들ContainerView.addSubview(endDayBar)
         endDayBar.anchor(top:전역일들.bottomAnchor, left: 전역일들ContainerView.leftAnchor, right: 전역일들ContainerView.rightAnchor,paddingTop: 12, paddingLeft: 16, paddingRight: 16)
-//        let col1 = UIColor(red: 170/255.0, green: 144/255.0, blue: 239/255.0, alpha: 1)
-//        let col2 = UIColor(red: 113/255.0, green: 87/255.0, blue: 219/255.0, alpha: 1)
-//        endDayBar.setGradient(color1: col2, color2: col1, width: (UIScreen.main.bounds.width - Constants.sideSpacing*4) * 전역가까움)
-//        print(전역가까움)
-//        dDay.anchor(right:전역일들ContainerView.leftAnchor, paddingRight: 전역가까움 > 0.1 ? -(UIScreen.main.bounds.width - Constants.sideSpacing*3) * 전역가까움 : -(전역일.intrinsicContentSize.width + 60))
+
+        emptyView.addSubview(dDay)
+        dDay.centerY(inView: 전역일들)
+        dDay.anchor(left: 전역일들.rightAnchor, paddingLeft: 8)
+//        dDay.anchor(left: 전역일들ContainerView.leftAnchor, paddingLeft: 16)
+//        nsConstraintFordDayLabel = dDay.rightAnchor.constraint(equalTo: 전역일들ContainerView.leftAnchor, constant: 전역가까움 > 0.1 ? (UIScreen.main.bounds.width - Constants.sideSpacing*3) * 전역가까움 : (전역일.intrinsicContentSize.width + 80) )
+//        print("전각",전역가까움)
         
+        
+//        nsConstraintFordDayLabel = dDay.leftAnchor.constraint(equalTo: endDayBar.leftAnchor, constant: (UIScreen.main.bounds.width - Constants.sideSpacing*4) * (전역가까움 < 0.2 ? 0.2 : 전역가까움))
+//        nsConstraintFordDayLabel?.isActive = true
         //MARK: (목표들)
+        
         let purposeStack = UIStackView(arrangedSubviews: [purposeLabel, todoCollectionView])
         purposeStack.axis = .vertical
         purposeStack.spacing = 8
         emptyView.addSubview(purposeStack)
         purposeStack.anchor(top: 전역일들ContainerView.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 40, paddingLeft: 0, paddingRight: 0)
+        
+        
+        emptyView.addSubview(todoEmptyView)
+        todoEmptyView.anchor(top: purposeLabel.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 8, paddingLeft: 0, paddingRight: 0, height: Constants.purposeCellHeight)
+//        todoEmptyView.setShadow()
+            
+//        todoEmptyView.layer.shadowOpacity = 1
+//
+//        todoEmptyView.layer.shadowRadius = 10
+//
+//        todoEmptyView.layer.masksToBounds = false
+        
+//        todoEmptyView.backgroundColor = .red
+        todoEmptyView.addSubview(selectTodoView)
+        
+        selectTodoView.addSubview(selectTodoLabel)
+        selectTodoView.layer.cornerRadius = 16
+
+        todoData = RealmManager.notDoneTodoData()
+        selectTodoLabel.text =  (todoData != nil) ? "" : "프로필에서 목표를 설정하세요."
+        selectTodoLabel.textColor = .black
+        selectTodoLabel.numberOfLines = 0
+        selectTodoLabel.textAlignment = .center
+        
+        selectTodoLabel.centerX(inView: selectTodoView)
+        selectTodoLabel.centerY(inView: selectTodoView)
+        
+//        todoCollectionView.addSubview(selectTodoView)
+        selectTodoView.backgroundColor = .white
+        selectTodoView.anchor(top: todoEmptyView.topAnchor, left: todoEmptyView.leftAnchor, right: todoEmptyView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0)
+        
+        selectTodoView.setShadow()
+        
+        nsConstraintForNoTodoData = selectTodoView.heightAnchor.constraint(equalToConstant: Constants.purposeCellHeight )
+        nsConstraintForNoTodoData?.isActive = true
+        
         todoCollectionView.anchor(left: stack.leftAnchor, right: stack.rightAnchor, paddingLeft: 0, paddingRight: 0)
         todoCollectionView.setHeight(height: Constants.purposeCellHeight)
-        todoCollectionView.backgroundColor = .systemGray6
+        todoCollectionView.backgroundColor = .clear
         //MARK: 운동 달력
 
         emptyView.addSubview(workoutLabel)
@@ -545,7 +569,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         previousButton.centerY(inView: calendar.calendarHeaderView)
         previousButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
         previousButton.tintColor = .black
-        print(isMealCollectionView)
+//        print(무슨부대인지)
         let nextButton = UIButton()
         nextButton.addTarget(self, action: #selector(nextTapped(_:)), for: .touchUpInside)
         nextButton.tintColor = .black
@@ -606,7 +630,6 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         workoutMentVstack.axis = .vertical
         workoutMentVstack.alignment = .leading
         
-        
 //        let workOutCal = shortRoundedView(color: CustomColor.red ?? .red)
 //        let workoutMentVstack = shortMent(ment: "운동 칼로리", value: 1700)
         let 운동칼로리 = UIStackView(arrangedSubviews: [workOutCal, workoutMentVstack])
@@ -628,131 +651,74 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     
     @objc fileprivate func goSelectArmyViewController() {
         let selectArmyViewController = SelectArmyViewController()
-        selectArmyViewController.isMealCollectionView = isMealCollectionView
+        selectArmyViewController.isMealCollectionView = 무슨부대인지
         selectArmyViewController.delegate = self
         navigationController?.pushViewController(selectArmyViewController, animated: true)
     }
     
     fileprivate var mealHStack = UIStackView()
     
-    fileprivate var mealEmptyView = UIView()
-    
-//    private func updateValues() {
-//        selectArmyLabel.text =  isMealCollectionView.isEmpty ? "부대를\n선택하세요" : "해당 부대는 식단 정보를\n제공하지 않습니다"
-//        print("qwe",!isMealCollectionView.isEmpty && isMealData)
-//        mealOrNothing = !isMealCollectionView.isEmpty && isMealData ? mealCollectionView : selectArmyView
-//
-////        print("cc",mealStack.subviews.forEach{$0.removeFromSuperview()})
-//
-//        selectArmyView.backgroundColor = !isMealCollectionView.isEmpty && isMealData ? .clear : .white
-////        mealStack.reloadInputViews()
-////        mealStack.
-//
-//        mealStack = UIStackView(arrangedSubviews: [mealHStack, mealOrNothing])
-//        print(mealEmptyView.subviews.count)
-//        mealEmptyView.addSubview(mealStack)
-//        mealEmptyView.subviews.enumerated().forEach { (i,k) in
-//            if i == 0 {
-//                k.removeFromSuperview()
-//            }
-//        }
-//
-//        mealStack.axis = .vertical
-//        mealStack.spacing = 8
-//        mealStack.backgroundColor = .clear
-//        mealStack.anchor(top: mealEmptyView.topAnchor, left: mealEmptyView.leftAnchor, bottom: mealEmptyView.bottomAnchor, right: mealEmptyView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
-//
-////        emptyView.addSubview(mealStack)
-////        mealStack.backgroundColor = .yellow
-////        mealCollectionView.backgroundColor = .systemGray6
-////        mealStack.axis = .vertical
-////        mealStack.spacing = 8
-////        mealStack.backgroundColor = .clear
-////        print("p1_20", emptyView.subviews.count)
-////        emptyView.addSubview(mealStack)
-////        print("p1_21", emptyView.subviews.count)
-////
-////        mealStack.anchor(top: calendar.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 40, paddingLeft: 0, paddingRight: 0)
-////
-////        mealOrNothing.anchor(left: stack.leftAnchor, right: stack.rightAnchor, paddingLeft: 0, paddingRight: 0)
-////        mealOrNothing.setHeight(height: Constants.mealCellHeight)
-//
-////        mealStack = UIStackView(arrangedSubviews: [mealHStack, mealOrNothing])
-////        mealStack.anchor(top: calendar.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 40, paddingLeft: 0, paddingRight: 0)
-////        view.layoutIfNeeded()
-//    }
+    fileprivate var mealEmptyView: UIView = {
+        let view = UIView()
+        view.setShadow()
+        return view
+    }()
+    fileprivate var todoEmptyView: UIView = {
+        let view = UIView()
+//        view.setShadow()
+        return view
+    }()
     
     private func updateMealAndCalView() {
-//        moreButton.backgroundColor = .red
-        moreButtons = moreButton
-        moreButton.isHidden = isMealData ? false : true
         
-        mealHStack = UIStackView(arrangedSubviews: [mealLabel, moreButtons])
-//        mealHStack.backgroundColor = .blue
-//        mealHStack.alignment = .center
+//        moreButton.isHidden = 있는부대인지 ? false : true
+        
+        emptyView.addSubview(mealEmptyView)
+        
+        mealHStack = UIStackView(arrangedSubviews: [mealLabel, moreButton])
+        
         //TODO: 이해 mealHStack background color
-        moreButtons.anchor(top: mealHStack.topAnchor, bottom: mealHStack.bottomAnchor, paddingTop: 0, paddingBottom: 0)
-        moreButtons.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        moreButton.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        moreButton.isHidden = (mealData != nil) ? false : true
+        
+        mealVStack = UIStackView(arrangedSubviews: [mealHStack, mealCollectionView])
+        mealVStack.axis = .vertical
+        
+        mealCollectionView.backgroundColor = .clear
+        mealEmptyView.addSubview(mealVStack)
+        mealVStack.anchor(top: mealEmptyView.topAnchor, left: mealEmptyView.leftAnchor, bottom: mealEmptyView.bottomAnchor, right: mealEmptyView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
+        
+        mealEmptyView.anchor(top: calendar.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 40, paddingLeft: 0, paddingRight: 0, height: Constants.mealCellHeight + 40)
+        
+        mealCollectionView.anchor(top: mealHStack.bottomAnchor, left: mealEmptyView.leftAnchor, bottom: mealEmptyView.bottomAnchor, right: mealEmptyView.rightAnchor, paddingTop: 8, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, height: Constants.mealCellHeight)
+        
+        selectArmyView.addSubview(activityIndicator)
+        activityIndicator.centerY(inView: selectArmyView)
+        activityIndicator.centerX(inView: selectArmyView)
 
+        selectArmyView.addSubview(selectArmyLabel)
         selectArmyView.layer.cornerRadius = 16
-        selectArmyLabel.text =  isMealCollectionView.isEmpty ? "부대를\n선택하세요" : "해당 부대는 식단 정보를\n제공하지 않습니다"
-        selectArmyLabel.textColor = .systemBlue
+        selectArmyLabel.text =  무슨부대인지.isEmpty ? "부대를\n선택하세요" : "해당 부대는 식단 정보를\n제공하지 않습니다"
+        selectArmyLabel.textColor = CustomColor.mainPurple
         selectArmyLabel.numberOfLines = 0
         selectArmyLabel.textAlignment = .center
-        print("p1_10", selectArmyView.subviews.count)
-        selectArmyView.addSubview(selectArmyLabel)
-        print("p1_11", selectArmyView.subviews.count)
+        
         selectArmyLabel.centerX(inView: selectArmyView)
         selectArmyLabel.centerY(inView: selectArmyView)
         
-//        print("qqqq",!isMealCollectionView.isEmpty && isMealData)
-        mealOrNothing = !isMealCollectionView.isEmpty && isMealData ? mealCollectionView : selectArmyView
-//        print("qqqqq", mealOrNothing)
-        selectArmyView.backgroundColor = !isMealCollectionView.isEmpty && isMealData ? .clear : .white
-        mealCollectionView.backgroundColor = .clear
-//        print(isMealCollectionView.isEmpty)
-//        print(isMealData)
-//        print(!isMealCollectionView.isEmpty && isMealData)
-        mealStack = UIStackView(arrangedSubviews: [mealHStack, mealOrNothing])
-//        mealStack.backgroundColor = .yellow
-//        mealCollectionView.backgroundColor = .systemGray6
-        mealStack.axis = .vertical
-        mealStack.spacing = 8
-        mealStack.backgroundColor = .clear
-        print("p1_20", emptyView.subviews.count)
+        mealEmptyView.addSubview(selectArmyView)
+        selectArmyView.layer.cornerRadius = 16
+        selectArmyView.backgroundColor = .white
+        selectArmyView.anchor(top: mealCollectionView.topAnchor, left: mealEmptyView.leftAnchor, right: mealEmptyView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0)
         
-        mealEmptyView.addSubview(mealStack)
-        mealStack.anchor(top: mealEmptyView.topAnchor, left: mealEmptyView.leftAnchor, bottom: mealEmptyView.bottomAnchor, right: mealEmptyView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
-        emptyView.addSubview(mealEmptyView)
-        mealEmptyView.anchor(top: calendar.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 40, paddingLeft: 0, paddingRight: 0)
-//        mealEmptyView.backgroundColor = .red
+        selectArmyView.addSubview(selectArmyButton)
         
-        
-        
-//        emptyView.addSubview(mealStack)
-//        print("p1_21", emptyView.subviews.count)
-//        mealStack.anchor(top: calendar.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 40, paddingLeft: 0, paddingRight: 0)
-        
-        
-        
-        mealOrNothing.anchor(left: stack.leftAnchor, right: stack.rightAnchor, paddingLeft: 0, paddingRight: 0)
-        mealOrNothing.setHeight(height: Constants.mealCellHeight)
-        print("p1_22", mealOrNothing.subviews.count)
-        mealOrNothing.addSubview(activityIndicator)
-        print("p1_23", mealOrNothing.subviews.count)
-        print("p2",mealOrNothing.subviews.count)
-        activityIndicator.centerY(inView: mealOrNothing)
-        activityIndicator.centerX(inView: mealOrNothing)
-//        mealOrNothing.backgroundColor = !isMealCollectionView.isEmpty && isMealData ? .clear : .white
-        
-
-        //버튼추가 updatemealand..
-        if (isMealCollectionView.isEmpty || isMealCollectionView == "없음") && !isMealData {
-            emptyView.addSubview(selectArmyButton)
-            selectArmyButton.addTarget(self, action: #selector(goSelectArmyViewController), for: .touchUpInside)
-            selectArmyButton.backgroundColor = .clear
-            selectArmyButton.anchor(top: mealOrNothing.topAnchor, left: mealOrNothing.leftAnchor, bottom: mealOrNothing.bottomAnchor, right: mealOrNothing.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
-        }
+        nsConstraintForNoMealData = selectArmyView.heightAnchor.constraint(equalToConstant: mealData != nil ? 0 : 210)
+        selectArmyLabel.isHidden = mealData != nil ? true : false
+        nsConstraintForNoMealData?.isActive = true
+        selectArmyButton.addTarget(self, action: #selector(goSelectArmyViewController), for: .touchUpInside)
+        selectArmyButton.tag = 77
+        selectArmyButton.anchor(top: selectArmyView.topAnchor,left: selectArmyView.leftAnchor, bottom: selectArmyView.bottomAnchor, right: selectArmyView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
     
         //MARK: 칼로리
         setCalroyView()
@@ -760,37 +726,20 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     }
     private func setCalroyView() {
         
-        
         let calHStack = UIStackView(arrangedSubviews: [calLabel, moreButtonForCalorie])
         calHStack.alignment = .firstBaseline
         moreButtonForCalorie.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        print("p1_0",emptyView.subviews.count)
         emptyView.addSubview(calHStack)
-        print("p1_1",emptyView.subviews.count)
-//        calHStack.anchor(top: mealStack.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 40, paddingLeft: 0, paddingRight: 0)
         calHStack.anchor(top: mealEmptyView.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 40, paddingLeft: 0, paddingRight: 0)
-
         calContainerView.layer.cornerRadius = 16
-        print("p1_2", emptyView.subviews.count)
         emptyView.addSubview(calContainerView)
-        print("p1_3",emptyView.subviews.count)
         calContainerView.backgroundColor = .white
         calContainerView.anchor(top: calHStack.bottomAnchor, left: stack.leftAnchor, bottom: emptyView.bottomAnchor,right: stack.rightAnchor, paddingTop: 8, paddingLeft: 0, paddingBottom: 60,paddingRight: 0, height: 160)
-        print("p1_4", calContainerView.subviews.count)
         calContainerView.addSubview(eatRoundedView)
-        print("p1_5", calContainerView.subviews.count)
-        eatRoundedView.anchor(top: calContainerView.topAnchor, left: calContainerView.leftAnchor, right: calContainerView.rightAnchor, paddingTop: 26, paddingLeft: 22, paddingRight: 0, height: 14)
-        
-//        eatRoundedView.progressValue = 0.0
-        print("p1_6", calContainerView.subviews.count)
+        eatRoundedView.anchor(top: calContainerView.topAnchor, left: calContainerView.leftAnchor, right: calContainerView.rightAnchor, paddingTop: 26, paddingLeft: 22, paddingRight: 22, height: 14)
         calContainerView.addSubview(workoutRoundedView)
-        print("p1_7", calContainerView.subviews.count)
         workoutRoundedView.anchor(top: eatRoundedView.bottomAnchor, left: eatRoundedView.leftAnchor, right: eatRoundedView.rightAnchor, paddingTop: 13, paddingLeft: 0, paddingRight: 0, height: 14)
-        print("p1_8", calContainerView.subviews.count)
         calContainerView.addSubview(basicRoundedView)
-        print("p1_9", calContainerView.subviews.count)
-//        workoutRoundedView.progressValue = 0.0
-        
         basicRoundedView.anchor(top: eatRoundedView.bottomAnchor, left: eatRoundedView.leftAnchor, right: eatRoundedView.rightAnchor, paddingTop: 13, paddingLeft: 0, paddingRight: 0, height: 14)
     }
     
@@ -814,7 +763,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         switch collectionView {
         case todoCollectionView:
-            print("cell purposeCollectionView")
+//            print("cell purposeCollectionView")
             guard let cell = todoCollectionView.dequeueReusableCell(withReuseIdentifier: PurposeCollectionViewCell.cellID, for: indexPath) as? PurposeCollectionViewCell else { return UICollectionViewCell() }
 //            let cell = PurposeCollectionViewCell(todo:  todoData[indexPath.row])
             
@@ -832,12 +781,13 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.thumbButton.tintColor = todoData[indexPath.row].isDone == false ? .gray : .none
             return cell
         case mealCollectionView:
-            print("cell mealCollectionView")
+//            print("cell mealCollectionView")
             guard let cell = mealCollectionView.dequeueReusableCell(withReuseIdentifier: mealCollectionViewCell.cellID, for: indexPath) as? mealCollectionViewCell else { return UICollectionViewCell() }
             cell.mealLabel.text = ["조식", "중식", "석식"][indexPath.row]
 //            cell.반찬들 = mealData[indexPath.row].mealArray
 //            cell.calLabel.text = "\(mealData[indexPath.row].calories)kcal"
             cell.backgroundColor = .white
+//            cell.backgroundColor = .blue
             guard let mealData = mealData else {
                 return cell
             }
@@ -917,7 +867,6 @@ extension MainViewController {
         } else {
             return .black
         }
-
     }
 
     @objc func nextTapped(_ sender:UIButton) {
@@ -935,15 +884,13 @@ extension MainViewController {
     func getPreviousMonth(date:Date)->Date {
         return  Calendar.current.date(byAdding: .month, value: -1, to:date)!
     }
+    
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillDefaultColorFor date: Date) -> UIColor? {
         
         let dateformatter = DateFormatter()
         dateformatter.dateFormat = "yyyy-MM-dd"
         dateformatter.locale = Locale(identifier: "ko_KR")
         
-//        print("q1", dateformatter.string(from: date))
-//        print("q12", events2.map{dateformatter.string(from: $0)})
-
         if events2.map{dateformatter.string(from: $0)}.contains(dateformatter.string(from: date)) {
             return CustomColor.calendarRedColor
         } else {
@@ -953,10 +900,67 @@ extension MainViewController {
     }
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        print(dateFormatter.string(from: date))
+//        print(dateFormatter.string(from: date))
         self.dismiss(animated: true, completion: nil)
     }
 
+}
+
+
+
+extension MainViewController: didPurpose {
+    func getThumbUp(todoID: Int) {
+        RealmManager.todoDoneAt(todoID)
+        todoCollectionView.isScrollEnabled = false
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.14) {
+            self.todoCollectionView.reloadData()
+            self.todoCollectionView.isScrollEnabled = true
+            self.todoUpdate()
+        }
+    }
+}
+
+extension MainViewController: ArmySelection {
+    func selectArmy(selectedArmy: String) {
+        navigationController?.popViewController(animated: true)
+        dismiss(animated: true)
+        selectArmyLabel.isHidden = true
+        moreButton.isUserInteractionEnabled = false
+        self.mealCollectionView.isHidden = false
+        
+        activityIndicator.startAnimating()
+        Webservice.shared.fetchMeals300(army: selectedArmy) {
+            DispatchQueue.main.async {
+                
+                let dateformatter = DateFormatter()
+                dateformatter.dateFormat = "yyyy-MM-dd"
+                dateformatter.locale = Locale(identifier: "ko_KR")
+                
+                self.mealData = RealmManager.searchMealDataByDate(date: dateformatter.string(from: Date()))
+                self.무슨부대인지 = selectedArmy
+                
+                if selectedArmy != "없음" {
+                    
+                    self.nsConstraintForNoMealData?.constant = 0
+                    self.selectArmyButton.isUserInteractionEnabled = false
+                    self.moreButton.isHidden = false
+                    self.moreButton.isUserInteractionEnabled = true
+                    self.mealCollectionView.reloadData()
+                    self.updateMealRoundedView()
+                } else {
+                    self.nsConstraintForNoMealData?.constant = 210
+                    self.selectArmyLabel.isHidden = false
+                    self.selectArmyButton.isUserInteractionEnabled = true
+                    self.moreButton.isHidden = true
+                    self.selectArmyLabel.text = "해당 부대는 식단 정보를\n제공하지 않습니다"
+                    self.moreButton.isUserInteractionEnabled = false
+                    self.updateMealRoundedView()
+                }
+                self.activityIndicator.stopAnimating()
+            }
+        }
+    }
 }
 
 extension MainViewController: FSCalendarDelegateAppearance {
@@ -975,110 +979,4 @@ enum Constants {
     static let smallText = 15.0
     static let middleText = 17.0
   }
-
-extension MainViewController: didPurpose {
-    func getThumbUp(todoID: Int) {
-        RealmManager.todoDoneAt(todoID)
-        todoCollectionView.isScrollEnabled = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.14) {
-            self.todoCollectionView.reloadData()
-            self.todoCollectionView.isScrollEnabled = true
-        }
-//        print(RealmManager.notDoneTodoData().count)
-//        print(todoData.count)
-//        print("get thumb up in vc")
-    }
-}
-
-//ref: https://medium.com/academy-poa/how-to-create-a-uiprogressview-with-gradient-progress-in-swift-2d1fa7d26f24
-class GradientProgressView: UIProgressView {
-    
-    @IBInspectable var firstColor: UIColor = UIColor.white {
-        didSet {
-            updateView()
-        }
-    }
-    
-    @IBInspectable var secondColor: UIColor = UIColor.white {
-        didSet {
-            updateView()
-        }
-    }
-    
-    func updateView() {
-        if let gradientImage = UIImage(bounds: self.bounds, colors: [firstColor, secondColor]) {
-            self.progressImage = gradientImage
-        }
-    }
-}
-
-extension MainViewController: ArmySelection {
-    func selectArmy(selectedArmy: String) {
-        //TODO
-        navigationController?.popViewController(animated: true)
-        dismiss(animated: true)
-        selectArmyLabel.isHidden = true
-        selectArmyView.backgroundColor = .clear
-        moreButton.isUserInteractionEnabled = false
-        moreButton.isHidden = true
-//        moreButtons = emptyButton
-        selectArmyButton.isUserInteractionEnabled = false
-//        isMealData = isMealCollectionView == "없음" ? false : true
-//        moreButtons.isUserInteractionEnabled = false
-        activityIndicator.startAnimating()
-        Webservice.shared.fetchMeals300(army: selectedArmy) {
-            DispatchQueue.main.async {
-                
-                print("qqqqqqq", selectedArmy)
-                let dateformatter = DateFormatter()
-                dateformatter.dateFormat = "yyyy-MM-dd"
-                dateformatter.locale = Locale(identifier: "ko_KR")
-                self.mealData = RealmManager.searchMealDataByDate(date: dateformatter.string(from: Date().addingTimeInterval(60*60*9)))
-                self.isMealCollectionView = selectedArmy
-                self.isMealData = selectedArmy == "없음" ? false : true
-                self.mealCollectionView.reloadData()
-                self.updateMealAndCalView()
-//                self.updateValues()
-                if selectedArmy != "없음" {
-                    self.selectArmyLabel.isHidden = true
-                    self.mealCollectionView.isHidden = false
-    //                self.selectArmyView.isHidden = true
-    //                self.mealOrNothing.backgroundColor = .clear
-                    self.selectArmyView.backgroundColor = .clear
-                    self.selectArmyButton.isUserInteractionEnabled = false
-                    self.moreButton.isHidden = false
-//                    self.moreButtons = self.moreButton
-                    self.moreButton.isUserInteractionEnabled = true
-                    self.updateMealRoundedView()
-                } else {
-                    self.selectArmyLabel.isHidden = false
-                    self.mealCollectionView.isHidden = true
-                    self.selectArmyView.backgroundColor = .white
-                    self.selectArmyButton.isUserInteractionEnabled = true
-                    self.moreButton.isHidden = true
-//                    self.moreButtons = self.emptyButton
-                    self.moreButton.isUserInteractionEnabled = false
-                    self.updateMealRoundedView()
-                    
-                }
-                
-                
-                
-                self.activityIndicator.stopAnimating()
-                
-                
-                
-//                self.updateMealView()
-//                self.view?.reloadInputViews()
-//                self.view.updateConstraints()
-//                self.loadViewIfNeeded()
-            }
-        }
-    }
-    }//
-//  MainViewController.swift
-//  ChungSungChungSung
-//
-//  Created by Hankyu Lee on 2022/08/06.
-//
 

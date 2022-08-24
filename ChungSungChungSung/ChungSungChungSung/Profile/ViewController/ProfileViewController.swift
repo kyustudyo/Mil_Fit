@@ -11,7 +11,7 @@ import RealmSwift
 class ProfileViewController: UIViewController {
     private let profileViewTitle = "프로필"
     
-    private var goalList = GoalData().list
+//    private var goalList = GoalData().list
     
     @IBOutlet weak var settingsButton: UIBarButtonItem!
     @IBOutlet weak var profileTableView: UITableView!
@@ -58,9 +58,8 @@ class ProfileViewController: UIViewController {
 //        print(RealmManager.searchTodo())//둘다하자
 //        print(RealmManager.searchCurrentTodo()?.content)
         todo = RealmManager.searchCurrentTodo()
-        
-        RealmManager.saveBadgeData(date: Date().addingTimeInterval(60*60*9), title: "우리의 시작")
-        RealmManager.saveBadgeData(date: Date().addingTimeInterval(60*60*9), title: "첫 기록의 기쁨")
+//        RealmManager.saveBadgeData(date: Date().addingTimeInterval(60*60*9), title: "우리의 시작")
+//        RealmManager.saveBadgeData(date: Date().addingTimeInterval(60*60*9), title: "첫 기록의 기쁨")
         print(Realm.Configuration.defaultConfiguration.fileURL!)
 //        print(RealmManager.searchBadges())
 //        badges = RealmManager.searchBadges()
@@ -112,7 +111,7 @@ extension ProfileViewController: GoalsDetailViewDelegate, BadgeDetailViewDelegat
     func didTapGoalsMoreButton() {
         guard let goalsDetailView = UIStoryboard(name: "GoalsDetail", bundle: .main).instantiateViewController(withIdentifier: "GoalsDetailViewController") as? GoalsDetailViewController else { return }
         
-        print("qwer", RealmManager.doneTodoData2()?.count, RealmManager.notDoneTodoData2()?.count)
+//        print("qwer", RealmManager.doneTodoData2()?.count, RealmManager.notDoneTodoData2()?.count)
         goalsDetailView.delegate = self
         goalsDetailView.deleteDelegate = self
 //        goalsDetailView.doneTodos = RealmManager.doneTodoData2()
@@ -184,7 +183,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             
             if let todo = todo {
                 cell.goalLabel.text = todo.content
-                print("qwer", dateFormatter.string(from: todo.date))
+//                print("qwer", dateFormatter.string(from: todo.date))
                 cell.goalSavedDateLabel.text = dateFormatter.string(from: todo.date)
                 
             } else {
@@ -259,7 +258,7 @@ extension RealmManager {
     static func searchCurrentWeight2() -> Int? {
         let localRealm = try! Realm()
         let realm = localRealm.objects(WeightRealm.self)
-        print("렘\(realm)")
+//        print("렘\(realm)")
         let target = realm.sorted(byKeyPath: "dateSorting", ascending: false)
         if target.count == 0 {
             return nil
@@ -328,7 +327,7 @@ extension ProfileViewController: EditDischargeViewRelated {
 extension ProfileViewController: DischargeEdit {
     func changeDischarge() {
         dischargeDate = UserDefaultManager.loadDischargeDate2()
-        print(UserDefaultManager.loadDischargeDate2())
+//        print(UserDefaultManager.loadDischargeDate2())
         profileTableView.reloadData()
     }
 }
@@ -367,7 +366,7 @@ extension ProfileViewController: EditBodyViewRelatedForBodyVC {
         let b = 5 * Double(height)
         let c = 6.8 * Double(age)
         let cal = 66 + a + b - c
-        print("cc", Int(cal))
+        
         UserDefaultManager.saveBMR(BMR: Int(cal))
     }
 }
@@ -394,7 +393,7 @@ extension RealmManager {
 extension ProfileViewController: TodoAdd {
     func addTodo() {
         todo = RealmManager.searchCurrentTodo()
-        print(todo?.content)
+//        print(todo?.content)
         profileTableView.reloadData()
     }
 }
@@ -402,7 +401,7 @@ extension ProfileViewController: TodoAdd {
 extension ProfileViewController: DeleteTodo {
     func didDelete() {
         todo = RealmManager.searchCurrentTodo()
-        print(todo?.content)
+//        print(todo?.content)
         profileTableView.reloadData()
     }
 }
