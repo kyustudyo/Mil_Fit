@@ -50,7 +50,13 @@
 
 [MIT](https://choosealicense.com/licenses/mit/)
 
-## Attribution Links
+## 💿 활용 공공데이터
+
+- 연도별 장병 체력검정 기준 / 국군체육부대 (https://opendata.mnd.go.kr/openinf/sheetview2.jsp?infId=OA-9490)
+- 보건소 모바일 헬스케어 운동 / 한국건강증진개발원 (https://www.data.go.kr/data/15068730/fileData.do#tab-layer-file)
+- 부대별 식단정보 / 각 부대
+
+## 🔗 Attribution Links
 
 <a href="https://www.flaticon.com/free-icons/promoted" title="promoted icons">Promoted icons created by Prosymbols Premium - Flaticon</a>.  
 <a href="https://www.flaticon.com/free-icons/calendar" title="calendar icons">Calendar icons created by Prosymbols Premium - Flaticon</a>.  
