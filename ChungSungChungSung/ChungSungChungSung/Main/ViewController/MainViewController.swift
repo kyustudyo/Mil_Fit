@@ -120,7 +120,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
     
     fileprivate let workoutLabel: UILabel = {
         let label = UILabel()
-        label.text = "운동"
+        label.text = "운동한 날"
         label.font = UIFont.systemFont(ofSize: Constants.bigText, weight: .bold)
         return label
     }()
