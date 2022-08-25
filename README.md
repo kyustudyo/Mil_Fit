@@ -1,7 +1,7 @@
 # 군핏 by Team Colosseum
 
 <img width="200" alt="앱아이콘" src="https://user-images.githubusercontent.com/103012157/186115653-a36e2ec8-86d4-4a7f-98b7-41176dfa8c38.png">
-
+[앱스토어 링크](https://apps.apple.com/us/app/%EA%B5%B0%ED%95%8F/id1640985192)
 
 ## 📌 Features
 
@@ -43,7 +43,7 @@
 
 ## 📚 Documentation
 
-[Notion](https://quick-plastic-2d0.notion.site/c4d7a16a2c654361904b25727278cd4c)
+[Notion](https://quick-plastic-2d0.notion.site/by-e3a235f2be7c4e0b81702256c2bbcea2)
 
 
 ## :lock_with_ink_pen: License
