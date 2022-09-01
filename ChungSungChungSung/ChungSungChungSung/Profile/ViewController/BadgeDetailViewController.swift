@@ -129,6 +129,7 @@ extension BadgeDetailViewController: UICollectionViewDelegate, UICollectionViewD
         guard let badgeDetailInfoView = UIStoryboard(name: "BadgeDetailInfo", bundle: .main).instantiateViewController(withIdentifier: "BadgeDetailInfoViewController") as? BadgeDetailInfoViewController else { return }
         
         badgeDetailInfoView.badge = badgeList[indexPath.row]
+        
         if lightImageIndexes.contains(indexPath.row) {
             badgeDetailInfoView.isTonal = false
         } else {

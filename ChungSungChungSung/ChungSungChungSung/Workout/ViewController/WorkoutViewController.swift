@@ -183,18 +183,22 @@ class WorkoutViewController: UIViewController {
     func setWeekView()
     {
         totalSquares.removeAll()
-        시작일 = CalendarHelper().addDays(date: Date().addingTimeInterval(60*60*9), days: -150)
+        시작일 = CalendarHelper().addDays(date: Date().addingTimeInterval(60*60*9), days: -10)
 //        print("오늘", Date().addingTimeInterval(60*60*9))
         var current = 시작일
+        print(current, "시작일")
         //TODO: 끝일
         let nextSunday = CalendarHelper().addDays(date: Date().addingTimeInterval(60*60*9), days: 0)
         print("cn", current, nextSunday)
         while (current < nextSunday)
         {
-//            print(current)
+            print("qw?",current)
             totalSquares.append(current)
+            
             current = CalendarHelper().addDays(date: current, days: 1)
+            
         }
+        print("qw?",totalSquares)
         if let index = totalSquares.firstIndex(where: { date in
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = " yyyy-MM-dd"
@@ -274,7 +278,8 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dailyCalendarCell", for: indexPath) as? DailyCalendarCell else {
             return UICollectionViewCell()
         }
- 
+
+        print("??",totalSquares)
         let date = totalSquares[indexPath.item]
         
         cell.dayNameView.text = getDayOfWeek(date: date)
