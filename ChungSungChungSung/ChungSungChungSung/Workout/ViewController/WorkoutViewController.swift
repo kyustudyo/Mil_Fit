@@ -367,6 +367,15 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
                     returnNumber = 1
                 } else {
                     returnNumber = todaysWorkout.count
+                    if returnNumber == 1 {
+                        if let badges = RealmManager.searchBadges() {
+                            if !badges.map { $0.title }.contains("첫 기록의 기쁨") {
+                                RealmManager.saveBadgeData(date: Date().addingTimeInterval(60*60*9), title: "첫 기록의 기쁨")
+                                
+                                self.tabBarController?.tabBar.items![3].badgeValue = "1"
+                            }
+                        }
+                    }
                     numberOfTodaysWorkoutForScroll = todaysWorkout.count
                 }
             }
@@ -447,7 +456,6 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
                         workoutDates.append(dateFormatterForWorkout.string(from: selectedDate))
 //                        UserDefaultManager.saveIsWorkoutDate(date: selectedDate)
 //                        workoutDates = defaults.stringArray(forKey: "workoutDate") ?? [String]()
-                        
                         todaysWorkoutView.reloadData()
                         dailyCalendarView.reloadData()
                         print("toc", todaysWorkout.count - 1)

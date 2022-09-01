@@ -28,7 +28,6 @@ class OnboardingLastViewController: UIViewController {
                     let vc = TabViewController()
                     
                     RealmManager.saveBadgeData(date: Date().addingTimeInterval(60*60*9), title: "우리의 시작")
-                    RealmManager.saveBadgeData(date: Date().addingTimeInterval(60*60*9), title: "첫 기록의 기쁨")
                     
                     self.navigationController?.isNavigationBarHidden = true
                     self.navigationController?.pushViewController(vc, animated: true)

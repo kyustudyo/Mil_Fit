@@ -23,8 +23,19 @@ class ProfileViewController: UIViewController {
     var todo: ToDoListRealm?
     var badgeNames: [String]?
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        if let badges = RealmManager.searchBadges() {
+            badgeNames = badges.map { $0.title }
+            profileTableView.reloadData()
+        }
+        self.tabBarController?.tabBar.items![3].badgeValue = nil
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
 //        RealmManager.deleteAllWeightData2()
 //        UserDefaultManager.saveUnit(unit: "제 1234부대")
 //        print(UserDefaultManager.loadUnit())
@@ -63,9 +74,7 @@ class ProfileViewController: UIViewController {
         print(Realm.Configuration.defaultConfiguration.fileURL!)
 //        print(RealmManager.searchBadges())
 //        badges = RealmManager.searchBadges()
-        if let badges = RealmManager.searchBadges() {
-            badgeNames = badges.map { $0.title }
-        }
+        
         
         configNavigationTitle()
         self.view.backgroundColor = CustomColor.bgGray
