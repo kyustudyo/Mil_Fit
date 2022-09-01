@@ -163,7 +163,7 @@ class TestMainViewController: UIViewController {
         runningGraphView.backgroundColor = UIColor.clear
         runningGraphTitleLabel.text = "3Km 달리기"
         runningGraphTitleLabel.textColor = UIColor.systemGray
-        runningGraphRecordLabel.text = "\(runningRealm.minutes!)분\(runningRealm.seconds!)초"
+        runningGraphRecordLabel.text = "\(runningRealm.minutes!)'\(runningRealm.seconds!)''"
         runningGraphRecordLabel.textColor = UIColor.systemGray
         let runningGoalLevel = getGoalLevel(level: runningRealm.level)
         let runningMaxStandard = getMaxStandard(testType: .running, level: runningGoalLevel ?? "특급")
@@ -172,8 +172,8 @@ class TestMainViewController: UIViewController {
         }else {
             runningGoalLabel.isHidden = false
             let remainTime = runningRealm.totalTime! - runningMaxStandard
-            runningGoalLabel.text = "\(runningGoalLevel!)까지 \(remainTime / 60)분\(remainTime % 60)초!"
-            runningGoalLabel.setTargetStringColor(targetString: "\(remainTime / 60)분\(remainTime % 60)초", color: CustomColor.red!)
+            runningGoalLabel.text = "\(runningGoalLevel!)까지 \(remainTime / 60)'\(remainTime % 60)''!"
+            runningGoalLabel.setTargetStringColor(targetString: "\(remainTime / 60)'\(remainTime % 60)''", color: CustomColor.red!)
         }
         
 //        runningGraphRecordLabel.setTargetStringColor(targetString: "\(runningRealm.minutes!):\(runningRealm.seconds!)", color: CustomColor.red!)

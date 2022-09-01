@@ -18,6 +18,7 @@ class MainCalorieViewController: UIViewController {
     var countOfDays: Int = 0
     override func viewDidLoad() {
         navigationItem.title = "칼로리"
+        navigationItem.largeTitleDisplayMode = .never
         navigationController?.navigationBar.topItem?.backButtonTitle = "메인"
         self.navigationController?.navigationBar.tintColor = CustomColor.mainPurple
         

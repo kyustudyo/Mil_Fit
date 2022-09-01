@@ -291,6 +291,7 @@ extension MainMealViewController: UITableViewDelegate, UITableViewDataSource {
             cell.label7.text = array[6]
         }
 //        cell.render(mealData[indexPath.section].mealArray)
+        cell.selectionStyle = .none
         return cell
     }
     
@@ -316,6 +317,7 @@ class CalendarHelper {
     
     let calendar = Calendar.current
     
+
     func plusMonth(date: Date) -> Date
     {
         return calendar.date(byAdding: .month, value: 1, to: date)!
@@ -341,12 +343,14 @@ class CalendarHelper {
     {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy"
+        dateFormatter.locale = Locale(identifier: "ko_KR")
         return dateFormatter.string(from: date)
     }
     
     func timeString(date: Date) -> String
     {
         let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ko_KR")
         dateFormatter.dateFormat = "HH:mm"
         return dateFormatter.string(from: date)
     }
