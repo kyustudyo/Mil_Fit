@@ -191,13 +191,14 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             dateFormatter.dateFormat = "yyyy.MM.dd"
             
             if let todo = todo {
-                cell.goalLabel.text = todo.content
-//                print("qwer", dateFormatter.string(from: todo.date))
-                cell.goalSavedDateLabel.text = dateFormatter.string(from: todo.date)
-                
+                if !todo.isDone {
+                    cell.goalLabel.text = todo.content
+                    cell.goalSavedDateLabel.text = dateFormatter.string(from: todo.date)
+                } else {
+                    noTodoData(cell: cell)
+                }
             } else {
-                cell.goalLabel.text = "목표를 설정하세요."
-                cell.goalSavedDateLabel.text = dateFormatter.string(from: Date())
+                noTodoData(cell: cell)
             }
 //            cell.goalLabel.text = goalList[0].content
 //            cell.goalSavedDateLabel.text = goalList[0].date
@@ -226,7 +227,16 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             // TODO: 뱃지 많아지면 자동으로 CollectionView 높이만큼 이 TableViewCell 높이도 길어졌으면 좋겠음.
         }
     }
-    
+    fileprivate func noTodoData(cell: GoalsTableViewCell) {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+        
+        cell.goalLabel.text = "목표를 설정하세요."
+        cell.goalSavedDateLabel.text = ""
+        
+    }
 }
 
 extension UserDefaultManager {

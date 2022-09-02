@@ -192,13 +192,13 @@ class WorkoutViewController: UIViewController {
         print("cn", current, nextSunday)
         while (current < nextSunday)
         {
-            print("qw?",current)
+//            print("qw?",current)
             totalSquares.append(current)
             
             current = CalendarHelper().addDays(date: current, days: 1)
             
         }
-        print("qw?",totalSquares)
+//        print("qw?",totalSquares)
         if let index = totalSquares.firstIndex(where: { date in
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = " yyyy-MM-dd"
@@ -371,6 +371,7 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
                         if let badges = RealmManager.searchBadges() {
                             if !badges.map { $0.title }.contains("첫 기록의 기쁨") {
                                 RealmManager.saveBadgeData(date: Date().addingTimeInterval(60*60*9), title: "첫 기록의 기쁨")
+//                                print("qwe~!!", Date().addingTimeInterval(60*60*9))
                                 
                                 self.tabBarController?.tabBar.items![3].badgeValue = "1"
                             }
