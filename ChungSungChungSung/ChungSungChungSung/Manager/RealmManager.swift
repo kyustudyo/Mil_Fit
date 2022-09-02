@@ -94,7 +94,7 @@ public class RealmManager {
         })
     }
     
-    static func saveWeightData(date: Date, weight: Int) {
+    static func saveWeightData(date: Date, weight: Double) {
         
         let weight = WeightRealm(date: date, weight: weight)
         
@@ -245,7 +245,7 @@ extension RealmManager {
     
     //몸무게
     
-    static func searchCurrentWeight() -> Int? {
+    static func searchCurrentWeight() -> Double? {
         let localRealm = try! Realm()
         let realm = localRealm.objects(WeightRealm.self)
         let target = realm.sorted(byKeyPath: "dateSorting", ascending: false)

@@ -39,7 +39,7 @@ class OnboardingSecondViewController: UIViewController {
                         UserDefaultManager.saveHeight(height: heightInt)
 //                        print("키 \(heightInt)")
                     }
-                    if let weightInt = Int(weightText) {
+                    if let weightInt = Double(weightText) {
                         RealmManager.saveWeightData(date: date, weight: weightInt)
 //                        print("몸무게 \(weightInt)")
                     }

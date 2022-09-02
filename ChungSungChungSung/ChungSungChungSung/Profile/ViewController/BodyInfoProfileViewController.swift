@@ -46,7 +46,7 @@ class BodyInfoProfileViewController: UIViewController {
     func setChartData(data: Results<WeightRealm>) -> [Double] {
         var dataSet = [Double]()
         for i in data {
-            dataSet.append(Double(i.weight))
+            dataSet.append(i.weight)
         }
         return dataSet
     }
@@ -58,7 +58,7 @@ class BodyInfoProfileViewController: UIViewController {
             }
         }
         if let weight = self.weightTextField.text, weight.count != 0 {
-            if let iWeight = Int(weight) {
+            if let iWeight = Double(weight) {
                 RealmManager.saveWeightData(date: Date().addingTimeInterval(60*60*9), weight: iWeight)
 //                print("chch", Date().addingTimeInterval(60*60*9))
             }

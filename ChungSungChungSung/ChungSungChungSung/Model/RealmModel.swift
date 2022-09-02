@@ -163,11 +163,11 @@ class TotalOutputCaloriesRealm: Object {
 
 class WeightRealm: Object {
     @Persisted var date: Date
-    @Persisted var weight: Int
+    @Persisted var weight: Double
     @Persisted var dateSorting: Int
     @Persisted(primaryKey: true) var _id: ObjectId
     
-    convenience init(date: Date, weight: Int) {
+    convenience init(date: Date, weight: Double) {
         self.init()
         self.date = date
         self.weight = weight

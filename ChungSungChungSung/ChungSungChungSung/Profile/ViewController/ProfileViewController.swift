@@ -18,7 +18,7 @@ class ProfileViewController: UIViewController {
     var unit: String?
     var dischargeDate: Date?
     var age: Int?
-    var weight: Int?
+    var weight: Double?
     var height : Int?
     var todo: ToDoListRealm?
     var badgeNames: [String]?
@@ -274,7 +274,7 @@ extension RealmManager {
         return realm
     }
     
-    static func searchCurrentWeight2() -> Int? {
+    static func searchCurrentWeight2() -> Double? {
         let localRealm = try! Realm()
         let realm = localRealm.objects(WeightRealm.self)
 //        print("렘\(realm)")
@@ -358,7 +358,7 @@ extension ProfileViewController: EditBodyViewRelated {
         if let age = age,
            let height = height,
            let weight = weight {
-            bodyDetail.info = [age, height, weight]
+            bodyDetail.info = [age, height, Int(weight)]
         } 
         
         navigationController?.pushViewController(bodyDetail, animated: true)
