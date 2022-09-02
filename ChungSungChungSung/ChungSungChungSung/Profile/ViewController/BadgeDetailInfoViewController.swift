@@ -38,7 +38,7 @@ class BadgeDetailInfoViewController: UIViewController {
         
         if let badges = RealmManager.searchBadges() {
             if let index = badges.map { $0.title }.firstIndex(of: badge?.title) {
-                badgeDateLabel.text = dateFormatter.string(from: badges[index].date)
+                badgeDateLabel.text = dateFormatter.string(from: badges[index].date.addingTimeInterval(-60*60*9))
             } else {
                 badgeDateLabel.text = "-"
             }
