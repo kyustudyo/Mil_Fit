@@ -247,7 +247,6 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         let view = UICollectionViewFlowLayout()
         view.minimumLineSpacing = Constants.lineSpacing
         view.scrollDirection = .horizontal
-       
         return view
       }()
     

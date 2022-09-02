@@ -101,8 +101,8 @@ class MainMealViewController: UIViewController, UICollectionViewDelegate, UIColl
             current = CalendarHelper().addDays(date: current, days: 1)
         }
         
-        headerLabel.text = CalendarHelper().monthString(date: selectedDate)
-            + " " + CalendarHelper().yearString(date: selectedDate)
+        headerLabel.text = CalendarHelper().yearString(date: selectedDate) + "년" + " " + CalendarHelper().monthString(date: selectedDate)
+            
         
         
         self.collectionView.reloadData()
@@ -335,7 +335,7 @@ class CalendarHelper {
     {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "LLLL"
-        
+        dateFormatter.locale = Locale(identifier: "ko_KR")
         return dateFormatter.string(from: date)
     }
     
@@ -364,6 +364,7 @@ class CalendarHelper {
     func dayOfMonth(date: Date) -> Int
     {
         let components = calendar.dateComponents([.day], from: date)
+        print("qwe", date, components)
         return components.day!
     }
     

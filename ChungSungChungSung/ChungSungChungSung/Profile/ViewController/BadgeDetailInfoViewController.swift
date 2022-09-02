@@ -44,7 +44,8 @@ class BadgeDetailInfoViewController: UIViewController {
             }
         }
         badgeTitleLabel.text = badge?.title
-        badgeDescriptionLabel.text = badge?.description
+        
+        badgeDescriptionLabel.text = isTonal ? "???" : badge?.description 
     }
     
 }

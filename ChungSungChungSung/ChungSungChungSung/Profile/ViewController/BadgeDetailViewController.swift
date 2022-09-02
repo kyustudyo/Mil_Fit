@@ -10,23 +10,38 @@ import UIKit
 class BadgeDetailViewController: UIViewController/*, UIViewControllerTransitioningDelegate*/ {
     private var badgeList = BadgeData().list
     private var numberOfBadgeEarned: Int = 0
-    private var lightImageIndexes: [Int] {
-        var indexes: [Int] = []
-        for (i,badge) in badgeList.enumerated() {
-            if badgeNames.contains(badge.title) {
-                indexes.append(i)
+    var badgeNames: [String] = [] {
+        didSet {
+            var indexes: [Int] = []
+            for (i,badge) in badgeList.enumerated() {
+                if badgeNames.contains(badge.title) {
+                    indexes.append(i)
+                }
             }
+            lightImageIndexes = indexes
         }
-        return indexes
     }
+
+    private var lightImageIndexes: [Int] = [] {
+        willSet {
+            badgeDetailCollectionView?.reloadData()
+        }
+    }
+
     @IBOutlet weak var numberOfBadgeLabel: UILabel!
     @IBOutlet weak var badgeDetailCollectionView: UICollectionView!
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        if let badges = RealmManager.searchBadges() {
+            badgeNames = badges.map { $0.title }
+        }
+        setNumberOfBadgeEarned()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        setNumberOfBadgeEarned()
-        
+
         self.view.backgroundColor = CustomColor.bgGray
         self.navigationController?.navigationBar.tintColor = CustomColor.mainPurple
         self.navigationItem.title = "획득한 뱃지"
@@ -38,49 +53,13 @@ class BadgeDetailViewController: UIViewController/*, UIViewControllerTransitioni
         setNumberOfBadgeEarned()
     }
     
-    
-//    var earnedBadges: [BadgeModel] = []
-    var badgeNames: [String] = []
-//    {
-//        get {
-//            []
-//        }
-//        set {
-//            earnedBadges = badgeList.filter {
-//                newValue.contains($0.title)
-//            }
-//            setNumberOfBadgeEarned()
-//            badgeDetailCollectionView.reloadData()
-//        }
-//    }
-    
-    
-    
     private func setNumberOfBadgeEarned() {
-//        var earnedBadges: [BadgeModel] = []
-//        earnedBadges = badgeList.filter {
-//            if $0.date?.isEmpty == false {
-//                return true
-//            } else {
-//                return false
-//            }
-//        }
+
         numberOfBadgeEarned = badgeNames.count
         numberOfBadgeLabel.text = "\(numberOfBadgeEarned) / 15"
     }
-    
-//    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-//        return SetSizePresentationController(presentedViewController: presented, presenting: presenting)
-//    }
+ 
 }
-//
-//class SetSizePresentationController: UIPresentationController {
-//    override var frameOfPresentedViewInContainerView: CGRect {
-//        get {
-//            return CGRect(x: 0, y: (containerView?.bounds.height ?? 0)/2, width: containerView?.bounds.width ?? 0, height: (containerView?.bounds.height ?? 0)/2)
-//        }
-//    }
-//}
 
 extension BadgeDetailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -129,6 +108,7 @@ extension BadgeDetailViewController: UICollectionViewDelegate, UICollectionViewD
         guard let badgeDetailInfoView = UIStoryboard(name: "BadgeDetailInfo", bundle: .main).instantiateViewController(withIdentifier: "BadgeDetailInfoViewController") as? BadgeDetailInfoViewController else { return }
         
         badgeDetailInfoView.badge = badgeList[indexPath.row]
+        
         if lightImageIndexes.contains(indexPath.row) {
             badgeDetailInfoView.isTonal = false
         } else {
