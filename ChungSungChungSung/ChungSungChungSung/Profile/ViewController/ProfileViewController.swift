@@ -25,11 +25,13 @@ class ProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
+        todo = RealmManager.notDoneTodoData()?[0]
+        
         if let badges = RealmManager.searchBadges() {
             badgeNames = badges.map { $0.title }
-            profileTableView.reloadData()
         }
         self.tabBarController?.tabBar.items![3].badgeValue = nil
+        profileTableView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -68,7 +70,8 @@ class ProfileViewController: UIViewController {
         
 //        print(RealmManager.searchTodo())//둘다하자
 //        print(RealmManager.searchCurrentTodo()?.content)
-        todo = RealmManager.searchCurrentTodo()
+//        todo = RealmManager.searchCurrentTodo()
+        todo = RealmManager.notDoneTodoData()?[0]
 //        RealmManager.saveBadgeData(date: Date().addingTimeInterval(60*60*9), title: "우리의 시작")
 //        RealmManager.saveBadgeData(date: Date().addingTimeInterval(60*60*9), title: "첫 기록의 기쁨")
         print(Realm.Configuration.defaultConfiguration.fileURL!)
