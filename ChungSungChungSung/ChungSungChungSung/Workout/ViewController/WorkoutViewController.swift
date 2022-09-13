@@ -98,7 +98,7 @@ class WorkoutViewController: UIViewController {
             dateFormatterForWorkout.string(from: $0)
         }
 //        UserDefaults().set([], forKey: "workoutDate")
-        setWorkoutList()    // TODO: 운동 목록 먼저 넣어놓는 함수. 나중에 온보딩쪽에 옮겨야함
+//        setWorkoutList()    // TODO: 운동 목록 먼저 넣어놓는 함수. 나중에 온보딩쪽에 옮겨야함
         favoriteWorkouts = defaults.stringArray(forKey: "WorkoutList")
 //        RealmManager.deleteAllWorkoutData2()
 //        print(workoutDates.count)
@@ -240,13 +240,13 @@ class WorkoutViewController: UIViewController {
     }
     
     // TODO: 운동 목록 먼저 넣어놓는 함수. 나중에 온보딩쪽에 옮겨야함
-    func setWorkoutList() {
-        let favoriteWorkouts = ["달리기", "팔굽혀펴기", "윗몸일으키기", "풀업", "플랭크", "런지", "스쿼트", "상체 근력운동", "하체 근력운동", "복근 운동"]
-        let otherWorkouts = ["레그 레이즈", "체스트 프레스", "숄더 프레스", "레그 프레스", "벤치 프레스", "레그 익스텐션", "레그 컬", "데드 리프트", "축구", "족구"]
-        
-        defaults.set(favoriteWorkouts, forKey: "WorkoutList")
-        defaults.set(otherWorkouts, forKey: "OtherWorkoutList")
-    }
+//    func setWorkoutList() {
+//        let favoriteWorkouts = ["달리기", "팔굽혀펴기", "윗몸일으키기", "풀업", "플랭크", "런지", "스쿼트", "상체 근력운동", "하체 근력운동", "복근 운동"]
+//        let otherWorkouts = ["레그 레이즈", "체스트 프레스", "숄더 프레스", "레그 프레스", "벤치 프레스", "레그 익스텐션", "레그 컬", "데드 리프트", "축구", "족구"]
+//
+//        defaults.set(favoriteWorkouts, forKey: "WorkoutList")
+//        defaults.set(otherWorkouts, forKey: "OtherWorkoutList")
+//    }
     
     func showToast() {
         let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 100, y: 60, width: 200, height: 50))

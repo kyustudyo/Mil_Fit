@@ -42,6 +42,7 @@ class OnboardingViewController: UIViewController {
         nextButton.tintColor = CustomColor.mainPurple
         configPickerView()
         configToolbar()
+        setWorkoutList()
     }
     
     func isValidNumber(_ text: String?) -> Int {
@@ -54,6 +55,13 @@ class OnboardingViewController: UIViewController {
         if Int(text) == nil { return ErrorString.NotNumber.rawValue}
         else if Int(text) == 0 { return ErrorString.Zero.rawValue}
         return 0
+    }
+    func setWorkoutList() {
+        let favoriteWorkouts = ["달리기", "팔굽혀펴기", "윗몸일으키기", "풀업", "플랭크", "런지", "스쿼트", "상체 근력운동", "하체 근력운동", "복근 운동"]
+        let otherWorkouts = ["레그 레이즈", "체스트 프레스", "숄더 프레스", "레그 프레스", "벤치 프레스", "레그 익스텐션", "레그 컬", "데드 리프트", "축구", "족구"]
+        
+        defaults.set(favoriteWorkouts, forKey: "WorkoutList")
+        defaults.set(otherWorkouts, forKey: "OtherWorkoutList")
     }
 }
 
