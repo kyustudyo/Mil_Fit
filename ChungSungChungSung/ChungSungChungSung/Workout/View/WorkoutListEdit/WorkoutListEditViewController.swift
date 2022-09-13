@@ -127,34 +127,20 @@ extension WorkoutListEditViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
-        if let targetWorkout = favoriteWorkouts?[indexPath.row] {
-        
+//        if let targetWorkout = favoriteWorkouts?[indexPath.row] {
             if editingStyle == UITableViewCell.EditingStyle.delete {
                 if let targetWorkout = favoriteWorkouts?[indexPath.row] {
-                
                     favoriteWorkouts?.remove(at: indexPath.row)
                     otherWorkouts?.insert(targetWorkout, at: 0)
                 }
-        
-//                tableView.deleteRows(at: [indexPath], with: .automatic)
-//                tableView.insertRows(at: [IndexPath(row: 0, section: 1)], with: .automatic)
-//                tableView.reloadData()
             } else if editingStyle == UITableViewCell.EditingStyle.insert {
                 if let targetWorkout = otherWorkouts?[indexPath.row] {
-                
                     otherWorkouts?.remove(at: indexPath.row)
                     favoriteWorkouts?.append(targetWorkout)
                 }
-//                tableView.deleteRows(at: [indexPath], with: .automatic)
-//                if let favoriteWorkoutCount = favoriteWorkouts?.count {
-//                    tableView.insertRows(at: [IndexPath(row: favoriteWorkoutCount-1, section: 0)], with: .automatic)
-//                }
-//                tableView.reloadData()
             }
             tableView.reloadData()
-//            workoutListEditTable.reloadData()
-        }
+//        }
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
