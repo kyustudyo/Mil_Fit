@@ -216,6 +216,20 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
 //        return view
 //    }()
     
+    
+    fileprivate var mealHStack = UIStackView()
+    
+    fileprivate var mealEmptyView: UIView = {
+        let view = UIView()
+        view.setShadow()
+        return view
+    }()
+    fileprivate var todoEmptyView: UIView = {
+        let view = UIView()
+//        view.setShadow()
+        return view
+    }()
+    
     private let selectArmyLabel: UILabel = {
         let label = UILabel()
         return label
@@ -442,9 +456,6 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         calendar.setShadow()
         calendar.delegate = self
         calendar.dataSource = self
-        
-//        print(Realm.Configuration.defaultConfiguration.fileURL!)
-
         setupUI()
        
     }
@@ -463,19 +474,14 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         emptyView.backgroundColor = CustomColor.bgGray
     
         //MARK: (날짜 + 멘트)
-//        let stack = UIStackView(arrangedSubviews: [dateLabel])
         stack.addSubview(dateLabel)
         dateLabel.anchor(left: stack.leftAnchor, paddingLeft: 4)
         dateLabel.centerY(inView: stack)
         dateLabel.isHidden = true
         emptyView.addSubview(stack)
         stack.anchor(top: emptyView.topAnchor, left: emptyView.leftAnchor, right: emptyView.rightAnchor, paddingTop: 0, paddingLeft: 16, paddingRight: 16)
-//        stack.backgroundColor = .red
         
         //MARK: 전역일 프로그레스
-//        let 전역일들ContainerView = UIView()
-        
-        
         emptyView.addSubview(전역일들ContainerView)
         전역일들ContainerView.layer.cornerRadius = 16
         전역일들ContainerView.backgroundColor = .white
@@ -510,15 +516,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         
         emptyView.addSubview(todoEmptyView)
         todoEmptyView.anchor(top: purposeLabel.bottomAnchor, left: stack.leftAnchor, right: stack.rightAnchor, paddingTop: 8, paddingLeft: 0, paddingRight: 0, height: Constants.purposeCellHeight)
-//        todoEmptyView.setShadow()
-            
-//        todoEmptyView.layer.shadowOpacity = 1
-//
-//        todoEmptyView.layer.shadowRadius = 10
-//
-//        todoEmptyView.layer.masksToBounds = false
-        
-//        todoEmptyView.backgroundColor = .red
+
         todoEmptyView.addSubview(selectTodoView)
         
         selectTodoView.addSubview(selectTodoLabel)
@@ -595,7 +593,6 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         
         
         let eatCal = shortRoundedView(color: CustomColor.subtlePurple ?? .purple)
-//        let eatMentVstack = shortMent(ment: "먹은 대사량", value: 1700)
         let 먹은칼로리 = UIStackView(arrangedSubviews: [eatCal, eatMentVstack])
         먹은칼로리.axis = .vertical
         먹은칼로리.spacing = 6
@@ -607,7 +604,6 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         basicCaloryMent.textColor = .black
         
         let basicCal = shortRoundedView(color: CustomColor.strongPurple ?? .purple)
-//        let basicMentVstack = shortMent(ment: "기초 대사량", value: 1700)
         let basicMentVstack = UIStackView(arrangedSubviews: [basicCaloryMent, todayBasicCaloryLabel])
         basicMentVstack.axis = .vertical
         basicMentVstack.alignment = .leading
@@ -623,14 +619,11 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         workoutCaloryMent.textColor = .black
         
         let workOutCal = shortRoundedView(color: CustomColor.red ?? .red)
-//        let basicCal = shortRoundedView(color: CustomColor.strongPurple ?? .purple)
-//        let basicMentVstack = shortMent(ment: "기초 대사량", value: 1700)
+
         let workoutMentVstack = UIStackView(arrangedSubviews: [workoutCaloryMent, todayWorkoutCaloryLabel])
         workoutMentVstack.axis = .vertical
         workoutMentVstack.alignment = .leading
         
-//        let workOutCal = shortRoundedView(color: CustomColor.red ?? .red)
-//        let workoutMentVstack = shortMent(ment: "운동 칼로리", value: 1700)
         let 운동칼로리 = UIStackView(arrangedSubviews: [workOutCal, workoutMentVstack])
         운동칼로리.axis = .vertical
         운동칼로리.spacing = 6
@@ -654,20 +647,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSo
         selectArmyViewController.delegate = self
         navigationController?.pushViewController(selectArmyViewController, animated: true)
     }
-    
-    fileprivate var mealHStack = UIStackView()
-    
-    fileprivate var mealEmptyView: UIView = {
-        let view = UIView()
-        view.setShadow()
-        return view
-    }()
-    fileprivate var todoEmptyView: UIView = {
-        let view = UIView()
-//        view.setShadow()
-        return view
-    }()
-    
+ 
     private func updateMealAndCalView() {
         
 //        moreButton.isHidden = 있는부대인지 ? false : true
@@ -762,9 +742,8 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         switch collectionView {
         case todoCollectionView:
-//            print("cell purposeCollectionView")
+
             guard let cell = todoCollectionView.dequeueReusableCell(withReuseIdentifier: PurposeCollectionViewCell.cellID, for: indexPath) as? PurposeCollectionViewCell else { return UICollectionViewCell() }
-//            let cell = PurposeCollectionViewCell(todo:  todoData[indexPath.row])
             
             let dateFormatter = DateFormatter()
             dateFormatter.locale = Locale(identifier: "ko_KR")
@@ -780,39 +759,17 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.thumbButton.tintColor = todoData[indexPath.row].isDone == false ? .gray : .none
             return cell
         case mealCollectionView:
-//            print("cell mealCollectionView")
             guard let cell = mealCollectionView.dequeueReusableCell(withReuseIdentifier: mealCollectionViewCell.cellID, for: indexPath) as? mealCollectionViewCell else { return UICollectionViewCell() }
             cell.mealLabel.text = ["조식", "중식", "석식"][indexPath.row]
-//            cell.반찬들 = mealData[indexPath.row].mealArray
-//            cell.calLabel.text = "\(mealData[indexPath.row].calories)kcal"
             cell.backgroundColor = .white
-//            cell.backgroundColor = .blue
+            
             guard let mealData = mealData else {
                 return cell
             }
-            let array = mealData[indexPath.row].mealArray
             
-            if array.count > 0 {
-                cell.label1.text = array[0]
-            }
-            if array.count > 1 {
-                cell.label2.text = array[1]
-            }
-            if array.count > 2 {
-                cell.label3.text = array[2]
-            }
-            if array.count > 3 {
-                cell.label4.text = array[3]
-            }
-            if array.count > 4 {
-                cell.label5.text = array[4]
-            }
-            if array.count > 5 {
-                cell.label6.text = array[5]
-            } else
-            if array.count > 6 {
-                cell.label7.text = array[6]
-            }
+            let array = mealData[indexPath.row].mealArray
+            cell.mealStringArray = array
+
             return cell
         default:
             return UICollectionViewCell()
@@ -892,20 +849,15 @@ extension MainViewController {
         
         if events2.map{dateformatter.string(from: $0)}.contains(dateformatter.string(from: date)) {
             return CustomColor.calendarRedColor
-        } else {
-            
         }
         return nil
     }
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-//        print(dateFormatter.string(from: date))
         self.dismiss(animated: true, completion: nil)
     }
 
 }
-
-
 
 extension MainViewController: didPurpose {
     func getThumbUp(todoID: Int) {
@@ -966,16 +918,4 @@ extension MainViewController: FSCalendarDelegateAppearance {
     
 }
 
-enum Constants {
-    static let sideSpacing = 16.0
-    static let lineSpacing = 16.0
-    static let weekLineSpacing = 6.0
-    static let purposeCellHeight = 107.0
-    static let mealCellHeight = 210.0//191
-    static let purposeCellWidth = 289.0
-    static let mealCellWidth = 160.0 //145.0
-    static let bigText = 22.0
-    static let smallText = 15.0
-    static let middleText = 17.0
-  }
 
